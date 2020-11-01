@@ -5,31 +5,33 @@
 <title>食べたい物リスト入力確認</title>
 </head>
 <body>
-	<p>以下の内容で間違いはないでしょうか</p>
-	<table>
-		<tr>
-			<td>
-			<img th:src="${image}" alt="サンプル">
-			</td>
-		</tr>
-		<tr>
-			<th>料理名</th>
-			<td>
-			<div th:text="${session['foodInfDto'].foodName}"></div>
-			</td>
-		</tr>
-		<tr>
-			<th>料理名の説明</th>
-			<td>
-			<div th:text="${session['foodInfDto'].requestOutline}"></div>
-			</td>
-		</tr>
-		<tr>
-			<th>ジャンル</th>
-			<td>
-			<div th:text="${genreName}"></div>
-			</td>
-		</tr>
-	</table>
+	<form th:action="@{/inputfood/insert}" method="post">
+		<p>以下の内容で間違いはないでしょうか</p>
+		<table>
+			<tr>
+				<td>
+				<img th:src="${image}" alt="サンプル">
+				</td>
+			</tr>
+			<tr>
+				<th>料理名</th>
+				<td>
+				<div th:text="${session['foodInfDto'].foodName}"></div>
+				</td>
+			</tr>
+			<tr>
+				<th>料理名の説明</th>
+				<td>
+				<div th:text="${session['foodInfDto'].requestOutline}"></div>
+				</td>
+			</tr>
+			<tr>
+				<th>ジャンル</th>
+				<td>
+				<div th:text="${genreName}"></div>
+				</td>
+			</tr>
+		</table>
+	</form>
 </body>
 </html>

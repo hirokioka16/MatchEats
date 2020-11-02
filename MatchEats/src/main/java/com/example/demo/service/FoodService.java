@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.repository.FoodRepository;
+import com.example.demo.dto.FoodInfoDto;
 import com.example.demo.dto.GenreInfoDto;
 import com.example.demo.entity.GenreTblEntity;
 
@@ -34,5 +35,10 @@ public class FoodService {
 		}
 		
 		return list;
+	}
+	
+	public void insert(FoodInfoDto dto) {
+		
+		
 	}
 }

@@ -90,8 +90,18 @@ public class InputFoodListController {
 	@RequestMapping(value= {"/insert"}, method=RequestMethod.POST)
 	public String insert() {
 		
+		FoodInfoDto dto = (FoodInfoDto)session.getAttribute("foodInfDto");
+		foodService.insert(dto);
+		session.removeAttribute("foodInfDto");
+		return "redirect:/inputfood/complete";
+	}
+	
+	@RequestMapping(value= {"/complete"}, method=RequestMethod.GET)
+	public String complete() {
+		
 		return "complete_foodlist_input";
 	}
+	
 	
 	
 	//formの値をdtoに入れているメソッド

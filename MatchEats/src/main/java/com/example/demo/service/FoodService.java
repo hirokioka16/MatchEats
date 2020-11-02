@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.repository.FoodRepository;
+import com.example.demo.repository.GenreRepository;
 import com.example.demo.dto.FoodInfoDto;
 import com.example.demo.dto.GenreInfoDto;
+import com.example.demo.entity.FoodTblEntity;
 import com.example.demo.entity.GenreTblEntity;
+import com.example.demo.entity.UserTblEntity;
 
 
 
@@ -18,11 +21,13 @@ public class FoodService {
 	
 	@Autowired
 	FoodRepository foodRepository;
+	@Autowired
+	GenreRepository genreRepository;
 
 	public List<GenreInfoDto> getGenre(){
 		
 		List<GenreInfoDto> list = new ArrayList<GenreInfoDto>();
-		List<GenreTblEntity> entityList = foodRepository.findAll();
+		List<GenreTblEntity> entityList = genreRepository.findAll();
 		
 		for(GenreTblEntity entity : entityList ) {
 			
@@ -39,6 +44,33 @@ public class FoodService {
 	
 	public void insert(FoodInfoDto dto) {
 		
+		FoodTblEntity foodEntity = change(dto);
+		foodRepository.saveAndFlush(foodEntity);
+		
+	}
+	
+	//dtoの値をentityに入れるメソッド
+	private FoodTblEntity change(FoodInfoDto dto) {
+		
+		FoodTblEntity foodEntity = new FoodTblEntity();
+		
+		foodEntity.setFoodName(dto.getFoodName());
+		foodEntity.setRequestOutline(dto.getRequestOutline());
+		foodEntity.setRegistDate(dto.getRegistDate());
+		foodEntity.setEatFlag(dto.getEatFlag());
+		foodEntity.setRequestPicture(dto.getRequestPicture().getOriginalFilename());
+		
+		UserTblEntity userEntity = new UserTblEntity();
+		//テスト用の値
+		userEntity.setUserId(1);
+		
+		GenreTblEntity genreEntiry = new GenreTblEntity();
+		genreEntiry.setGenreId(dto.getGenreId());
+		
+		
+		foodEntity.setUserTbl(userEntity);
+		foodEntity.setGenreTbl(genreEntiry);
+		return foodEntity;
 		
 	}
 }

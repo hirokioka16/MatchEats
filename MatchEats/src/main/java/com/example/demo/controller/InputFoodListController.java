@@ -46,6 +46,9 @@ public class InputFoodListController {
 		List<GenreInfoDto> list = foodService.getGenre();
 		model.addAttribute("list",list);
 		
+		FoodInfoDto foodInfoDto = new FoodInfoDto();
+		model.addAttribute("foodInfoDto",foodInfoDto);
+		
 		return "input_foodlist";
 	}
 	
@@ -68,11 +71,7 @@ public class InputFoodListController {
 			model.addAttribute("list",list);
 			url = "input_foodlist";
 		}else{	
-			//画像の保存先
-			File destination = new File("/Users/hiroikeshouta/Desktop/upimg" + "/" + form.getRequestPicture().getOriginalFilename());
-			//画像保存処理
-//			form.getRequestPicture().transferTo(destination);
-//			form.setFileName(form.getRequestPicture().getOriginalFilename());
+			
 			StringBuffer data = new StringBuffer();
 	        String base64 = new String(Base64.encodeBase64(form.getRequestPicture().getBytes()),"ASCII");
 	        data.append("data:image/jpeg;base64,");
@@ -88,10 +87,16 @@ public class InputFoodListController {
 		return url;
 	}
 	@RequestMapping(value= {"/insert"}, method=RequestMethod.POST)
-	public String insert() {
+	public String insert() throws java.text.ParseException {
 		
 		FoodInfoDto dto = (FoodInfoDto)session.getAttribute("foodInfDto");
+		dto.setRegistDate(getNowDate());
 		foodService.insert(dto);
+		//画像の保存先
+//		File destination = new File("/Users/hiroikeshouta/Desktop/upimg" + "/" + dto.getRequestPicture().getOriginalFilename());
+		//画像保存処理
+//		form.getRequestPicture().transferTo(destination);
+//		form.setFileName(form.getRequestPicture().getOriginalFilename());
 		session.removeAttribute("foodInfDto");
 		return "redirect:/inputfood/complete";
 	}

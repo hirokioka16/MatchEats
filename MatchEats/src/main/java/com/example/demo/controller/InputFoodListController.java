@@ -26,7 +26,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.dto.FoodInfoDto;
 import com.example.demo.dto.GenreInfoDto;
-import com.example.demo.dto.TestDto;
 import com.example.demo.entity.FoodTblEntity;
 import com.example.demo.entity.GenreTblEntity;
 import com.example.demo.entity.UserTblEntity;

@@ -26,7 +26,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.dto.FoodInfoDto;
 import com.example.demo.dto.GenreInfoDto;
+<<<<<<< HEAD
 import com.example.demo.form.FoodForm;
+=======
+import com.example.demo.entity.FoodTblEntity;
+import com.example.demo.entity.GenreTblEntity;
+import com.example.demo.entity.UserTblEntity;
+import com.example.demo.form.FoodForm;
+import com.example.demo.repository.FoodRepository;
+>>>>>>> main
 import com.example.demo.service.FoodService;
 import com.sun.el.parser.ParseException;
 
@@ -38,6 +46,11 @@ public class InputFoodListController {
 	FoodService foodService;
 	@Autowired
 	HttpSession session;
+<<<<<<< HEAD
+=======
+	@Autowired
+	FoodRepository foodRepository;
+>>>>>>> main
 
 	@RequestMapping(value= {"/input"}, method=RequestMethod.GET)
 	public String input(@ModelAttribute("FoodForm")FoodForm form,Model model) {
@@ -46,6 +59,12 @@ public class InputFoodListController {
 		List<GenreInfoDto> list = foodService.getGenre();
 		model.addAttribute("list",list);
 		
+<<<<<<< HEAD
+=======
+		FoodInfoDto foodInfoDto = new FoodInfoDto();
+		model.addAttribute("foodInfoDto",foodInfoDto);
+		
+>>>>>>> main
 		return "input_foodlist";
 	}
 	
@@ -68,11 +87,15 @@ public class InputFoodListController {
 			model.addAttribute("list",list);
 			url = "input_foodlist";
 		}else{	
+<<<<<<< HEAD
 			//画像の保存先
 			File destination = new File("/Users/hiroikeshouta/Desktop/upimg" + "/" + form.getRequestPicture().getOriginalFilename());
 			//画像保存処理
 //			form.getRequestPicture().transferTo(destination);
 //			form.setFileName(form.getRequestPicture().getOriginalFilename());
+=======
+			
+>>>>>>> main
 			StringBuffer data = new StringBuffer();
 	        String base64 = new String(Base64.encodeBase64(form.getRequestPicture().getBytes()),"ASCII");
 	        data.append("data:image/jpeg;base64,");
@@ -88,12 +111,44 @@ public class InputFoodListController {
 		return url;
 	}
 	@RequestMapping(value= {"/insert"}, method=RequestMethod.POST)
+<<<<<<< HEAD
 	public String insert() {
+=======
+	public String insert() throws java.text.ParseException {
+		
+		FoodInfoDto dto = (FoodInfoDto)session.getAttribute("foodInfDto");
+		dto.setRegistDate(getNowDate());
+		foodService.insert(dto);
+		//画像の保存先
+//		File destination = new File("/Users/hiroikeshouta/Desktop/upimg" + "/" + dto.getRequestPicture().getOriginalFilename());
+		//画像保存処理
+//		form.getRequestPicture().transferTo(destination);
+//		form.setFileName(form.getRequestPicture().getOriginalFilename());
+		session.removeAttribute("foodInfDto");
+		return "redirect:/inputfood/complete";
+	}
+	
+	@RequestMapping(value= {"/complete"}, method=RequestMethod.GET)
+	public String complete() {
+>>>>>>> main
 		
 		return "complete_foodlist_input";
 	}
 	
 	
+<<<<<<< HEAD
+=======
+	@RequestMapping(value= {"/test"}, method=RequestMethod.GET)
+	public String test() {
+		List<FoodRepository> list = foodRepository.testFind();
+		return "complete_foodlist_input";
+	}
+	
+	
+	
+
+	
+>>>>>>> main
 	//formの値をdtoに入れているメソッド
 	private FoodInfoDto getCreateDto(FoodForm form){
 		FoodInfoDto dto = new FoodInfoDto ();

@@ -26,7 +26,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.dto.FoodInfoDto;
 import com.example.demo.dto.GenreInfoDto;
+import com.example.demo.dto.TestDto;
+import com.example.demo.entity.FoodTblEntity;
+import com.example.demo.entity.GenreTblEntity;
+import com.example.demo.entity.UserTblEntity;
 import com.example.demo.form.FoodForm;
+import com.example.demo.repository.FoodRepository;
 import com.example.demo.service.FoodService;
 import com.sun.el.parser.ParseException;
 
@@ -38,6 +43,8 @@ public class InputFoodListController {
 	FoodService foodService;
 	@Autowired
 	HttpSession session;
+	@Autowired
+	FoodRepository foodRepository;
 
 	@RequestMapping(value= {"/input"}, method=RequestMethod.GET)
 	public String input(@ModelAttribute("FoodForm")FoodForm form,Model model) {
@@ -108,6 +115,15 @@ public class InputFoodListController {
 	}
 	
 	
+	@RequestMapping(value= {"/test"}, method=RequestMethod.GET)
+	public String test() {
+		List<FoodRepository> list = foodRepository.testFind();
+		return "complete_foodlist_input";
+	}
+	
+	
+	
+
 	
 	//formの値をdtoに入れているメソッド
 	private FoodInfoDto getCreateDto(FoodForm form){

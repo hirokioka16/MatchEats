@@ -1,26 +1,21 @@
-package com.example.demo.entity;
+package com.example.demo.dto;
 
-import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
-@Entity 
-@Table(name="eatlist")
-public class FoodTblEntity implements Serializable{
+import com.example.demo.entity.GenreTblEntity;
+import com.example.demo.entity.UserTblEntity;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer requestId;
-	@ManyToOne
-    @JoinColumn(name="user_id")
-	private UserTblEntity userTbl;
+public class TestDto {
+	
+	private Integer genreId;
+	
+	private String genreName;
+	
+	
+	private Integer userId;
 	
 	private String foodName;
 	
@@ -28,28 +23,33 @@ public class FoodTblEntity implements Serializable{
 	
 	private Date registDate;
 	
-	@ManyToOne
-    @JoinColumn(name="genre_id")
-	private GenreTblEntity genreTbl;
 	
 	private String eatFlag;
 	
 	private String requestPicture;
 
-	public Integer getRequestId() {
-		return requestId;
+	public Integer getGenreId() {
+		return genreId;
 	}
 
-	public void setRequestId(Integer requestId) {
-		this.requestId = requestId;
+	public void setGenreId(Integer genreId) {
+		this.genreId = genreId;
 	}
 
-	public UserTblEntity getUserTbl() {
-		return userTbl;
+	public String getGenreName() {
+		return genreName;
 	}
 
-	public void setUserTbl(UserTblEntity userTbl) {
-		this.userTbl = userTbl;
+	public void setGenreName(String genreName) {
+		this.genreName = genreName;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	public String getFoodName() {
@@ -76,14 +76,6 @@ public class FoodTblEntity implements Serializable{
 		this.registDate = registDate;
 	}
 
-	public GenreTblEntity getGenreTbl() {
-		return genreTbl;
-	}
-
-	public void setGenreTbl(GenreTblEntity genreTbl) {
-		this.genreTbl = genreTbl;
-	}
-
 	public String getEatFlag() {
 		return eatFlag;
 	}
@@ -99,8 +91,7 @@ public class FoodTblEntity implements Serializable{
 	public void setRequestPicture(String requestPicture) {
 		this.requestPicture = requestPicture;
 	}
-	
-	
+
 	
 	
 

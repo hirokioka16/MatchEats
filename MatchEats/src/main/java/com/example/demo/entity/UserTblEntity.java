@@ -1,11 +1,13 @@
 package com.example.demo.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity 
@@ -47,6 +49,19 @@ public class UserTblEntity {
 	private float assessMent;
 	
 	private String iconPass;
+	
+	@OneToMany(mappedBy="userTbl")
+	private List<FoodTblEntity> foodUser;
+	
+	
+
+	public List<FoodTblEntity> getFoodUser() {
+		return foodUser;
+	}
+
+	public void setFoodUser(List<FoodTblEntity> foodUser) {
+		this.foodUser = foodUser;
+	}
 
 	public Integer getUserId() {
 		return userId;

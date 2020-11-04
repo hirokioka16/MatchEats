@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>食べたい物リスト登録</title>
+</head>
+<body>
+	<table>
+ 	  	<tr th:if="${validationError}" th:each="error : ${validationError}">
+      		<td style="color:red;" th:text="${error}"></td>
+   	 	</tr>
+  	</table>
+	<form th:action="@{/inputfood/confirm}" enctype="multipart/form-data" method="post" th:object="${FoodForm}">
+		<input type="file" th:field="*{requestPicture}"><br>
+		<input type="text" placeholder="料理名" th:field="*{foodName}"><br>
+		<input type="text" placeholder="料理の説明" th:field="*{requestOutline}"><br>		
+		<select name="genreId">
+			<option th:each="genre : ${list}" th:value="${genre.genreId}" th:text="${genre.genreName}"></option>
+		</select>
+		
+		<input type="submit" value="登録">
+	</form>
+		
+	<form>
+		<input type="submit" value="戻る">
+	</form>
+</body>
+</html>

@@ -20,7 +20,7 @@ public class UserTblEntity {
 	
 	private String userName;
 	
-	private String nickName;
+	private String nickname;
 	
 	private String userMail;
 	
@@ -28,7 +28,7 @@ public class UserTblEntity {
 	
 	private String postalCode;
 	
-	private String userAdress;
+	private String userAddres;
 	
 	private String userTel;
 	
@@ -46,7 +46,7 @@ public class UserTblEntity {
 	
 	private Integer sales;
 	
-	private float assessMent;
+	private float assessment;
 	
 	private String iconPass;
 	
@@ -80,11 +80,11 @@ public class UserTblEntity {
 	}
 
 	public String getNickName() {
-		return nickName;
+		return nickname;
 	}
 
 	public void setNickName(String nickName) {
-		this.nickName = nickName;
+		this.nickname = nickName;
 	}
 
 	public String getUserMail() {
@@ -112,11 +112,11 @@ public class UserTblEntity {
 	}
 
 	public String getUserAdress() {
-		return userAdress;
+		return userAddres;
 	}
 
-	public void setUserAdress(String userAdress) {
-		this.userAdress = userAdress;
+	public void setUserAdress(String userAddres) {
+		this.userAddres = userAddres;
 	}
 
 	public String getUserTel() {
@@ -184,11 +184,11 @@ public class UserTblEntity {
 	}
 
 	public float getAssessMent() {
-		return assessMent;
+		return assessment;
 	}
 
-	public void setAssessMent(float assessMent) {
-		this.assessMent = assessMent;
+	public void setAssessMent(float assessment) {
+		this.assessment = assessment;
 	}
 
 	public String getIconPass() {

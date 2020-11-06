@@ -1,13 +1,17 @@
 package com.example.demo.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public class UserRepository extends JpaRepository<UserTblEntity,Integer>{
+import com.example.demo.entity.UserTblEntity;
 
-	Query("select u from UserTblEntity uwhere adminEmail = :mail and adminPass = :password")
-	public UserTblEntity login(@Param("mail")String mail,@Param("password")String password) {
+public interface UserRepository extends JpaRepository<UserTblEntity,Integer>{
+
+	@Query("select u from UserTblEntity u where userMail = :mail and  userPass = :password")
+	public UserTblEntity login(@Param("mail")String mail,@Param("password")String password);
 
 	}
 
 
-}
+

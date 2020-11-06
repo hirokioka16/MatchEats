@@ -38,7 +38,7 @@ public class LoginServlet {
 
 		if(loginInfo !=null) {
 			session.setAttribute("loginInfo", loginInfo);
-			url = "redirect:menu";
+			url = "redirect:top";
 		}else{
 			err = "メールアドレスまたはパスワードが間違っています";
 			url = "redirect:login";

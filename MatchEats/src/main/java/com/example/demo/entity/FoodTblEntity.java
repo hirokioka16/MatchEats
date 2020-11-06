@@ -11,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity 
+@Entity
 @Table(name="eatlist")
 public class FoodTblEntity implements Serializable{
 
@@ -21,19 +21,19 @@ public class FoodTblEntity implements Serializable{
 	@ManyToOne
     @JoinColumn(name="user_id")
 	private UserTblEntity userTbl;
-	
+
 	private String foodName;
-	
+
 	private String requestOutline;
-	
+
 	private Date registDate;
-	
+
 	@ManyToOne
     @JoinColumn(name="genre_id")
 	private GenreTblEntity genreTbl;
-	
+
 	private String eatFlag;
-	
+
 	private String requestPicture;
 
 	public Integer getRequestId() {
@@ -99,9 +99,9 @@ public class FoodTblEntity implements Serializable{
 	public void setRequestPicture(String requestPicture) {
 		this.requestPicture = requestPicture;
 	}
-	
-	
-	
-	
+
+
+
+
 
 }

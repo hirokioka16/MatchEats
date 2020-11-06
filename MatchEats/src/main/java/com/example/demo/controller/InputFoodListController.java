@@ -1,15 +1,12 @@
 package com.example.demo.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
-
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,56 +18,40 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.dto.FoodInfoDto;
 import com.example.demo.dto.GenreInfoDto;
-<<<<<<< HEAD
-import com.example.demo.form.FoodForm;
-=======
-import com.example.demo.entity.FoodTblEntity;
-import com.example.demo.entity.GenreTblEntity;
-import com.example.demo.entity.UserTblEntity;
 import com.example.demo.form.FoodForm;
 import com.example.demo.repository.FoodRepository;
->>>>>>> main
 import com.example.demo.service.FoodService;
-import com.sun.el.parser.ParseException;
 
 @Controller
 @RequestMapping(value= {"/inputfood"})
 public class InputFoodListController {
-	
+
 	@Autowired
 	FoodService foodService;
 	@Autowired
 	HttpSession session;
-<<<<<<< HEAD
-=======
 	@Autowired
 	FoodRepository foodRepository;
->>>>>>> main
 
 	@RequestMapping(value= {"/input"}, method=RequestMethod.GET)
 	public String input(@ModelAttribute("FoodForm")FoodForm form,Model model) {
-		
+
 		//料理のジャンルをDBから取得
 		List<GenreInfoDto> list = foodService.getGenre();
 		model.addAttribute("list",list);
-		
-<<<<<<< HEAD
-=======
+
 		FoodInfoDto foodInfoDto = new FoodInfoDto();
 		model.addAttribute("foodInfoDto",foodInfoDto);
-		
->>>>>>> main
+
 		return "input_foodlist";
 	}
-	
+
 	@RequestMapping(value= {"/confirm"}, method=RequestMethod.POST)
 	public String confirm(@Validated @ModelAttribute("FoodForm")FoodForm form,BindingResult result,Model model) throws IllegalStateException, IOException {
-		String url = null;	
+		String url = null;
 		//入力エラーをチェック
 		if(result.hasErrors()) {
 			List<String> errorList = new ArrayList<String>();
@@ -81,41 +62,30 @@ public class InputFoodListController {
 			model.addAttribute("validationError", errorList);
 			model.addAttribute("list",list);
 			url = "input_foodlist";
-		//画像が選択されていない場合	
+		//画像が選択されていない場合
 		}else if (form.getRequestPicture().isEmpty()) {
 			List<GenreInfoDto> list = foodService.getGenre();
 			model.addAttribute("list",list);
 			url = "input_foodlist";
-		}else{	
-<<<<<<< HEAD
-			//画像の保存先
-			File destination = new File("/Users/hiroikeshouta/Desktop/upimg" + "/" + form.getRequestPicture().getOriginalFilename());
-			//画像保存処理
-//			form.getRequestPicture().transferTo(destination);
-//			form.setFileName(form.getRequestPicture().getOriginalFilename());
-=======
-			
->>>>>>> main
+		}else{
+
 			StringBuffer data = new StringBuffer();
 	        String base64 = new String(Base64.encodeBase64(form.getRequestPicture().getBytes()),"ASCII");
 	        data.append("data:image/jpeg;base64,");
 	        data.append(base64);
-	        
+
 	        model.addAttribute("image",data.toString());
 	        model.addAttribute("genreName",getGenreName(Integer.parseInt(form.getGenreId())) );
 			//formの値をdtoにいれるメソッドを呼んでいる
 			FoodInfoDto dto = getCreateDto(form);
 			session.setAttribute("foodInfDto", dto);
-			url = "confirm_foodlist_input";	
+			url = "confirm_foodlist_input";
 		}
 		return url;
 	}
 	@RequestMapping(value= {"/insert"}, method=RequestMethod.POST)
-<<<<<<< HEAD
-	public String insert() {
-=======
 	public String insert() throws java.text.ParseException {
-		
+
 		FoodInfoDto dto = (FoodInfoDto)session.getAttribute("foodInfDto");
 		dto.setRegistDate(getNowDate());
 		foodService.insert(dto);
@@ -127,28 +97,24 @@ public class InputFoodListController {
 		session.removeAttribute("foodInfDto");
 		return "redirect:/inputfood/complete";
 	}
-	
+
 	@RequestMapping(value= {"/complete"}, method=RequestMethod.GET)
 	public String complete() {
->>>>>>> main
-		
+
 		return "complete_foodlist_input";
 	}
-	
-	
-<<<<<<< HEAD
-=======
+
+
 	@RequestMapping(value= {"/test"}, method=RequestMethod.GET)
 	public String test() {
 		List<FoodRepository> list = foodRepository.testFind();
 		return "complete_foodlist_input";
 	}
-	
-	
-	
 
-	
->>>>>>> main
+
+
+
+
 	//formの値をdtoに入れているメソッド
 	private FoodInfoDto getCreateDto(FoodForm form){
 		FoodInfoDto dto = new FoodInfoDto ();
@@ -162,18 +128,18 @@ public class InputFoodListController {
 		}
 		dto.setRequestPicture(form.getRequestPicture());
 		return dto;
-		
+
 	}
-	
+
 	//現在時刻を登録する
 	public Date getNowDate() throws java.text.ParseException {
-		Date date = new Date(); 
+		Date date = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String strDate = dateFormat.format(date);
 		//String型の日付をDate型に変更している
 		SimpleDateFormat d1 = new SimpleDateFormat("yyyy-MM-dd");
 		Date now = d1.parse(strDate);
-		
+
 		return now;
 	}
 	//ジャンルIDからジャンル名を取得する

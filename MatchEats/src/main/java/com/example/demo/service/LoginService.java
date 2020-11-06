@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.LoginInfoDto;
+import com.example.demo.entity.UserTblEntity;
+import com.example.demo.repository.UserRepository;
 
 @Service
 public class LoginService {
@@ -14,12 +16,12 @@ public class LoginService {
 	public LoginInfoDto login(String mail,String pass)throws Exception{
 	LoginInfoDto loginInfoDto = null;
 
-	userRepository entity = userRepository.login(mail,pass);
+	UserTblEntity entity = userRepository.login(mail,pass);
 
 	if(entity != null) {
 		loginInfoDto = new LoginInfoDto();
-		loginInfoDto.setEmail(entity.getAdminEmail());
-		loginInfoDto.setPass(entity.getAdminPass());
+		loginInfoDto.setEmail(entity.getUserMail());
+		loginInfoDto.setPass(entity.getUserPass());
 	}
 
 	return loginInfoDto;

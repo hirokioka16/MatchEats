@@ -2,49 +2,25 @@ package com.example.demo.dto;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
+
+
 public class FoodInfoDto {
 
-	private String requestId;
-	private int userId;
-	private String foodname;
+	private String foodName;
 	private String requestOutline;
 	private Date registDate;
-	private String genreId;
+	private int genreId;
 	private String eatFlag;
-	private String requestPicture;
+	private MultipartFile requestPicture;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	public String getRequestId() {
-		return requestId;
+	public String getFoodName() {
+		return foodName;
 	}
-	public void setRequestId(String requestId) {
-		this.requestId = requestId;
-	}
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-	public String getFoodname() {
-		return foodname;
-	}
-	public void setFoodname(String foodname) {
-		this.foodname = foodname;
+	public void setFoodName(String foodName) {
+		this.foodName = foodName;
 	}
 	public String getRequestOutline() {
 		return requestOutline;
@@ -58,10 +34,10 @@ public class FoodInfoDto {
 	public void setRegistDate(Date registDate) {
 		this.registDate = registDate;
 	}
-	public String getGenreId() {
+	public int getGenreId() {
 		return genreId;
 	}
-	public void setGenreId(String genreId) {
+	public void setGenreId(int genreId) {
 		this.genreId = genreId;
 	}
 	public String getEatFlag() {
@@ -70,13 +46,12 @@ public class FoodInfoDto {
 	public void setEatFlag(String eatFlag) {
 		this.eatFlag = eatFlag;
 	}
-	public String getRequestPicture() {
+	public MultipartFile getRequestPicture() {
 		return requestPicture;
 	}
-	public void setRequestPicture(String requestPicture) {
+	public void setRequestPicture(MultipartFile requestPicture) {
 		this.requestPicture = requestPicture;
 	}
-
 
 
 

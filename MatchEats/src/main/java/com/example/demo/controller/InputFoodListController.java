@@ -51,10 +51,7 @@ public class InputFoodListController {
 		//料理のジャンルをDBから取得
 		List<GenreInfoDto> list = foodService.getGenre();
 		model.addAttribute("list",list);
-		
-		FoodInfoDto foodInfoDto = new FoodInfoDto();
-		model.addAttribute("foodInfoDto",foodInfoDto);
-		
+	
 		return "input_foodlist";
 	}
 	
@@ -125,8 +122,9 @@ public class InputFoodListController {
 
 	
 	//formの値をdtoに入れているメソッド
-	private FoodInfoDto getCreateDto(FoodForm form){
+	public FoodInfoDto getCreateDto(FoodForm form){
 		FoodInfoDto dto = new FoodInfoDto ();
+		dto.setRequestId(form.getRequestId());
 		dto.setFoodName(form.getFoodName());
 		dto.setRequestOutline(form.getRequestOutline());
 		dto.setGenreId(Integer.parseInt(form.getGenreId()));

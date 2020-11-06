@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FoodForm {
 	
+	private int requestId;
 	@NotBlank(message = "料理名を入力してください")
 	@Size(max=50,message = "料理名は50文字以内に入力してください")
 	private String foodName;
@@ -24,6 +25,13 @@ public class FoodForm {
 	
 	private String fileName;
 	
+	
+	public int getRequestId() {
+		return requestId;
+	}
+	public void setRequestId(int requestId) {
+		this.requestId = requestId;
+	}
 	public String getFoodName() {
 		return foodName;
 	}

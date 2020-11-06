@@ -24,6 +24,7 @@ public class FoodService {
 	@Autowired
 	GenreRepository genreRepository;
 
+	//ジャンルを取得する
 	public List<GenreInfoDto> getGenre(){
 		
 		List<GenreInfoDto> list = new ArrayList<GenreInfoDto>();
@@ -47,6 +48,45 @@ public class FoodService {
 		FoodTblEntity foodEntity = change(dto);
 		foodRepository.saveAndFlush(foodEntity);
 		
+	}
+	//自分の投稿した食べたい物リストを表示する
+	public List<FoodInfoDto> getMyFoodList(int userId){
+		
+		List<FoodInfoDto> list = new ArrayList<FoodInfoDto>();
+		List<FoodTblEntity> entityList = foodRepository.getMyFoodList(userId);
+		
+		for(FoodTblEntity entity:entityList) {
+			
+			FoodInfoDto dto = new FoodInfoDto();
+			dto.setRequestId(entity.getRequestId());
+			dto.setFoodName(entity.getFoodName());
+			dto.setRegistDate(entity.getRegistDate());
+			dto.setPictureName(entity.getRequestPicture());
+			
+			list.add(dto);
+		}
+		
+		return list;
+	}
+	//自分が投稿した食べたい物リストを修正する
+	public void update(FoodInfoDto dto) {
+		FoodTblEntity foodEntity = change(dto);
+		foodRepository.saveAndFlush(foodEntity);
+	}
+	
+	//自分の食べたい物リストの修正または削除するデータを持ってくる
+	public FoodInfoDto getUdFoodList(int requestId){
+		
+		FoodTblEntity entity = foodRepository.getOne(requestId);
+		FoodInfoDto dto = new FoodInfoDto();
+		
+		dto.setRequestId(entity.getRequestId());
+		dto.setFoodName(entity.getFoodName());
+		dto.setRequestOutline(entity.getRequestOutline());
+		dto.setGenreId(entity.getGenreTbl().getGenreId());
+		dto.setEatFlag(entity.getEatFlag());
+		dto.setPictureName(entity.getRequestPicture());
+		return dto;
 	}
 	
 	//dtoの値をentityに入れるメソッド
@@ -73,4 +113,5 @@ public class FoodService {
 		return foodEntity;
 		
 	}
+	
 }

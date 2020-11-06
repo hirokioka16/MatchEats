@@ -17,7 +17,11 @@ import com.example.demo.entity.UserTblEntity;
 
 public interface FoodRepository extends JpaRepository<FoodTblEntity,Integer>{
 
+	//テーブル結合の例
 	@Query("SELECT f FROM FoodTblEntity f left join f.genreTbl g left join f.userTbl u")
     public List<FoodRepository> testFind();
-	//SELECT f FROM FoodTblEntity f left join f.genreTbl g left join f.userTbl u
+	
+	//自分の投稿した食べたい物リストを取得する
+	@Query("SELECT f FROM FoodTblEntity f left join f.userTbl u WHERE u.userId = :userId")
+	public List<FoodTblEntity> getMyFoodList(@Param("userId") int userId);
 }

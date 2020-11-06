@@ -13,6 +13,21 @@ public class FoodInfoDto {
 	private String eatFlag;
 	private String requestPicture;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	public String getRequestId() {
 		return requestId;
 	}

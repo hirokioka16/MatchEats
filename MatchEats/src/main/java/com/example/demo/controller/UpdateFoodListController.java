@@ -40,15 +40,39 @@ public class UpdateFoodListController {
 		
 		List<GenreInfoDto> list = foodService.getGenre();
 		
-		FoodInfoDto dto = foodService.getUdFoodList(Integer.parseInt(requestId));
-		form.setRequestId(dto.getRequestId());
-		form.setFoodName(dto.getFoodName());
-		form.setRequestOutline(dto.getRequestOutline());
-		form.setGenreId(String.valueOf(dto.getGenreId()));
-		form.setEatFlag(dto.getEatFlag());
-		form.setFileName(dto.getPictureName());
+		FoodInfoDto dto = new FoodInfoDto();
+
+		//確認画面で戻るボタンを押下した時に前回までの入力内容を入力画面に反映させる処理
+		try {
+			dto = (FoodInfoDto)session.getAttribute("foodInfDto");
+		}catch (NullPointerException e){
+		}
+		if(dto == null) {
+			dto = foodService.getUdFoodList(Integer.parseInt(requestId));
+			form.setRequestId(dto.getRequestId());
+			form.setFoodName(dto.getFoodName());
+			form.setRequestOutline(dto.getRequestOutline());
+			form.setGenreId(String.valueOf(dto.getGenreId()));
+			form.setEatFlag(dto.getEatFlag());
+			form.setFileName(dto.getPictureName());
+			form.setGenreName(inputFoodList.getGenreName(dto.getGenreId()));
+			
+			model.addAttribute("list",list);
+		}else {
+			form.setRequestId(dto.getRequestId());
+			form.setFoodName(dto.getFoodName());
+			form.setRequestOutline(dto.getRequestOutline());
+			form.setGenreId(String.valueOf(dto.getGenreId()));
+			form.setEatFlag(dto.getEatFlag());
+			form.setFileName(dto.getPictureName());
+			form.setGenreName(inputFoodList.getGenreName(dto.getGenreId()));
+			
+			model.addAttribute("list",list);
+			
+		}
+			
 		
-		model.addAttribute("list",list);
+
 		
 		return "update_foodlist";
 	}
@@ -65,6 +89,7 @@ public class UpdateFoodListController {
 					List<GenreInfoDto> list = foodService.getGenre();
 					model.addAttribute("validationError", errorList);
 					model.addAttribute("list",list);
+					form.setGenreName(inputFoodList.getGenreName(Integer.parseInt(form.getGenreId())));
 					url = "update_foodlist";
 				}else{				       					
 			        model.addAttribute("genreName",inputFoodList.getGenreName(Integer.parseInt(form.getGenreId())) );
@@ -78,6 +103,15 @@ public class UpdateFoodListController {
 	@RequestMapping(value= {"/update"}, method=RequestMethod.POST)
 	public String update(){
 		
+		FoodInfoDto dto = (FoodInfoDto)session.getAttribute("foodInfDto");
+		foodService.update(dto);
+		session.removeAttribute("foodInfDto");
+		
 		return "redirect:/updatefoodlist/complete";
+	}
+	@RequestMapping(value= {"/complete"}, method=RequestMethod.GET)
+	public String complete(){
+		
+		return "complete_foodlist_update";
 	}
 }

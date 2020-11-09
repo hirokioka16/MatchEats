@@ -6,6 +6,9 @@
 </head>
 <body>
 	<table>
+		<tr th:if="${errImg}">
+      		<td style="color:red;" th:text="${errImg}"></td>
+   	 	</tr>
  	  	<tr th:if="${validationError}" th:each="error : ${validationError}">
       		<td style="color:red;" th:text="${error}"></td>
    	 	</tr>
@@ -32,11 +35,16 @@
 		<tr>
 			<td>料理のジャンル</td>
 		</tr>
+		
 		<tr>
-			<td><select name="genreId">
-			<option th:each="genre : ${list}" th:value="${genre.genreId}" th:text="${genre.genreName}"></option>
-			</select></td>
+			<td>
+				<select name="genreId">
+					<option th:value="*{genreId}" th:text="*{genreName}"></option>
+					<option th:each="genre : ${list}" th:value="${genre.genreId}" th:text="${genre.genreName}"></option>
+				</select>
+			</td>
 		</tr>
+		
 		</table>
 		<p>
 		<input type="submit" value="登録">

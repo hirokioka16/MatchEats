@@ -8,10 +8,12 @@
 	<form method="post">
 	<table>
 	<tr th:each="list:${list}">
-		<td><input type="radio" name="requestId" th:value="${list.requestId}"></td>
+		<td>
+			<input type="radio" name="requestId" th:value="${list.requestId}">
+		</td>
 		<td th:text="${list.pictureName}">
 		<th th:text="${list.foodName}">
-		<td th:text="${list.registDate}">
+		<td th:text="${#dates.format(list.registDate,'yyyy/MM/dd')}">
 	</tr>
 	</table>
 	

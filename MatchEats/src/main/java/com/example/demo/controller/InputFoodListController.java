@@ -50,8 +50,24 @@ public class InputFoodListController {
 		
 		//料理のジャンルをDBから取得
 		List<GenreInfoDto> list = foodService.getGenre();
+		
+		FoodInfoDto dto = new FoodInfoDto();
+		String genreName="";
+
+		//確認画面で戻るボタンを押下した時に前回までの入力内容を入力画面に反映させる処理
+		try {
+			dto = (FoodInfoDto)session.getAttribute("foodInfDto");
+		}catch (NullPointerException e){
+		}
+		if(dto != null) {
+			form.setFoodName(dto.getFoodName());
+			form.setRequestOutline(dto.getRequestOutline());
+			form.setGenreId(String.valueOf(dto.getGenreId()));
+			form.setGenreName(getGenreName(dto.getGenreId()));
+			session.removeAttribute("foodInfDto");
+		}
+		model.addAttribute("name",genreName);
 		model.addAttribute("list",list);
-	
 		return "input_foodlist";
 	}
 	
@@ -67,11 +83,14 @@ public class InputFoodListController {
 			List<GenreInfoDto> list = foodService.getGenre();
 			model.addAttribute("validationError", errorList);
 			model.addAttribute("list",list);
+			form.setGenreName(getGenreName(Integer.parseInt(form.getGenreId())));
 			url = "input_foodlist";
 		//画像が選択されていない場合	
 		}else if (form.getRequestPicture().isEmpty()) {
 			List<GenreInfoDto> list = foodService.getGenre();
 			model.addAttribute("list",list);
+			model.addAttribute("errImg","画像を選択してください");
+			form.setGenreName(getGenreName(Integer.parseInt(form.getGenreId())));
 			url = "input_foodlist";
 		}else{	
 			

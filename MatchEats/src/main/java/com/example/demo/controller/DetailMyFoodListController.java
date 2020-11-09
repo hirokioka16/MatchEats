@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +17,13 @@ public class DetailMyFoodListController {
 	
 	@Autowired
 	FoodService foodService; 
+	@Autowired
+	HttpSession session;
 	
 	@RequestMapping(value= {"/foodlist"}, method=RequestMethod.GET)
 	public String getUserList(Model model) {
 		
+		session.removeAttribute("foodInfDto");
 		//session.getAttribute("loginInfo",loginInfo.getUserId)
 		//int userId =
 		

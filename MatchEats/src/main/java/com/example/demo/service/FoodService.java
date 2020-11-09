@@ -70,9 +70,21 @@ public class FoodService {
 	}
 	//自分が投稿した食べたい物リストを修正する
 	public void update(FoodInfoDto dto) {
-		FoodTblEntity foodEntity = change(dto);
-		foodRepository.saveAndFlush(foodEntity);
+		
+		FoodTblEntity foodEntity = new FoodTblEntity();
+		
+		foodEntity.setRequestId(dto.getRequestId());
+		foodEntity.setFoodName(dto.getFoodName());
+		foodEntity.setRequestOutline(dto.getRequestOutline());
+		foodEntity.setEatFlag(dto.getEatFlag());
+		GenreTblEntity genreEntiry = new GenreTblEntity();
+		genreEntiry.setGenreId(dto.getGenreId());
+		
+		foodEntity.setGenreTbl(genreEntiry);
+		
+		foodRepository.update(foodEntity.getFoodName(), foodEntity.getRequestOutline(),foodEntity.getGenreTbl(), foodEntity.getEatFlag(), foodEntity.getRequestId());
 	}
+	
 	
 	//自分の食べたい物リストの修正または削除するデータを持ってくる
 	public FoodInfoDto getUdFoodList(int requestId){
@@ -94,6 +106,7 @@ public class FoodService {
 		
 		FoodTblEntity foodEntity = new FoodTblEntity();
 		
+		foodEntity.setRequestId(dto.getRequestId());
 		foodEntity.setFoodName(dto.getFoodName());
 		foodEntity.setRequestOutline(dto.getRequestOutline());
 		foodEntity.setRegistDate(dto.getRegistDate());

@@ -16,4 +16,7 @@ public interface FoodRepository extends JpaRepository<FoodTblEntity,Integer>{
     public List<FoodRepository> testFind();
 	//SELECT f FROM FoodTblEntity f left join f.genreTbl g left join f.userTbl u
 
+
+	@Query("SELECT f FROM FoodTblEntity f WHERE f.eatFlag = 0")
+	public List<FoodTblEntity> getAllList();
 }

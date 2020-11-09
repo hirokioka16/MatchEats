@@ -75,4 +75,26 @@ public class FoodService {
 
 	}
 
+	//全ユーザーの食べたい物をDBから取得する
+	public List<FoodInfoDto> getAllList(){
+
+		List<FoodInfoDto> list = new ArrayList<FoodInfoDto>();
+		List<FoodTblEntity> entityList = foodRepository.getAllList();
+
+		for(FoodTblEntity entity:entityList) {
+
+			FoodInfoDto dto = new FoodInfoDto();
+			dto.setRequestId(entity.getRequestId());
+			dto.setFoodName(entity.getFoodName());
+			dto.setRegistDate(entity.getRegistDate());
+			dto.setPictureName(entity.getRequestPicture());
+
+			list.add(dto);
+		}
+
+		return list;
+
+
+	}
+
 }

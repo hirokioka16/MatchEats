@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>詳細</title>
+</head>
+<body>
+
+<p th:text="${dto.foodName}"></p>
+<table>
+	<tr>
+		<th>説明</th>
+		<th:text="${dto.requestOutline}"></th:text>
+	</tr>
+	<tr>
+		<th>登録日</th>
+		<th:text="${dto.registDate}"></th:text>
+	</tr>
+
+
+
+</table>
+
+</body>
+</html>

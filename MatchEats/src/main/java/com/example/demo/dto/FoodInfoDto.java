@@ -8,14 +8,30 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FoodInfoDto {
 
+	private int requestId;
 	private String foodName;
 	private String requestOutline;
 	private Date registDate;
 	private int genreId;
 	private String eatFlag;
 	private MultipartFile requestPicture;
+	private String pictureName;
 
 
+
+
+	public int getRequestId() {
+		return requestId;
+	}
+	public void setRequestId(int requestId) {
+		this.requestId = requestId;
+	}
+	public String getPictureName() {
+		return pictureName;
+	}
+	public void setPictureName(String pictureName) {
+		this.pictureName = pictureName;
+	}
 	public String getFoodName() {
 		return foodName;
 	}

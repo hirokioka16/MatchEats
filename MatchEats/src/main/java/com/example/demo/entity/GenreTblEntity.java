@@ -33,8 +33,8 @@ public class GenreTblEntity implements Serializable{
 	public Integer getGenreId() {
 		return genreId;
 	}
-	public void setGenreId(Integer genreId) {
-		this.genreId = genreId;
+	public void setGenreId(int i) {
+		this.genreId = i;
 	}
 	public String getGenreName() {
 		return genreName;

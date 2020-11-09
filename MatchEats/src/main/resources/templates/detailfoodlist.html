@@ -10,12 +10,17 @@
 <table>
 	<tr>
 		<th>説明</th>
-		<th:text="${dto.requestOutline}"></th:text>
+		<td th:text="${dto.requestOutline}"></td>
 	</tr>
 	<tr>
 		<th>登録日</th>
-		<th:text="${dto.registDate}"></th:text>
+		<td th:text="${dto.registDate}"></td>
 	</tr>
+
+	<form method="POST">
+		<input type="hidden" name="requestId" th:value="${dto.requestId}">
+		<input type="submit" formaction="/offerinput/input" value="オファー">
+	</form>
 
 
 

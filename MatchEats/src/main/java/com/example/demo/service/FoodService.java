@@ -97,4 +97,19 @@ public class FoodService {
 
 	}
 
+	//自分の食べたい物リストの修正または削除するデータを持ってくる
+		public FoodInfoDto getUdFoodList(int requestId){
+
+			FoodTblEntity entity = foodRepository.getOne(requestId);
+			FoodInfoDto dto = new FoodInfoDto();
+
+			dto.setRequestId(entity.getRequestId());
+			dto.setFoodName(entity.getFoodName());
+			dto.setRequestOutline(entity.getRequestOutline());
+			dto.setGenreId(entity.getGenreTbl().getGenreId());
+			dto.setEatFlag(entity.getEatFlag());
+			dto.setPictureName(entity.getRequestPicture());
+			return dto;
+		}
+
 }

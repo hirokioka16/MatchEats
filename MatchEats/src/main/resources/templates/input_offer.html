@@ -11,7 +11,7 @@
    	 	</tr>
   	</table>
 
-  	<form th:action="@{/offerinput/confirm}" enctype="multipart/form-data" method="post" th:object="${CookingForm}">
+  	<form th:action="@{/inputoffer/confirm}" enctype="multipart/form-data" method="post" th:object="${CookingForm}">
 		<input type="text" placeholder="金額を入力してください" th:field="*{price}"><br>
 		<input type="text" placeholder="オファーコメントを入力してください" th:field="*{offerComment}">
 

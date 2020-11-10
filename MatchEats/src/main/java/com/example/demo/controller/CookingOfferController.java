@@ -33,6 +33,8 @@ public class CookingOfferController {
 	@Autowired
 	FoodService foodService;
 	@Autowired
+	CookingOfferService cookingOfferService;
+	@Autowired
 	HttpSession session;
 
 	@RequestMapping(value= {"/input"}, method=RequestMethod.POST)
@@ -92,8 +94,10 @@ public class CookingOfferController {
 		dto.setOfferDate(getNowDate());
 		int requestId = (int)session.getAttribute("requestId");
 		dto.setRequestId(String.valueOf(requestId));
+		dto.setDeliveryFlg(false);
+		dto.setReactionStatus("0");
 
-		CookingOfferService.insert(dto);
+		cookingOfferService.insert(dto);
 
 
 		session.removeAttribute("CookingInfoDto");

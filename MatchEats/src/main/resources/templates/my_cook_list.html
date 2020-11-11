@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+
+<title>調理リスト一覧</title>
+</head>
+<body>
+<form method = "post">
+<h1>調理リスト一覧</h1>
+	<table>
+	<tr th:each="CookingList:${CookingList}">
+		<td>
+
+		</td>
+		<td th:text="${CookingList.pictureName}">
+		<th th:text="${CookingList.foodName}">
+		<td th:text="${#dates.format(CookingList.registDate,'yyyy/MM/dd')}">
+	</tr>
+	</table>
+
+	<input type="submit" formaction="/updatefoodlist/input" value="修正">
+	 <input type="submit" formaction="/deletefood/confirm" value="削除">
+</form>
+</body>
+</html>

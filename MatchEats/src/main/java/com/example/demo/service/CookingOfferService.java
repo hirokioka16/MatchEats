@@ -27,9 +27,24 @@ public class CookingOfferService {
 			cookOfferEntity.setOfferComment(dto.getOfferComment());
 			cookOfferEntity.setOfferDate(dto.getOfferDate());
 			cookOfferEntity.setReactionStatus(dto.getReactionStatus());
+			cookOfferEntity.setDeliveryFlg(dto.isDeliveryFlg());
 
 		return cookOfferEntity;
 
 	}
 
+/**
+	public List<CookingInfoDto> getOfferHistory(int userId){
+
+		CookOfferTblEntity entity = CookingOfferRepository.getOfferHistory(userId);
+		CookingInfoDto dto = new CookingInfoDto();
+
+		dto.setOfferId(entity.getOfferId());
+		dto.setRequestId(entity.getFoodTbl().getRequestId());
+		dto.setUserId(entity.getUserTbl().getUserId());
+		dto.setPrice(entity.getPrice());
+
+
+	}
+**/
 }

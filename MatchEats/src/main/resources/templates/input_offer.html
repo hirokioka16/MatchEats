@@ -16,7 +16,10 @@
 		<input type="text" placeholder="オファーコメントを入力してください" th:field="*{offerComment}">
 
 		<input type="submit" value="オファーする">
+	</form>
 
+	<form th:action="@{/detailfoodlist}" method="POST">
+		<input type="submit" value="戻る">
 	</form>
 
 </body>

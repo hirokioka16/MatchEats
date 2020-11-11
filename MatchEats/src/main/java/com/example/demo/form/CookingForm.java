@@ -5,7 +5,7 @@ import javax.validation.constraints.Size;
 
 public class CookingForm {
 
-	@NotBlank(message = "金額を入力してください")
+
 	private  int price;
 
 	@NotBlank(message = "オファーコメントを入力してください")

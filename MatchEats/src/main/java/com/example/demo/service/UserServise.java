@@ -29,6 +29,66 @@ public class UserServise {
 		
 	}
 	
+	public void update(UserInfoDto dto) {
+		UserTblEntity userEntity = new UserTblEntity();
+		
+		userEntity.setUserId(dto.getUserId());
+		userEntity.setUserMail(dto.getUserMail());
+		userEntity.setUserPass(dto.getUserPass());
+		userEntity.setNickName(dto.getNickName());
+		userEntity.setUserName(dto.getUserName());
+		userEntity.setUserTel(dto.getUserTel());
+		userEntity.setPostalCode(dto.getPostalCode());
+		userEntity.setUserAdress(dto.getUserAddres());
+		
+		//日付の方変換
+		try {
+			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date userBirth = sdFormat.parse(dto.getUserBirth());
+			userEntity.setUserBirth(userBirth);
+		
+		} catch (ParseException e) {
+				e.printStackTrace();
+		}
+		
+		userEntity.setCardName(dto.getCardName());
+		userEntity.setUserCard(dto.getUserCard());
+		userEntity.setLimitDate(dto.getLimitDate());
+		userEntity.setSecureCode(dto.getSecureCode());
+		
+		
+		
+		
+		userRepository.update(
+				userEntity.getUserId(),
+				userEntity.getUserMail(),
+				userEntity.getUserPass(),
+				userEntity.getNickName(),
+				userEntity.getUserName(),
+				userEntity.getUserTel(),
+				userEntity.getPostalCode(),
+				userEntity.getUserAdress(),
+				userEntity.getUserBirth(),
+				userEntity.getCardName(),
+				userEntity.getUserCard(),
+				userEntity.getLimitDate(),
+				userEntity.getSecureCode()
+				
+				);
+	}
+	
+	public UserInfoDto getUser(int id) {
+		
+		UserTblEntity userEntity = new UserTblEntity();
+		userEntity = userRepository.getOne(id);
+		
+		UserInfoDto dto = new UserInfoDto();
+		dto = change3(userEntity);
+		
+		return dto;
+		
+	}
+	
 	
 	// dtoの値をentityに入れるメソッド
 	private UserTblEntity change(UserInfoDto dto) {
@@ -79,5 +139,37 @@ public class UserServise {
 		return bankEntity;
 		
 	}
+	
+	
+	// entityの値をdtoに入れるメソッド
+		private UserInfoDto change3(UserTblEntity userEntity) {
+			
+			UserInfoDto userDto = new UserInfoDto();
+			userDto.setUserId(userEntity.getUserId());
+			userDto.setUserName(userEntity.getUserName());
+			userDto.setNickName(userEntity.getNickName());
+			userDto.setUserMail(userEntity.getUserMail());
+			userDto.setUserPass(userEntity.getUserPass());
+			userDto.setPostalCode(userEntity.getPostalCode());
+			userDto.setUserAddres(userEntity.getUserAdress());
+			userDto.setUserTel(userEntity.getUserTel());
+			
+			//変換
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			String strDate = dateFormat.format(userEntity.getUserBirth());
+			userDto.setUserBirth(strDate);
+			
+			userDto.setUserCard(userEntity.getUserCard());
+			userDto.setCardName(userEntity.getCardName());
+			userDto.setLimitDate(userEntity.getLimitDate());
+			userDto.setSecureCode(userEntity.getSecureCode());
+			
+				
+		
+				return userDto;
+			
+		}
+	
+	
 
 }

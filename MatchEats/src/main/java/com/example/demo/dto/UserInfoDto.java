@@ -2,7 +2,7 @@ package com.example.demo.dto;
 
 public class UserInfoDto {
 	
-	
+	private Integer userId;
 	private String userMail;
 	private String userPass;
 	private String nickName;
@@ -25,6 +25,13 @@ public class UserInfoDto {
 
 	
 	//getterとsetter
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 	public String getUserMail() {
 		return userMail;
 	}

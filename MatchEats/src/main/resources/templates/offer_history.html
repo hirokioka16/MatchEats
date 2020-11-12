@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>オファー送信履歴</title>
+</head>
+<body>
+	<form method="post">
+		<table>
+			<tr th:each="list:${list}">
+				<td><input type="radio" name="offerId" th:value="${list.offerId}"></td>
+				<td th;text="${list.price}"></td>
+				<td th:text="${list.offerComment}"></td>
+			</tr>
+		</table>
+
+		<input type="submit" formaction="/" value="aaa">
+
+
+	</form>
+
+</body>
+</html>

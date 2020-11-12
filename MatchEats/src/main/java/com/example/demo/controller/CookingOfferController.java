@@ -118,20 +118,26 @@ public class CookingOfferController {
 
 	}
 
-/**
+
+
 	//オファー送信履歴
-	@RequestMapping(value= {"cookingoffer/history"}, method=RequestMethod.POST)
+	@RequestMapping(value= {"cookingoffer/history"}, method=RequestMethod.GET)
 	public String offerHistory(Model model) {
 
 		LoginInfoDto loginInfo = (LoginInfoDto) session.getAttribute("loginInfo");
 
 		//int userId = loginInfo.getUserId();
+		int userId = 1;
 
+		List<CookingInfoDto> list = cookingOfferService.getOfferHistory(userId);
 
-		List<CookingInfoDto> list = cookingOfferService.getOfferHistory(1);
+		model.addAttribute("list",list);
+
+		return "offer_history";
 
 	}
-**/
+
+
 
 	//formで入力した値をdtoに挿入するメソッド
 	public CookingInfoDto getCreateDto(CookingForm form) {

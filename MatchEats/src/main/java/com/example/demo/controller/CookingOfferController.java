@@ -142,7 +142,7 @@ public class CookingOfferController {
 	public String  deleteConfirm(@RequestParam("offerId") String offerId,Model model) {
 
 		//削除するオファーの情報を再取得
-		CookingInfoDto cookdto = CookingOfferService.getOfferInfo(Integer.parseInt(offerId));
+		CookingInfoDto cookdto = cookingOfferService.getOfferInfo(Integer.parseInt(offerId));
 
 
 

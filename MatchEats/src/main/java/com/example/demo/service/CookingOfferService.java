@@ -31,8 +31,8 @@ public class CookingOfferService {
 		 }
 
 		 for(FoodTblEntity entity:resultList) {
-
 				FoodInfoDto dto = new FoodInfoDto();
+				dto.setRequestId(entity.getRequestId());
 				dto.setFoodName(entity.getFoodName());
 				dto.setRegistDate(entity.getRegistDate());
 				dto.setPictureName(entity.getRequestPicture());

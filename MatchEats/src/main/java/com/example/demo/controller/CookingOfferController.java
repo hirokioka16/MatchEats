@@ -137,6 +137,22 @@ public class CookingOfferController {
 
 	}
 
+	//オファー取り消し確認
+	@RequestMapping(value= {"cookingoffer/deleteconfirm"}, method=RequestMethod.POST)
+	public String  deleteConfirm(@RequestParam("offerId") String offerId,Model model) {
+
+		//削除するオファーの情報を再取得
+		CookingInfoDto cookdto = CookingOfferService.getOfferInfo(Integer.parseInt(offerId));
+
+
+
+		model.addAttribute("cookdto",cookdto);
+
+
+		return "offer_delete_confirm";
+
+	}
+
 
 
 	//formで入力した値をdtoに挿入するメソッド

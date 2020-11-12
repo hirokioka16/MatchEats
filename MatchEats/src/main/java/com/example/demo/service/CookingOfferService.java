@@ -48,6 +48,8 @@ public class CookingOfferService {
 	}
 
 
+
+	//オファー送信履歴確認
 	public List<CookingInfoDto> getOfferHistory(int userId){
 
 		List<CookingInfoDto> list = new ArrayList<CookingInfoDto>();
@@ -66,6 +68,28 @@ public class CookingOfferService {
 		}
 
 		return list;
+
+	}
+
+
+	//オファー情報取得用メソッド
+	public CookingInfoDto getOfferInfo(int offerId) {
+		CookOfferTblEntity entity = cookingOfferRepository.getOne(offerId);
+		CookingInfoDto dto = new CookingInfoDto();
+
+		dto.setOfferId(String.valueOf(entity.getOfferId()));
+		dto.setRequestId(String.valueOf(entity.getFoodTbl().getRequestId()));
+		dto.setUserId(String.valueOf(entity.getUserTbl().getUserId()));
+		dto.setPrice(entity.getPrice());
+		dto.setOfferComment(entity.getOfferComment());
+		dto.setOfferDate(entity.getOfferDate());
+		dto.setDeliveryFlg(entity.getDeliveryFlg());
+		dto.setDeliveryRequestDate(entity.getDeliveryRequestDate());
+		dto.setReactionStatus(entity.getReactionStatus());
+		dto.setReactionComment(entity.getReactionComment());
+		dto.setReactionDate(entity.getReactionDate());
+
+		return dto;
 
 	}
 

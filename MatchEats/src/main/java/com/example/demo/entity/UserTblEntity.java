@@ -123,8 +123,8 @@ public class UserTblEntity {
 		return userTel;
 	}
 
-	public void setUserTel(String userTel) {
-		this.userTel = userTel;
+	public void setUserTel(String usertel) {
+		this.userTel = usertel;
 	}
 
 	public Date getUserBirth() {

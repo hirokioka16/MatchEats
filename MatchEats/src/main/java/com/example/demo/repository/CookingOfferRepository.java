@@ -2,9 +2,6 @@ package com.example.demo.repository;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
-import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,6 +15,7 @@ public interface CookingOfferRepository extends JpaRepository<CookOfferTblEntity
 	@Query("SELECT o FROM CookOfferTblEntity o left join o.userTbl u WHERE u.userId = :userId")
 	public List<CookOfferTblEntity> getOfferHistory(@Param("userId") int userId);
 
+	/**
 	@Transactional
 	@Modifying
 	@Query("UPDATE CookOfferTblEntity c SET"
@@ -25,7 +23,7 @@ public interface CookingOfferRepository extends JpaRepository<CookOfferTblEntity
 				+" WHERE c.offerId = :offerId")
 	public void update(
 					@Param("reactionStatus") String reactionStatus,
-					@Param("offerId") int offerId
+					@Param("offerId") Integer offerId
 			);
-
+	**/
 }

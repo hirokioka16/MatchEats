@@ -9,35 +9,35 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity 
+@Entity
 @Table(name="history")
 public class HistoryTblEntity implements Serializable{
 
 	@Id
 	private Integer historyId;
-	
+
 	@ManyToOne
-    @JoinColumn(name="offer_id")
+    @JoinColumn(name="offer_id",insertable=false,updatable=false)
 	private CookOfferTblEntity CookOfferTbl;
-	
+
 	@ManyToOne
 	@JoinColumn(name="admin_id")
 	private AdminTblEntity adminTbl;
-	
+
 	private Date recoveryDate;
-	
+
 	private Date deliveryCompleteDate;
-	
+
 	private  Integer stateStatus;
-	
+
 	private Integer adminProfit;
-	
+
 	private Integer cookProfit;
-	
+
 	@ManyToOne
     @JoinColumn(name="cookuser_id")
 	private UserTblEntity cookOfferUser;
-	
+
 	@ManyToOne
     @JoinColumn(name="requestuser_id")
 	private UserTblEntity requestUser;
@@ -121,10 +121,10 @@ public class HistoryTblEntity implements Serializable{
 	public void setRequestUser(UserTblEntity requestUser) {
 		this.requestUser = requestUser;
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 }

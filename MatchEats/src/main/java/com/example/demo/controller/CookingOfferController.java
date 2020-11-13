@@ -111,7 +111,7 @@ public class CookingOfferController {
 		//オファーが来たことをメールで通知したい人生だった
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute("loginInfo");
 
-		String email = loginInfo.getEmail();
+		//String email = loginInfo.getEmail();
 		session.removeAttribute("requestId");
 
 		return "complete_offer_input";
@@ -144,13 +144,28 @@ public class CookingOfferController {
 		//削除するオファーの情報を再取得
 		CookingInfoDto cookdto = cookingOfferService.getOfferInfo(Integer.parseInt(offerId));
 
-
-
 		model.addAttribute("cookdto",cookdto);
 
 
 		return "offer_delete_confirm";
 
+	}
+
+	//オファー取り消し
+	@RequestMapping(value= {"cookingoffer/delete"},method=RequestMethod.POST)
+	public String delete(@RequestParam("offerId") String offerId,Model model) {
+
+		cookingOfferService.delete(offerId);
+
+		return "redirect:/cookingoffer/deletecomplete";
+
+	}
+
+	//オファー取り消し完了
+	@RequestMapping(value= {"/cookingoffer/deletecomplete"}, method=RequestMethod.GET)
+	public String deletecomplete() {
+
+		return "complete_delete_offer";
 	}
 
 

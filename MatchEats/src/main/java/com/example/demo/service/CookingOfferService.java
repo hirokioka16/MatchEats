@@ -93,4 +93,16 @@ public class CookingOfferService {
 
 	}
 
+	public void delete(String offerId) {
+
+		CookOfferTblEntity offerEntity = new CookOfferTblEntity();
+
+		offerEntity.setOfferId(Integer.parseInt(offerId));
+		offerEntity.setReactionStatus("4");
+
+
+
+		cookingOfferRepository.update(offerEntity.getReactionStatus(),offerEntity.getOfferId());
+	}
+
 }

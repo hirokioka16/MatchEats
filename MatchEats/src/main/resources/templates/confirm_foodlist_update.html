@@ -2,17 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>食べたい物リスト入力確認</title>
+<title>食べたい物リスト修正確認</title>
 </head>
 <body>
-	<form th:action="@{/inputfood/insert}" method="post">
+	<form th:action="@{/updatefoodlist/update}" method="post">
 		<p>以下の内容で間違いはないでしょうか</p>
 		<table>
-			<tr>
-				<td>
-				<img th:src="${image}" alt="サンプル">
-				</td>
-			</tr>
 			<tr>
 				<td>料理名</td>
 			</tr>
@@ -30,15 +25,20 @@
 			</tr>
 			<tr>
 				<td th:text="${genreName}"></td>
-			</tr>
-			
+			</tr>		
 		</table>
+		<div th:switch="${session['foodInfDto'].eatFlag}">
+    		<p th:case="0">オファー受付可</p>
+    		<p th:case="1">オファー受付不可</p>
+    		<p th:case="*">エラー</p>
+		</div>
 		<p>
-		<input type="submit" value="登録">
+			<input type="submit" value="修正">
 		</p>
 	</form>
 	
-	<form th:action="@{/inputfood/input}">
+	<form th:action="@{/updatefoodlist/input}" method="post">
+		<input type="hidden" name="requestId" th:value="${session['foodInfDto'].requestId}">
 		<input type="submit" value="戻る">
 	</form>
 </body>

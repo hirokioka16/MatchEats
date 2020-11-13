@@ -14,6 +14,16 @@
    	 	</tr>
   	</table>
 	<form th:action="@{/inputfood/confirm}" enctype="multipart/form-data" method="post" th:object="${FoodForm}">
+<<<<<<< HEAD
+		<input type="file" th:field="*{requestPicture}"><br>
+		<input type="text" placeholder="料理名" th:field="*{foodName}"><br>
+<<<<<<< HEAD
+		<input type="text" placeholder="料理の説明" th:field="*{requestOutline}"><br>
+		<select name="genreId">
+			<option th:each="genre : ${list}" th:value="${genre.genreId}" th:text="${genre.genreName}"></option>
+		</select>
+
+=======
 		<table>
 		<tr>
 			<td>料理画像</td>
@@ -47,12 +57,29 @@
 		
 		</table>
 		<p>
+>>>>>>> main
 		<input type="submit" value="登録">
 		</p>
 	</form>
-		
+
 	<form>
 		<input type="submit" value="戻る">
 	</form>
+	<form>
+		<input type="submit" value="新規登録">
+	</form>
+=======
+		<input type="text" placeholder="料理の説明" th:field="*{requestOutline}"><br>
+		<select name="genreId">
+			<option th:each="genre : ${list}" th:value="${genre.genreId}" th:text="${genre.genreName}"></option>
+		</select>
+
+		<input type="submit" value="登録">
+	</form>
+
+	<form>
+		<input type="submit" value="戻る">
+	</form>
+>>>>>>> main
 </body>
 </html>

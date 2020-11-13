@@ -46,4 +46,8 @@ public interface FoodRepository extends JpaRepository<FoodTblEntity,Integer>{
 			@Param("eatFlag") String eat_flag,
 			@Param("requestId") int requestId
 			);
+	
+	
+	@Query("SELECT f FROM FoodTblEntity f left join f.genreTbl g left join f.userTbl u")
+    public List<FoodRepository> getDeliveryApprovalList();
 }

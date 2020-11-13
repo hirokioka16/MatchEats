@@ -36,20 +36,12 @@ public class InputFoodListController {
 	@Autowired
 	FoodRepository foodRepository;
 
-
 	@RequestMapping(value= {"/input"}, method=RequestMethod.GET)
 	public String input(@ModelAttribute("FoodForm")FoodForm form,Model model) {
 
 		//料理のジャンルをDBから取得
 		List<GenreInfoDto> list = foodService.getGenre();
-<<<<<<< HEAD
-		model.addAttribute("list",list);
 
-		FoodInfoDto foodInfoDto = new FoodInfoDto();
-		model.addAttribute("foodInfoDto",foodInfoDto);
-
-=======
-		
 		FoodInfoDto dto = new FoodInfoDto();
 		String genreName="";
 
@@ -67,7 +59,6 @@ public class InputFoodListController {
 		}
 		model.addAttribute("name",genreName);
 		model.addAttribute("list",list);
->>>>>>> main
 		return "input_foodlist";
 	}
 
@@ -126,15 +117,18 @@ public class InputFoodListController {
 	@RequestMapping(value= {"/complete"}, method=RequestMethod.GET)
 	public String complete() {
 
-
 		return "complete_foodlist_input";
 	}
+
 
 	@RequestMapping(value= {"/test"}, method=RequestMethod.GET)
 	public String test() {
 		List<FoodRepository> list = foodRepository.testFind();
 		return "complete_foodlist_input";
 	}
+
+
+
 
 
 	//formの値をdtoに入れているメソッド

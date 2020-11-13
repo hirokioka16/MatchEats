@@ -30,7 +30,6 @@ public class FoodService {
 		List<GenreInfoDto> list = new ArrayList<GenreInfoDto>();
 		List<GenreTblEntity> entityList = genreRepository.findAll();
 
-
 		for(GenreTblEntity entity : entityList ) {
 
 			GenreInfoDto dto = new GenreInfoDto();
@@ -50,52 +49,49 @@ public class FoodService {
 		foodRepository.saveAndFlush(foodEntity);
 
 	}
-<<<<<<< HEAD
-
-=======
 	//自分の投稿した食べたい物リストを表示する
 	public List<FoodInfoDto> getMyFoodList(int userId){
-		
+
 		List<FoodInfoDto> list = new ArrayList<FoodInfoDto>();
 		List<FoodTblEntity> entityList = foodRepository.getMyFoodList(userId);
-		
+
 		for(FoodTblEntity entity:entityList) {
-			
+
 			FoodInfoDto dto = new FoodInfoDto();
 			dto.setRequestId(entity.getRequestId());
 			dto.setFoodName(entity.getFoodName());
 			dto.setRegistDate(entity.getRegistDate());
 			dto.setPictureName(entity.getRequestPicture());
-			
+
 			list.add(dto);
 		}
-		
+
 		return list;
 	}
 	//自分が投稿した食べたい物リストを修正する
 	public void update(FoodInfoDto dto) {
-		
+
 		FoodTblEntity foodEntity = new FoodTblEntity();
-		
+
 		foodEntity.setRequestId(dto.getRequestId());
 		foodEntity.setFoodName(dto.getFoodName());
 		foodEntity.setRequestOutline(dto.getRequestOutline());
 		foodEntity.setEatFlag(dto.getEatFlag());
 		GenreTblEntity genreEntiry = new GenreTblEntity();
 		genreEntiry.setGenreId(dto.getGenreId());
-		
+
 		foodEntity.setGenreTbl(genreEntiry);
-		
+
 		foodRepository.update(foodEntity.getFoodName(), foodEntity.getRequestOutline(),foodEntity.getGenreTbl(), foodEntity.getEatFlag(), foodEntity.getRequestId());
 	}
-	
-	
+
+
 	//自分の食べたい物リストの修正または削除するデータを持ってくる
 	public FoodInfoDto getUdFoodList(int requestId){
-		
+
 		FoodTblEntity entity = foodRepository.getOne(requestId);
 		FoodInfoDto dto = new FoodInfoDto();
-		
+
 		dto.setRequestId(entity.getRequestId());
 		dto.setFoodName(entity.getFoodName());
 		dto.setRequestOutline(entity.getRequestOutline());
@@ -104,18 +100,13 @@ public class FoodService {
 		dto.setPictureName(entity.getRequestPicture());
 		return dto;
 	}
-	
->>>>>>> main
+
 	//dtoの値をentityに入れるメソッド
 	private FoodTblEntity change(FoodInfoDto dto) {
 
 		FoodTblEntity foodEntity = new FoodTblEntity();
-<<<<<<< HEAD
 
-=======
-		
 		foodEntity.setRequestId(dto.getRequestId());
->>>>>>> main
 		foodEntity.setFoodName(dto.getFoodName());
 		foodEntity.setRequestOutline(dto.getRequestOutline());
 		foodEntity.setRegistDate(dto.getRegistDate());
@@ -137,44 +128,25 @@ public class FoodService {
 	}
 
 	//全ユーザーの食べたい物をDBから取得する
-	public List<FoodInfoDto> getAllList(){
+		public List<FoodInfoDto> getAllList(){
 
-		List<FoodInfoDto> list = new ArrayList<FoodInfoDto>();
-		List<FoodTblEntity> entityList = foodRepository.getAllList();
+			List<FoodInfoDto> list = new ArrayList<FoodInfoDto>();
+			List<FoodTblEntity> entityList = foodRepository.getAllList();
 
-		for(FoodTblEntity entity:entityList) {
+			for(FoodTblEntity entity:entityList) {
 
-			FoodInfoDto dto = new FoodInfoDto();
-			dto.setRequestId(entity.getRequestId());
-			dto.setFoodName(entity.getFoodName());
-			dto.setRegistDate(entity.getRegistDate());
-			dto.setPictureName(entity.getRequestPicture());
+				FoodInfoDto dto = new FoodInfoDto();
+				dto.setRequestId(entity.getRequestId());
+				dto.setFoodName(entity.getFoodName());
+				dto.setRegistDate(entity.getRegistDate());
+				dto.setPictureName(entity.getRequestPicture());
 
-			list.add(dto);
+				list.add(dto);
+			}
+
+			return list;
+
+
 		}
 
-		return list;
-
-
-	}
-<<<<<<< HEAD
-
-	//自分の食べたい物リストの修正または削除するデータを持ってくる
-		public FoodInfoDto getUdFoodList(int requestId){
-
-			FoodTblEntity entity = foodRepository.getOne(requestId);
-			FoodInfoDto dto = new FoodInfoDto();
-
-			dto.setRequestId(entity.getRequestId());
-			dto.setFoodName(entity.getFoodName());
-			dto.setRequestOutline(entity.getRequestOutline());
-			dto.setGenreId(entity.getGenreTbl().getGenreId());
-			dto.setEatFlag(entity.getEatFlag());
-			dto.setPictureName(entity.getRequestPicture());
-			return dto;
-		}
-
-=======
-	
->>>>>>> main
 }

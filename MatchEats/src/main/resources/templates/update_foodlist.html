@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>食べたい物リスト修正内容入力</title>
+</head>
+<body>
+	<table>
+ 	  	<tr th:if="${validationError}" th:each="error : ${validationError}">
+      		<td style="color:red;" th:text="${error}"></td>
+   	 	</tr>
+  	</table>
+	<form th:action="@{/updatefoodlist/confirm}" enctype="multipart/form-data" method="post" th:object="${FoodForm}">
+	<input type="hidden" th:field="*{requestId}">
+	<table>
+		<tr>
+			<td>料理画像</td>
+		</tr>
+		<tr>
+			<td><img th:src="aaa" alt="サンプル"></td>
+		</tr>
+		<tr>
+			<td>料理名</td>
+		</tr>
+		<tr>
+			<td><input type="text" placeholder="料理名" th:field="*{foodName}"></td>
+		<tr>
+		<tr>
+			<td>料理の説明</td>
+		</tr>
+		<tr>
+			<td><input type="text" placeholder="料理の説明" th:field="*{requestOutline}"></td>
+		</tr>
+		<tr>
+			<td>料理のジャンル</td>
+		</tr>
+		<tr>
+			<td>
+				<select name="genreId">
+					<option th:value="*{genreId}" th:text="*{genreName}"></option>
+					<option th:each="genre : ${list}" th:value="${genre.genreId}" th:text="${genre.genreName}"></option>
+				</select>
+			</td>
+		</tr>
+	</table>
+	
+	<div th:switch="*{eatFlag}">
+		<div th:case="0">
+			<input type="radio" name="eatFlag" value="0" checked/>オファー受付可
+   			<input type="radio" name="eatFlag" value="1" />オファー受付不可
+   		</div>
+   		<div th:case="1">
+			<input type="radio" name="eatFlag" value="0" />オファー受付可
+   			<input type="radio" name="eatFlag" value="1" checked/>オファー受付不可
+   		</div>
+   	</div>
+		<p>
+		<input type="submit" value="登録">
+		</p>
+	</form>
+		
+	<form th:action="@{/foodlist}">
+		<input type="submit" value="戻る">
+	</form>
+</body>
+</html>

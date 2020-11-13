@@ -16,10 +16,17 @@ public class FoodInfoDto {
 	private String eatFlag;
 	private MultipartFile requestPicture;
 	private String pictureName;
+<<<<<<< HEAD
 
 
 
 
+=======
+	
+	
+	
+	
+>>>>>>> main
 	public int getRequestId() {
 		return requestId;
 	}

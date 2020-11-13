@@ -1,21 +1,19 @@
 package com.example.demo.repository;
 
-import org.springframework.stereotype.Repository;
-
-import java.sql.Date;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.UserTblEntity;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserTblEntity, Integer> {
-	
-	
-	
+
+	@Query("select u from UserTblEntity u where userMail = :mail and  userPass = :password")
+	public UserTblEntity login(@Param("mail")String mail,@Param("password")String password);
+
 	//会員情報修正
 	@Modifying
 	@Query("UPDATE UserTblEntity u SET "
@@ -47,6 +45,6 @@ public interface UserRepository extends JpaRepository<UserTblEntity, Integer> {
 			@Param("limitDate") String limitDate,
 			@Param("secureCode") String secureCode
 			);
-	
+
 
 }

@@ -42,6 +42,20 @@ public class CookOfferTblEntity implements Serializable{
 	private String reactionComment;
 
 	private Date reactionDate;
+	
+	private Date approvalRequestDeliveryDate;	
+	
+	private boolean approval_delivery_flg;
+	
+	
+
+	public Date getApprovalRequestDeliveryDate() {
+		return approvalRequestDeliveryDate;
+	}
+
+	public void setApprovalRequestDeliveryDate(Date approvalRequestDeliveryDate) {
+		this.approvalRequestDeliveryDate = approvalRequestDeliveryDate;
+	}
 
 	public Integer getOfferId() {
 		return offerId;
@@ -131,5 +145,14 @@ public class CookOfferTblEntity implements Serializable{
 		this.reactionDate = reactionDate;
 	}
 
+	public boolean isApproval_delivery_flg() {
+		return approval_delivery_flg;
+	}
+
+	public void setApproval_delivery_flg(boolean approval_delivery_flg) {
+		this.approval_delivery_flg = approval_delivery_flg;
+	}
+	
+	
 
 }

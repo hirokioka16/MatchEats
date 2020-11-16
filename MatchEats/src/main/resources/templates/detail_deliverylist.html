@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>配達リクエスト詳細</title>
+</head>
+<body>
+	<form th:action="@{/delivery/deliveryinsert}" method="post">
+		<table>
+			<tr>
+				<th>ユーザー名</th>
+				<td th:text="${dto.userName}">
+			</tr>
+			<tr>
+				<th>リクエスト承認日</th>
+				<td th:if="${dto.requestApprovalDay != null}" th:text="${#dates.format(dto.requestApprovalDay,'yyyy/MM/dd HH:mm:ss')}">
+				<td th:if="${dto.requestApprovalDay == null}" th:text="配達リクエストが承認されていません">
+			</tr>
+			<tr>
+				<th>住所</th>
+				<td th:text="${dto.address}">
+			</tr>
+		</table>
+		<input type="hidden" name="requestId" th:value="${dto.offerId}">
+		<input type="submit" value = "承認">
+	</form>
+	<form th:action="@{/delivery/requestlist}" method="get">
+		<input type="submit" value = "戻る">
+	</form>
+</body>
+</html>

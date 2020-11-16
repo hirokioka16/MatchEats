@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>配達リクエスト一覧</title>
+</head>
+<body>
+	<form th:action="@{/delivery/requestDetail}" method="post">
+		<table>
+			<tr th:each="list:${list}">
+				<td th:text="${list.userName}">
+				<td th:text="${#dates.format(list.requestDay,'yyyy/MM/dd HH:mm:ss')}">
+				<td>
+					<input type="radio" name="requestId" th:value="${list.offerId}">
+				</td>
+			</tr>
+		</table>
+		<input type="submit" value = "詳細へ">
+	</form>
+</body>
+</html>

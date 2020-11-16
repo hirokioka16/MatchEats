@@ -20,22 +20,26 @@ public class CookingOfferService {
 
 	public  List<FoodInfoDto> getList(){
 		List<CookingInfoDto> list = new ArrayList<CookingInfoDto>();
-		 List<CookOfferTblEntity> tblList = cookingRepository.getList();
+		//session.getAttribute("loginInfo", loginInfo);
+		 List<CookOfferTblEntity> tblList = cookingRepository.getList(1);
 
 
 		 List<FoodTblEntity> resultList =  new ArrayList<FoodTblEntity>();
 		 List<FoodInfoDto> resultListDto = new ArrayList<FoodInfoDto>();
+		 List<Integer> offerId = new ArrayList<Integer>();
 		 for(int i=0;i<tblList.size();i++) {
 			resultList.add(tblList.get(i).getFoodTbl());
+			offerId.add(tblList.get(i).getOfferId());
 
 		 }
 
-		 for(FoodTblEntity entity:resultList) {
+		 for(int y=0;y<resultList.size();y++) {
 				FoodInfoDto dto = new FoodInfoDto();
-				dto.setRequestId(entity.getRequestId());
-				dto.setFoodName(entity.getFoodName());
-				dto.setRegistDate(entity.getRegistDate());
-				dto.setPictureName(entity.getRequestPicture());
+				dto.setOfferId(offerId.get(y));
+				dto.setRequestId(resultList.get(y).getRequestId());
+				dto.setFoodName(resultList.get(y).getFoodName());
+				dto.setRegistDate(resultList.get(y).getRegistDate());
+				dto.setPictureName(String.valueOf(resultList.get(y).getRequestPicture()));
 
 				resultListDto.add(dto);
 

@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FoodInfoDto {
 
+	private int offerId;
 	private int requestId;
 	private String foodName;
 	private String requestOutline;
@@ -20,6 +21,12 @@ public class FoodInfoDto {
 
 
 
+	public int getOfferId() {
+		return offerId;
+	}
+	public void setOfferId(int offerId) {
+		this.offerId = offerId;
+	}
 	public int getRequestId() {
 		return requestId;
 	}

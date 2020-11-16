@@ -3,13 +3,12 @@ package com.example.demo.repository;
 import java.util.Date;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.entity.CookOfferTblEntity;
 @Repository
@@ -17,10 +16,10 @@ import com.example.demo.entity.CookOfferTblEntity;
 public interface CookingOfferRepository extends JpaRepository<CookOfferTblEntity, Integer> {
 
 
-	@Query("SELECT o FROM CookOfferTblEntity o left join o.userTbl u WHERE u.userId = :userId")
+	@Query("SELECT o FROM CookOfferTblEntity o left join o.userTbl u WHERE u.userId = :userId AND o.reactionStatus IN ('0')")
 	public List<CookOfferTblEntity> getOfferHistory(@Param("userId") int userId);
 
-	/**
+
 	@Transactional
 	@Modifying
 	@Query("UPDATE CookOfferTblEntity c SET"
@@ -30,18 +29,5 @@ public interface CookingOfferRepository extends JpaRepository<CookOfferTblEntity
 					@Param("reactionStatus") String reactionStatus,
 					@Param("offerId") Integer offerId
 			);
-	**/
-	
 	@Query("SELECT o FROM CookOfferTblEntity o left join o.userTbl u WHERE o.deliveryFlg = :deliveryFlg")
-	public List<CookOfferTblEntity> getDeliveryList(@Param("deliveryFlg") boolean deliveryFlg);
-
-	@Modifying
-	@Query("UPDATE CookOfferTblEntity c SET"
-			+ " c.approvalRequestDeliveryDate = :date "
-			+ " WHERE c.offerId = :offerId ")
-	public void setApprovalDate(
-			@Param("date") Date date,
-			@Param("offerId") int offerId
-			);
-	
 }

@@ -2,9 +2,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>食べたい物リスト一覧</title>
+<title>検索結果</title>
 </head>
 <body>
+
+<script  type="text/javascript">
+
+	String nullMsg = null;
+	nullMsg = "${nullMsg}";
+
+	if(nullMsg != null){
+</script>
+	 <p th:text="${nullMsg}"></p>
+<script type="text/javascript">
+	}else{
+</script>
+
+
 	<form method="post">
 		<table>
 			<tr th:each="list:${list}">
@@ -17,12 +31,8 @@
 
 		<input type="submit" formaction="/detailfoodlist" value="詳細">
 	</form>
-
-	<form method="get">
-
-		<input type="text" name="keyword">
-		<input type="submit" formaction="/seachfoodlist" value="検索">
-	</form>
-
+<script type="text/javascript">
+	}
+</script>
 </body>
 </html>

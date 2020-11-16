@@ -6,6 +6,17 @@
 </head>
 <body>
 
+<script  type="text/javascript">
+
+	String nullMsg = null;
+	nullMsg = "${nullMsg}";
+
+	if(nullMsg != null){
+</script>
+	 <p th:text="${nullMsg}"></p>
+<script type="text/javascript">
+	}else{
+</script>
 
 
 	<form method="post">
@@ -20,3 +31,8 @@
 
 		<input type="submit" formaction="/detailfoodlist" value="詳細">
 	</form>
+<script type="text/javascript">
+	}
+</script>
+</body>
+</html>

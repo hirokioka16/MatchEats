@@ -54,6 +54,11 @@ public class FoodListController {
 		List<FoodInfoDto> list = null;
 		list = foodService.search(keyword);
 
+		if(list.size()==0) {
+			String nullMsg = "該当するものが見つかりませんでした。";
+			model.addAttribute("nullMsg",nullMsg);
+		}
+
 		model.addAttribute("list",list);
 
 		return "seachfoodlist";

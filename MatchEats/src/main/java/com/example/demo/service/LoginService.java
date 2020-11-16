@@ -1,3 +1,4 @@
+
 package com.example.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,12 @@ public class LoginService {
 	public LoginInfoDto login(String mail,String userid)throws Exception{
 	LoginInfoDto loginInfoDto = null;
 
-	UserTblEntity entity = userRepository.login(mail,userid);
+	UserTblEntity entity = userRepository.login(mail,pass);
 
 	if(entity != null) {
 		loginInfoDto = new LoginInfoDto();
 		loginInfoDto.setEmail(entity.getUserMail());
-		loginInfoDto.setPass(entity.getUserPass());
+		loginInfoDto.setUserId(entity.getUserId());
 	}
 
 	return loginInfoDto;

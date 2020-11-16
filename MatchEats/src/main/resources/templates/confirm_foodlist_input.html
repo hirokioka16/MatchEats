@@ -42,25 +42,28 @@
 				</td>
 			</tr>
 			<tr>
-				<th>料理名</th>
-				<td>
-				<div th:text="${session['foodInfDto'].foodName}"></div>
-				</td>
+				<td>料理名</td>
 			</tr>
 			<tr>
-				<th>料理名の説明</th>
-				<td>
-				<div th:text="${session['foodInfDto'].requestOutline}"></div>
-				</td>
+				<td th:text="${session['foodInfDto'].foodName}"></td>
 			</tr>
 			<tr>
-				<th>ジャンル</th>
-				<td>
-				<div th:text="${genreName}"></div>
-				</td>
+				<td>料理名の説明</td>
 			</tr>
+			<tr>
+				<td th:text="${session['foodInfDto'].requestOutline}"></td>
+			</tr>
+			<tr>
+				<td>ジャンル</td>
+			</tr>
+			<tr>
+				<td th:text="${genreName}"></td>
+			</tr>
+			
 		</table>
+		<p>
 		<input type="submit" value="登録">
+		</p>
 	</form>
 	
 	<form th:action="@{/inputfood/input}">

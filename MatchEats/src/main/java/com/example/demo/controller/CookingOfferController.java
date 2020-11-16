@@ -111,6 +111,8 @@ public class CookingOfferController {
 		//オファーが来たことをメールで通知したい人生だった
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute("loginInfo");
 
+
+
 		//String email = loginInfo.getEmail();
 		session.removeAttribute("requestId");
 

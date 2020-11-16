@@ -49,7 +49,17 @@ public class FoodListController {
 	}
 
 	@RequestMapping(value= {"/seachfoodlist"}, method=RequestMethod.GET)
-	public String seach() {
+	public String seach(@RequestParam("keyword") String keyword,Model model) {
+
+		List<FoodInfoDto> list = null;
+		list = foodService.search(keyword);
+
+		if(list.size()==0) {
+			String nullMsg = "該当するものが見つかりませんでした。";
+			model.addAttribute("nullMsg",nullMsg);
+		}
+
+		model.addAttribute("list",list);
 
 		return "seachfoodlist";
 

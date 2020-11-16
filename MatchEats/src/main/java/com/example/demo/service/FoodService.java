@@ -149,4 +149,23 @@ public class FoodService {
 
 		}
 
+		public List<FoodInfoDto> search(String keyword){
+
+			List<FoodInfoDto> list = new ArrayList<FoodInfoDto>();
+			List<FoodTblEntity> entityList = foodRepository.search(keyword);
+
+			for(FoodTblEntity entity:entityList) {
+
+				FoodInfoDto dto = new FoodInfoDto();
+				dto.setRequestId(entity.getRequestId());
+				dto.setFoodName(entity.getFoodName());
+				dto.setRegistDate(entity.getRegistDate());
+				dto.setPictureName(entity.getRequestPicture());
+
+				list.add(dto);
+			}
+
+			return list;
+		}
+
 }

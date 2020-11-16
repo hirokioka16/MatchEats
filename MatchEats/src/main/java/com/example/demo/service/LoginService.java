@@ -22,7 +22,7 @@ public class LoginService {
 	if(entity != null) {
 		loginInfoDto = new LoginInfoDto();
 		loginInfoDto.setEmail(entity.getUserMail());
-		loginInfoDto.setPass(entity.getUserPass());
+		loginInfoDto.setUserId(entity.getUserId());
 	}
 
 	return loginInfoDto;

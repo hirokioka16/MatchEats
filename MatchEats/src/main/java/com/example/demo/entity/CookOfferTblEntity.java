@@ -45,8 +45,7 @@ public class CookOfferTblEntity implements Serializable{
 	
 	private Date approvalRequestDeliveryDate;	
 	
-	private boolean approval_delivery_flg;
-	
+	private boolean approvalDeliveryFlg;
 	
 
 	public Date getApprovalRequestDeliveryDate() {
@@ -145,13 +144,15 @@ public class CookOfferTblEntity implements Serializable{
 		this.reactionDate = reactionDate;
 	}
 
-	public boolean isApproval_delivery_flg() {
-		return approval_delivery_flg;
+	public boolean isApprovalDeliveryFlg() {
+		return approvalDeliveryFlg;
 	}
 
-	public void setApproval_delivery_flg(boolean approval_delivery_flg) {
-		this.approval_delivery_flg = approval_delivery_flg;
+	public void setApprovalDeliveryFlg(boolean approvalDeliveryFlg) {
+		this.approvalDeliveryFlg = approvalDeliveryFlg;
 	}
+
+	
 	
 	
 

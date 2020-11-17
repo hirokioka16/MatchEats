@@ -57,10 +57,32 @@ public class DeliveryService {
 	}
 	
 	//配達リクエスト承認処理
-	public void deliveryRequesrInsert(int offerId,Date approvalDate) {
+	public void deliveryRequesrInsert(int offerId,Date approvalDate,boolean flg) {
 		
-		cookRepository.setApprovalDate(approvalDate, offerId);
+		cookRepository.setApprovalDate(approvalDate,flg,offerId);
 	}
 	
+	//配達リクエストが承認された料理の一覧
+	public List<DeliveryInfoDto> getRequestAPProvalList(){
+		
+		List<CookOfferTblEntity> entity = cookRepository.getRequestAPProvalList();
+		
+		List<DeliveryInfoDto> list = new ArrayList<DeliveryInfoDto>();
+		
+		for(int i=0;i<entity.size();i++) {
+			
+			DeliveryInfoDto dto = new DeliveryInfoDto();
+			
+			dto.setOfferId(entity.get(i).getOfferId());
+			dto.setUserName(entity.get(i).getUserTbl().getUserName());
+			dto.setRequestApprovalDay(entity.get(i).getApprovalRequestDeliveryDate());
+		
+			list.add(dto);
+		}	
+		return list;
+	}
 	
 }
+	
+	
+

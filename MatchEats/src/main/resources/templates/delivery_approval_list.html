@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>配達リクエスト一覧</title>
+<title>配達リクエスト承認済み料理一覧</title>
 </head>
 <body>
 	<form th:action="@{/delivery/requestDetail}" method="post">
@@ -12,13 +12,13 @@
 				<th>リクエスト日</th>
 			<tr th:each="list:${list}">
 				<td th:text="${list.userName}">
-				<td th:text="${#dates.format(list.requestDay,'yyyy/MM/dd HH:mm:ss')}">
+				<td th:text="${#dates.format(list.requestApprovalDay,'yyyy/MM/dd HH:mm:ss')}">
 				<td>
 					<input type="radio" name="requestId" th:value="${list.offerId}">
 				</td>
 			</tr>
 		</table>
-		<input type="submit" value = "詳細へ">
+		<input type="submit" value = "回収">
 	</form>
 	<form th:action="@{/admin/menu}" method="get">
 		<input type = "submit" value="戻る">

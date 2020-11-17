@@ -43,25 +43,31 @@ public class DeliveryController {
 		return "detail_deliverylist";
 	}
 	
-	//配達リクエスト承認
+	//配達リクエスト承認処理
 	@RequestMapping(value= {"/deliveryinsert"}, method=RequestMethod.POST)
 	public String deliveryRequestDetail(@RequestParam("requestId") int requestId) throws ParseException {
 		
-		deliveryService.deliveryRequesrInsert(requestId,getNowDate() );
-		return "redirect:delivery/deliverycomplete";
+		boolean approval_delivery_flg = true;
+		deliveryService.deliveryRequesrInsert(requestId,getNowDate(),approval_delivery_flg);
+		
+		return "redirect:/delivery/deliverycomplete";
 	}
 	
 	@RequestMapping(value= {"/deliverycomplete"}, method=RequestMethod.GET)
 	public String deliveryComplete() {
 		
-		return "delivery_approval_list_confirm";
+		return "delivery_request_complete";
 	}
 	
 	
 	
 	//配達リクエストが承認されたやつ
-	@RequestMapping(value= {"/list"}, method=RequestMethod.GET)
+	@RequestMapping(value= {"/approvallist"}, method=RequestMethod.GET)
 	public String deliveryList(Model model) {
+		
+		List<DeliveryInfoDto> list = deliveryService.getRequestAPProvalList();
+		
+		model.addAttribute("list", list);
 		
 		return "delivery_approval_list";
 	}

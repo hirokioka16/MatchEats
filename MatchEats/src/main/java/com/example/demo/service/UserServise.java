@@ -153,6 +153,7 @@ public class UserServise {
 			userDto.setPostalCode(userEntity.getPostalCode());
 			userDto.setUserAddres(userEntity.getUserAdress());
 			userDto.setUserTel(userEntity.getUserTel());
+			userDto.setSales(userEntity.getSales());
 			
 			//変換
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

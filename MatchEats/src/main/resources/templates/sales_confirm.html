@@ -21,9 +21,9 @@
 		</table>	
 	
 	<form th:action="@{/transferRegistration}" method="post">
-		<input type="submit" value="戻る">
+		<input th:if="${userInfoDto.sales != 0}" type="submit" value="振り込み申請する">
 	</form>
-	<form th:action="@{/}" method="get">
+	<form th:action="@{/mypage}" method="get">
 		<input type="submit" value="戻る">
 	</form>
 

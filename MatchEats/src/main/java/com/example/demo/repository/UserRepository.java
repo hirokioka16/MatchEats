@@ -1,5 +1,7 @@
 package com.example.demo.repository;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -7,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.UserTblEntity;
-
+@Transactional
 @Repository
 public interface UserRepository extends JpaRepository<UserTblEntity, Integer> {
 
@@ -46,5 +48,11 @@ public interface UserRepository extends JpaRepository<UserTblEntity, Integer> {
 			@Param("secureCode") String secureCode
 			);
 
+	@Modifying
+	@Query("UPDATE UserTblEntity u SET"
+			+ " u.sales = 0 "
+			+ " WHERE u.userId = :userId ")
+	public void reset(
+			@Param("userId")int userId);
 
 }

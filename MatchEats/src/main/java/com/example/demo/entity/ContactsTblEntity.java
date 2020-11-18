@@ -7,24 +7,24 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@Entity 
+@Entity
 @Table(name="contacts")
 public class ContactsTblEntity implements Serializable{
 
 	@Id
 	private Integer contactId;
-	
-	@Id
+
+
 	@ManyToOne
     @JoinColumn(name="user_id")
 	private UserTblEntity userTbl;
-	
+
 	private String content;
-	
+
 	private Date contactDate;
+
 
 	public Integer getContactId() {
 		return contactId;
@@ -57,6 +57,6 @@ public class ContactsTblEntity implements Serializable{
 	public void setContactDate(Date contactDate) {
 		this.contactDate = contactDate;
 	}
-	
-	
+
+
 }

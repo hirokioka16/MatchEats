@@ -13,13 +13,13 @@ import com.example.demo.dto.FoodInfoDto;
 import com.example.demo.entity.CookOfferTblEntity;
 import com.example.demo.entity.FoodTblEntity;
 import com.example.demo.entity.UserTblEntity;
-import com.example.demo.repository.CookingOfferRepository;
+import com.example.demo.repository.CookingRepository;
 
 @Service
 public class CookingOfferService {
 
 	@Autowired
-	CookingOfferRepository cookingOfferRepository;
+	CookingRepository cookingOfferRepository;
 
 	public void insert(CookingInfoDto dto) {
 
@@ -108,9 +108,9 @@ public class CookingOfferService {
 		cookingOfferRepository.save(offerEntity);
 	}
 
-	public  List<FoodInfoDto> getList(){
+	public  List<FoodInfoDto> getList(int userId){
 		List<CookingInfoDto> list = new ArrayList<CookingInfoDto>();
-		 List<CookOfferTblEntity> tblList = cookingOfferRepository.getList();
+		 List<CookOfferTblEntity> tblList =cookingOfferRepository.getList(userId);
 
 
 		 List<FoodTblEntity> resultList =  new ArrayList<FoodTblEntity>();

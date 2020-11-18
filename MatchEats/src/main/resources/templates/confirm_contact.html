@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>お問い合わせ確認</title>
+</head>
+<body>
+<form th:action="@{/inputContact/insert}" method="post">
+	<p>以下の内容で送信します</p>
+	<table>
+		<tr>
+		<td th:text="${session['contactInfoDto'].content}"></td>
+		</tr>
+	</table>
+
+	<input type="submit" value="送信">
+</form>
+	<form th:action="@{/inputContact/input}" method="post">
+		<input type="submit" value="戻る">
+	</form>
+
+</body>
+</html>

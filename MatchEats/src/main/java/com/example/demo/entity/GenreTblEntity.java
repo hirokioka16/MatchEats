@@ -42,9 +42,8 @@ public class GenreTblEntity implements Serializable{
 	public void setGenreName(String genreName) {
 		this.genreName = genreName;
 	}
-		
-	
-}
 
 
 }
+
+

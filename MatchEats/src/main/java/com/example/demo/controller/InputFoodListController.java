@@ -59,13 +59,12 @@ public class InputFoodListController {
 		}
 		model.addAttribute("name",genreName);
 		model.addAttribute("list",list);
-<<<<<<< HEAD
+
 
 		FoodInfoDto foodInfoDto = new FoodInfoDto();
 		model.addAttribute("foodInfoDto",foodInfoDto);
 
-=======
->>>>>>> main
+
 		return "input_foodlist";
 	}
 

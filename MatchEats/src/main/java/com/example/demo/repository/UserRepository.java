@@ -50,6 +50,5 @@ public interface UserRepository extends JpaRepository<UserTblEntity, Integer> {
 			@Param("limitDate") String limitDate,
 			@Param("secureCode") String secureCode
 			);
-	
 
 }

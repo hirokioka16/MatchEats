@@ -19,7 +19,7 @@ public class UserServise {
 	@Autowired
 	UserRepository userRepository;
 	
-	
+	//登録
 	public void insert(UserInfoDto dto) {
 		
 		UserTblEntity userEntity = change(dto);
@@ -29,6 +29,9 @@ public class UserServise {
 		
 	}
 	
+	
+	
+	//修正
 	public void update(UserInfoDto dto) {
 		UserTblEntity userEntity = new UserTblEntity();
 		
@@ -76,6 +79,19 @@ public class UserServise {
 				
 				);
 	}
+	
+	
+	
+	
+	
+	//削除
+	public void delete(Integer userId) {
+		userRepository.deleteById(userId);
+	}
+	
+	
+	
+	
 	
 	public UserInfoDto getUser(int id) {
 		

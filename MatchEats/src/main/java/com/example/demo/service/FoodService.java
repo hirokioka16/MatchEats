@@ -114,8 +114,7 @@ public class FoodService {
 		foodEntity.setRequestPicture(dto.getRequestPicture().getOriginalFilename());
 
 		UserTblEntity userEntity = new UserTblEntity();
-		//テスト用の値
-		userEntity.setUserId(1);
+		userEntity.setUserId(dto.getUserId());
 
 		GenreTblEntity genreEntiry = new GenreTblEntity();
 		genreEntiry.setGenreId(dto.getGenreId());

@@ -1,14 +1,23 @@
 package com.example.demo.controller;
 
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.demo.dto.FoodInfoDto;
 import com.example.demo.dto.GenreInfoDto;
+import com.example.demo.dto.LoginInfoDto;
 import com.example.demo.form.FoodForm;
 import com.example.demo.repository.FoodRepository;
 import com.example.demo.service.FoodService;
@@ -28,6 +38,8 @@ import com.example.demo.service.FoodService;
 @Controller
 @RequestMapping(value= {"/inputfood"})
 public class InputFoodListController {
+	
+	private HttpServletRequest servletRequest;
 
 	@Autowired
 	FoodService foodService;
@@ -92,6 +104,17 @@ public class InputFoodListController {
 
 	        model.addAttribute("image",data.toString());
 	        model.addAttribute("genreName",getGenreName(Integer.parseInt(form.getGenreId())) );
+	        
+			File destination = new File("/Users/hiroikeshouta/Desktop/img" + "/" + form.getRequestPicture().getOriginalFilename());
+			makeDir(String.valueOf(destination));
+			//画像保存処理
+			try {
+				form.getRequestPicture().transferTo(destination);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			form.setFileName(form.getRequestPicture().getOriginalFilename());
+			
 			//formの値をdtoにいれるメソッドを呼んでいる
 			FoodInfoDto dto = getCreateDto(form);
 			session.setAttribute("foodInfDto", dto);
@@ -100,16 +123,21 @@ public class InputFoodListController {
 		return url;
 	}
 	@RequestMapping(value= {"/insert"}, method=RequestMethod.POST)
-	public String insert() throws java.text.ParseException {
+	public String insert() throws java.text.ParseException, IllegalStateException, IOException {
 
 		FoodInfoDto dto = (FoodInfoDto)session.getAttribute("foodInfDto");
+		LoginInfoDto loginInfo  = (LoginInfoDto)session.getAttribute("loginInfo");
+		dto.setUserId(loginInfo.getUserId());
+		
 		dto.setRegistDate(getNowDate());
-		foodService.insert(dto);
+		     
 		//画像の保存先
-//		File destination = new File("/Users/hiroikeshouta/Desktop/upimg" + "/" + dto.getRequestPicture().getOriginalFilename());
-		//画像保存処理
-//		form.getRequestPicture().transferTo(destination);
-//		form.setFileName(form.getRequestPicture().getOriginalFilename());
+		//画像保存処理 
+		//makeDir(String.valueOf(destination));
+		//dto.getRequestPicture().transferTo(new File("/Users/hiroikeshouta/Desktop/img/" + dto.getRequestPicture().getOriginalFilename()));
+	
+		foodService.insert(dto);
+		
 		session.removeAttribute("foodInfDto");
 		return "redirect:/inputfood/complete";
 	}
@@ -121,14 +149,6 @@ public class InputFoodListController {
 	}
 
 
-	@RequestMapping(value= {"/test"}, method=RequestMethod.GET)
-	public String test() {
-		List<FoodRepository> list = foodRepository.testFind();
-		return "complete_foodlist_input";
-	}
-
-
-
 
 
 	//formの値をdtoに入れているメソッド
@@ -138,6 +158,8 @@ public class InputFoodListController {
 		dto.setFoodName(form.getFoodName());
 		dto.setRequestOutline(form.getRequestOutline());
 		dto.setGenreId(Integer.parseInt(form.getGenreId()));
+		dto.setRequestPicture(form.getRequestPicture());
+		
 		if(form.getEatFlag()==null) {
 			dto.setEatFlag("0");
 		}else {
@@ -171,4 +193,13 @@ public class InputFoodListController {
 		}
 		return genreName;
 	}
+    public static void makeDir(String dir){
+        //Fileオブジェクトを生成する
+        File f = new File(dir);
+
+        if (!f.exists()) {
+            //フォルダ作成実行
+            f.mkdirs();
+        }
+    }
 }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>食事履歴詳細</title>
+</head>
+<body>
+
+
+	<form th:action="@{/history/assessmentconfirm}" method="post" th:object="${AssessmentForm}">
+
+		ポイント<select name="point" th:field="*{point}">
+					<option value=1>1</option>
+					<option value=1>2</option>
+					<option value=1>3</option>
+					<option value=1>4</option>
+					<option value=1>5</option>
+				</select>
+
+		<br>
+		<input type="text" th:field="*{a_comment}">
+
+
+
+
+
+
+
+
+
+
+
+
+</form>
+
+
+</body>
+</html>

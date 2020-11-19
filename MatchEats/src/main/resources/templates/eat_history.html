@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>食事履歴一覧</title>
+</head>
+<body>
+	<form method="post">
+		<table>
+			<tr>
+				<th>料理名</th>
+				<th>依頼日</th>
+				<th>金額</th>
+				<th>製作状況</th>
+				<th>配達状況</th>
+
+			</tr>
+			<tr th:each="list:${list}">
+				<td><input type="hidden" name="historyId" th:value="${list.historyId}"></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><input type="submit"  formaction="/history/detail" value="詳細"></td>
+			</tr>
+		</table>
+
+	</form>
+
+</body>
+</html>

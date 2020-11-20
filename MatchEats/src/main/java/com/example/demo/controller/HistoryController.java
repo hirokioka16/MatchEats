@@ -20,9 +20,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.dto.AssessmentInfoDto;
+import com.example.demo.dto.CookingInfoDto;
+import com.example.demo.dto.EatHistoryDetailDto;
+import com.example.demo.dto.FoodInfoDto;
 import com.example.demo.dto.HistoryInfoDto;
 import com.example.demo.dto.LoginInfoDto;
 import com.example.demo.form.AssessmentForm;
+import com.example.demo.service.CookingOfferService;
+import com.example.demo.service.FoodService;
 import com.example.demo.service.HistoryService;
 
 @Controller
@@ -30,6 +35,10 @@ public class HistoryController {
 
 	@Autowired
 	HistoryService historyService;
+	@Autowired
+	CookingOfferService cookService;
+	@Autowired
+	FoodService foodService;
 	@Autowired
 	HttpSession session;
 
@@ -47,8 +56,45 @@ public class HistoryController {
 		int offerId = 1;
 
 		List<HistoryInfoDto> list = historyService.getFoodlist(userId);
+		List<EatHistoryDetailDto> eatList = new ArrayList();
 
-		model.addAttribute("list",list);
+		for(HistoryInfoDto dto : list) {
+			EatHistoryDetailDto eatDto = new EatHistoryDetailDto();
+
+			eatDto.setHistoryId(dto.getHistoryId());
+
+			//食べものの名前とリクエスト日時を取得したい
+			//オファーIDをキーにしてオファーテーブルからリクエストIDを取得
+			//リクエストIDをキーに食べたいものテーブルから情報取得、各値をセット
+			CookingInfoDto cookDto = cookService.getOfferInfo(dto.getOfferId());
+			FoodInfoDto foodInfoDto = foodService.getUdFoodList(Integer.parseInt(cookDto.getRequestId()));
+
+
+			eatDto.setFoodName(foodInfoDto.getFoodName());
+			eatDto.setRequestDate(foodInfoDto.getRegistDate());
+			eatDto.setPrice(dto.getCookProfit()+dto.getAdminProfit());
+
+			int state = dto.getStateStatus();
+			switch(state) {
+				case 0:
+					eatDto.setStateStatus("未回収（調理中）");
+					break;
+				case 1:
+					eatDto.setStateStatus("配達中");
+					eatDto.setRecoveryDate(dto.getRecoveryDate());
+					break;
+				case 2:
+					eatDto.setStateStatus("配達完了");
+					eatDto.setDeliveryCompleteDate(dto.getDeliveryCompleteDate());
+					break;
+			}
+
+
+			eatList.add(eatDto);
+		}
+
+
+		model.addAttribute("eatList",eatList);
 
 		return "eat_history";
 

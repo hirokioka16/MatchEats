@@ -98,6 +98,7 @@ public class FoodService {
 		dto.setGenreId(entity.getGenreTbl().getGenreId());
 		dto.setEatFlag(entity.getEatFlag());
 		dto.setPictureName(entity.getRequestPicture());
+		dto.setRegistDate(entity.getRegistDate());
 		return dto;
 	}
 

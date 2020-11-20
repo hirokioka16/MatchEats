@@ -109,5 +109,7 @@ public class HistoryService {
 		return assessmentEntity;
 
 	}
+
+	//オファー情報を取得
 }
 

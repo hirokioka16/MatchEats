@@ -105,6 +105,30 @@ public class HistoryController {
 
 	}
 
+	@RequestMapping(value={"history/insertassessment"},method=RequestMethod.POST)
+	public String insert() throws java.text.ParseException {
+
+		AssessmentInfoDto dto = (AssessmentInfoDto)session.getAttribute("AssessmentInfoDto");
+		//時間をセット
+		dto.setAssessmentDate(getNowDate());
+
+		historyService.insert(dto);
+
+		session.removeAttribute("AssessmentInfoDto");
+
+
+
+		return "redirect:/history/complete";
+
+	}
+
+	@RequestMapping(value= {"/history/complete"},method=RequestMethod.GET)
+	public String complete() {
+
+		return "complete_assessment_insert";
+
+	}
+
 
 	//formで入力した値をdtoに挿入するメソッド
 	public AssessmentInfoDto getCreateDto(AssessmentForm form) {

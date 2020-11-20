@@ -6,8 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dto.AssessmentInfoDto;
 import com.example.demo.dto.HistoryInfoDto;
+import com.example.demo.entity.AssessmentTblEntity;
 import com.example.demo.entity.HistoryTblEntity;
+import com.example.demo.repository.AssessmentRepository;
 import com.example.demo.repository.HistoryRepository;
 
 @Service
@@ -15,6 +18,8 @@ public class HistoryService {
 
 	@Autowired
 	HistoryRepository historyRepository;
+	@Autowired
+	AssessmentRepository assessmentRepository;
 
 
 	public List<HistoryInfoDto> getFoodlist(int userId){
@@ -79,6 +84,30 @@ public class HistoryService {
 
 
 		return dto;
+	}
+
+	//評価登録メソッド
+	public void insert(AssessmentInfoDto dto) {
+
+		AssessmentTblEntity assessmentEntity = change(dto);
+
+		assessmentRepository.saveAndFlush(assessmentEntity);
+	}
+
+	private AssessmentTblEntity change(AssessmentInfoDto dto) {
+
+		AssessmentTblEntity assessmentEntity = new AssessmentTblEntity();
+
+		HistoryTblEntity historyEntity = new HistoryTblEntity();
+		historyEntity.setHistoryId(dto.getHistoryId());
+		assessmentEntity.setHistoryTbl(historyEntity);
+
+		assessmentEntity.setPoint(String.valueOf(dto.getPoint()));
+		assessmentEntity.setaComment(dto.getAssessmentComment());
+		assessmentEntity.setAssessmentDate(dto.getAssessmentDate());
+
+		return assessmentEntity;
+
 	}
 }
 

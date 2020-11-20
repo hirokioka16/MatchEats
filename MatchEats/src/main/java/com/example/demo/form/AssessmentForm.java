@@ -5,7 +5,7 @@ import javax.validation.constraints.Size;
 
 public class AssessmentForm {
 
-	@NotBlank(message = "点数を選択して下さい")
+
 	private int point;
 
 	@NotBlank(message = "コメントを入力してください")

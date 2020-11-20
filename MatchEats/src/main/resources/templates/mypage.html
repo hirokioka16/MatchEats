@@ -5,7 +5,7 @@
 <title>マイページ</title>
 </head>
 <body>
-<a th:href="@{/transferProcedures}" th:text="売上申請"></a>
+<div id="side" th:replace="layout/side :: side"></div>
 	<form th:action="@{/transferProcedures}" method="post">
 	
 		<p>会員情報</p>

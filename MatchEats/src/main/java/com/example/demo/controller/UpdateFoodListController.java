@@ -46,6 +46,7 @@ public class UpdateFoodListController {
 		try {
 			dto = (FoodInfoDto)session.getAttribute("foodInfDto");
 		}catch (NullPointerException e){
+			e.printStackTrace();
 		}
 		if(dto == null) {
 			dto = foodService.getUdFoodList(Integer.parseInt(requestId));

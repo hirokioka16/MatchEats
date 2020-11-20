@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -105,7 +106,22 @@ public class InputFoodListController {
 	        model.addAttribute("image",data.toString());
 	        model.addAttribute("genreName",getGenreName(Integer.parseInt(form.getGenreId())) );
 	        
-			File destination = new File("/Users/hiroikeshouta/Desktop/img" + "/" + form.getRequestPicture().getOriginalFilename());
+	        //画像の名前が被らないように画像の名前の後に最後のrequestId+1をする 
+	        List<Integer> requestIdList = foodService.getAllRequestId();
+	        int pictureAddNumber = requestIdList.get(requestIdList.size()-1);
+	        pictureAddNumber +=1;
+	        int extension = form.getRequestPicture().getOriginalFilename().lastIndexOf(".");
+	        String resultName="";
+	        List<String> distinction = Arrays.asList(form.getRequestPicture().getOriginalFilename().split(""));
+	        for(int i = 0;i<distinction.size();i++) {
+	        	if(i == extension -1) {
+	        		resultName = resultName + distinction.get(i) + pictureAddNumber;
+	        	}else {
+	        		resultName = resultName + distinction.get(i);
+	        	}
+	        }
+	      //画像の保存先
+			File destination = new File("/Users/hiroikeshouta/Desktop/img" + "/" + resultName);
 			makeDir(String.valueOf(destination));
 			//画像保存処理
 			try {
@@ -113,7 +129,7 @@ public class InputFoodListController {
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-			form.setFileName(form.getRequestPicture().getOriginalFilename());
+			form.setFileName(resultName);
 			
 			//formの値をdtoにいれるメソッドを呼んでいる
 			FoodInfoDto dto = getCreateDto(form);
@@ -159,6 +175,7 @@ public class InputFoodListController {
 		dto.setRequestOutline(form.getRequestOutline());
 		dto.setGenreId(Integer.parseInt(form.getGenreId()));
 		dto.setRequestPicture(form.getRequestPicture());
+		dto.setPictureName(form.getFileName());
 		
 		if(form.getEatFlag()==null) {
 			dto.setEatFlag("0");

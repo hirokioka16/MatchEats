@@ -24,6 +24,18 @@ public class FoodService {
 	@Autowired
 	GenreRepository genreRepository;
 
+	//
+	public List<Integer> getAllRequestId(){
+
+		List<Integer> list = new ArrayList<Integer>();
+		List<FoodTblEntity> entityList = foodRepository.findAll();
+
+		for(FoodTblEntity entity : entityList ) {
+
+			list.add(entity.getRequestId());
+		}
+		return list;
+	}
 	//ジャンルを取得する
 	public List<GenreInfoDto> getGenre(){
 
@@ -111,7 +123,7 @@ public class FoodService {
 		foodEntity.setRequestOutline(dto.getRequestOutline());
 		foodEntity.setRegistDate(dto.getRegistDate());
 		foodEntity.setEatFlag(dto.getEatFlag());
-		foodEntity.setRequestPicture(dto.getRequestPicture().getOriginalFilename());
+		foodEntity.setRequestPicture(dto.getPictureName());
 
 		UserTblEntity userEntity = new UserTblEntity();
 		userEntity.setUserId(dto.getUserId());

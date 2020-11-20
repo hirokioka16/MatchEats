@@ -17,6 +17,7 @@ public class FoodInfoDto {
 	private String eatFlag;
 	private MultipartFile requestPicture;
 	private String pictureName;
+	
 
 
 

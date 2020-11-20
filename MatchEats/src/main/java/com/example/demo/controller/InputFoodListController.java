@@ -1,17 +1,24 @@
 package com.example.demo.controller;
 
+
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
+import javax.servlet.http.Part;
 
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,23 +28,20 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.dto.FoodInfoDto;
 import com.example.demo.dto.GenreInfoDto;
-import com.example.demo.entity.FoodTblEntity;
-import com.example.demo.entity.GenreTblEntity;
-import com.example.demo.entity.UserTblEntity;
+import com.example.demo.dto.LoginInfoDto;
 import com.example.demo.form.FoodForm;
 import com.example.demo.repository.FoodRepository;
 import com.example.demo.service.FoodService;
-import com.sun.el.parser.ParseException;
 
 @Controller
 @RequestMapping(value= {"/inputfood"})
 public class InputFoodListController {
 	
+	private HttpServletRequest servletRequest;
+
 	@Autowired
 	FoodService foodService;
 	@Autowired
@@ -47,10 +51,10 @@ public class InputFoodListController {
 
 	@RequestMapping(value= {"/input"}, method=RequestMethod.GET)
 	public String input(@ModelAttribute("FoodForm")FoodForm form,Model model) {
-		
+
 		//料理のジャンルをDBから取得
 		List<GenreInfoDto> list = foodService.getGenre();
-		
+
 		FoodInfoDto dto = new FoodInfoDto();
 		String genreName="";
 
@@ -70,10 +74,10 @@ public class InputFoodListController {
 		model.addAttribute("list",list);
 		return "input_foodlist";
 	}
-	
+
 	@RequestMapping(value= {"/confirm"}, method=RequestMethod.POST)
 	public String confirm(@Validated @ModelAttribute("FoodForm")FoodForm form,BindingResult result,Model model) throws IllegalStateException, IOException {
-		String url = null;	
+		String url = null;
 		//入力エラーをチェック
 		if(result.hasErrors()) {
 			List<String> errorList = new ArrayList<String>();
@@ -85,61 +89,66 @@ public class InputFoodListController {
 			model.addAttribute("list",list);
 			form.setGenreName(getGenreName(Integer.parseInt(form.getGenreId())));
 			url = "input_foodlist";
-		//画像が選択されていない場合	
+		//画像が選択されていない場合
 		}else if (form.getRequestPicture().isEmpty()) {
 			List<GenreInfoDto> list = foodService.getGenre();
 			model.addAttribute("list",list);
 			model.addAttribute("errImg","画像を選択してください");
 			form.setGenreName(getGenreName(Integer.parseInt(form.getGenreId())));
 			url = "input_foodlist";
-		}else{	
-			
+		}else{
+
 			StringBuffer data = new StringBuffer();
 	        String base64 = new String(Base64.encodeBase64(form.getRequestPicture().getBytes()),"ASCII");
 	        data.append("data:image/jpeg;base64,");
 	        data.append(base64);
-	        
+
 	        model.addAttribute("image",data.toString());
 	        model.addAttribute("genreName",getGenreName(Integer.parseInt(form.getGenreId())) );
+	        
+	        //本当はこれでinsertの後に画像を保存したい
+	        //session.setAttribute("file", form);
+	       
+	        //ファイルを保存するメソッド(仮)
+	       // form.setFileName(saveFile(form));
+	        
 			//formの値をdtoにいれるメソッドを呼んでいる
 			FoodInfoDto dto = getCreateDto(form);
 			session.setAttribute("foodInfDto", dto);
-			url = "confirm_foodlist_input";	
+			url = "confirm_foodlist_input";
 		}
 		return url;
 	}
 	@RequestMapping(value= {"/insert"}, method=RequestMethod.POST)
-	public String insert() throws java.text.ParseException {
-		
+	public String insert() throws java.text.ParseException, IllegalStateException, IOException {
+
 		FoodInfoDto dto = (FoodInfoDto)session.getAttribute("foodInfDto");
+		LoginInfoDto loginInfo  = (LoginInfoDto)session.getAttribute("loginInfo");
+		dto.setUserId(loginInfo.getUserId());
+		
 		dto.setRegistDate(getNowDate());
+		     
+///////////
+//本当はここでしたい画像保存したいけど無理
+//		FoodForm form = (FoodForm) session.getAttribute("file");
+//		dto.setPictureName(saveFile(form));
+		
+		
 		foodService.insert(dto);
-		//画像の保存先
-//		File destination = new File("/Users/hiroikeshouta/Desktop/upimg" + "/" + dto.getRequestPicture().getOriginalFilename());
-		//画像保存処理
-//		form.getRequestPicture().transferTo(destination);
-//		form.setFileName(form.getRequestPicture().getOriginalFilename());
+		
 		session.removeAttribute("foodInfDto");
 		return "redirect:/inputfood/complete";
 	}
-	
+
 	@RequestMapping(value= {"/complete"}, method=RequestMethod.GET)
 	public String complete() {
-		
-		return "complete_foodlist_input";
-	}
-	
-	
-	@RequestMapping(value= {"/test"}, method=RequestMethod.GET)
-	public String test() {
-		List<FoodRepository> list = foodRepository.testFind();
-		return "complete_foodlist_input";
-	}
-	
-	
-	
 
-	
+		return "complete_foodlist_input";
+	}
+
+
+
+
 	//formの値をdtoに入れているメソッド
 	public FoodInfoDto getCreateDto(FoodForm form){
 		FoodInfoDto dto = new FoodInfoDto ();
@@ -147,6 +156,9 @@ public class InputFoodListController {
 		dto.setFoodName(form.getFoodName());
 		dto.setRequestOutline(form.getRequestOutline());
 		dto.setGenreId(Integer.parseInt(form.getGenreId()));
+		dto.setRequestPicture(form.getRequestPicture());
+		dto.setPictureName(form.getFileName());
+		
 		if(form.getEatFlag()==null) {
 			dto.setEatFlag("0");
 		}else {
@@ -154,18 +166,18 @@ public class InputFoodListController {
 		}
 		dto.setRequestPicture(form.getRequestPicture());
 		return dto;
-		
+
 	}
-	
+
 	//現在時刻を登録する
 	public Date getNowDate() throws java.text.ParseException {
-		Date date = new Date(); 
+		Date date = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String strDate = dateFormat.format(date);
 		//String型の日付をDate型に変更している
 		SimpleDateFormat d1 = new SimpleDateFormat("yyyy-MM-dd");
 		Date now = d1.parse(strDate);
-		
+
 		return now;
 	}
 	//ジャンルIDからジャンル名を取得する
@@ -180,4 +192,42 @@ public class InputFoodListController {
 		}
 		return genreName;
 	}
+    public static void makeDir(String dir){
+        //Fileオブジェクトを生成する
+        File f = new File(dir);
+
+        if (!f.exists()) {
+            //フォルダ作成実行
+            f.mkdirs();
+        }
+    }
+    
+    public String saveFile(FoodForm form) {
+    	
+		//画像の名前が被らないように画像の名前の後に最後のrequestId+1をする 
+        List<Integer> requestIdList = foodService.getAllRequestId();
+        int pictureAddNumber = requestIdList.get(requestIdList.size()-1);
+        pictureAddNumber +=1;
+        int extension = form.getRequestPicture().getOriginalFilename().lastIndexOf(".");
+        String resultName="";
+        List<String> distinction = Arrays.asList(form.getRequestPicture().getOriginalFilename().split(""));
+        for(int i = 0;i<distinction.size();i++) {
+        	if(i == extension -1) {
+        		resultName = resultName + distinction.get(i) + pictureAddNumber;
+        	}else {
+        		resultName = resultName + distinction.get(i);
+        	}
+        }
+      //画像の保存先
+		File destination = new File("/Users/hiroikeshouta/Desktop/img" + "/" + resultName);
+		makeDir(String.valueOf(destination));
+		//画像保存処理
+		try {
+			form.getRequestPicture().transferTo(destination);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return resultName;
+    }
 }

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>オファー取り消し確認</title>
+</head>
+<body>
+	<p>以下のオファーを取り消しますが、よろしいですか？</p>
+		<table>
+			<tr>
+				<th>オファーコメント</th>
+				<td th:text="${cookdto.offerComment}"></td>
+			</tr>
+		</table>
+
+		<form method="POST">
+			<input type="hidden" name="offerId" th:value="${cookdto.offerId}">
+			<input type="submit" formaction="/cookingoffer/delete" value="削除">
+		</form>
+
+</body>
+</html>

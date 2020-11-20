@@ -130,9 +130,13 @@ public class CookingOfferService {
 
 				resultListDto.add(dto);
 		 }
+
+		 cookingOfferRepository.deleteById(1);
+
 		 return resultListDto;
 
     }
+//リスト詳細
 	public CookingInfoDto getdetail(int requestId){
 
 
@@ -145,6 +149,10 @@ public class CookingOfferService {
 		dto.setPictureName(cookOfferTblEntity.getFoodTbl().getRequestPicture());
 		dto.setFoodName(cookOfferTblEntity.getFoodTbl().getFoodName());
 		dto.setOfferDate(cookOfferTblEntity.getOfferDate());
+		dto.setOfferComment(cookOfferTblEntity.getOfferComment());
+		dto.setPoint(cookOfferTblEntity.getUserTbl().getAssessMent());
+		dto.setGenreName(cookOfferTblEntity.getFoodTbl().getGenreTbl().getGenreName());
+		dto.setRequestOutline(cookOfferTblEntity.getFoodTbl().getRequestOutline());
 
 
 

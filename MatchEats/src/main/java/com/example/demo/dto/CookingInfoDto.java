@@ -18,6 +18,10 @@ public class CookingInfoDto {
 	private String userName;
 	private String pictureName;
 	private String foodName;
+	private String genreName;
+	private String requestOutline;
+	private float point;
+
 
 	public String getOfferId() {
 		return offerId;
@@ -102,6 +106,25 @@ public class CookingInfoDto {
 	}
 	public void setFoodName(String foodName) {
 		this.foodName = foodName;
+	}
+	public String getRequestOutline() {
+		return requestOutline;
+	}
+	public void setRequestOutline(String requestOutline) {
+		this.requestOutline = requestOutline;
+	}
+
+	public String getGenreName() {
+		return genreName;
+	}
+	public void setGenreName(String genreName) {
+		this.genreName = genreName;
+	}
+	public float getPoint() {
+		return point;
+	}
+	public void setPoint(float point) {
+		this.point = point;
 	}
 
 

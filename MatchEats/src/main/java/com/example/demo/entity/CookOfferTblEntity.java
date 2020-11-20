@@ -132,4 +132,8 @@ public class CookOfferTblEntity implements Serializable{
 	}
 
 
+
+
+
+
 }

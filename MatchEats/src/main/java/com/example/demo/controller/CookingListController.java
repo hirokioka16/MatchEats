@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.dto.CookingInfoDto;
@@ -47,6 +49,12 @@ public String displayList(Model model) {
 	return "my_cook_details";
 
 
-}
+  }
 
+//データベースに配達依頼登録
+  @RequestMapping(value= {"cookinglist/insert"},method=RequestMethod.POST)
+  public String insert() {
+
+	  return "";
+  }
 }

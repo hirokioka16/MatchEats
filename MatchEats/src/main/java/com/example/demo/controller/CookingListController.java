@@ -29,7 +29,7 @@ HttpSession session;
 //リストを表示する
 @GetMapping(value="/cooking/list")
 public String displayList(Model model) {
-	LoginInfoDto user  = (LoginInfoDto) session.getAttribute("logininfo" );
+	LoginInfoDto user  = (LoginInfoDto) session.getAttribute("loginInfo" );
 	List<FoodInfoDto> CookingList=cookService.getList(user.getUserId());
 
 

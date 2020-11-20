@@ -106,31 +106,12 @@ public class InputFoodListController {
 	        model.addAttribute("image",data.toString());
 	        model.addAttribute("genreName",getGenreName(Integer.parseInt(form.getGenreId())) );
 	        
-	        //画像の名前が被らないように画像の名前の後に最後のrequestId+1をする 
-	        List<Integer> requestIdList = foodService.getAllRequestId();
-	        int pictureAddNumber = requestIdList.get(requestIdList.size()-1);
-	        pictureAddNumber +=1;
-	        int extension = form.getRequestPicture().getOriginalFilename().lastIndexOf(".");
-	        String resultName="";
-	        List<String> distinction = Arrays.asList(form.getRequestPicture().getOriginalFilename().split(""));
-	        for(int i = 0;i<distinction.size();i++) {
-	        	if(i == extension -1) {
-	        		resultName = resultName + distinction.get(i) + pictureAddNumber;
-	        	}else {
-	        		resultName = resultName + distinction.get(i);
-	        	}
-	        }
-	      //画像の保存先
-			File destination = new File("/Users/hiroikeshouta/Desktop/img" + "/" + resultName);
-			makeDir(String.valueOf(destination));
-			//画像保存処理
-			try {
-				form.getRequestPicture().transferTo(destination);
-			}catch(Exception e){
-				e.printStackTrace();
-			}
-			form.setFileName(resultName);
-			
+	        //本当はこれでinsertの後に画像を保存したい
+	        //session.setAttribute("file", form);
+	       
+	        //ファイルを保存するメソッド(仮)
+	       // form.setFileName(saveFile(form));
+	        
 			//formの値をdtoにいれるメソッドを呼んでいる
 			FoodInfoDto dto = getCreateDto(form);
 			session.setAttribute("foodInfDto", dto);
@@ -147,11 +128,12 @@ public class InputFoodListController {
 		
 		dto.setRegistDate(getNowDate());
 		     
-		//画像の保存先
-		//画像保存処理 
-		//makeDir(String.valueOf(destination));
-		//dto.getRequestPicture().transferTo(new File("/Users/hiroikeshouta/Desktop/img/" + dto.getRequestPicture().getOriginalFilename()));
-	
+///////////
+//本当はここでしたい画像保存したいけど無理
+//		FoodForm form = (FoodForm) session.getAttribute("file");
+//		dto.setPictureName(saveFile(form));
+		
+		
 		foodService.insert(dto);
 		
 		session.removeAttribute("foodInfDto");
@@ -218,5 +200,34 @@ public class InputFoodListController {
             //フォルダ作成実行
             f.mkdirs();
         }
+    }
+    
+    public String saveFile(FoodForm form) {
+    	
+		//画像の名前が被らないように画像の名前の後に最後のrequestId+1をする 
+        List<Integer> requestIdList = foodService.getAllRequestId();
+        int pictureAddNumber = requestIdList.get(requestIdList.size()-1);
+        pictureAddNumber +=1;
+        int extension = form.getRequestPicture().getOriginalFilename().lastIndexOf(".");
+        String resultName="";
+        List<String> distinction = Arrays.asList(form.getRequestPicture().getOriginalFilename().split(""));
+        for(int i = 0;i<distinction.size();i++) {
+        	if(i == extension -1) {
+        		resultName = resultName + distinction.get(i) + pictureAddNumber;
+        	}else {
+        		resultName = resultName + distinction.get(i);
+        	}
+        }
+      //画像の保存先
+		File destination = new File("/Users/hiroikeshouta/Desktop/img" + "/" + resultName);
+		makeDir(String.valueOf(destination));
+		//画像保存処理
+		try {
+			form.getRequestPicture().transferTo(destination);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return resultName;
     }
 }

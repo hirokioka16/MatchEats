@@ -109,7 +109,7 @@ public class CookingOfferService {
 	}
 
 	public  List<FoodInfoDto> getList(int userId){
-		List<CookingInfoDto> list = new ArrayList<CookingInfoDto>();
+		 List<CookingInfoDto> list = new ArrayList<CookingInfoDto>();
 		 List<CookOfferTblEntity> tblList =cookingOfferRepository.getList(userId);
 
 
@@ -121,21 +121,38 @@ public class CookingOfferService {
 		 }
 
 		 for(FoodTblEntity entity:resultList) {
-
 				FoodInfoDto dto = new FoodInfoDto();
+				dto.setRequestId(entity.getRequestId());
 				dto.setFoodName(entity.getFoodName());
 				dto.setRegistDate(entity.getRegistDate());
 				dto.setPictureName(entity.getRequestPicture());
 
+
 				resultListDto.add(dto);
+		 }
+		 return resultListDto;
+
+    }
+	public CookingInfoDto getdetail(int requestId){
 
 
-			}
+		CookOfferTblEntity cookOfferTblEntity = cookingOfferRepository.getOne(requestId);
 
-		return resultListDto;
-	}
+		CookingInfoDto dto = new CookingInfoDto();
 
+		dto.setOfferId(String.valueOf(cookOfferTblEntity.getOfferId()));
+		dto.setUserName(cookOfferTblEntity.getUserTbl().getUserName());
+		dto.setPictureName(cookOfferTblEntity.getFoodTbl().getRequestPicture());
+		dto.setFoodName(cookOfferTblEntity.getFoodTbl().getFoodName());
+		dto.setOfferDate(cookOfferTblEntity.getOfferDate());
+
+
+
+		return dto;
 }
+}
+
+
 
 
 

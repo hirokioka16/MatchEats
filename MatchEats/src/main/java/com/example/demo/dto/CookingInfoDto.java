@@ -15,6 +15,9 @@ public class CookingInfoDto {
 	private String reactionStatus;
 	private String reactionComment;
 	private Date reactionDate;
+	private String userName;
+	private String pictureName;
+	private String foodName;
 
 	public String getOfferId() {
 		return offerId;
@@ -81,6 +84,24 @@ public class CookingInfoDto {
 	}
 	public void setReactionDate(Date reactionDate) {
 		this.reactionDate = reactionDate;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getPictureName() {
+		return pictureName;
+	}
+	public void setPictureName(String pictureName) {
+		this.pictureName = pictureName;
+	}
+	public String getFoodName() {
+		return foodName;
+	}
+	public void setFoodName(String foodName) {
+		this.foodName = foodName;
 	}
 
 

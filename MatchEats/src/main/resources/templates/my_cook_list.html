@@ -8,7 +8,7 @@
 <title>調理リスト一覧</title>
 </head>
 <body>
-<form method = "post">
+<form th:action="@{/user/detail}">
 <h1>調理リスト一覧</h1>
 	<table>
 	<tr th:each="CookingList:${CookingList}">
@@ -17,13 +17,14 @@
 			<input type="radio" name="requestId" th:value="${CookingList.requestId}">
 		</td>
 		<td th:text="${CookingList.pictureName}">
+		<td th:text="${CookingList.pictureName}">
 		<th th:text="${CookingList.foodName}">
 		<td th:text="${#dates.format(CookingList.registDate,'yyyy/MM/dd')}">
 	</tr>
 	</table>
 
-	<input type="submit" formaction="/updatefoodlist/input" value="修正">
-	 <input type="submit" formaction="/deletefood/confirm" value="削除">
+	<input type="submit" value="詳細">
+
 </form>
 </body>
 </html>

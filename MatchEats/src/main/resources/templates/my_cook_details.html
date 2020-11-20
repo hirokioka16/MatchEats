@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-
+<table>
+<tr>
+<td th:text="${detail.userName}">
+		<td th:text="${detail.pictureName}">
+		<th th:text="${detail.foodName}">
+		<td th:text="${#dates.format(detail.offerDate,'yyyy/MM/dd')}">
+		</tr>
+		</table>
 </body>
 </html>

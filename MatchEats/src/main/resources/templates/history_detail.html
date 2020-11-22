@@ -6,6 +6,45 @@
 </head>
 <body>
 
+	<table>
+		<tr>
+			<th>食べたいもの</th>
+			<td th:text="${eatDto.foodName}"></td>
+		</tr>
+		<tr>
+			<th>ニックネーム</th>
+			<td th:text="${eatDto.nickName}"></td>
+		</tr>
+		<tr>
+			<th>リクエスト概要</th>
+			<td th:text="${eatDto.requestOutline}"></td>
+		</tr>
+		<tr>
+			<th>オファーコメント</th>
+			<td th:text="${eatDto.offerComment}"></td>
+		</tr>
+		<tr>
+			<th>リクエスト日</th>
+			<td th:text="${eatDto.requestDate}"></td>
+		</tr>
+		<tr>
+			<th>価格</th>
+			<td th:text="${eatDto.price}"></td>
+		</tr>
+		<tr>
+			<th>状態</th>
+			<td th:text="${eatDto.stateStatus}"></td>
+		</tr>
+		<tr>
+			<th>回収日</th>
+			<td th:text="${eatDto.recoveryDate}"></td>
+		</tr>
+		<tr>
+			<th>配達完了日</th>
+			<td th:text="${eatDto.deliveryCompleteDate}"></td>
+		</tr>
+	</table>
+
 
 	<form th:action="@{/history/assessmentconfirm}" method="post" th:object="${AssessmentForm}">
 
@@ -22,18 +61,13 @@
 
 		<input type="submit" value="確認">
 
+	</form>
+
+	<form th:action="@{/history/list}" method="get">
+		<input type="submit" value="一覧に戻る">
+	</form>
 
 
-
-
-
-
-
-
-
-
-
-</form>
 
 
 </body>

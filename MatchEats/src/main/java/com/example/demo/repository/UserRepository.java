@@ -47,4 +47,6 @@ public interface UserRepository extends JpaRepository<UserTblEntity, Integer> {
 			);
 
 
+
+
 }

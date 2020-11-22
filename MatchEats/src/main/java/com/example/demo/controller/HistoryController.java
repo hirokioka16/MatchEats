@@ -29,6 +29,7 @@ import com.example.demo.form.AssessmentForm;
 import com.example.demo.service.CookingOfferService;
 import com.example.demo.service.FoodService;
 import com.example.demo.service.HistoryService;
+import com.example.demo.service.UserServise;
 
 @Controller
 public class HistoryController {
@@ -39,6 +40,8 @@ public class HistoryController {
 	CookingOfferService cookService;
 	@Autowired
 	FoodService foodService;
+	@Autowired
+	UserServise userService;
 	@Autowired
 	HttpSession session;
 
@@ -108,10 +111,51 @@ public class HistoryController {
 
 
 		HistoryInfoDto dto = historyService.getEatInfo(historyId);
-
 		session.setAttribute("historyId", historyId);
 
-		model.addAttribute("dto",dto);
+		EatHistoryDetailDto eatDto = new EatHistoryDetailDto();
+		eatDto.setHistoryId(historyId);
+
+
+		//オファーIDをとりだす
+		//オファーの情報取ってくる
+
+		CookingInfoDto offerDto = cookService.getOfferInfo(dto.getOfferId());
+
+		FoodInfoDto foodDto = foodService.getUdFoodList(Integer.parseInt(offerDto.getRequestId()));
+		eatDto.setFoodName(foodDto.getFoodName());
+
+		//→作る人のuserIdをとる
+		//userIdをキーにnicknameをとる
+		String nickName = userService.getNickName(offerDto.getUserId());
+		eatDto.setNickName(nickName);
+
+		eatDto.setRequestOutline(foodDto.getRequestOutline());
+		eatDto.setOfferComment(offerDto.getOfferComment());
+
+		eatDto.setRequestDate(foodDto.getRegistDate());
+		eatDto.setPrice(offerDto.getPrice());
+
+
+		int state = dto.getStateStatus();
+		switch(state) {
+			case 0:
+				eatDto.setStateStatus("未回収（調理中）");
+				break;
+			case 1:
+				eatDto.setStateStatus("配達中");
+				eatDto.setRecoveryDate(dto.getRecoveryDate());
+				break;
+			case 2:
+				eatDto.setStateStatus("配達完了");
+				eatDto.setDeliveryCompleteDate(dto.getDeliveryCompleteDate());
+				break;
+		}
+
+
+
+
+		model.addAttribute("eatDto",eatDto);
 
 
 		return "history_detail";

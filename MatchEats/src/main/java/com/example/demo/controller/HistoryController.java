@@ -56,7 +56,6 @@ public class HistoryController {
 
 		//テスト用
 		int userId = 1;
-		int offerId = 1;
 
 		//食事履歴
 
@@ -109,9 +108,12 @@ public class HistoryController {
 			EatHistoryDetailDto cookDto = new EatHistoryDetailDto();
 			cookDto.setHistoryId(cDto.getHistoryId());
 
-			//料理名をセット
 
-			//オファー送信日をセット
+			CookingInfoDto offerDto = cookService.getOfferInfo(cDto.getOfferId());
+			FoodInfoDto foodInfoDto = foodService.getUdFoodList(Integer.parseInt(offerDto.getRequestId()));
+
+			cookDto.setFoodName(foodInfoDto.getFoodName());
+			cookDto.setOfferDate(offerDto.getOfferDate());
 
 			cookDto.setProfit(cDto.getCookProfit());
 
@@ -199,6 +201,63 @@ public class HistoryController {
 
 
 		return "history_detail";
+	}
+
+	//調理履歴詳細
+	@RequestMapping(value={"history/cookdetail"},method=RequestMethod.POST)
+	public String detailCook (@RequestParam("historyId") int historyId,Model model) {
+
+		HistoryInfoDto dto = historyService.getEatInfo(historyId);
+		session.setAttribute("historyId", historyId);
+
+		EatHistoryDetailDto cookDto = new EatHistoryDetailDto();
+		cookDto.setHistoryId(historyId);
+
+		CookingInfoDto offerDto = cookService.getOfferInfo(dto.getOfferId());
+
+
+		//食べものの名称
+		FoodInfoDto foodDto = foodService.getUdFoodList(Integer.parseInt(offerDto.getRequestId()));
+		cookDto.setFoodName(foodDto.getFoodName());
+
+		//食事する人のニックネーム
+		//String nickName = userService.getNickName(String.valueOf(foodDto.getUserId()));
+		//cookDto.setNickName(nickName);
+
+		//リクエスト概要
+		cookDto.setRequestOutline(foodDto.getRequestOutline());
+
+		//オファーコメント
+		cookDto.setOfferComment(offerDto.getOfferComment());
+
+		//提示金額
+		cookDto.setPrice(offerDto.getPrice());
+		//利益
+		cookDto.setProfit(dto.getCookProfit());
+		//状態
+		//回収日時
+		//配達完了日時
+		int state = dto.getStateStatus();
+		switch(state) {
+			case 0:
+				cookDto.setStateStatus("未回収（調理中）");
+				break;
+			case 1:
+				cookDto.setStateStatus("配達中");
+				cookDto.setRecoveryDate(dto.getRecoveryDate());
+				break;
+			case 2:
+				cookDto.setStateStatus("配達完了");
+				cookDto.setDeliveryCompleteDate(dto.getDeliveryCompleteDate());
+				break;
+		}
+
+
+		model.addAttribute("cookDto",cookDto);
+
+
+		return "history_cookdetail";
+
 	}
 
 

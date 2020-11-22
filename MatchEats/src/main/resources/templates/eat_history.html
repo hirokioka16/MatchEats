@@ -39,7 +39,7 @@
 		<label class="tab_class" for="tab2">作った</label>
 		<div class="content_class">
 
-				<form method="post">
+			<form method="post">
 				<table>
 					<tr>
 						<th>料理名</th>
@@ -51,6 +51,8 @@
 					</tr>
 					<tr th:each="cookList:${cookList}">
 						<td><input type="hidden" name="historyId" th:value="${cookList.historyId}"></td>
+						<td th:text="${cookList.foodName}"></td>
+						<td th:text="${cookList.offerDate}"></td>
 						<td th:text="${cookList.profit}"></td>
 						<td th:text="${cookList.stateStatus}"></td>
 						<td th:text="${cookList.recoveryDate}"></td>

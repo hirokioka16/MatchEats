@@ -15,6 +15,7 @@ public class EatHistoryDetailDto {
 	private String stateStatus;
 	private Date recoveryDate;
 	private Date deliveryCompleteDate;
+	private Date offerDate;
 
 	public int getHistoryId() {
 		return historyId;
@@ -82,7 +83,12 @@ public class EatHistoryDetailDto {
 	public void setDeliveryCompleteDate(Date deliveryCompleteDate) {
 		this.deliveryCompleteDate = deliveryCompleteDate;
 	}
-
+	public Date getOfferDate() {
+		return offerDate;
+	}
+	public void setOfferDate(Date offerDate) {
+		this.offerDate = offerDate;
+	}
 
 
 }

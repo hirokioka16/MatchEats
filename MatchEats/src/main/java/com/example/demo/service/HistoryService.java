@@ -21,7 +21,7 @@ public class HistoryService {
 	@Autowired
 	AssessmentRepository assessmentRepository;
 
-
+	//食事履歴取得
 	public List<HistoryInfoDto> getFoodlist(int userId){
 
 		List<HistoryInfoDto> list = new ArrayList<HistoryInfoDto>();
@@ -48,6 +48,39 @@ public class HistoryService {
 		}
 
 		return list;
+
+	}
+
+	//調理履歴取得
+	public List<HistoryInfoDto> getCookList(int userId){
+
+		List<HistoryInfoDto> list = new ArrayList<HistoryInfoDto>();
+		List<HistoryTblEntity> entityList = historyRepository.getCookList(userId);
+
+
+		for(HistoryTblEntity entity:entityList) {
+
+			HistoryInfoDto dto = new HistoryInfoDto();
+			dto.setHistoryId(entity.getHistoryId());
+			dto.setOfferId(entity.getCookOfferTbl().getOfferId());
+
+			if(entity.getAdminTbl() != null) {
+				dto.setAdminId(entity.getAdminTbl().getAdminId());
+			}
+			dto.setRecoveryDate(entity.getRecoveryDate());
+			dto.setDeliveryCompleteDate(entity.getDeliveryCompleteDate());
+			dto.setStateStatus(entity.getStateStatus());
+			dto.setAdminProfit(entity.getAdminProfit());
+			dto.setCookProfit(entity.getCookProfit());
+			dto.setCookUserId(entity.getCookOfferUser().getUserId());
+			dto.setRequestUserId(entity.getRequestUser().getUserId());
+
+			list.add(dto);
+		}
+
+
+		return list;
+
 
 	}
 
@@ -110,6 +143,6 @@ public class HistoryService {
 
 	}
 
-	//オファー情報を取得
+
 }
 

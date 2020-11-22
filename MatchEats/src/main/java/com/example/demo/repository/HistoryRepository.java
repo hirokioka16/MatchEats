@@ -15,8 +15,13 @@ public interface HistoryRepository extends JpaRepository<HistoryTblEntity, Integ
 
 
 	//自分が食事した履歴を取得する
-	@Query("SELECT h FROM HistoryTblEntity h left join h.cookOfferUser u WHERE u.userId = :userId")
+	@Query("SELECT h FROM HistoryTblEntity h left join h.requestUser u WHERE u.userId = :userId")
 	public List<HistoryTblEntity> getFoodList(@Param("userId") int userId);
+
+
+	//自分が調理した履歴を取得する
+	@Query("SELECT h FROM HistoryTblEntity h left join h.cookOfferUser u WHERE u.userId = :userId")
+	public List<HistoryTblEntity> getCookList(@Param("userId") int userId);
 
 	//offerIDから食べたいものを逆引きする
 	@Query("SELECT f.foodName FROM FoodTblEntity f left join CookOfferTblEntity c WHERE c.offerId = :offerId")

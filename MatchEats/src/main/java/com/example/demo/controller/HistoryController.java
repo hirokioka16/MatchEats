@@ -46,7 +46,7 @@ public class HistoryController {
 	HttpSession session;
 
 
-	//食事履歴一覧
+	//食事・調理履歴一覧
 	@RequestMapping(value= {"history/list"},method=RequestMethod.GET)
 	public String getFoodList(Model model) {
 
@@ -58,6 +58,8 @@ public class HistoryController {
 		int userId = 1;
 		int offerId = 1;
 
+		//食事履歴
+
 		List<HistoryInfoDto> list = historyService.getFoodlist(userId);
 		List<EatHistoryDetailDto> eatList = new ArrayList();
 
@@ -66,11 +68,10 @@ public class HistoryController {
 
 			eatDto.setHistoryId(dto.getHistoryId());
 
-			//食べものの名前とリクエスト日時を取得したい
 			//オファーIDをキーにしてオファーテーブルからリクエストIDを取得
 			//リクエストIDをキーに食べたいものテーブルから情報取得、各値をセット
-			CookingInfoDto cookDto = cookService.getOfferInfo(dto.getOfferId());
-			FoodInfoDto foodInfoDto = foodService.getUdFoodList(Integer.parseInt(cookDto.getRequestId()));
+			CookingInfoDto offerDto = cookService.getOfferInfo(dto.getOfferId());
+			FoodInfoDto foodInfoDto = foodService.getUdFoodList(Integer.parseInt(offerDto.getRequestId()));
 
 
 			eatDto.setFoodName(foodInfoDto.getFoodName());
@@ -96,8 +97,47 @@ public class HistoryController {
 			eatList.add(eatDto);
 		}
 
-
 		model.addAttribute("eatList",eatList);
+
+
+		//調理履歴
+		List<HistoryInfoDto> cList = historyService.getCookList(userId);
+		List<EatHistoryDetailDto> cookList = new ArrayList();
+
+		for(HistoryInfoDto cDto : list) {
+
+			EatHistoryDetailDto cookDto = new EatHistoryDetailDto();
+			cookDto.setHistoryId(cDto.getHistoryId());
+
+			//料理名をセット
+
+			//オファー送信日をセット
+
+			cookDto.setProfit(cDto.getCookProfit());
+
+			int state = cDto.getStateStatus();
+			switch(state) {
+			case 0:
+				cookDto.setStateStatus("未回収（調理中）");
+				break;
+			case 1:
+				cookDto.setStateStatus("配達中");
+				cookDto.setRecoveryDate(cDto.getRecoveryDate());
+				break;
+			case 2:
+				cookDto.setStateStatus("配達完了");
+				cookDto.setDeliveryCompleteDate(cDto.getDeliveryCompleteDate());
+				break;
+		}
+
+		cookList.add(cookDto);
+
+		}
+
+		model.addAttribute("cookList",cookList);
+
+
+
 
 		return "eat_history";
 
@@ -105,9 +145,9 @@ public class HistoryController {
 
 
 
-	//履歴詳細
-	@RequestMapping(value={"history/detail"},method=RequestMethod.POST)
-	public String detailFood (@RequestParam("historyId") int historyId, @ModelAttribute("AssessmentForm")AssessmentForm form,Model model) {
+	//食事履歴詳細
+	@RequestMapping(value={"history/eatdetail"},method=RequestMethod.POST)
+	public String detailEat (@RequestParam("historyId") int historyId, @ModelAttribute("AssessmentForm")AssessmentForm form,Model model) {
 
 
 		HistoryInfoDto dto = historyService.getEatInfo(historyId);
@@ -218,6 +258,8 @@ public class HistoryController {
 		return "complete_assessment_insert";
 
 	}
+
+
 
 
 	//formで入力した値をdtoに挿入するメソッド

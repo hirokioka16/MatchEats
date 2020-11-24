@@ -16,7 +16,22 @@ public class EatHistoryDetailDto {
 	private Date recoveryDate;
 	private Date deliveryCompleteDate;
 	private Date offerDate;
+	private String requestUsername;
+	private String cookerName;
 
+
+	public String getRequestUsername() {
+		return requestUsername;
+	}
+	public void setRequestUsername(String requestUsername) {
+		this.requestUsername = requestUsername;
+	}
+	public String getCookerName() {
+		return cookerName;
+	}
+	public void setCookerName(String cookerName) {
+		this.cookerName = cookerName;
+	}
 	public int getHistoryId() {
 		return historyId;
 	}

@@ -111,6 +111,7 @@ public class FoodService {
 		dto.setEatFlag(entity.getEatFlag());
 		dto.setPictureName(entity.getRequestPicture());
 		dto.setRegistDate(entity.getRegistDate());
+		dto.setUserId(entity.getUserTbl().getUserId());
 		return dto;
 	}
 

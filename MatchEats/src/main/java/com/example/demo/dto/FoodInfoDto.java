@@ -17,11 +17,11 @@ public class FoodInfoDto {
 	private String eatFlag;
 	private MultipartFile requestPicture;
 	private String pictureName;
-	private int userId;
 
 
 
-	
+
+
 	public int getUserId() {
 		return userId;
 	}
@@ -76,12 +76,7 @@ public class FoodInfoDto {
 	public void setRequestPicture(MultipartFile requestPicture) {
 		this.requestPicture = requestPicture;
 	}
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+
 
 
 

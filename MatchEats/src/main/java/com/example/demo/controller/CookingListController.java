@@ -24,6 +24,9 @@ public class CookingListController {
 private CookingOfferService cookService;
 
 @Autowired
+CookingOfferService cookingOfferService;
+
+@Autowired
 HttpSession session;
 
 //リストを表示する
@@ -53,8 +56,12 @@ public String displayList(Model model) {
 
 //データベースに配達依頼登録
   @RequestMapping(value= {"cookinglist/insert"},method=RequestMethod.POST)
-  public String insert() {
+  public String update(@RequestParam("offerId") String offerId,Model model) {
 
-	  return "";
+	  cookingOfferService.update(offerId);
+
+
+
+	  return "my_cookinglist_complete";
   }
 }

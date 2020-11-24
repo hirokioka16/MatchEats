@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class CookingInfoDto {
 
-	private String offerId;
+	private Integer offerId;
 	private String requestId;
 	private String userId;
 	private int price;
@@ -23,12 +23,7 @@ public class CookingInfoDto {
 	private float point;
 
 
-	public String getOfferId() {
-		return offerId;
-	}
-	public void setOfferId(String offerId) {
-		this.offerId = offerId;
-	}
+
 	public String getRequestId() {
 		return requestId;
 	}
@@ -125,6 +120,12 @@ public class CookingInfoDto {
 	}
 	public void setPoint(float point) {
 		this.point = point;
+	}
+	public Integer getOfferId() {
+		return offerId;
+	}
+	public void setOfferId(Integer offerId) {
+		this.offerId = offerId;
 	}
 
 

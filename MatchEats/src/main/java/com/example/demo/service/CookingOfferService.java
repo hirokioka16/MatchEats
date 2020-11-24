@@ -108,6 +108,7 @@ public class CookingOfferService {
 		cookingOfferRepository.save(offerEntity);
 	}
 
+	//調理リスト
 	public  List<FoodInfoDto> getList(int userId){
 		 List<CookingInfoDto> list = new ArrayList<CookingInfoDto>();
 		 List<CookOfferTblEntity> tblList =cookingOfferRepository.getList(userId);
@@ -115,6 +116,7 @@ public class CookingOfferService {
 
 		 List<FoodTblEntity> resultList =  new ArrayList<FoodTblEntity>();
 		 List<FoodInfoDto> resultListDto = new ArrayList<FoodInfoDto>();
+
 		 for(int i=0;i<tblList.size();i++) {
 			resultList.add(tblList.get(i).getFoodTbl());
 
@@ -122,16 +124,18 @@ public class CookingOfferService {
 
 		 for(FoodTblEntity entity:resultList) {
 				FoodInfoDto dto = new FoodInfoDto();
+				dto.setOfferId(offerId);
 				dto.setRequestId(entity.getRequestId());
 				dto.setFoodName(entity.getFoodName());
 				dto.setRegistDate(entity.getRegistDate());
 				dto.setPictureName(entity.getRequestPicture());
+				dto.setOfferId(entity.get);
 
 
 				resultListDto.add(dto);
 		 }
 
-		 cookingOfferRepository.deleteById(1);
+
 
 		 return resultListDto;
 
@@ -158,6 +162,26 @@ public class CookingOfferService {
 
 		return dto;
 }
+//配達以来をデータベースに登録する
+	public void update(String offerId ) {
+
+		CookOfferTblEntity offerEntity = new CookOfferTblEntity();
+		offerEntity = cookingOfferRepository.getOne(Integer.parseInt(offerId));
+
+
+		boolean delivaryflg = true ;
+		offerEntity.setDeliveryFlg( delivaryflg);
+
+
+
+
+
+
+
+		cookingOfferRepository.save(offerEntity);
+	}
+
+
 }
 
 

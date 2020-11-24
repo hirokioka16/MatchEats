@@ -20,6 +20,13 @@ public interface CookingRepository  extends JpaRepository<CookOfferTblEntity,Int
 		@Query("SELECT o FROM CookOfferTblEntity o left join o.userTbl u WHERE u.userId = :userId AND o.reactionStatus IN ('0')")
 		public List<CookOfferTblEntity> getOfferHistory(@Param("userId") int userId);
 
+		@Query("UPDATE FoodTblEntity x SET "
+				+" x.deliveryFlg = :deliveryFlg "
+				+" WHERE x.userId =:userId")
+		public void update(
+				@Param("deliveryFlg")boolean deliveryFlg,
+				@Param("userId") Integer userId
+				);
 
 		@Transactional
 		@Modifying

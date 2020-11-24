@@ -28,21 +28,29 @@ public interface CookingOfferRepository extends JpaRepository<CookOfferTblEntity
 					@Param("reactionStatus") String reactionStatus,
 					@Param("offerId") Integer offerId
 			);
-	@Query("SELECT o FROM CookOfferTblEntity o left join o.userTbl u WHERE o.deliveryFlg = :deliveryFlg AND o.approvalDeliveryFlg != true")
+	@Query("SELECT o FROM CookOfferTblEntity o left join o.userTbl u WHERE o.deliveryFlg = :deliveryFlg AND o.approvalDeliveryStatus = null")
 	public List<CookOfferTblEntity> getDeliveryList(@Param("deliveryFlg") boolean deliveryFlg);
 
 	@Modifying
 	@Query("UPDATE CookOfferTblEntity c SET"
 			+ " c.approvalRequestDeliveryDate = :date, "
-			+ " c.approvalDeliveryFlg = :flg "
+			+ " c.approvalDeliveryStatus = 1 "
 			+ " WHERE c.offerId = :offerId ")
 	public void setApprovalDate(
 			@Param("date") Date date,
-			@Param("flg") boolean flg,
 			@Param("offerId") int offerId
-			
 			);
 	
-	@Query("SELECT c FROM CookOfferTblEntity c left join c.userTbl u WHERE  c.approvalDeliveryFlg = true")
-	public List<CookOfferTblEntity> getRequestAPProvalList();
+	@Query("SELECT c FROM CookOfferTblEntity c left join c.userTbl u WHERE  c.approvalDeliveryStatus = 1")
+	public List<CookOfferTblEntity> getRequestAPProvalList(@Param("status") String status);
+	
+	
+	@Modifying
+	@Query("UPDATE CookOfferTblEntity c SET"
+			+ " c.approvalDeliveryStatus = :status "
+			+ " WHERE c.offerId = :offerId "
+			)
+	public void changeApprovalDeliveryStatus(
+			@Param("status") String status,
+			@Param("offerId") int offerId);
 }

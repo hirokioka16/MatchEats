@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>料理回収完了</title>
+</head>
+<body>
+	<p>料理の回収が完了しました</p>
+	<form th:action="@{/delivery/approvallist}" method="get">
+		<input type = "submit" value="戻る">
+	</form>
+</body>
+</html>

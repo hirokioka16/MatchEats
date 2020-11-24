@@ -16,6 +16,7 @@ import com.example.demo.dto.DeliveryInfoDto;
 import com.example.demo.dto.FoodInfoDto;
 import com.example.demo.service.DeliveryService;
 import com.example.demo.service.FoodService;
+import com.example.demo.service.HistoryService;
 
 @Controller
 @RequestMapping(value= {"/delivery"})
@@ -23,6 +24,9 @@ public class DeliveryController {
 	
 	@Autowired
 	DeliveryService deliveryService;
+	
+	@Autowired
+	HistoryService historyService;
 	
 	//配達リクエストされたやつ
 	@RequestMapping(value= {"/requestlist"}, method=RequestMethod.GET)
@@ -36,9 +40,9 @@ public class DeliveryController {
 	
 	//配達リクエストの詳細
 	@RequestMapping(value= {"/requestDetail"}, method=RequestMethod.POST)
-	public String deliveryRequestDetail(@RequestParam("requestId") int requestId,Model model) {
+	public String deliveryRequestDetail(@RequestParam("offerId") int offerId,Model model) {
 	
-		DeliveryInfoDto dto = deliveryService.getDetailDeliveryRequest(requestId);
+		DeliveryInfoDto dto = deliveryService.getDetailDeliveryRequest(offerId);
 		model.addAttribute("dto", dto);
 		return "detail_deliverylist";
 	}
@@ -47,8 +51,7 @@ public class DeliveryController {
 	@RequestMapping(value= {"/deliveryinsert"}, method=RequestMethod.POST)
 	public String deliveryRequestDetail(@RequestParam("requestId") int requestId) throws ParseException {
 		
-		boolean approval_delivery_flg = true;
-		deliveryService.deliveryRequesrInsert(requestId,getNowDate(),approval_delivery_flg);
+		deliveryService.deliveryRequesrInsert(requestId,getNowDate());
 		
 		return "redirect:/delivery/deliverycomplete";
 	}
@@ -61,25 +64,35 @@ public class DeliveryController {
 	
 	
 	
-	//配達リクエストが承認されたやつ
+	//配達リクエストが承認されたやつ回収編
 	@RequestMapping(value= {"/approvallist"}, method=RequestMethod.GET)
 	public String deliveryList(Model model) {
 		
-		List<DeliveryInfoDto> list = deliveryService.getRequestAPProvalList();
-		
+		//回収するやつ
+		List<DeliveryInfoDto> list = deliveryService.getRequestAPProvalList("1");
+			
 		model.addAttribute("list", list);
 		
 		return "delivery_approval_list";
 	}
 	
+	//配達する料理を回収するかの確認画面
 	@RequestMapping(value= {"/collectionconfirm"}, method=RequestMethod.POST)
-	public String correction(Model model) {
+	public String correction(@RequestParam("offerId") int offerId,Model model) {
+		
+		DeliveryInfoDto dto = deliveryService.getDetailDeliveryRequest(offerId);
+		model.addAttribute("dto", dto);
 		
 		return "delivery_approval_list_confirm";
 	}
 	
+	//回収完了登録
 	@RequestMapping(value= {"/collectioninsert"}, method=RequestMethod.POST)
-	public String correctionInsert(Model model) {
+	public String correctionInsert(@RequestParam("offerId") int offerId) {
+		
+		//sessionからadminIdをとってくるそして入れる
+		int adminId = 1;
+		historyService.cookCollection(offerId,adminId);
 		
 		return "redirect:/delivery/collectioncomplete";
 	}
@@ -87,8 +100,39 @@ public class DeliveryController {
 	@RequestMapping(value= {"/collectioncomplete"}, method=RequestMethod.GET)
 	public String correctionComplete() {
 		
-		return "delivery_approval_list_confirm";
+		return "food_collection_complete";
 	}
+	
+	//配達リクエストが承認されたやつ配達編
+		@RequestMapping(value= {"/mydeliverylist"}, method=RequestMethod.GET)
+		public String mydeliverylist(Model model) {
+			
+		int adminId = 1; 
+		//配達するやつ
+		List<DeliveryInfoDto> list = ;
+		
+		return "my_delivery_list";
+	}
+	
+		@RequestMapping(value= {"/confirm"}, method=RequestMethod.POST)
+		public String confirm(Model model) {
+			
+			return "confirm_delivery";
+		}
+		
+		@RequestMapping(value= {"/insert"}, method=RequestMethod.POST)
+		public String insert() {
+			
+			return "redirect:/delivery/complete";
+		}
+		
+		@RequestMapping(value= {"/complete"}, method=RequestMethod.GET)
+		public String complete(Model model) {
+			
+			return "delivery_complete";
+		}
+		
+		
 	
 	//現在時刻(秒まで)取得
 	public Date getNowDate() throws java.text.ParseException {

@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.AssessmentInfoDto;
 import com.example.demo.dto.HistoryInfoDto;
+import com.example.demo.entity.AdminTblEntity;
 import com.example.demo.entity.AssessmentTblEntity;
 import com.example.demo.entity.HistoryTblEntity;
 import com.example.demo.repository.AssessmentRepository;
+import com.example.demo.repository.CookingOfferRepository;
 import com.example.demo.repository.HistoryRepository;
 
 @Service
@@ -20,6 +22,8 @@ public class HistoryService {
 	HistoryRepository historyRepository;
 	@Autowired
 	AssessmentRepository assessmentRepository;
+	@Autowired
+	CookingOfferRepository cookRepository;
 
 	//食事履歴取得
 	public List<HistoryInfoDto> getFoodlist(int userId){
@@ -125,6 +129,16 @@ public class HistoryService {
 		AssessmentTblEntity assessmentEntity = change(dto);
 
 		assessmentRepository.saveAndFlush(assessmentEntity);
+	}
+	
+	//料理の回収登録をする
+	public void cookCollection(int offerId,int adminId) {
+		
+		AdminTblEntity entity = new AdminTblEntity();
+		entity.setAdminId(adminId);
+		
+		historyRepository.cookCollectionUpdate(entity,offerId);
+		cookRepository.changeApprovalDeliveryStatus("2",offerId);
 	}
 
 	private AssessmentTblEntity change(AssessmentInfoDto dto) {

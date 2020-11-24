@@ -5,7 +5,7 @@
 <title>配達リクエスト承認済み料理一覧</title>
 </head>
 <body>
-	<form th:action="@{/delivery/requestDetail}" method="post">
+	<form th:action="@{/delivery/collectionconfirm}" method="post">
 		<table>
 			<tr>
 				<th>ユーザー名</th>
@@ -14,7 +14,7 @@
 				<td th:text="${list.userName}">
 				<td th:text="${#dates.format(list.requestApprovalDay,'yyyy/MM/dd HH:mm:ss')}">
 				<td>
-					<input type="radio" name="requestId" th:value="${list.offerId}">
+					<input type="radio" name="offerId" th:value="${list.offerId}">
 				</td>
 			</tr>
 		</table>

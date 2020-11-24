@@ -167,5 +167,13 @@ public class FoodService {
 
 			return list;
 		}
+		/*
+		 * Food情報　全検索
+		 * @return 検索結果
+		 */
+		public List<FoodTblEntity> searchAll(){
+			return foodRepository.findAll();
+		}
+
 
 }

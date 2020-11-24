@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+<link href="/css/list.css" rel="stylesheet"></link>
+<meta charset="UTF-8">
+<title>メニュー</title>
+</head>
+<body>
+   <table>
+       <tr th:each="eatlis:${foodlist}">
+          <td>
+           <img th:src="${eatlis.requestPicture}">
+          </td>
+          <td th:text="${eatlis.foodName}"></td>
+      </tr>
+      <tr  th:each="eatlis:${genrelist}">
+          <td th:text="${genrelist.genreTbl}"></td>
+          <td th:text="${eatlis.userTbl}"></td>
+       </tr>
+   </table>
+</body>
+</html>

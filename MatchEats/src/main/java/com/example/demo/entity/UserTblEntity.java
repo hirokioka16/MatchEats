@@ -201,6 +201,25 @@ public class UserTblEntity {
 	
 	
 	
+//	@OneToMany(mappedBy="userTbl")
+//	private List<CookOfferTblEntity> cookUser;
+//
+//
+//
+//	public List<CookOfferTblEntity> getCookUser() {
+//		return cookUser;
+//	}
+//
+//	public void setCookUser(List<CookOfferTblEntity> cookUser) {
+//		this.cookUser = cookUser;
+//	}
+//	
+//	
+
+	
+	
+	
+	
 	
 
 }

@@ -27,5 +27,14 @@ public interface CookingOfferRepository extends JpaRepository<CookOfferTblEntity
 					@Param("reactionStatus") String reactionStatus,
 					@Param("offerId") Integer offerId
 			);
+	
+//	
+//	@Query("SELECT c.userID, f.userTbl.userName FROM CookOfTblEntity WHERE c.userTbl.userId = :userId AND c.reactionStatus = '0'")
+//	public List<CookOfferTblEntity> getOfferUser
+	
+	
+	@Query("SELECT c FROM CookOfferTblEntity c left join c.foodTbl f WHERE f.userTbl.userId = :userId AND c.reactionStatus = '0'")
+	public List<CookOfferTblEntity> getReactionList(@Param("userId") int userId);
+	
 
 }

@@ -26,6 +26,7 @@ public class CookOfferTblEntity implements Serializable{
 	@ManyToOne
     @JoinColumn(name="user_id")
 	private UserTblEntity userTbl;
+	
 
 	private Integer price;
 
@@ -66,6 +67,7 @@ public class CookOfferTblEntity implements Serializable{
 	public void setUserTbl(UserTblEntity userTbl) {
 		this.userTbl = userTbl;
 	}
+
 
 	public Integer getPrice() {
 		return price;

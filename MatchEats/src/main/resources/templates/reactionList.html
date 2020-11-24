@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>リアクション一覧</title>
+</head>
+<body>
+
+<form method="post">
+	
+	<table>
+	<div th:each="reactionList:${reactionList}">
+		<tr>
+			<td th:text="${reactionList.userName}">
+		</tr>
+		<tr>
+			<td><input type="submit" formaction="/依頼先" value="依頼">
+			<td><input type="submit" formaction="/拒否先" value="拒否">
+		</tr>
+		<tr>
+			<td th:text="'¥:' + ${reactionList.price}">
+		</tr>
+		<tr>
+			<td th:text="'コメント:' + ${reactionList.offerComment}">
+		</tr>
+	</div>
+	</table>
+</form>
+
+</body>
+</html>

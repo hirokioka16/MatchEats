@@ -55,4 +55,6 @@ public interface UserRepository extends JpaRepository<UserTblEntity, Integer> {
 	public void reset(
 			@Param("userId")int userId);
 
+
+
 }

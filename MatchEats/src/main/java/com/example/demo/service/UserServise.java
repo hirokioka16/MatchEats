@@ -18,8 +18,8 @@ import com.example.demo.repository.UserRepository;
 
 @Service
 public class UserServise {
-	
-	
+
+
 	@Autowired
 	UserRepository userRepository;
 	
@@ -28,17 +28,17 @@ public class UserServise {
 	
 	
 	public void insert(UserInfoDto dto) {
-		
+
 		UserTblEntity userEntity = change(dto);
 		///BankTblEntity bankEntity = change2(dto);
 		userRepository.saveAndFlush(userEntity);
 		///userRepository.saveAndFlush(entity)
-		
+
 	}
-	
+
 	public void update(UserInfoDto dto) {
 		UserTblEntity userEntity = new UserTblEntity();
-		
+
 		userEntity.setUserId(dto.getUserId());
 		userEntity.setUserMail(dto.getUserMail());
 		userEntity.setUserPass(dto.getUserPass());
@@ -47,25 +47,25 @@ public class UserServise {
 		userEntity.setUserTel(dto.getUserTel());
 		userEntity.setPostalCode(dto.getPostalCode());
 		userEntity.setUserAdress(dto.getUserAddres());
-		
+
 		//日付の方変換
 		try {
 			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
 			Date userBirth = sdFormat.parse(dto.getUserBirth());
 			userEntity.setUserBirth(userBirth);
-		
+
 		} catch (ParseException e) {
 				e.printStackTrace();
 		}
-		
+
 		userEntity.setCardName(dto.getCardName());
 		userEntity.setUserCard(dto.getUserCard());
 		userEntity.setLimitDate(dto.getLimitDate());
 		userEntity.setSecureCode(dto.getSecureCode());
-		
-		
-		
-		
+
+
+
+
 		userRepository.update(
 				userEntity.getUserId(),
 				userEntity.getUserMail(),
@@ -80,20 +80,20 @@ public class UserServise {
 				userEntity.getUserCard(),
 				userEntity.getLimitDate(),
 				userEntity.getSecureCode()
-				
+
 				);
 	}
-	
+
 	public UserInfoDto getUser(int id) {
-		
+
 		UserTblEntity userEntity = new UserTblEntity();
 		userEntity = userRepository.getOne(id);
-		
+
 		UserInfoDto dto = new UserInfoDto();
 		dto = change3(userEntity);
-		
+
 		return dto;
-		
+
 	}
 	
 	//売上申請を登録する
@@ -128,7 +128,7 @@ public class UserServise {
 	
 	// dtoの値をentityに入れるメソッド
 	private UserTblEntity change(UserInfoDto dto) {
-		
+
 		UserTblEntity userEntity = new UserTblEntity();
 		    userEntity.setUserName(dto.getUserName());
 		    userEntity.setNickName(dto.getNickName());
@@ -137,13 +137,13 @@ public class UserServise {
 		    userEntity.setPostalCode(dto.getPostalCode());
 			userEntity.setUserAdress(dto.getUserAddres());
 			userEntity.setUserTel(dto.getUserTel());
-			
+
 			//日付変換
 			try {
 				SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
 				Date userBirth = sdFormat.parse(dto.getUserBirth());
 				userEntity.setUserBirth(userBirth);
-			
+
 			} catch (ParseException e) {
 					e.printStackTrace();
 			}
@@ -155,31 +155,31 @@ public class UserServise {
 			userEntity.setAccountType("0");
 			userEntity.setSales(0);
 			userEntity.setAssessMent(0);
-			
-		
-		
-			
-			
+
+
+
+
+
 			return userEntity;
-		
-		
+
+
 	}
-	
+
 	private BankTblEntity change2(UserInfoDto dto) {
-		BankTblEntity bankEntity = new BankTblEntity();		
+		BankTblEntity bankEntity = new BankTblEntity();
 		bankEntity.setBankName(dto.getBankName());
 		bankEntity.setAccountNumber(dto.getAccountNumber());
 		bankEntity.setBranchName(dto.getBranchName());
 		bankEntity.setAccountName(dto.getAccountName());
-		
+
 		return bankEntity;
-		
+
 	}
-	
-	
+
+
 	// entityの値をdtoに入れるメソッド
 		private UserInfoDto change3(UserTblEntity userEntity) {
-			
+
 			UserInfoDto userDto = new UserInfoDto();
 			userDto.setUserId(userEntity.getUserId());
 			userDto.setUserName(userEntity.getUserName());
@@ -195,18 +195,29 @@ public class UserServise {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			String strDate = dateFormat.format(userEntity.getUserBirth());
 			userDto.setUserBirth(strDate);
-			
+
 			userDto.setUserCard(userEntity.getUserCard());
 			userDto.setCardName(userEntity.getCardName());
 			userDto.setLimitDate(userEntity.getLimitDate());
 			userDto.setSecureCode(userEntity.getSecureCode());
-			
-				
-		
+
+
+
 				return userDto;
-			
+
 		}
-	
-	
+
+
+	//ニックネームを取ってくる(履歴用）
+		public String getNickName(String userId) {
+
+			UserTblEntity userEntity = userRepository.getOne(Integer.parseInt(userId));
+
+			String nickName = userEntity.getNickName();
+
+			return nickName;
+		}
+
+
 
 }

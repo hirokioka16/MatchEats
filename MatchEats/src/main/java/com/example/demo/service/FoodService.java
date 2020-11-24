@@ -181,4 +181,24 @@ public class FoodService {
 			return list;
 		}
 
+		public String getGenreName(int genreId) {
+
+			GenreTblEntity genreEntity = genreRepository.getOne(genreId);
+
+			String genreName = genreEntity.getGenreName();
+
+			return genreName;
+		}
+
+		public void delete(String requestId) {
+
+			FoodTblEntity foodEntity = new FoodTblEntity();
+			foodEntity = foodRepository.getOne(Integer.parseInt(requestId));
+
+			foodEntity.setEatFlag("2");
+
+			foodRepository.save(foodEntity);
+
+		}
+
 }

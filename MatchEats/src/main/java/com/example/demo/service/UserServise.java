@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,11 +21,11 @@ public class UserServise {
 
 	@Autowired
 	UserRepository userRepository;
-	
+
 	@Autowired
 	TransferRepository transferRepository;
-	
-	
+
+
 	public void insert(UserInfoDto dto) {
 
 		UserTblEntity userEntity = change(dto);
@@ -95,37 +94,37 @@ public class UserServise {
 		return dto;
 
 	}
-	
+
 	//売上申請を登録する
 	public void insertTransfer(UserInfoDto dto) throws ParseException {
-		
-		
+
+
 		TransferTblEntity transFerEntity =  new TransferTblEntity();
 		UserTblEntity userEntity =  new UserTblEntity();
 		userEntity.setUserId(dto.getUserId());
-		
+
 		Date date = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String strDate = dateFormat.format(date);
 		//String型の日付をDate型に変更している
 		SimpleDateFormat d1 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date now = d1.parse(strDate);
-		
+
 		TransferId id = new TransferId();
 		id.setUserTbl(userEntity);
 		transFerEntity.setTransferId(id);
 		transFerEntity.setPrice(dto.getSales());
 		transFerEntity.setTransferDate(now);
 		transFerEntity.setAcceptFlag(false);
-		
+
 		//売上振り込み申請をする
 		transferRepository.saveAndFlush(transFerEntity);
 		//ユーザーの売上を0にする
 		userRepository.reset(dto.getUserId());
-		
+
 	}
-	
-	
+
+
 	// dtoの値をentityに入れるメソッド
 	private UserTblEntity change(UserInfoDto dto) {
 
@@ -190,7 +189,7 @@ public class UserServise {
 			userDto.setUserAddres(userEntity.getUserAdress());
 			userDto.setUserTel(userEntity.getUserTel());
 			userDto.setSales(userEntity.getSales());
-			
+
 			//変換
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			String strDate = dateFormat.format(userEntity.getUserBirth());
@@ -208,7 +207,7 @@ public class UserServise {
 		}
 
 
-	//ニックネームを取ってくる(履歴用）
+	//ニックネームを取得する(履歴用）
 		public String getNickName(String userId) {
 
 			UserTblEntity userEntity = userRepository.getOne(Integer.parseInt(userId));
@@ -216,6 +215,16 @@ public class UserServise {
 			String nickName = userEntity.getNickName();
 
 			return nickName;
+		}
+
+	//ユーザーの本名を取得する(履歴用）
+		public String getTrueName(int userId) {
+
+			UserTblEntity userEntity = userRepository.getOne(userId);
+
+			String trueName  = userEntity.getUserName();
+
+			return trueName;
 		}
 
 

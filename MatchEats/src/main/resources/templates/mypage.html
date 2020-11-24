@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>マイページ</title>
+</head>
+<body>
+<div id="side" th:replace="layout/side :: side"></div>
+	<form th:action="@{/transferProcedures}" method="post">
+	
+		<p>会員情報</p>
+		<table>
+			<tr>
+				<th>名前</th>
+				<td th:text="${userInfoDto.userName}"></td>
+			</tr>
+			<tr>
+				<th>ニックネーム</th>
+				<td th:text="${userInfoDto.nickName}"></td>
+			</tr>
+			<tr>
+				<th>メールアドレス</th>
+				<td th:text="${userInfoDto.userMail}"></td>
+			</tr>
+			<tr>
+				<th>郵便番号</th>
+				<td th:text="${userInfoDto.postalCode}"></td>
+			</tr>
+			<tr>
+				<th>住所</th>
+				<td th:text="${userInfoDto.userAddres}"></td>
+			</tr>
+			<tr>
+				<th>生年月日</th>
+				<td th:text="${userInfoDto.userBirth}"></td>
+			</tr>
+			<tr>
+				
+		</table>
+		
+	</form>
+	
+	<form th:action="@{/}" method="get">
+		<input type="submit" value="戻る">
+	</form>
+
+</body>
+</html>

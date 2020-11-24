@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,7 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.UserInfoDto;
 import com.example.demo.entity.BankTblEntity;
+import com.example.demo.entity.TransferId;
+import com.example.demo.entity.TransferTblEntity;
 import com.example.demo.entity.UserTblEntity;
+import com.example.demo.repository.TransferRepository;
 import com.example.demo.repository.UserRepository;
 
 @Service
@@ -18,8 +22,11 @@ public class UserServise {
 
 	@Autowired
 	UserRepository userRepository;
-
-
+	
+	@Autowired
+	TransferRepository transferRepository;
+	
+	
 	public void insert(UserInfoDto dto) {
 
 		UserTblEntity userEntity = change(dto);
@@ -88,8 +95,37 @@ public class UserServise {
 		return dto;
 
 	}
-
-
+	
+	//売上申請を登録する
+	public void insertTransfer(UserInfoDto dto) throws ParseException {
+		
+		
+		TransferTblEntity transFerEntity =  new TransferTblEntity();
+		UserTblEntity userEntity =  new UserTblEntity();
+		userEntity.setUserId(dto.getUserId());
+		
+		Date date = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String strDate = dateFormat.format(date);
+		//String型の日付をDate型に変更している
+		SimpleDateFormat d1 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date now = d1.parse(strDate);
+		
+		TransferId id = new TransferId();
+		id.setUserTbl(userEntity);
+		transFerEntity.setTransferId(id);
+		transFerEntity.setPrice(dto.getSales());
+		transFerEntity.setTransferDate(now);
+		transFerEntity.setAcceptFlag(false);
+		
+		//売上振り込み申請をする
+		transferRepository.saveAndFlush(transFerEntity);
+		//ユーザーの売上を0にする
+		userRepository.reset(dto.getUserId());
+		
+	}
+	
+	
 	// dtoの値をentityに入れるメソッド
 	private UserTblEntity change(UserInfoDto dto) {
 
@@ -153,7 +189,8 @@ public class UserServise {
 			userDto.setPostalCode(userEntity.getPostalCode());
 			userDto.setUserAddres(userEntity.getUserAdress());
 			userDto.setUserTel(userEntity.getUserTel());
-
+			userDto.setSales(userEntity.getSales());
+			
 			//変換
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			String strDate = dateFormat.format(userEntity.getUserBirth());

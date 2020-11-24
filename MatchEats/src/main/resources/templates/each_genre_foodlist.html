@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+<link th:href="@{/css/card.css}" rel="stylesheet" type="text/css">
+<title>ジャンル別料理一覧</title>
+</head>
+<body>
+	<header>	
+		<div th:unless="${loginFlg}">
+			<div th:replace="layout/header :: beforeheader" ></div>
+		</div>
+		<div th:if="${loginFlg}">
+			<div th:replace="layout/header :: afterheader" ></div>
+		</div>
+	</header>
+	
+	
+	<div class="card-columns">
+			<div class="card" th:each="list: ${firstList}" th:object="${list}">
+	    		<img src="http://jousen5.aso-abcc.com/shoppingSystem/img/minami.jpg" class="card-img-top" alt="img">
+	    		<div class="card-body">
+	      			<h5 class="card-title" th:text="*{foodName}"></h5>
+	      			<p class="card-text" th:text="なんかかく"></p>		
+	    		</div>
+			</div>
+	</div>
+	
+</body>
+</html>

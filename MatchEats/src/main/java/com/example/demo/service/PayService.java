@@ -24,7 +24,8 @@ public class PayService {
     chargeMap.put("source", stripeForm.getStripeToken());
     
     //reaction_statusを"3"(決済済み)に設定するRepositoryを書く
-
+    
+    
     return Charge.create(chargeMap);
 	}
 }

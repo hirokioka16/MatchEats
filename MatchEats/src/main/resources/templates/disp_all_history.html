@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+				<table>
+					<tr>
+						<th>依頼者</th>
+						<th>製作者</th>
+						<th>オファー日</th>
+						<th>配達完了日</th>
+						<th>金額</th>
+
+					</tr>
+					<tr th:each="historyList:${historyList}">
+						<td th:text="${historyList.requestUsername}"></td>
+						<td th:text="${historyList.cookerName}"></td>
+						<td th:text="${historyList.offerDate}"></td>
+						<td th:text="${historyList.deliveryCompleteDate}"></td>
+						<td th:text="${historyList.price}"></td>
+					</tr>
+				</table>
+
+</body>
+</html>

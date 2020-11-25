@@ -3,41 +3,47 @@ package com.example.demo.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity 
+@Entity
 @Table(name="history")
 public class HistoryTblEntity implements Serializable{
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer historyId;
-	
+
 	@ManyToOne
-    @JoinColumn(name="offer_id")
+    @JoinColumn(name="offer_id",insertable=false,updatable=false)
 	private CookOfferTblEntity CookOfferTbl;
-	
+
 	@ManyToOne
-	@JoinColumn(name="admin_id")
+	@JoinColumn(name="admin_id",nullable = true)
 	private AdminTblEntity adminTbl;
-	
+
+	@Column(nullable = true)
 	private Date recoveryDate;
-	
+
+	@Column(nullable = true)
 	private Date deliveryCompleteDate;
-	
+
 	private  Integer stateStatus;
-	
+
 	private Integer adminProfit;
-	
+
 	private Integer cookProfit;
-	
+
 	@ManyToOne
     @JoinColumn(name="cookuser_id")
 	private UserTblEntity cookOfferUser;
-	
+
 	@ManyToOne
     @JoinColumn(name="requestuser_id")
 	private UserTblEntity requestUser;
@@ -121,10 +127,10 @@ public class HistoryTblEntity implements Serializable{
 	public void setRequestUser(UserTblEntity requestUser) {
 		this.requestUser = requestUser;
 	}
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 }

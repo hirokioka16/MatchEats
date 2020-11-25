@@ -27,6 +27,7 @@ public class ContactsTblEntity implements Serializable{
 
 	private Date contactDate;
 
+
 	public Integer getContactId() {
 		return contactId;
 	}

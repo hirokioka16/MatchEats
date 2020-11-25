@@ -8,6 +8,7 @@ public class ContactInfoDto {
 	private String content;
 	private Date contactDate;
 	private int userId;
+	private String userMail;
 
 
 	public int getUserId() {
@@ -33,5 +34,11 @@ public class ContactInfoDto {
 	}
 	public void setContactDate(Date contactDate) {
 		this.contactDate = contactDate;
+	}
+	public String getUserMail() {
+		return userMail;
+	}
+	public void setUserMail(String userMail) {
+		this.userMail = userMail;
 	}
 }

@@ -8,6 +8,7 @@ public class MatchEatsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MatchEatsApplication.class, args);
+		
 	}
 
 }

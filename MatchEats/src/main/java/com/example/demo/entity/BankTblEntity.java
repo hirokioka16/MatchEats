@@ -23,7 +23,7 @@ public class BankTblEntity implements Serializable{
 	
 	private String branchName;
 	
-	private Integer accountNumber;
+	private String accountNumber;
 	
 	private String accountName;
 
@@ -51,11 +51,11 @@ public class BankTblEntity implements Serializable{
 		this.branchName = branchName;
 	}
 
-	public Integer getAccountNumber() {
+	public String getAccountNumber() {
 		return accountNumber;
 	}
 
-	public void setAccountNumber(Integer accountNumber) {
+	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
 

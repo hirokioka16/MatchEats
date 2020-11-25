@@ -4,40 +4,43 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity 
+@Entity
 @Table(name="cookoffer")
 public class CookOfferTblEntity implements Serializable{
-	
+
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer offerId;
-	
+
 	@ManyToOne
     @JoinColumn(name="request_id")
 	private FoodTblEntity foodTbl;
-	
+
 	@ManyToOne
     @JoinColumn(name="user_id")
 	private UserTblEntity userTbl;
-	
+
 	private Integer price;
-	
+
 	private String offerComment;
-	
+
 	private Date offerDate;
-	
-	private Integer deliveryFlg;
-	
+
+	private boolean deliveryFlg;
+
 	private Date deliveryRequestDate;
-	
+
 	private String reactionStatus;
-	
+
 	private String reactionComment;
-	
+
 	private Date reactionDate;
 
 	public Integer getOfferId() {
@@ -88,12 +91,12 @@ public class CookOfferTblEntity implements Serializable{
 		this.offerDate = offerDate;
 	}
 
-	public Integer getDeliveryFlg() {
+	public boolean getDeliveryFlg() {
 		return deliveryFlg;
 	}
 
-	public void setDeliveryFlg(Integer deliveryFlg) {
-		this.deliveryFlg = deliveryFlg;
+	public void setDeliveryFlg(boolean b) {
+		this.deliveryFlg = b;
 	}
 
 	public Date getDeliveryRequestDate() {
@@ -127,6 +130,6 @@ public class CookOfferTblEntity implements Serializable{
 	public void setReactionDate(Date reactionDate) {
 		this.reactionDate = reactionDate;
 	}
-	
-	
+
+
 }

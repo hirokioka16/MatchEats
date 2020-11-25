@@ -28,6 +28,8 @@ public interface CookingOfferRepository extends JpaRepository<CookOfferTblEntity
 					@Param("reactionStatus") String reactionStatus,
 					@Param("offerId") Integer offerId
 			);
+	
+	//配達リクエストがきた料理の一覧
 	@Query("SELECT o FROM CookOfferTblEntity o left join o.userTbl u WHERE o.deliveryFlg = :deliveryFlg AND o.approvalDeliveryStatus = null")
 	public List<CookOfferTblEntity> getDeliveryList(@Param("deliveryFlg") boolean deliveryFlg);
 

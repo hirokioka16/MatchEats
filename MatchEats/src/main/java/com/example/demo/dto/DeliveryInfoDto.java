@@ -15,8 +15,18 @@ public class DeliveryInfoDto {
 	private String address;
 	
 	private String content;
+	
+	private int historyId;
 
 	
+
+	public int getHistoryId() {
+		return historyId;
+	}
+
+	public void setHistoryId(int historyId) {
+		this.historyId = historyId;
+	}
 
 	public int getOfferId() {
 		return offerId;

@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -35,11 +36,30 @@ public interface HistoryRepository extends JpaRepository<HistoryTblEntity, Integ
 	@Modifying
 	@Query("UPDATE HistoryTblEntity h SET "
 				+" h.stateStatus = 1, "
-				+" h.adminTbl = :adminId "
+				+" h.adminTbl = :adminId, "
+				+" h.recoveryDate = :date "
 				+" WHERE h.CookOfferTbl.offerId = :offerId")
 	public void cookCollectionUpdate(
 			@Param("adminId") AdminTblEntity adminId,
-			@Param("offerId") Integer offerId
+			@Param("offerId") Integer offerId,
+			@Param("date") Date date
+			);
+	
+	//料理の配達登録をする
+		@Modifying
+		@Query("UPDATE HistoryTblEntity h SET "
+					+" h.stateStatus = 2, "
+					+" h.deliveryCompleteDate = :date "
+					+" WHERE h.historyId = :historyId")
+		public void cookDeliveryUpdate(
+				@Param("historyId") Integer historyId,
+				@Param("date") Date date
+				);
+	
+	//自分が配達しなければならない料理をオーダーした人の情報を取得する
+	@Query("SELECT h FROM HistoryTblEntity h WHERE h.adminTbl = :adminId AND h.stateStatus != 2")
+	public List<HistoryTblEntity>  getDeleveryUserInfo(
+			@Param("adminId") AdminTblEntity adminId
 			);
 			
 }

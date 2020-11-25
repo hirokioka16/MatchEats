@@ -88,11 +88,11 @@ public class DeliveryController {
 	
 	//回収完了登録
 	@RequestMapping(value= {"/collectioninsert"}, method=RequestMethod.POST)
-	public String correctionInsert(@RequestParam("offerId") int offerId) {
+	public String correctionInsert(@RequestParam("offerId") int offerId) throws ParseException {
 		
 		//sessionからadminIdをとってくるそして入れる
 		int adminId = 1;
-		historyService.cookCollection(offerId,adminId);
+		historyService.cookCollection(offerId,adminId,getNowDate());
 		
 		return "redirect:/delivery/collectioncomplete";
 	}
@@ -104,33 +104,39 @@ public class DeliveryController {
 	}
 	
 	//配達リクエストが承認されたやつ配達編
-		@RequestMapping(value= {"/mydeliverylist"}, method=RequestMethod.GET)
-		public String mydeliverylist(Model model) {
-			
-		int adminId = 1; 
+	@RequestMapping(value= {"/mydeliverylist"}, method=RequestMethod.GET)
+	public String mydeliverylist(Model model) {
+		
+		int adminId = 1;
 		//配達するやつ
-		List<DeliveryInfoDto> list = ;
+		List<DeliveryInfoDto> list = historyService.mydeliverylist(adminId);
+		model.addAttribute("list", list);
 		
 		return "my_delivery_list";
 	}
 	
-		@RequestMapping(value= {"/confirm"}, method=RequestMethod.POST)
-		public String confirm(Model model) {
+	@RequestMapping(value= {"/confirm"}, method=RequestMethod.POST)
+	public String confirm(@RequestParam("historyId") int historyId,Model model) {
 			
-			return "confirm_delivery";
-		}
+		DeliveryInfoDto dto = historyService.getDeliveryInfo(historyId);
+			
+		model.addAttribute("dto", dto);
 		
-		@RequestMapping(value= {"/insert"}, method=RequestMethod.POST)
-		public String insert() {
-			
-			return "redirect:/delivery/complete";
-		}
+		return "confirm_delivery";
+	}
 		
-		@RequestMapping(value= {"/complete"}, method=RequestMethod.GET)
-		public String complete(Model model) {
+	@RequestMapping(value= {"/insert"}, method=RequestMethod.POST)
+	public String insert(@RequestParam("historyId") int historyId) throws ParseException {
+		
+		historyService.deliveryComplete(historyId, getNowDate());
+		return "redirect:/delivery/complete";
+	}
+		
+	@RequestMapping(value= {"/complete"}, method=RequestMethod.GET)
+	public String complete(Model model) {
 			
-			return "delivery_complete";
-		}
+		return "delivery_complete";
+	}
 		
 		
 	

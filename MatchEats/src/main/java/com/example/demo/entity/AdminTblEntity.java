@@ -1,9 +1,11 @@
 package com.example.demo.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity 
@@ -19,6 +21,20 @@ public class AdminTblEntity implements Serializable{
 	private String adminMail;
 	
 	private String adminPass;
+	
+	@OneToMany(mappedBy="adminTbl")
+	private List<HistoryTblEntity> historyList;
+	
+	
+
+
+	public List<HistoryTblEntity> getHistoryList() {
+		return historyList;
+	}
+
+	public void setHistoryList(List<HistoryTblEntity> historyList) {
+		this.historyList = historyList;
+	}
 
 	public Integer getAdminId() {
 		return adminId;

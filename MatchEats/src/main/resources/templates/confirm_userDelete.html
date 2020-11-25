@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>会員退会　確認</title>
+</head>
+<body>
+
+<h1>退会申請</h1>
+
+<p>退会申請後は会員向けサービスのご利用ができなくなります</p>
+<p style="color:rgb(235, 58, 51);">一度退会してしまうとアカウントは元に戻せなくなります</p>
+
+<form th:action="@{/deleteUserEntry/delete}" method="post">
+	<input type="submit" value="退会">
+</form>
+
+
+<form th:action="マイページリンク" method="">
+	<input type="submit" value="戻る">
+</form>
+
+</body>
+</html>

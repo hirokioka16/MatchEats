@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>食事履歴一覧</title>
+<link th:href="@{/css/history.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div class="area">
+		<!-- 以下2行＋CSSでタブ切り替えを実装 -->
+		<input type="radio" name="tab_name" id="tab1" checked>
+		<label class="tab_class" for="tab1">食べた</label>
+		<div class="content_class">
+
+			<form method="post">
+				<table>
+					<tr>
+						<th>料理名</th>
+						<th>依頼日</th>
+						<th>金額</th>
+						<th>製作状況</th>
+						<th>時間</th>
+
+					</tr>
+					<tr th:each="eatList:${eatList}">
+						<td><input type="hidden" name="historyId" th:value="${eatList.historyId}"></td>
+						<td th:text="${eatList.foodName}"></td>
+						<td th:text="${eatList.requestDate}"></td>
+						<td th:text="${eatList.price}"></td>
+						<td th:text="${eatList.stateStatus}"></td>
+						<td th:text="${eatList.recoveryDate}"></td>
+						<td><input type="submit"  formaction="/history/eatdetail" value="詳細"></td>
+					</tr>
+				</table>
+
+			</form>
+		</div>
+		<input type="radio" name="tab_name" id="tab2">
+		<label class="tab_class" for="tab2">作った</label>
+		<div class="content_class">
+
+			<form method="post">
+				<table>
+					<tr>
+						<th>料理名</th>
+						<th>オファー日</th>
+						<th>利益</th>
+						<th>製作状況</th>
+						<th>時間</th>
+
+					</tr>
+					<tr th:each="cookList:${cookList}">
+						<td><input type="hidden" name="historyId" th:value="${cookList.historyId}"></td>
+						<td th:text="${cookList.foodName}"></td>
+						<td th:text="${cookList.offerDate}"></td>
+						<td th:text="${cookList.profit}"></td>
+						<td th:text="${cookList.stateStatus}"></td>
+						<td th:text="${cookList.recoveryDate}"></td>
+						<td><input type="submit"  formaction="/history/cookdetail" value="詳細"></td>
+					</tr>
+				</table>
+
+			</form>
+
+
+		</div>
+	</div>
+
+</body>
+</html>

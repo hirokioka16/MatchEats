@@ -107,6 +107,23 @@ public class FoodTblEntity implements Serializable{
 	public void setRequestPicture(String requestPicture) {
 		this.requestPicture = requestPicture;
 	}
+	
+//	@OneToMany(mappedBy="userTbl")
+//	private List<CookOfferTblEntity> foodUser;
+//	
+//	
+//
+//	public List<CookOfferTblEntity> getFoodUser() {
+//		return foodUser;
+//	}
+//
+//	public void setFoodUser(List<CookOfferTblEntity> foodUser) {
+//		this.foodUser = foodUser;
+//	}
+	
+	
+	
+	
 
 
 

@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity 
@@ -53,7 +54,17 @@ public class UserTblEntity {
 	@OneToMany(mappedBy="userTbl")
 	private List<FoodTblEntity> foodUser;
 	
-	
+//	@OneToOne(mappedBy="userTbl")
+//	private List<TransferId> transferUser;
+//	
+//
+//	public List<TransferId> getTransferUser() {
+//		return transferUser;
+//	}
+//
+//	public void setTransferUser(List<TransferId> transferUser) {
+//		this.transferUser = transferUser;
+//	}
 
 	public List<FoodTblEntity> getFoodUser() {
 		return foodUser;
@@ -198,6 +209,25 @@ public class UserTblEntity {
 	public void setIconPass(String iconPass) {
 		this.iconPass = iconPass;
 	}
+	
+	
+	
+//	@OneToMany(mappedBy="userTbl")
+//	private List<CookOfferTblEntity> cookUser;
+//
+//
+//
+//	public List<CookOfferTblEntity> getCookUser() {
+//		return cookUser;
+//	}
+//
+//	public void setCookUser(List<CookOfferTblEntity> cookUser) {
+//		this.cookUser = cookUser;
+//	}
+//	
+//	
+
+	
 	
 	
 	

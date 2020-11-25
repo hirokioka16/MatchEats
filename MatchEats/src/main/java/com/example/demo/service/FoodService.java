@@ -24,6 +24,18 @@ public class FoodService {
 	@Autowired
 	GenreRepository genreRepository;
 
+	//
+	public List<Integer> getAllRequestId(){
+
+		List<Integer> list = new ArrayList<Integer>();
+		List<FoodTblEntity> entityList = foodRepository.findAll();
+
+		for(FoodTblEntity entity : entityList ) {
+
+			list.add(entity.getRequestId());
+		}
+		return list;
+	}
 	//ジャンルを取得する
 	public List<GenreInfoDto> getGenre(){
 
@@ -98,6 +110,8 @@ public class FoodService {
 		dto.setGenreId(entity.getGenreTbl().getGenreId());
 		dto.setEatFlag(entity.getEatFlag());
 		dto.setPictureName(entity.getRequestPicture());
+		dto.setRegistDate(entity.getRegistDate());
+		dto.setUserId(entity.getUserTbl().getUserId());
 		return dto;
 	}
 
@@ -111,11 +125,10 @@ public class FoodService {
 		foodEntity.setRequestOutline(dto.getRequestOutline());
 		foodEntity.setRegistDate(dto.getRegistDate());
 		foodEntity.setEatFlag(dto.getEatFlag());
-		foodEntity.setRequestPicture(dto.getRequestPicture().getOriginalFilename());
+		foodEntity.setRequestPicture(dto.getPictureName());
 
 		UserTblEntity userEntity = new UserTblEntity();
-		//テスト用の値
-		userEntity.setUserId(1);
+		userEntity.setUserId(dto.getUserId());
 
 		GenreTblEntity genreEntiry = new GenreTblEntity();
 		genreEntiry.setGenreId(dto.getGenreId());
@@ -166,6 +179,26 @@ public class FoodService {
 			}
 
 			return list;
+		}
+
+		public String getGenreName(int genreId) {
+
+			GenreTblEntity genreEntity = genreRepository.getOne(genreId);
+
+			String genreName = genreEntity.getGenreName();
+
+			return genreName;
+		}
+
+		public void delete(String requestId) {
+
+			FoodTblEntity foodEntity = new FoodTblEntity();
+			foodEntity = foodRepository.getOne(Integer.parseInt(requestId));
+
+			foodEntity.setEatFlag("2");
+
+			foodRepository.save(foodEntity);
+
 		}
 
 }

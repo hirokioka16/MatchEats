@@ -7,6 +7,7 @@ public class CookingInfoDto {
 	private Integer offerId;
 	private String requestId;
 	private String userId;
+	private String userName;
 	private int price;
 	private String offerComment;
 	private Date offerDate;
@@ -35,6 +36,12 @@ public class CookingInfoDto {
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public int getPrice() {
 		return price;

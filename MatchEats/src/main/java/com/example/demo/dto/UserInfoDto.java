@@ -1,5 +1,7 @@
 package com.example.demo.dto;
 
+import java.util.Date;
+
 public class UserInfoDto {
 	
 	private Integer userId;
@@ -19,11 +21,29 @@ public class UserInfoDto {
 	private String branchName;
 	private String accountName;
 	private String secureCode;
+	private int sales;
+	private Date recoveryDate;
 	
 	
 	
 
 	
+	public Date getRecoveryDate() {
+		return recoveryDate;
+	}
+
+	public void setRecoveryDate(Date recoveryDate) {
+		this.recoveryDate = recoveryDate;
+	}
+
+	public int getSales() {
+		return sales;
+	}
+
+	public void setSales(int sales) {
+		this.sales = sales;
+	}
+
 	//getterとsetter
 	public Integer getUserId() {
 		return userId;

@@ -108,7 +108,7 @@ public class UpdateUserEntry {
 		userService.update(dto);
 		
 		session.removeAttribute("userInfoDto");
-		return "redirect:/updateUserEntry/complete";
+		return "redirect:/updateUserInfo/complete";
 			
 	}
 	

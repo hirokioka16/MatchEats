@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>マイページ</title>
+</head>
+<body>
+		<p>売上振り込み申請確認</p>
+		<table>
+			<tr>
+				<th>売上</th>
+				<td th:text="${userInfoDto.sales}"></td>
+			</tr>
+			<tr>
+				<th>名前</th>
+				<td th:text="${userInfoDto.userName}"></td>
+			</tr>
+			<tr>
+				<th>ニックネーム</th>
+				<td th:text="${userInfoDto.nickName}"></td>
+			</tr>
+		</table>	
+	
+	<form th:action="@{/transferRegistration}" method="post">
+		<input th:if="${userInfoDto.sales != 0}" type="submit" value="振り込み申請する">
+	</form>
+	<form th:action="@{/mypage}" method="get">
+		<input type="submit" value="戻る">
+	</form>
+
+</body>
+</html>

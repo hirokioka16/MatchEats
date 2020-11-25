@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>入力内容確認</title>
+</head>
+<body>
+	<form th:action="@{/inputoffer/insert}" method="POST">
+	<p>以下の内容で間違いないでしょうか？</p>
+	<table>
+		<tr>
+			<th>金額</th>
+			<td th:text="${session['CookingInfoDto'].price}"></td>
+		</tr>
+		<tr>
+			<th>オファーコメント</th>
+			<td th:text="${session['CookingInfoDto'].offerComment}"></td>
+		</tr>
+	</table>
+
+	<input type="submit" value="オファーする">
+	</form>
+
+	<form th:action="@{/inputoffer/input}" method="POST">
+		<input type="submit" value="戻る">
+	</form>
+
+</body>
+</html>

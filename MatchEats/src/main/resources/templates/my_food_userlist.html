@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>食べたい物リスト一覧</title>
+</head>
+<body>
+	<form method="post">
+	<table>
+	<tr th:each="list:${list}">
+		<td>
+			<input type="radio" name="requestId" th:value="${list.requestId}">
+		</td>
+		<td th:text="${list.pictureName}">
+		<th th:text="${list.foodName}">
+		<td th:text="${#dates.format(list.registDate,'yyyy/MM/dd')}">
+	</tr>
+	</table>
+	
+	<input type="submit" formaction="/updatefoodlist/input" value="修正">
+	<input type="submit" formaction="/deletefood/confirm" value="削除">
+	</form>
+	
+</body>
+</html>

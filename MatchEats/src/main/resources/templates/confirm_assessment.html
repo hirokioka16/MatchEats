@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>評価入力確認</title>
+</head>
+<body>
+	<form th:action="@{/history/insertassessment}" method="post">
+		<p>以下の内容でよろしいでしょうか？</p>
+		<table>
+			<tr>
+				<th>ポイント</th>
+				<td th:text="${session['AssessmentInfoDto'].point}"></td>
+			</tr>
+			<tr>
+				<th>コメント</th>
+				<td th:text="${session['AssessmentInfoDto'].assessmentComment}"></td>
+			</tr>
+		</table>
+
+
+		<input type="submit" value="送信">
+
+
+
+
+
+	</form>
+
+</body>
+</html>

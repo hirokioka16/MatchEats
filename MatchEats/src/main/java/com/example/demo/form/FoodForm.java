@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FoodForm {
 	
+	private int requestId;
 	@NotBlank(message = "料理名を入力してください")
 	@Size(max=50,message = "料理名は50文字以内に入力してください")
 	private String foodName;
@@ -16,14 +17,29 @@ public class FoodForm {
 	private String requestOutline;
 	@NotBlank(message = "料理のジャンルを選択してください")
 	private String genreId;
+	private String genreName;
 //	@NotBlank(message = "受付状況を選択してください")
 //	@Size(max=1,message = "受付状況を選択してください")
+	@Size(max=1,message="エラーが発生しました。一度一つ前のページに戻ってください")
 	private String eatFlag;
 	
 	private MultipartFile requestPicture;
 	
 	private String fileName;
 	
+	
+	public String getGenreName() {
+		return genreName;
+	}
+	public void setGenreName(String genreName) {
+		this.genreName = genreName;
+	}
+	public int getRequestId() {
+		return requestId;
+	}
+	public void setRequestId(int requestId) {
+		this.requestId = requestId;
+	}
 	public String getFoodName() {
 		return foodName;
 	}

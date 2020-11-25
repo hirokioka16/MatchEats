@@ -34,10 +34,7 @@ public class UserServise {
 		///userRepository.saveAndFlush(entity)
 
 	}
-	
-	
-	
-	//修正
+
 	public void update(UserInfoDto dto) {
 		UserTblEntity userEntity = new UserTblEntity();
 

@@ -3,7 +3,10 @@ package com.example.demo.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,6 +17,7 @@ import javax.persistence.Table;
 public class HistoryTblEntity implements Serializable{
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer historyId;
 
 	@ManyToOne
@@ -21,11 +25,13 @@ public class HistoryTblEntity implements Serializable{
 	private CookOfferTblEntity CookOfferTbl;
 
 	@ManyToOne
-	@JoinColumn(name="admin_id")
+	@JoinColumn(name="admin_id",nullable = true)
 	private AdminTblEntity adminTbl;
 
+	@Column(nullable = true)
 	private Date recoveryDate;
 
+	@Column(nullable = true)
 	private Date deliveryCompleteDate;
 
 	private  Integer stateStatus;

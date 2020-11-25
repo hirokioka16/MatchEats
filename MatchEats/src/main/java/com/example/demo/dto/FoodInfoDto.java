@@ -22,7 +22,8 @@ public class FoodInfoDto {
 
 
 
-	
+
+
 	public int getUserId() {
 		return userId;
 	}
@@ -83,6 +84,7 @@ public class FoodInfoDto {
 	public void setUserAddres(String userAddres) {
 		this.userAddres = userAddres;
 	}
+
 
 
 

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.ContactInfoDto;
 import com.example.demo.entity.ContactsTblEntity;
+import com.example.demo.entity.UserTblEntity;
 import com.example.demo.repository.ContactRepository;
 
 /**
@@ -25,7 +26,7 @@ public class ContactService {
 	 * お問い合わせ情報 Repository
 	 */
 	@Autowired
-	private ContactRepository contactRepository;
+	 ContactRepository contactRepository;
 
 	/**
 	 * お問い合わせ情報 全検索
@@ -56,27 +57,6 @@ public class ContactService {
 	}
 
 
-
-}
-
-package com.example.demo.service;
-
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.example.demo.dto.ContactInfoDto;
-import com.example.demo.entity.ContactsTblEntity;
-import com.example.demo.entity.UserTblEntity;
-import com.example.demo.repository.ContactRepository;
-
-
-@Service
-public class ContactService {
-
-	@Autowired
-	ContactRepository contactRepository;
-
 	public void insert(ContactInfoDto dto) {
 
 		ContactsTblEntity contactEntity = change(dto);
@@ -96,4 +76,12 @@ public class ContactService {
 
 			return contactEntity;
 		}
+
+
+
 }
+
+
+
+
+

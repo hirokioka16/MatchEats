@@ -19,11 +19,20 @@ public class UserInfoDto {
 	private String branchName;
 	private String accountName;
 	private String secureCode;
+	private int sales;
 	
 	
 	
 
 	
+	public int getSales() {
+		return sales;
+	}
+
+	public void setSales(int sales) {
+		this.sales = sales;
+	}
+
 	//getterとsetter
 	public Integer getUserId() {
 		return userId;

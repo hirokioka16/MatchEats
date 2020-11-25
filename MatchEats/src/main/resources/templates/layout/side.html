@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<div th:fragment="side" th:remove="tag">
+		<ul>
+			<li><a th:href="@{/mypage}" th:text="マイページ"></a></li>
+			<li><a th:href="@{/updateUserInfo/input}" th:text="会員情報修正"></a></li>
+			<li><a th:href="@{/inputfood/input}" th:text="食べたい物リスト追加"></a></li>
+			<li><a th:href="@{/foodlist}" th:text="食べたい物リスト一覧"></a></li>
+			<li><a th:href="@{/history/list}" th:text="履歴"></a></li>
+			<li><a th:href="@{/reaction/list}" th:text="リアクション"></a></li>
+			<li><a th:href="@{/cookinglist/list}" th:text="制作承諾オファー一覧"></a></li>
+    		<li><a th:href="@{/transferProcedures}" th:text="売上申請"></a></li>
+        </ul>    
+    </div>
+</body>
+</html>

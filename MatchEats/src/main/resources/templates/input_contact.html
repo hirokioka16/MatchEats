@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>お問い合わせ入力画面</title>
+</head>
+<body>
+<form th:action="@{/inputContact/confirm}" enctype="multipart/form-data" method="post" th:object="${ContactForm}">
+	<input type="text" th:field="*{content}"><br>
+	<input type="submit" value="次へ">
+</form>
+<form>
+	<input type="submit" value="戻る">
+</form>
+</body>
+</html>

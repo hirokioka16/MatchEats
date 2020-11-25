@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<table>
+<tr>
+		<th th:text="${detail.foodName}">
+		<td th:text="${detail.userName}">
+		<td th:text="${detail.pictureName}">
+		<td th:text="${detail.point}">
+		<td th:text="${detail.genreName}">
+		<td th:text="${#dates.format(detail.offerDate,'yyyy/MM/dd')}">
+		<td th:text="${detail.requestOutline}">
+		<td th:text="${detail.offerComment}">
+		</tr>
+		</table>
+		<input type="submit" formaction="/updatefoodlist/input" value="配達">
+	<input type="submit" formaction="cookingoffer/delete" value="オファーの取消">
+</body>
+</html>

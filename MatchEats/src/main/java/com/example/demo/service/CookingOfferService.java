@@ -1,3 +1,5 @@
+
+
 package com.example.demo.service;
 
 import java.util.ArrayList;
@@ -7,16 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.CookingInfoDto;
+import com.example.demo.dto.FoodInfoDto;
 import com.example.demo.entity.CookOfferTblEntity;
 import com.example.demo.entity.FoodTblEntity;
 import com.example.demo.entity.UserTblEntity;
-import com.example.demo.repository.CookingOfferRepository;
+import com.example.demo.repository.CookingRepository;
 
 @Service
 public class CookingOfferService {
 
 	@Autowired
-	CookingOfferRepository cookingOfferRepository;
+	CookingRepository cookingOfferRepository;
 
 	public void insert(CookingInfoDto dto) {
 
@@ -133,4 +136,85 @@ public class CookingOfferService {
 		cookingOfferRepository.save(offerEntity);
 	}
 
+	//調理リスト
+	public  List<FoodInfoDto> getList(int userId){
+		 List<CookingInfoDto> list = new ArrayList<CookingInfoDto>();
+		 List<CookOfferTblEntity> tblList =cookingOfferRepository.getList(userId);
+
+
+		 List<FoodTblEntity> resultList =  new ArrayList<FoodTblEntity>();
+		 List<FoodInfoDto> resultListDto = new ArrayList<FoodInfoDto>();
+
+		 for(int i=0;i<tblList.size();i++) {
+			resultList.add(tblList.get(i).getFoodTbl());
+
+		 }
+
+		 for(FoodTblEntity entity:resultList) {
+				FoodInfoDto dto = new FoodInfoDto();
+				dto.setOfferId(offerId);
+				dto.setRequestId(entity.getRequestId());
+				dto.setFoodName(entity.getFoodName());
+				dto.setRegistDate(entity.getRegistDate());
+				dto.setPictureName(entity.getRequestPicture());
+				dto.setOfferId(entity.get);
+
+
+				resultListDto.add(dto);
+		 }
+
+
+
+		 return resultListDto;
+
+    }
+//リスト詳細
+	public CookingInfoDto getdetail(int requestId){
+
+
+		CookOfferTblEntity cookOfferTblEntity = cookingOfferRepository.getOne(requestId);
+
+		CookingInfoDto dto = new CookingInfoDto();
+
+		dto.setOfferId(String.valueOf(cookOfferTblEntity.getOfferId()));
+		dto.setUserName(cookOfferTblEntity.getUserTbl().getUserName());
+		dto.setPictureName(cookOfferTblEntity.getFoodTbl().getRequestPicture());
+		dto.setFoodName(cookOfferTblEntity.getFoodTbl().getFoodName());
+		dto.setOfferDate(cookOfferTblEntity.getOfferDate());
+		dto.setOfferComment(cookOfferTblEntity.getOfferComment());
+		dto.setPoint(cookOfferTblEntity.getUserTbl().getAssessMent());
+		dto.setGenreName(cookOfferTblEntity.getFoodTbl().getGenreTbl().getGenreName());
+		dto.setRequestOutline(cookOfferTblEntity.getFoodTbl().getRequestOutline());
+
+
+
+		return dto;
 }
+//配達以来をデータベースに登録する
+	public void update(String offerId ) {
+
+		CookOfferTblEntity offerEntity = new CookOfferTblEntity();
+		offerEntity = cookingOfferRepository.getOne(Integer.parseInt(offerId));
+
+
+		boolean delivaryflg = true ;
+		offerEntity.setDeliveryFlg( delivaryflg);
+
+
+
+
+
+
+
+		cookingOfferRepository.save(offerEntity);
+	}
+
+
+}
+
+
+
+
+
+
+

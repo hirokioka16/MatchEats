@@ -82,7 +82,20 @@ public class UserServise {
 
 				);
 	}
-
+	
+	
+	
+	
+	
+	//削除
+	public void delete(Integer userId) {
+		userRepository.deleteById(userId);
+	}
+	
+	
+	
+	
+	
 	public UserInfoDto getUser(int id) {
 
 		UserTblEntity userEntity = new UserTblEntity();

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,8 +16,8 @@ import javax.persistence.Table;
 public class ContactsTblEntity implements Serializable{
 
 	@Id
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer contactId;
-
 
 	@ManyToOne
     @JoinColumn(name="user_id")
@@ -57,6 +59,4 @@ public class ContactsTblEntity implements Serializable{
 	public void setContactDate(Date contactDate) {
 		this.contactDate = contactDate;
 	}
-
-
 }

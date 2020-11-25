@@ -24,6 +24,34 @@ public class CookingOfferService {
 
 		cookingOfferRepository.saveAndFlush(offerEntity);
 	}
+	
+	
+	//リアクション一覧を取得する
+	public List<CookingInfoDto> getReactionList(int userId) {
+		
+		
+		List<CookingInfoDto> reactionList = new ArrayList<CookingInfoDto>();
+		List<CookOfferTblEntity> entityList = cookingOfferRepository.getReactionList(userId);
+		
+		for(CookOfferTblEntity entity:entityList) {
+			
+			CookingInfoDto dto = new CookingInfoDto();
+			dto.setUserId(String.valueOf(entity.getUserTbl().getUserId()));
+			dto.setUserName(entity.getUserTbl().getUserName());
+			dto.setOfferId(String.valueOf(entity.getOfferId()));
+			dto.setPrice(entity.getPrice());
+			dto.setOfferComment(entity.getOfferComment());
+			
+			reactionList.add(dto);
+		}
+		
+		return reactionList;
+		
+	}
+	
+	
+	
+	
 
 	private CookOfferTblEntity change(CookingInfoDto dto) {
 

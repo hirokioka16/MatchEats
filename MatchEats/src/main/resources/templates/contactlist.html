@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link href="/css/list.css" rel="stylesheet"></link>
+<title>お問い合わせ一覧画面</title>
+</head>
+<body>
+     <div>
+      <button  class=btn1>メニューへ</button>
+     </div>
+    <table>
+       <tr>
+         <th></th>
+         <th>メールアドレス</th>
+         <th>お問い合わせメッセージ</th>
+         <th></th>
+       </tr>
+       <tr th:each="userTbl:${contactlist}">
+          <td class="center" th:text="${userTbl.contactId}"></td>
+          <td th:text="${userTbl.userMail}"></td>
+          <td th:text="${userTbl.content}"></td>
+          <td class="center" th:text="${#dates.format(userTbl.contactDate,'yyy/MM/dd')}"></td>
+        </tr>
+    </table>
+</body>
+</html>

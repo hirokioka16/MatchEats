@@ -9,25 +9,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@Entity 
+@Entity
 @Table(name="contacts")
 public class ContactsTblEntity implements Serializable{
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer contactId;
-	
 
 	@ManyToOne
     @JoinColumn(name="user_id")
 	private UserTblEntity userTbl;
-	
+
 	private String content;
-	
+
 	private Date contactDate;
+
 
 	public Integer getContactId() {
 		return contactId;
@@ -60,6 +59,4 @@ public class ContactsTblEntity implements Serializable{
 	public void setContactDate(Date contactDate) {
 		this.contactDate = contactDate;
 	}
-	
-	
 }

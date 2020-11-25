@@ -20,7 +20,8 @@ public class FoodInfoDto {
 
 
 
-	
+
+
 	public int getUserId() {
 		return userId;
 	}
@@ -75,7 +76,7 @@ public class FoodInfoDto {
 	public void setRequestPicture(MultipartFile requestPicture) {
 		this.requestPicture = requestPicture;
 	}
-	
+
 
 
 

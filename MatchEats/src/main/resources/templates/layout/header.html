@@ -5,7 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
+
 	<div th:fragment="beforeheader" th:remove="tag">
 		<nav class="nav">
 			<h1 style="margin-left: 20%;">MatchEats</h1>
@@ -16,7 +16,7 @@
 				</div>
 			</form>
 		</nav>
-		
+
 		<ul class="nav justify-content-end" style="border-bottom: 1px solid #dcdcdc;margin-bottom:15px;">
   			<li class="nav-item">
 				<a class="nav-link active" th:href="@{/login}" th:text="ログイン"></a>
@@ -24,11 +24,11 @@
 			<li class="nav-item">
 				<a class="nav-link" th:href="@{/inputUserEntry/input}" th:text="新規会員登録"></a>
 			</li>
-        </ul>    
+        </ul>
     </div>
-    
+
     <div th:fragment="afterheader" th:remove="tag">
-	
+
 		<nav class="nav">
 			<h1 style="margin-left: 20%;">MatchEats</h1>
 			<form method="get">
@@ -38,12 +38,15 @@
 				</div>
 			</form>
 		</nav>
-		
+
 		<ul class="nav justify-content-end" style="border-bottom: 1px solid #dcdcdc;margin-bottom:15px;">
 			<li class="nav-item">
 				<a class="nav-link active" th:href="@{/mypage}" th:text="マイページ"></a>
 			</li>
-        </ul>    
+			<li class="nav-item">
+				<a class="nav-link active" th:href="@{/logout}" th:text="ログアウト"></a>
+        	</li>
+        </ul>
     </div>
 </body>
 </html>

@@ -29,7 +29,7 @@ public class PayControllr {
 		
 		   CookingInfoDto dto = payService.getFoodInfo(offerId);
 		   
-		   	dto.setOfferId(String.valueOf(offerId));
+		   	dto.setOfferId(offerId);
 		   	model.addAttribute("stripePublicKey", "");
 	        model.addAttribute("currency", "jpy");
 			model.addAttribute("dto", dto);

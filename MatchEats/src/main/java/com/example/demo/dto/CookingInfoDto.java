@@ -21,7 +21,6 @@ public class CookingInfoDto {
 	private String genreName;
 	private String requestOutline;
 	private float point;
-	private String foodName;
 	private String cookContent;
 	private String imgName;
 	
@@ -40,18 +39,7 @@ public class CookingInfoDto {
 	public void setCookContent(String cookContent) {
 		this.cookContent = cookContent;
 	}
-	public String getFoodName() {
-		return foodName;
-	}
-	public void setFoodName(String foodName) {
-		this.foodName = foodName;
-	}
-	public String getOfferId() {
-		return offerId;
-	}
-	public void setOfferId(String offerId) {
-		this.offerId = offerId;
-	}
+
 	public String getRequestId() {
 		return requestId;
 	}

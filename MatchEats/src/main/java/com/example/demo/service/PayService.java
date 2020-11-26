@@ -71,7 +71,7 @@ public class PayService {
 		HistoryTblEntity en = new HistoryTblEntity();
 		CookOfferTblEntity cook = new CookOfferTblEntity();
 		
-		cook.setOfferId(Integer.parseInt(dto.getOfferId()));
+		cook.setOfferId(dto.getOfferId());
 		
 		en.setCookOfferTbl(cook);
 		

@@ -13,48 +13,53 @@ import com.example.demo.dto.FoodInfoDto;
 import com.example.demo.entity.CookOfferTblEntity;
 import com.example.demo.entity.FoodTblEntity;
 import com.example.demo.entity.UserTblEntity;
+import com.example.demo.repository.CookingOfferRepository;
 import com.example.demo.repository.CookingRepository;
 
 @Service
 public class CookingOfferService {
 
 	@Autowired
-	CookingRepository cookingOfferRepository;
+	CookingRepository cookingRepository;
+
+	@Autowired
+	CookingOfferRepository cookingOfferRepository;
+
 
 	public void insert(CookingInfoDto dto) {
 
 		CookOfferTblEntity offerEntity = change(dto);
 
-		cookingOfferRepository.saveAndFlush(offerEntity);
+		cookingRepository.saveAndFlush(offerEntity);
 	}
-	
-	
+
+
 	//リアクション一覧を取得する
 	public List<CookingInfoDto> getReactionList(int userId) {
-		
-		
+
+
 		List<CookingInfoDto> reactionList = new ArrayList<CookingInfoDto>();
 		List<CookOfferTblEntity> entityList = cookingOfferRepository.getReactionList(userId);
-		
+
 		for(CookOfferTblEntity entity:entityList) {
-			
+
 			CookingInfoDto dto = new CookingInfoDto();
 			dto.setUserId(String.valueOf(entity.getUserTbl().getUserId()));
 			dto.setUserName(entity.getUserTbl().getUserName());
-			dto.setOfferId(String.valueOf(entity.getOfferId()));
+			dto.setOfferId(entity.getOfferId());
 			dto.setPrice(entity.getPrice());
 			dto.setOfferComment(entity.getOfferComment());
-			
+
 			reactionList.add(dto);
 		}
-		
+
 		return reactionList;
-		
+
 	}
-	
-	
-	
-	
+
+
+
+
 
 	private CookOfferTblEntity change(CookingInfoDto dto) {
 
@@ -88,7 +93,7 @@ public class CookingOfferService {
 
 		for(CookOfferTblEntity entity:entityList) {
 			CookingInfoDto dto = new CookingInfoDto();
-			dto.setOfferId(String.valueOf(entity.getOfferId()));
+			dto.setOfferId(entity.getOfferId());
 			dto.setRequestId(String.valueOf(entity.getFoodTbl().getRequestId()));
 			dto.setUserId(String.valueOf(entity.getUserTbl().getUserId()));
 			dto.setPrice(entity.getPrice());
@@ -105,10 +110,10 @@ public class CookingOfferService {
 
 	//オファー情報取得用メソッド
 	public CookingInfoDto getOfferInfo(int offerId) {
-		CookOfferTblEntity entity = cookingOfferRepository.getOne(offerId);
+		CookOfferTblEntity entity = cookingRepository.getOne(offerId);
 		CookingInfoDto dto = new CookingInfoDto();
 
-		dto.setOfferId(String.valueOf(entity.getOfferId()));
+		dto.setOfferId(entity.getOfferId());
 		dto.setRequestId(String.valueOf(entity.getFoodTbl().getRequestId()));
 		dto.setUserId(String.valueOf(entity.getUserTbl().getUserId()));
 		dto.setPrice(entity.getPrice());
@@ -127,19 +132,20 @@ public class CookingOfferService {
 	public void delete(String offerId) {
 
 		CookOfferTblEntity offerEntity = new CookOfferTblEntity();
-		offerEntity = cookingOfferRepository.getOne(Integer.parseInt(offerId));
+		offerEntity = cookingRepository.getOne(Integer.parseInt(offerId));
 
 		offerEntity.setReactionStatus("4");
 
 
 
-		cookingOfferRepository.save(offerEntity);
+		cookingRepository.save(offerEntity);
 	}
 
 	//調理リスト
 	public  List<FoodInfoDto> getList(int userId){
+
 		 List<CookingInfoDto> list = new ArrayList<CookingInfoDto>();
-		 List<CookOfferTblEntity> tblList =cookingOfferRepository.getList(userId);
+		 List<CookOfferTblEntity> tblList =cookingRepository.getList(userId);
 
 
 		 List<FoodTblEntity> resultList =  new ArrayList<FoodTblEntity>();
@@ -152,12 +158,11 @@ public class CookingOfferService {
 
 		 for(FoodTblEntity entity:resultList) {
 				FoodInfoDto dto = new FoodInfoDto();
-				dto.setOfferId(offerId);
 				dto.setRequestId(entity.getRequestId());
 				dto.setFoodName(entity.getFoodName());
 				dto.setRegistDate(entity.getRegistDate());
 				dto.setPictureName(entity.getRequestPicture());
-				dto.setOfferId(entity.get);
+				dto.setUserId(entity.getUserTbl().getUserId());
 
 
 				resultListDto.add(dto);
@@ -172,11 +177,11 @@ public class CookingOfferService {
 	public CookingInfoDto getdetail(int requestId){
 
 
-		CookOfferTblEntity cookOfferTblEntity = cookingOfferRepository.getOne(requestId);
+		CookOfferTblEntity cookOfferTblEntity = cookingRepository.getOne(requestId);
 
 		CookingInfoDto dto = new CookingInfoDto();
 
-		dto.setOfferId(String.valueOf(cookOfferTblEntity.getOfferId()));
+		dto.setOfferId(cookOfferTblEntity.getOfferId());
 		dto.setUserName(cookOfferTblEntity.getUserTbl().getUserName());
 		dto.setPictureName(cookOfferTblEntity.getFoodTbl().getRequestPicture());
 		dto.setFoodName(cookOfferTblEntity.getFoodTbl().getFoodName());
@@ -194,19 +199,15 @@ public class CookingOfferService {
 	public void update(String offerId ) {
 
 		CookOfferTblEntity offerEntity = new CookOfferTblEntity();
-		offerEntity = cookingOfferRepository.getOne(Integer.parseInt(offerId));
+		offerEntity = cookingRepository.getOne(Integer.parseInt(offerId));
 
 
 		boolean delivaryflg = true ;
-		offerEntity.setDeliveryFlg( delivaryflg);
+		offerEntity.setDeliveryFlg(delivaryflg);
+
+		cookingRepository.update(offerEntity.getOfferId());
 
 
-
-
-
-
-
-		cookingOfferRepository.save(offerEntity);
 	}
 
 

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>調理詳細</title>
 </head>
 <body>
 <table>
@@ -17,7 +17,9 @@
 		<td th:text="${detail.offerComment}">
 		</tr>
 		</table>
-		<input type="submit" formaction="/updatefoodlist/input" value="配達">
-	<input type="submit" formaction="cookingoffer/delete" value="オファーの取消">
+		<form method="post">
+		<input type="hidden" th:value="${detail.offerId}" name="offerId">
+		<input type="submit" formaction="/cookinglist/insert" value="配達">
+		</form>
 </body>
 </html>

@@ -2,11 +2,12 @@ package com.example.demo.repository;
 
 import java.util.List;
 
-import org.springframework.data.jdbc.repository.query.Modifying;
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.entity.CookOfferTblEntity;
 
@@ -17,17 +18,19 @@ public interface CookingRepository  extends JpaRepository<CookOfferTblEntity,Int
 	    public List<CookOfferTblEntity> getList(@Param("userId")int userId);
 		//SELECT f FROM FoodTblEntity f left join f.genreTbl g left join f.userTbl u
 
+
 		@Query("SELECT o FROM CookOfferTblEntity o left join o.userTbl u WHERE u.userId = :userId AND o.reactionStatus IN ('0')")
 		public List<CookOfferTblEntity> getOfferHistory(@Param("userId") int userId);
 
-		@Query("UPDATE FoodTblEntity x SET "
-				+" x.deliveryFlg = :deliveryFlg "
-				+" WHERE x.userId =:userId")
+		@Transactional
+		@Modifying
+		@Query("UPDATE CookOfferTblEntity x SET "
+				+" x.deliveryFlg = true "
+				+" WHERE x.offerId =:offerId")
 		public void update(
-				@Param("deliveryFlg")boolean deliveryFlg,
-				@Param("userId") Integer userId
-				);
+				@Param("offerId") int userId);
 
+		/**
 		@Transactional
 		@Modifying
 		@Query("UPDATE CookOfferTblEntity c SET"
@@ -37,6 +40,8 @@ public interface CookingRepository  extends JpaRepository<CookOfferTblEntity,Int
 						@Param("reactionStatus") String reactionStatus,
 						@Param("offerId") Integer offerId
 				);
+
+		**/
 }
 
 

@@ -7,7 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.dto.CookingInfoDto;
 import com.example.demo.form.StripeForm;
 import com.example.demo.service.PayService;
 import com.stripe.exception.StripeException;
@@ -21,25 +23,23 @@ public class PayControllr {
 	@Autowired
 	private PayService payService;
 	
+	
 	   @RequestMapping(value = {"/pay"},method=RequestMethod.GET)
-	   public String checkout(Model model) {
-
+	   public String payConfirm(@RequestParam("offerId") int offerId,Model model) {
 		
-		//料理名、料理の説明、金額をDBからとってくる
+		   CookingInfoDto dto = payService.getFoodInfo(offerId);
 		   
-		
-		model.addAttribute("amount", 100);//in cents
-		model.addAttribute("foodName", "テスト商品名");
-		model.addAttribute("content", "テスト料理説明");
-        model.addAttribute("stripePublicKey", "");
-        model.addAttribute("currency", "jpy");
-	       return "stripe_checkout";
+		   	dto.setOfferId(String.valueOf(offerId));
+		   	model.addAttribute("stripePublicKey", "");
+	        model.addAttribute("currency", "jpy");
+			model.addAttribute("dto", dto);
+		return "detail_pay";
 	   }
 	   
 	   @RequestMapping(value = {"/charge"},method=RequestMethod.POST)
-	    public String charge(StripeForm stripeForm, Model model)throws StripeException {
+	    public String charge(StripeForm stripeForm,@RequestParam("amount") int price,@RequestParam("offerId") int offerId,Model model)throws StripeException {
 	    	stripeForm.setDescription("Example charge");
-	        Charge charge = payService.charge(stripeForm);
+	        payService.charge(stripeForm,offerId);
 	       
 	        return "pay_complete";
 	    }

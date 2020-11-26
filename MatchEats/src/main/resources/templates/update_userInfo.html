@@ -6,6 +6,10 @@
 </head>
 <body>
 
+<form th:action="@{/mypage}">
+	<input type="submit" value="戻る">
+	</form>
+
 
 
 <!-- エラーメッセージ -->
@@ -18,21 +22,21 @@
 
 <!-- 入力フォーム -->
 <form th:action="@{/updateUserInfo/confirm}"  method="post" th:object="${UserForm}">
- 	<input type="hidden" th:field="*{userId}"> 
+ 	<input type="hidden" th:field="*{userId}">
  	メールアドレス<input type="text" th:field="*{userMail}"><br>
- 	
+
  	パスワード<input type="password" th:field="*{userPass}"><br>
- 	
+
  	ニックネーム<input type="text" placeholder="" th:field="*{nickName}"><br>
- 	
+
  	名前<input type="text" placeholder="" th:field="*{userName}"><br>
- 	
+
  	電話番号<input type="text" placeholder="ハイフン抜きの半角数字で入力してください" th:field="*{userTel}"><br>
- 	
+
  	郵便番号<input type="text" placeholder="ハイフン抜きの半角数字で入力してください" th:field="*{postalCode}"><br>
- 	
+
  	住所<input type="text" placeholder="" th:field="*{userAddres}"><br>
- 	
+
  	生年月日<select  name="year">
  				<option th:value="*{year}" th:text="*{year}"></option>
 				<option value="1950">1950</option>
@@ -156,11 +160,11 @@
 				<option value="30">30</option>
 				<option value="31">31</option>
  	 		</select>日<br>
- 	 		
+
  	カード名義<input type="text" th:field="*{cardName}"><br>
- 	
+
  	クレジットカード番号<input type="text" placeholder="半角数字で入力してください" th:field="*{userCard}"><br>
- 	
+
  	有効期限<select name="limitYear">
  				<option th:value="*{limitYear}" th:text="*{limitYear}"></option>
  				<option value="2020">2020</option>
@@ -174,7 +178,7 @@
 				<option value="2028">2028</option>
 				<option value="2029">2029</option>
 				<option value="2030">2030</option>
- 				
+
  			</select>
  			<select name="limitMonth">
  	 			<option th:value="*{limitMonth}" th:text="*{limitMonth}"></option>
@@ -191,17 +195,17 @@
 				<option value="11">11</option>
 				<option value="12">12</option>
  	 		</select>月<br>
- 	 		
- 	
+
+
  	セキュリティーコード<input type="text" th:field="*{secureCode}"><br>
- 	
+
  	<input type="submit" value="次へ">
- 	
+
  </form>
- 
+
 <!-- <!--  <form th:action="@{/updateUserInfo/input}" method="post">
 		<input type="submit" value="戻る">
-	</form> --> 
+	</form> -->
 
 </body>
 </html>

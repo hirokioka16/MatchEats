@@ -49,7 +49,10 @@ public class CookingOfferService {
 			dto.setOfferId(entity.getOfferId());
 			dto.setPrice(entity.getPrice());
 			dto.setOfferComment(entity.getOfferComment());
-
+			dto.setFoodName(entity.getFoodTbl().getFoodName());
+			dto.setImgName(entity.getFoodTbl().getRequestPicture());
+			dto.setCookContent(entity.getFoodTbl().getRequestOutline());
+			
 			reactionList.add(dto);
 		}
 

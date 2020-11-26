@@ -21,8 +21,24 @@ public class CookingInfoDto {
 	private String genreName;
 	private String requestOutline;
 	private float point;
+	private String cookContent;
+	private String imgName;
+	
+	
 
-
+	
+	public String getImgName() {
+		return imgName;
+	}
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
+	}
+	public String getCookContent() {
+		return cookContent;
+	}
+	public void setCookContent(String cookContent) {
+		this.cookContent = cookContent;
+	}
 
 	public String getRequestId() {
 		return requestId;

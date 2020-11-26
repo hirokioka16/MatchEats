@@ -4,10 +4,16 @@
 <meta charset="UTF-8">
 <title>リアクション一覧</title>
 </head>
-<body>	
+<body>
 	<table>
+
+
+	<form th:action="@{/mypage}">
+	<input type="submit" value="戻る">
+	</form>
+
 	<div th:each="reactionList:${reactionList}">
-	
+
 		<tr>
 			<form method='get'>
 				<input type="hidden" name='offerId' th:value="${reactionList.offerId}">
@@ -35,7 +41,7 @@
 	</div>
 	</table>
 
-			
+
 
 </body>
 </html>

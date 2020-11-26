@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+	package com.example.demo.controller;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,7 +14,7 @@ import com.example.demo.form.LoginForm;
 import com.example.demo.service.LoginService;
 
 @Controller
-public class LoginServlet {
+public class LoginController {
 
 	@Autowired
 	LoginService loginService;

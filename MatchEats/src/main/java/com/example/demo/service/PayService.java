@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.CookingInfoDto;
+import com.example.demo.dto.LoginInfoDto;
 import com.example.demo.entity.CookOfferTblEntity;
 import com.example.demo.entity.HistoryTblEntity;
+import com.example.demo.entity.UserTblEntity;
 import com.example.demo.form.StripeForm;
 import com.example.demo.repository.CookingOfferRepository;
 import com.example.demo.repository.HistoryRepository;
@@ -35,12 +37,14 @@ public class PayService {
 		dto.setOfferComment(entity.getOfferComment());
 		dto.setImgName(entity.getFoodTbl().getRequestPicture());
 		dto.setCookContent(entity.getFoodTbl().getRequestOutline());
+		dto.setUserId(String.valueOf(entity.getUserTbl().getUserId()));
+		
 		
 		return dto;
 	}
 	
 	public void charge(StripeForm stripeForm,int offerId){
-	Stripe.apiKey = "";
+	Stripe.apiKey = "sk_test_51HZSIrJjnozX4HQuaJEH2KwtoFV15jNAuHzoMFjAD33VhGCo4bBRHML5c6u29yqwVxkhYEU1SI56nFmoVj5zv7wk00EEGDaZ1p";
 
     Map<String, Object> chargeMap = new HashMap<String, Object>();
     chargeMap.put("amount", stripeForm.getAmount());
@@ -49,31 +53,44 @@ public class PayService {
     chargeMap.put("source", stripeForm.getStripeToken());
     
     CookingInfoDto dto = getFoodInfo(offerId);
+    HistoryTblEntity en = change(dto);
+    CookOfferTblEntity cook = new CookOfferTblEntity();
+    cook.setOfferId(offerId);
+    en.setCookOfferTbl(cook);
     
     try {
 		Charge.create(chargeMap);
 		
 	    //reaction_statusを"2"(決済済み)に設定するRepositoryを書く
-	   cookingOfferRepository.rejectOffer(offerId);
+	   cookingOfferRepository.approvalOffer(offerId);
+	   historyRepository.saveAndFlush(en);
 	    
 	} catch (StripeException e) {
 		e.printStackTrace();
 	}catch (Exception e) {
 		e.printStackTrace();
 	}
-
-    
-  
 	}
+	
 	
 	public HistoryTblEntity change(CookingInfoDto dto) {
 		
 		HistoryTblEntity en = new HistoryTblEntity();
-		CookOfferTblEntity cook = new CookOfferTblEntity();
+		UserTblEntity cookUser = new UserTblEntity();
+		UserTblEntity requestUser = new UserTblEntity();
+	
+		int adminProfit = dto.getPrice() / 10;
+		int cookProfit = dto.getPrice() - adminProfit;
+		cookUser.setUserId(Integer.parseInt(dto.getUserId()));
+		//LoginInfoDto loginInfo  = (LoginInfoDto)session.getAttribute("loginInfo");
+		requestUser.setUserId(1);
 		
-		cook.setOfferId(dto.getOfferId());
+		en.setAdminProfit(adminProfit);
+		en.setCookProfit(cookProfit);
+		en.setCookOfferUser(cookUser);
+		en.setRequestUser(requestUser);
+		en.setStateStatus(0);
 		
-		en.setCookOfferTbl(cook);
 		
 		return en;
 	}

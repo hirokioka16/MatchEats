@@ -212,6 +212,12 @@ public class CookingOfferService {
 
 
 	}
+	
+	//リアクション拒否
+	public void approvalOffer(int offerId) {
+		
+		cookingOfferRepository.rejectOffer(offerId);
+	}
 
 
 }

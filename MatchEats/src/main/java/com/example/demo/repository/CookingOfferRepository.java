@@ -70,6 +70,14 @@ public interface CookingOfferRepository extends JpaRepository<CookOfferTblEntity
 			+ " c.reactionStatus = 2 "
 			+ " WHERE c.offerId = :offerId "
 			)
+	public void approvalOffer(
+			@Param("offerId") int offerId);
+	
+	@Modifying
+	@Query("UPDATE CookOfferTblEntity c SET"
+			+ " c.reactionStatus = 1 "
+			+ " WHERE c.offerId = :offerId "
+			)
 	public void rejectOffer(
 			@Param("offerId") int offerId);
 }

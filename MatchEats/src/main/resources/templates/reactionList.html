@@ -15,7 +15,10 @@
 			</form>
 		</tr>
 		<tr>
-			<td><input type="submit" formaction="/拒否先" value="拒否"></td>
+			<form method='get'>
+				<input type="hidden" name='offerId' th:value="${reactionList.offerId}">
+				<td><input type="submit" formaction="/reject" value="拒否"></td>
+			</form>
 		</tr>
 		<tr>
 			<td th:text="${reactionList.userName}">

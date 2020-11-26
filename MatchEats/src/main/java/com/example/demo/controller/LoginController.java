@@ -14,7 +14,7 @@ import com.example.demo.form.LoginForm;
 import com.example.demo.service.LoginService;
 
 @Controller
-public class LoginServlet {
+public class LoginController {
 
 	@Autowired
 	LoginService loginService;

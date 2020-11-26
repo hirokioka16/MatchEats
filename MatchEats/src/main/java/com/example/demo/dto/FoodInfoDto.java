@@ -18,6 +18,8 @@ public class FoodInfoDto {
 	private String eatFlag;
 	private MultipartFile requestPicture;
 	private String pictureName;
+	private String userAddres;
+	
 
 
 
@@ -82,6 +84,12 @@ public class FoodInfoDto {
 	}
 	public void setRequestPicture(MultipartFile requestPicture) {
 		this.requestPicture = requestPicture;
+	}
+	public String getUserAddres() {
+		return userAddres;
+	}
+	public void setUserAddres(String userAddres) {
+		this.userAddres = userAddres;
 	}
 
 

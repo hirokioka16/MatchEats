@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>配達確認画面</title>
+</head>
+<body>
+	<form th:action="@{/delivery/insert}" method="post">
+		<table>
+			<tr>
+				<th>ユーザー名</th>
+				<td th:text="${dto.userName}">
+			</tr>
+			<tr>
+				<th>回収時間</th>
+				<td th:if="${dto.requestApprovalDay != null}" th:text="${#dates.format(dto.requestDay,'yyyy/MM/dd HH:mm:ss')}">
+			</tr>
+			<tr>
+				<th>住所</th>
+				<td th:text="${dto.address}">
+			</tr>
+		</table>
+		<input type="hidden" name="historyId" th:value="${dto.historyId}">
+		<input type="submit" value = "配達完了">
+	</form>
+	<form th:action="@{/delivery/mydeliverylist}" method="get">
+		<input type="submit" value = "戻る">
+	</form>
+</body>
+</html>

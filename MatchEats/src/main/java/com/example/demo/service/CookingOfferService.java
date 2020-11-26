@@ -1,3 +1,5 @@
+
+
 package com.example.demo.service;
 
 import java.util.ArrayList;
@@ -7,23 +9,57 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.CookingInfoDto;
+import com.example.demo.dto.FoodInfoDto;
 import com.example.demo.entity.CookOfferTblEntity;
 import com.example.demo.entity.FoodTblEntity;
 import com.example.demo.entity.UserTblEntity;
 import com.example.demo.repository.CookingOfferRepository;
+import com.example.demo.repository.CookingRepository;
 
 @Service
 public class CookingOfferService {
 
 	@Autowired
+	CookingRepository cookingRepository;
+
+	@Autowired
 	CookingOfferRepository cookingOfferRepository;
+
 
 	public void insert(CookingInfoDto dto) {
 
 		CookOfferTblEntity offerEntity = change(dto);
 
-		cookingOfferRepository.saveAndFlush(offerEntity);
+		cookingRepository.saveAndFlush(offerEntity);
 	}
+
+
+	//リアクション一覧を取得する
+	public List<CookingInfoDto> getReactionList(int userId) {
+
+
+		List<CookingInfoDto> reactionList = new ArrayList<CookingInfoDto>();
+		List<CookOfferTblEntity> entityList = cookingOfferRepository.getReactionList(userId);
+
+		for(CookOfferTblEntity entity:entityList) {
+
+			CookingInfoDto dto = new CookingInfoDto();
+			dto.setUserId(String.valueOf(entity.getUserTbl().getUserId()));
+			dto.setUserName(entity.getUserTbl().getUserName());
+			dto.setOfferId(entity.getOfferId());
+			dto.setPrice(entity.getPrice());
+			dto.setOfferComment(entity.getOfferComment());
+
+			reactionList.add(dto);
+		}
+
+		return reactionList;
+
+	}
+
+
+
+
 
 	private CookOfferTblEntity change(CookingInfoDto dto) {
 
@@ -57,7 +93,7 @@ public class CookingOfferService {
 
 		for(CookOfferTblEntity entity:entityList) {
 			CookingInfoDto dto = new CookingInfoDto();
-			dto.setOfferId(String.valueOf(entity.getOfferId()));
+			dto.setOfferId(entity.getOfferId());
 			dto.setRequestId(String.valueOf(entity.getFoodTbl().getRequestId()));
 			dto.setUserId(String.valueOf(entity.getUserTbl().getUserId()));
 			dto.setPrice(entity.getPrice());
@@ -74,10 +110,10 @@ public class CookingOfferService {
 
 	//オファー情報取得用メソッド
 	public CookingInfoDto getOfferInfo(int offerId) {
-		CookOfferTblEntity entity = cookingOfferRepository.getOne(offerId);
+		CookOfferTblEntity entity = cookingRepository.getOne(offerId);
 		CookingInfoDto dto = new CookingInfoDto();
 
-		dto.setOfferId(String.valueOf(entity.getOfferId()));
+		dto.setOfferId(entity.getOfferId());
 		dto.setRequestId(String.valueOf(entity.getFoodTbl().getRequestId()));
 		dto.setUserId(String.valueOf(entity.getUserTbl().getUserId()));
 		dto.setPrice(entity.getPrice());
@@ -96,13 +132,90 @@ public class CookingOfferService {
 	public void delete(String offerId) {
 
 		CookOfferTblEntity offerEntity = new CookOfferTblEntity();
-		offerEntity = cookingOfferRepository.getOne(Integer.parseInt(offerId));
+		offerEntity = cookingRepository.getOne(Integer.parseInt(offerId));
 
 		offerEntity.setReactionStatus("4");
 
 
 
-		cookingOfferRepository.save(offerEntity);
+		cookingRepository.save(offerEntity);
 	}
 
+	//調理リスト
+	public  List<FoodInfoDto> getList(int userId){
+
+		 List<CookingInfoDto> list = new ArrayList<CookingInfoDto>();
+		 List<CookOfferTblEntity> tblList =cookingRepository.getList(userId);
+
+
+		 List<FoodTblEntity> resultList =  new ArrayList<FoodTblEntity>();
+		 List<FoodInfoDto> resultListDto = new ArrayList<FoodInfoDto>();
+
+		 for(int i=0;i<tblList.size();i++) {
+			resultList.add(tblList.get(i).getFoodTbl());
+
+		 }
+
+		 for(FoodTblEntity entity:resultList) {
+				FoodInfoDto dto = new FoodInfoDto();
+				dto.setRequestId(entity.getRequestId());
+				dto.setFoodName(entity.getFoodName());
+				dto.setRegistDate(entity.getRegistDate());
+				dto.setPictureName(entity.getRequestPicture());
+				dto.setUserId(entity.getUserTbl().getUserId());
+
+
+				resultListDto.add(dto);
+		 }
+
+
+
+		 return resultListDto;
+
+    }
+//リスト詳細
+	public CookingInfoDto getdetail(int requestId){
+
+
+		CookOfferTblEntity cookOfferTblEntity = cookingRepository.getOne(requestId);
+
+		CookingInfoDto dto = new CookingInfoDto();
+
+		dto.setOfferId(cookOfferTblEntity.getOfferId());
+		dto.setUserName(cookOfferTblEntity.getUserTbl().getUserName());
+		dto.setPictureName(cookOfferTblEntity.getFoodTbl().getRequestPicture());
+		dto.setFoodName(cookOfferTblEntity.getFoodTbl().getFoodName());
+		dto.setOfferDate(cookOfferTblEntity.getOfferDate());
+		dto.setOfferComment(cookOfferTblEntity.getOfferComment());
+		dto.setPoint(cookOfferTblEntity.getUserTbl().getAssessMent());
+		dto.setGenreName(cookOfferTblEntity.getFoodTbl().getGenreTbl().getGenreName());
+		dto.setRequestOutline(cookOfferTblEntity.getFoodTbl().getRequestOutline());
+
+
+
+		return dto;
 }
+//配達以来をデータベースに登録する
+	public void update(String offerId ) {
+
+		CookOfferTblEntity offerEntity = new CookOfferTblEntity();
+		offerEntity = cookingRepository.getOne(Integer.parseInt(offerId));
+
+
+		boolean delivaryflg = true ;
+		offerEntity.setDeliveryFlg(delivaryflg);
+
+		cookingRepository.update(offerEntity.getOfferId());
+
+
+	}
+
+
+}
+
+
+
+
+
+
+

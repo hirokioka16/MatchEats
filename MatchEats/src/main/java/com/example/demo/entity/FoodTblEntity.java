@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,9 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Entity 
+@Entity
 @Table(name="eatlist")
 public class FoodTblEntity implements Serializable{
 
@@ -21,20 +23,26 @@ public class FoodTblEntity implements Serializable{
 	@ManyToOne
     @JoinColumn(name="user_id")
 	private UserTblEntity userTbl;
-	
+
 	private String foodName;
-	
+
 	private String requestOutline;
-	
+
 	private Date registDate;
-	
+
 	@ManyToOne
     @JoinColumn(name="genre_id")
 	private GenreTblEntity genreTbl;
-	
+
 	private String eatFlag;
-	
+
 	private String requestPicture;
+
+	@OneToMany(mappedBy="foodTbl")
+	private List<CookOfferTblEntity> cookList;
+
+
+
 
 	public Integer getRequestId() {
 		return requestId;
@@ -100,8 +108,26 @@ public class FoodTblEntity implements Serializable{
 		this.requestPicture = requestPicture;
 	}
 	
+//	@OneToMany(mappedBy="userTbl")
+//	private List<CookOfferTblEntity> foodUser;
+//	
+//	
+//
+//	public List<CookOfferTblEntity> getFoodUser() {
+//		return foodUser;
+//	}
+//
+//	public void setFoodUser(List<CookOfferTblEntity> foodUser) {
+//		this.foodUser = foodUser;
+//	}
 	
 	
 	
+	
+
+
+
+
+
 
 }

@@ -72,6 +72,12 @@ public class InputFoodListController {
 		}
 		model.addAttribute("name",genreName);
 		model.addAttribute("list",list);
+
+
+		FoodInfoDto foodInfoDto = new FoodInfoDto();
+		model.addAttribute("foodInfoDto",foodInfoDto);
+
+
 		return "input_foodlist";
 	}
 

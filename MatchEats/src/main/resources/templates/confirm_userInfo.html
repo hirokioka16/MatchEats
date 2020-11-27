@@ -2,14 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 <title>会員情報修正　確認</title>
 </head>
 <body>
 
 
+<p style="text-align:center; margin-top:4%;">以下の内容で間違いないでしょうか。</p>
+
+<div class="border" style="width:60%; margin-right:auto; margin-left:auto; padding:5% 10%;">
 <form th:action="@{/updateUserInfo/update}" method="post">
-		<p>以下の内容で間違いないでしょうか</p>
-		<table>
+		<table class="table table-borderless" style="margin-bottom:4%;">
 			<tr>
 				<th>メールアドレス</th>
 				<td th:text="${session['userInfoDto'].userMail}"></td>
@@ -60,12 +63,13 @@
 			</tr>
 		</table>
 		
-		<input type="submit" value="登録する">
+		<input class="btn btn-primary btn-lg" type="submit" value="登録する" style="width:30%; float:left; margin-left:5%;">
 	</form>
 	
 	<form th:action="@{/updateUserInfo/input}" method="post">
-		<input type="submit" value="戻る">
+		<input class="btn btn-outline-secondary btn-lg" type="submit" value="戻る" style="width:30%; float: right;">
 	</form>
+</div>
 			
 
 </body>

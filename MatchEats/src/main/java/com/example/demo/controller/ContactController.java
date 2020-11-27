@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.demo.dto.ContactInfoDto;
+import com.example.demo.dto.LoginInfoDto;
 import com.example.demo.form.ContactForm;
 import com.example.demo.repository.ContactRepository;
 import com.example.demo.service.ContactService;
@@ -49,6 +50,13 @@ import com.example.demo.service.ContactService;
 	//入力
 		@RequestMapping(value= {"/input"},method=RequestMethod.GET)
 		public String input(@ModelAttribute("ContactForm")ContactForm form,Model model) {
+
+			LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute("loginInfo");
+
+			if(loginInfo == null) {
+
+				return "redirect:/login";
+			}
 		return "input_contact";
 		}
 	//確認

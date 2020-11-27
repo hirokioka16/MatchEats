@@ -114,6 +114,24 @@ public class FoodService {
 		dto.setUserId(entity.getUserTbl().getUserId());
 		return dto;
 	}
+	//ジャンルごとの料理を取得する
+	public List<FoodInfoDto> topDetailFoodList(int genreId){
+		
+		List<FoodTblEntity> foodEntityList = foodRepository.getGenreFoodList(genreId);
+		List<FoodInfoDto> list = new ArrayList<FoodInfoDto>();  
+		for(FoodTblEntity entity:foodEntityList) {
+
+			FoodInfoDto dto = new FoodInfoDto();
+			dto.setRequestId(entity.getRequestId());
+			dto.setFoodName(entity.getFoodName());
+			dto.setPictureName(entity.getRequestPicture());
+			dto.setUserAddres(entity.getUserTbl().getUserAdress());
+
+			list.add(dto);
+		}
+		
+		return list;
+	}
 
 	//dtoの値をentityに入れるメソッド
 	private FoodTblEntity change(FoodInfoDto dto) {

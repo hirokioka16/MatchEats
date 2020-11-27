@@ -25,17 +25,22 @@
 			<input type="hidden" name="genreId" value="0">
 			<input type="submit" class="btn btn-link" value="もっと見る" style="display: block;margin: 0 0 0 auto;">
 		</form>
+		<div class="album bg-light">
+		<div class="container">
 		<div class="card-columns">
-			<div class="card" th:each="list, stat : ${firstList}" th:object="${list}" th:if="${stat.index < 5}">
+			<div class="card shadow-sm" th:each="list, stat : ${firstList}" th:object="${list}" th:if="${stat.index < 5}">
 	    		<img src="http://jousen5.aso-abcc.com/shoppingSystem/img/minami.jpg" class="card-img-top" alt="img">
 	    		<div class="card-body">
 	      			<h5 class="card-title" th:text="*{foodName}"></h5>
 	      			<p class="card-text" th:text="${stat.index}"></p>
 	      			<form th:action="@{/detailfoodlist}" method="POST">
-	      				<input type="hidden" th:value="${requestId}" name="requestId">
+	      				<input type="hidden" th:value="*{requestId}" name="requestId">
 	      				<input type="submit" class="btn btn-link" value="詳細" style="display: block;margin: 0 0 0 auto;">
 	      			</form>
 	    		</div>
+			
+			</div>
+			</div>
 			</div>
 		</div>
 
@@ -44,8 +49,10 @@
 			<input type="hidden" name="genreId" value="1">
 			<input type="submit" class="btn btn-link" value="もっと見る" style="display: block;margin: 0 0 0 auto;">
 		</form>
+		<div class="album bg-light">
+		<div class="container">
 		<div class="card-columns">
-			<div class="card" th:each="list, stat : ${secondList}" th:object="${list}" th:if="${stat.index < 5}">
+			<div class="card shadow-sm" th:each="list, stat : ${secondList}" th:object="${list}" th:if="${stat.index < 5}">
 	    		<svg class="bd-placeholder-img card-img-top" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
 	    		<div class="card-body">
 	      			<h5 class="card-title" th:text="*{foodName}"></h5>
@@ -56,15 +63,20 @@
 	      			</form>
 	    		</div>
 			</div>
-		</div>
+			</div>
+			</div>
+			</div>
+		
 
 		<h3 class ="title">中華</h3>
 		<form th:action="@{/eachgenre}" method="get">
 			<input type="hidden" name="genreId" value="2">
 			<input type="submit" class="btn btn-link" value="もっと見る" style="display: block;margin: 0 0 0 auto;">
 		</form>
+		<div class="album bg-light">
+		<div class="container">
 		<div class="card-columns">
-			<div class="card" th:each="list, stat : ${thirdList}" th:object="${list}" th:if="${stat.index < 5}">
+			<div class="card shadow-sm" th:each="list, stat : ${thirdList}" th:object="${list}" th:if="${stat.index < 5}">
 	    		<svg class="bd-placeholder-img card-img-top" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
 	    		<div class="card-body">
 	      			<h5 class="card-title" th:text="*{foodName}"></h5>
@@ -74,16 +86,20 @@
 	      				<input type="submit" class="btn btn-link" value="詳細" style="display: block;margin: 0 0 0 auto;">
 	      			</form>
 	    		</div>
-			</div>
 		</div>
+			</div>
+			</div>
+			</div>
 
 		<h3 class ="title">スイーツ</h3>
 		<form th:action="@{/eachgenre}" method="get">
 			<input type="hidden" name="genreId" value="3">
 			<input type="submit" class="btn btn-link" value="もっと見る" style="display: block;margin: 0 0 0 auto;">
 		</form>
+		<div class="album bg-light">
+		<div class="container">
 		<div class="card-columns">
-			<div class="card" th:each="list, stat : ${fourthList}" th:object="${list}" th:if="${stat.index < 5}">
+			<div class="card shadow-sm" th:each="list, stat : ${fourthList}" th:object="${list}" th:if="${stat.index < 5}">
 	    		<svg class="bd-placeholder-img card-img-top" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
 	    		<div class="card-body">
 	      			<h5 class="card-title" th:text="*{foodName}"></h5>
@@ -94,7 +110,9 @@
 	      			</form>
 	    		</div>
 			</div>
-		</div>
+			</div>
+			</div>
+			</div>
 
 </body>
 </html>

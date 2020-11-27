@@ -2,47 +2,60 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 <title>マイページ</title>
+<style>
+</style>
 </head>
 <body>
+
+<header>
+	<div th:replace="layout/header :: afterheader" ></div>
+</header>
+<div class="row">
+
 <div id="side" th:replace="layout/side :: side"></div>
+
+	<div class="col-7">
 	<form th:action="@{/transferProcedures}" method="post">
-	
-		<p>会員情報</p>
-		<table>
+
+		<h5 style="color:#ff4500">会員情報</h5>
+		<table class="table table-hover">
+		<tbody>
 			<tr>
-				<th>名前</th>
+				<th scope="row">名前</th>
 				<td th:text="${userInfoDto.userName}"></td>
 			</tr>
 			<tr>
-				<th>ニックネーム</th>
+				<th scope="row">ニックネーム</th>
 				<td th:text="${userInfoDto.nickName}"></td>
 			</tr>
 			<tr>
-				<th>メールアドレス</th>
+				<th scope="row">メールアドレス</th>
 				<td th:text="${userInfoDto.userMail}"></td>
 			</tr>
 			<tr>
-				<th>郵便番号</th>
+				<th scope="row">郵便番号</th>
 				<td th:text="${userInfoDto.postalCode}"></td>
 			</tr>
 			<tr>
-				<th>住所</th>
+				<th scope="row">住所</th>
 				<td th:text="${userInfoDto.userAddres}"></td>
 			</tr>
 			<tr>
-				<th>生年月日</th>
+				<th scope="row">生年月日</th>
 				<td th:text="${userInfoDto.userBirth}"></td>
 			</tr>
 			<tr>
-				
+		</tbody>		
 		</table>
 		
 	</form>
 	
-	<form th:action="@{/}" method="get">
+	<form th:action="@{/menu}" method="get">
 		<input type="submit" value="戻る">
 	</form>
-
+	</div>
+</div>
 </body>
 </html>

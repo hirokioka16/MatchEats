@@ -36,7 +36,7 @@ public class CookingOfferController {
 	@Autowired
 	HttpSession session;
 
-	@RequestMapping(value= {"/inputoffer/input"}, method=RequestMethod.POST)
+	@RequestMapping(value= {"/inputoffer/input"}, method=RequestMethod.GET)
 	public String input(@RequestParam("requestId") String requestId, @ModelAttribute("CookingForm")CookingForm form,Model model) {
 
 

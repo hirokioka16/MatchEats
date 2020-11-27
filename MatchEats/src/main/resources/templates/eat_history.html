@@ -6,6 +6,9 @@
 <link th:href="@{/css/history.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
+	<form th:action="@{/mypage}">
+	<input type="submit" value="戻る">
+	</form>
 	<div class="area">
 		<!-- 以下2行＋CSSでタブ切り替えを実装 -->
 		<input type="radio" name="tab_name" id="tab1" checked>
@@ -15,6 +18,7 @@
 			<form method="post">
 				<table>
 					<tr>
+						<th></th>
 						<th>料理名</th>
 						<th>依頼日</th>
 						<th>金額</th>
@@ -61,10 +65,11 @@
 				</table>
 
 			</form>
-
-
 		</div>
 	</div>
+
+
+
 
 </body>
 </html>

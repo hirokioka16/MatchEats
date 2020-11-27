@@ -26,7 +26,7 @@ public class CookOfferTblEntity implements Serializable{
 	@ManyToOne
     @JoinColumn(name="user_id")
 	private UserTblEntity userTbl;
-	
+
 
 	private Integer price;
 
@@ -43,11 +43,11 @@ public class CookOfferTblEntity implements Serializable{
 	private String reactionComment;
 
 	private Date reactionDate;
-	
-	private Date approvalRequestDeliveryDate;	
-	
+
+	private Date approvalRequestDeliveryDate;
+
 	private String approvalDeliveryStatus;
-	
+
 
 	public Date getApprovalRequestDeliveryDate() {
 		return approvalRequestDeliveryDate;
@@ -154,13 +154,13 @@ public class CookOfferTblEntity implements Serializable{
 		this.approvalDeliveryStatus = approvalDeliveryStatus;
 	}
 
-	
 
-	
 
-	
-	
-	
+
+
+
+
+
 
 
 

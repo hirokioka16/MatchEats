@@ -5,27 +5,40 @@
 <title>リアクション一覧</title>
 </head>
 <body>
-
-<form method="post">
-	
 	<table>
+
+
+	<form th:action="@{/mypage}">
+	<input type="submit" value="戻る">
+	</form>
+
 	<div th:each="reactionList:${reactionList}">
+
+		<tr>
+			<form method='get'>
+				<input type="hidden" name='offerId' th:value="${reactionList.offerId}">
+				<td><input type="submit" formaction="/pay" value="依頼"></td>
+			</form>
+		</tr>
+		<tr>
+			<td><input type="submit" formaction="/拒否先" value="拒否"></td>
+		</tr>
 		<tr>
 			<td th:text="${reactionList.userName}">
 		</tr>
 		<tr>
-			<td><input type="submit" formaction="/依頼先" value="依頼">
-			<td><input type="submit" formaction="/拒否先" value="拒否">
+			<td th:text="'¥:' + ${reactionList.price}">
 		</tr>
 		<tr>
-			<td th:text="'¥:' + ${reactionList.price}">
+			<td th:text="${reactionList.foodName}">
 		</tr>
 		<tr>
 			<td th:text="'コメント:' + ${reactionList.offerComment}">
 		</tr>
 	</div>
 	</table>
-</form>
+
+
 
 </body>
 </html>

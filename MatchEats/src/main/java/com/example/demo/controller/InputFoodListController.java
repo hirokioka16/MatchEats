@@ -2,23 +2,19 @@ package com.example.demo.controller;
 
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
+
 
 import org.apache.tomcat.util.codec.binary.Base64;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,8 +36,6 @@ import com.example.demo.service.FoodService;
 @RequestMapping(value= {"/inputfood"})
 public class InputFoodListController {
 	
-	private HttpServletRequest servletRequest;
-
 	@Autowired
 	FoodService foodService;
 	@Autowired
@@ -68,6 +62,17 @@ public class InputFoodListController {
 			form.setRequestOutline(dto.getRequestOutline());
 			form.setGenreId(String.valueOf(dto.getGenreId()));
 			form.setGenreName(getGenreName(dto.getGenreId()));
+			//戻った場合画像を確認画面で保存した画像を消す処理
+			File file = new File("/Users/hiroikeshouta/Desktop/img" + "/" + dto.getPictureName());
+		    if (file.exists()){
+		        if (file.delete()){
+		          System.out.println("ファイルを削除しました");
+		        }else{
+		          System.out.println("ファイルの削除に失敗しました");
+		        }
+		    }else{
+		        System.out.println("ファイルが見つかりません");
+		      }
 			session.removeAttribute("foodInfDto");
 		}
 		model.addAttribute("name",genreName);
@@ -84,6 +89,11 @@ public class InputFoodListController {
 	@RequestMapping(value= {"/confirm"}, method=RequestMethod.POST)
 	public String confirm(@Validated @ModelAttribute("FoodForm")FoodForm form,BindingResult result,Model model) throws IllegalStateException, IOException {
 		String url = null;
+		
+		if(form.getGenreId().equals("")) {
+			form.setGenreId("1");
+		}
+		
 		//入力エラーをチェック
 		if(result.hasErrors()) {
 			List<String> errorList = new ArrayList<String>();
@@ -96,10 +106,19 @@ public class InputFoodListController {
 			form.setGenreName(getGenreName(Integer.parseInt(form.getGenreId())));
 			url = "input_foodlist";
 		//画像が選択されていない場合
-		}else if (form.getRequestPicture().isEmpty()) {
+		}else if (form.getRequestPicture().isEmpty() ){
 			List<GenreInfoDto> list = foodService.getGenre();
 			model.addAttribute("list",list);
 			model.addAttribute("errImg","画像を選択してください");
+			form.setGenreName(getGenreName(Integer.parseInt(form.getGenreId())));
+			url = "input_foodlist";
+		//画像以外が選択された時
+		}else if (!form.getRequestPicture().getOriginalFilename().substring(form.getRequestPicture().getOriginalFilename().lastIndexOf(".")).equals(".png") && 
+					!form.getRequestPicture().getOriginalFilename().substring(form.getRequestPicture().getOriginalFilename().lastIndexOf(".")).equals(".jpg") && 
+					!form.getRequestPicture().getOriginalFilename().substring(form.getRequestPicture().getOriginalFilename().lastIndexOf(".")).equals(".jpeg")) {
+			List<GenreInfoDto> list = foodService.getGenre();
+			model.addAttribute("list",list);
+			model.addAttribute("errImg","画像以外が選択されています");
 			form.setGenreName(getGenreName(Integer.parseInt(form.getGenreId())));
 			url = "input_foodlist";
 		}else{
@@ -111,12 +130,9 @@ public class InputFoodListController {
 
 	        model.addAttribute("image",data.toString());
 	        model.addAttribute("genreName",getGenreName(Integer.parseInt(form.getGenreId())) );
-	        
-	        //本当はこれでinsertの後に画像を保存したい
-	        //session.setAttribute("file", form);
 	       
-	        //ファイルを保存するメソッド(仮)
-	       // form.setFileName(saveFile(form));
+	        //ファイルを保存するメソッド
+	        form.setFileName(saveFile(form));
 	        
 			//formの値をdtoにいれるメソッドを呼んでいる
 			FoodInfoDto dto = getCreateDto(form);
@@ -133,13 +149,7 @@ public class InputFoodListController {
 		dto.setUserId(loginInfo.getUserId());
 		
 		dto.setRegistDate(getNowDate());
-		     
-///////////
-//本当はここでしたい画像保存したいけど無理
-//		FoodForm form = (FoodForm) session.getAttribute("file");
-//		dto.setPictureName(saveFile(form));
-		
-		
+		     		
 		foodService.insert(dto);
 		
 		session.removeAttribute("foodInfDto");
@@ -162,7 +172,6 @@ public class InputFoodListController {
 		dto.setFoodName(form.getFoodName());
 		dto.setRequestOutline(form.getRequestOutline());
 		dto.setGenreId(Integer.parseInt(form.getGenreId()));
-		dto.setRequestPicture(form.getRequestPicture());
 		dto.setPictureName(form.getFileName());
 		
 		if(form.getEatFlag()==null) {
@@ -210,16 +219,15 @@ public class InputFoodListController {
     
     public String saveFile(FoodForm form) {
     	
-		//画像の名前が被らないように画像の名前の後に最後のrequestId+1をする 
-        List<Integer> requestIdList = foodService.getAllRequestId();
-        int pictureAddNumber = requestIdList.get(requestIdList.size()-1);
-        pictureAddNumber +=1;
+		//画像の名前が被らないように画像の名前の後にランダムな値を配置する 
+    	String strDate = UUID.randomUUID().toString();
+		
         int extension = form.getRequestPicture().getOriginalFilename().lastIndexOf(".");
         String resultName="";
         List<String> distinction = Arrays.asList(form.getRequestPicture().getOriginalFilename().split(""));
         for(int i = 0;i<distinction.size();i++) {
         	if(i == extension -1) {
-        		resultName = resultName + distinction.get(i) + pictureAddNumber;
+        		resultName = resultName + distinction.get(i) + strDate;
         	}else {
         		resultName = resultName + distinction.get(i);
         	}

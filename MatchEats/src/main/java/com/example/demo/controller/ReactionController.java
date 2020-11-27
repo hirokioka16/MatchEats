@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.demo.dto.CookingInfoDto;
+import com.example.demo.dto.LoginInfoDto;
 import com.example.demo.service.CookingOfferService;
+import com.example.demo.service.PayService;
 
 @Controller
 public class ReactionController {
@@ -20,6 +22,8 @@ public class ReactionController {
 	CookingOfferService cookOfferService;
 	@Autowired
 	HttpSession session;
+	@Autowired
+	private PayService payService;
 	
 	@RequestMapping(value= {"/reactionList"}, method=RequestMethod.GET)
 	public String getList(Model model) {
@@ -28,10 +32,10 @@ public class ReactionController {
 //		session.getAttribute("loginInfo");
 //		int userId = loginInfo.getUserId();
 		
+		//LoginInfoDto loginInfo  = (LoginInfoDto)session.getAttribute("loginInfo");
 		
-		
-	
 		List<CookingInfoDto> reactionList = cookOfferService.getReactionList(1); //.getReactionList(userId)
+		
 		model.addAttribute("reactionList",reactionList);
 		
 		return "reactionList";

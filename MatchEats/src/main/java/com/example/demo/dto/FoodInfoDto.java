@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FoodInfoDto {
 
 	private int userId;
+	private int offerId;
 	private int requestId;
 	private String foodName;
 	private String requestOutline;
@@ -17,6 +18,8 @@ public class FoodInfoDto {
 	private String eatFlag;
 	private MultipartFile requestPicture;
 	private String pictureName;
+	private String userAddres;
+	
 
 
 
@@ -27,6 +30,12 @@ public class FoodInfoDto {
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+	public int getOfferId() {
+		return offerId;
+	}
+	public void setOfferId(int offerId) {
+		this.offerId = offerId;
 	}
 	public int getRequestId() {
 		return requestId;
@@ -75,6 +84,12 @@ public class FoodInfoDto {
 	}
 	public void setRequestPicture(MultipartFile requestPicture) {
 		this.requestPicture = requestPicture;
+	}
+	public String getUserAddres() {
+		return userAddres;
+	}
+	public void setUserAddres(String userAddres) {
+		this.userAddres = userAddres;
 	}
 
 

@@ -14,10 +14,10 @@ public class LoginService {
 	@Autowired
 	private UserRepository userRepository;
 
-	public LoginInfoDto login(String mail,String pass)throws Exception{
+	public LoginInfoDto login(String mail,String userid)throws Exception{
 	LoginInfoDto loginInfoDto = null;
 
-	UserTblEntity entity = userRepository.login(mail,pass);
+	UserTblEntity entity = userRepository.login(mail,userid);
 
 	if(entity != null) {
 		loginInfoDto = new LoginInfoDto();

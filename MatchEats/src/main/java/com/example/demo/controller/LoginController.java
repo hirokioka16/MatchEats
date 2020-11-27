@@ -1,9 +1,10 @@
-package com.example.demo.controller;
+	package com.example.demo.controller;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,7 +15,7 @@ import com.example.demo.form.LoginForm;
 import com.example.demo.service.LoginService;
 
 @Controller
-public class LoginServlet {
+public class LoginController {
 
 	@Autowired
 	LoginService loginService;
@@ -47,4 +48,10 @@ public class LoginServlet {
 
 		return url;
 }
+
+	@RequestMapping(value= {"/logout"},method=RequestMethod.GET)
+	public String logout(Model model) {
+		session.removeAttribute("loginInfo");
+		return "redirect:menu";
+	}
 }

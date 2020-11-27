@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class CookingInfoDto {
 
-	private String offerId;
+	private Integer offerId;
 	private String requestId;
 	private String userId;
 	private String userName;
@@ -16,13 +16,30 @@ public class CookingInfoDto {
 	private String reactionStatus;
 	private String reactionComment;
 	private Date reactionDate;
+	private String pictureName;
+	private String foodName;
+	private String genreName;
+	private String requestOutline;
+	private float point;
+	private String cookContent;
+	private String imgName;
+	
+	
 
-	public String getOfferId() {
-		return offerId;
+	
+	public String getImgName() {
+		return imgName;
 	}
-	public void setOfferId(String offerId) {
-		this.offerId = offerId;
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
 	}
+	public String getCookContent() {
+		return cookContent;
+	}
+	public void setCookContent(String cookContent) {
+		this.cookContent = cookContent;
+	}
+
 	public String getRequestId() {
 		return requestId;
 	}
@@ -88,6 +105,43 @@ public class CookingInfoDto {
 	}
 	public void setReactionDate(Date reactionDate) {
 		this.reactionDate = reactionDate;
+	}
+	public String getPictureName() {
+		return pictureName;
+	}
+	public void setPictureName(String pictureName) {
+		this.pictureName = pictureName;
+	}
+	public String getFoodName() {
+		return foodName;
+	}
+	public void setFoodName(String foodName) {
+		this.foodName = foodName;
+	}
+	public String getRequestOutline() {
+		return requestOutline;
+	}
+	public void setRequestOutline(String requestOutline) {
+		this.requestOutline = requestOutline;
+	}
+
+	public String getGenreName() {
+		return genreName;
+	}
+	public void setGenreName(String genreName) {
+		this.genreName = genreName;
+	}
+	public float getPoint() {
+		return point;
+	}
+	public void setPoint(float point) {
+		this.point = point;
+	}
+	public Integer getOfferId() {
+		return offerId;
+	}
+	public void setOfferId(Integer offerId) {
+		this.offerId = offerId;
 	}
 
 

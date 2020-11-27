@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>決済</title>
+</head>
+<body>
+	<table>
+		<tr>
+			<td th:text="${dto.userName}">
+		</tr>
+		
+		<tr>
+			<td th:text="${dto.offerComment}">
+		</tr>
+		
+		<tr>
+			<td><img th:src="${dto.imgName}" alt="サンプル"></td>
+			<td th:text="${dto.cookContent}">
+		</tr>
+		
+		
+		
+	</table>
+	<form th:action="@{/charge}" method='POST' id='checkout-form'>
+	    <input type='hidden' th:value='${dto.price}' name='amount'/>
+	    <input type='hidden' name="offerId" th:value='${dto.offerId}'/>
+	    <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
+	    <script
+	    	src='https://checkout.stripe.com/checkout.js'
+	    	class='stripe-button'
+	       	th:attr='data-key=${stripePublicKey},
+	       	data-amount=${dto.price},
+	       	data-currency=${currency},
+	       	data-name=${dto.foodName},
+	       	data-description=${dto.offerComment}'
+	       	data-locale='auto'
+	      	data-zip-code='false'>
+	   </script>
+	</form>
+	
+	<form th:action="@{/reactionList}" method='get'>
+		<input type="submit" value="戻る">
+	</form>
+	
+</body>
+</html>

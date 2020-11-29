@@ -10,7 +10,7 @@
 <body>
 <h1 class="sign-up-title">Sign up in seconds</h1>
 
-<form th:action="@{/adminauth}" method="post" th:object="${loginform}" class="sign-up">
+<form th:action="@{/adminmenu/menu}" method="post" th:object="${loginform}" class="sign-up">
 <p th:text="${errMessage}"></p>
 <input type="email" placeholder="E-mail" th:field="*{email}" class="sign-up-input"><br>
 <input type="password" placeholder="password" th:field="*{pass}" class="sign-up-input">

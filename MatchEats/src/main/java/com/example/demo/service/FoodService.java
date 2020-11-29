@@ -112,6 +112,8 @@ public class FoodService {
 		dto.setPictureName(entity.getRequestPicture());
 		dto.setRegistDate(entity.getRegistDate());
 		dto.setUserId(entity.getUserTbl().getUserId());
+		dto.setUserMail(entity.getUserTbl().getUserMail());
+		dto.setUserName(entity.getUserTbl().getUserName());
 		return dto;
 	}
 	//ジャンルごとの料理を取得する

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.controller.DeliveryController;
 import com.example.demo.dto.CookingInfoDto;
 import com.example.demo.dto.LoginInfoDto;
 import com.example.demo.entity.CookOfferTblEntity;
@@ -27,6 +28,8 @@ public class PayService {
 	@Autowired
 	HistoryRepository historyRepository;
 	
+	
+	
 	public CookingInfoDto getFoodInfo(int offerId) {
 		
 		CookingInfoDto dto = new CookingInfoDto();
@@ -38,31 +41,35 @@ public class PayService {
 		dto.setImgName(entity.getFoodTbl().getRequestPicture());
 		dto.setCookContent(entity.getFoodTbl().getRequestOutline());
 		dto.setUserId(String.valueOf(entity.getUserTbl().getUserId()));
-		
+		dto.setOfferDate(entity.getOfferDate());
+		dto.setFoodName(entity.getFoodTbl().getFoodName());
+		dto.setUserName(entity.getUserTbl().getUserName());
+		dto.setUserMail(entity.getUserTbl().getUserMail());
 		
 		return dto;
 	}
 	
 	public void charge(StripeForm stripeForm,int offerId){
-	Stripe.apiKey = "sk_test_51HZSIrJjnozX4HQuaJEH2KwtoFV15jNAuHzoMFjAD33VhGCo4bBRHML5c6u29yqwVxkhYEU1SI56nFmoVj5zv7wk00EEGDaZ1p";
-
-    Map<String, Object> chargeMap = new HashMap<String, Object>();
-    chargeMap.put("amount", stripeForm.getAmount());
-    chargeMap.put("description", stripeForm.getDescription());
-    chargeMap.put("currency", "jpy");
-    chargeMap.put("source", stripeForm.getStripeToken());
-    
-    CookingInfoDto dto = getFoodInfo(offerId);
-    HistoryTblEntity en = change(dto);
-    CookOfferTblEntity cook = new CookOfferTblEntity();
-    cook.setOfferId(offerId);
-    en.setCookOfferTbl(cook);
+		Stripe.apiKey = "sk_test_51HZSIrJjnozX4HQuaJEH2KwtoFV15jNAuHzoMFjAD33VhGCo4bBRHML5c6u29yqwVxkhYEU1SI56nFmoVj5zv7wk00EEGDaZ1p";
+	
+	    Map<String, Object> chargeMap = new HashMap<String, Object>();
+	    chargeMap.put("amount", stripeForm.getAmount());
+	    chargeMap.put("description", stripeForm.getDescription());
+	    chargeMap.put("currency", "jpy");
+	    chargeMap.put("source", stripeForm.getStripeToken());
+	    
+	    CookingInfoDto dto = getFoodInfo(offerId);
+	    HistoryTblEntity en = change(dto);
+	    CookOfferTblEntity cook = new CookOfferTblEntity();
+	    cook.setOfferId(offerId);
+	    en.setCookOfferTbl(cook);
     
     try {
 		Charge.create(chargeMap);
 		
 	    //reaction_statusを"2"(決済済み)に設定するRepositoryを書く
-	   cookingOfferRepository.approvalOffer(offerId);
+		DeliveryController del = new DeliveryController();
+	   cookingOfferRepository.approvalOffer(del.getNowDate(),offerId);
 	   historyRepository.saveAndFlush(en);
 	    
 	} catch (StripeException e) {

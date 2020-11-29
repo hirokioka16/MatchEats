@@ -19,25 +19,24 @@
 		
 		<div class="col-md-6">
 			<table class="table">
-			
-			<thead class="thead-light">
-				<tr>
-					<th scope="col">説明</th>
-					<td th:text="${dto.requestOutline}">
-				</tr>
-				<tr>
-					<th scope="col">登録日</th>
-					<td th:text="${dto.registDate}">
-				</tr>
-			</thead>	
+				<thead class="thead-light">
+					<tr>
+						<th scope="col">説明</th>
+						<td th:text="${dto.requestOutline}">
+					</tr>
+					<tr>
+						<th scope="col">登録日</th>
+						<td th:text="${dto.registDate}">
+					</tr>
+				</thead>	
 			</table>
 		</div>
 		<div class="col-md-12">
-		<form method="GET">
-		<input type="hidden" name="requestId" th:value="${dto.requestId}">
-		<input type="submit" formaction="/inputoffer/input" value="オファー" class="btn btn-danger btn-lg btn-block" style="margin-top:100px;">
-		<input type="submit" formaction="/menu" value="戻る" class="btn btn-secondary btn-lg btn-block" style="margin-top:20px;">
-		</form>
+			<form method="GET">
+				<input type="hidden" name="requestId" th:value="${dto.requestId}">
+				<input type="submit" formaction="/inputoffer/input" value="オファー" class="btn btn-danger btn-lg btn-block" style="margin-top:100px;">
+				<input type="submit" formaction="/menu" value="戻る" class="btn btn-outline-danger btn-lg btn-block" style="margin-top:20px;">
+			</form>
 		</div>
 	</div>
 </div>

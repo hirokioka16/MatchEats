@@ -1,47 +1,73 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<style>
+.row{
+margin-bottom: 10px;
+}
+
+</style>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 <title>リアクション一覧</title>
 </head>
 <body>
-	<table>
 
 
-	<form th:action="@{/mypage}">
-	<input type="submit" value="戻る">
-	</form>
+	<header>
+		<div th:replace="layout/header :: afterheader" ></div>
+	</header>
 
 	<div th:each="reactionList:${reactionList}">
 
-		<tr>
-			<form method='get'>
-				<input type="hidden" name='offerId' th:value="${reactionList.offerId}">
-				<td><input type="submit" formaction="/pay" value="依頼"></td>
-			</form>
-		</tr>
-		<tr>
-			<form method='get'>
-				<input type="hidden" name='offerId' th:value="${reactionList.offerId}">
-				<td><input type="submit" formaction="/reject" value="拒否"></td>
-			</form>
-		</tr>
-		<tr>
-			<td th:text="${reactionList.userName}">
-		</tr>
-		<tr>
-			<td th:text="'¥:' + ${reactionList.price}">
-		</tr>
-		<tr>
-			<td th:text="${reactionList.foodName}">
-		</tr>
-		<tr>
-			<td th:text="'コメント:' + ${reactionList.offerComment}">
-		</tr>
-	</div>
-	</table>
-
-
-
+		<div class="container">
+			  <div class="row">
+			    <div class="col-3">
+					<h5 th:text="'調理者:' + ${reactionList.userName}"></h5>
+			    </div>
+			    <div class="col-7">
+			  
+			    </div>
+			    <div class="col-1">
+			    	<form method='get'>
+						<input type="hidden" name='offerId' th:value="${reactionList.offerId}">
+						<input type="submit" formaction="/pay" value="詳細" class="btn btn-danger btn-lg">
+					</form>
+			    </div>
+			     <div class="col-1">
+			      	<form method='get'>
+						<input type="hidden" name='offerId' th:value="${reactionList.offerId}">
+						<input type="submit" formaction="/reject" value="拒否" class="btn btn-primary btn-lg">
+					</form>
+			    </div>
+			  </div>
+			  
+			  <div class="row">
+				<div class="col-md-6">
+					<!-- <img src="${pictureName}"> -->
+					<img src="http://jousen5.aso-abcc.com/shoppingSystem/img/yokomina.jpg" class="img-fluid">
+				</div>
+				
+				<div class="col-md-6">
+			    <table class="table">
+					<thead class="thead-light">
+					<tr>
+						<th scope="col">料理名</th>
+						<td th:text="${reactionList.foodName}">
+					</tr>
+					<tr>
+						<th scope="col">金額</th>
+						<td th:text="'¥' + ${reactionList.price}">
+					</tr>
+						<tr>
+						<th scope="col">オファーコメント</th>
+						<td th:text="${reactionList.offerComment}">
+					</tr>
+					</thead>	
+				</table>
+			  </div> 
+			</div>
+		</div>
+	 </div>
 </body>
 </html>

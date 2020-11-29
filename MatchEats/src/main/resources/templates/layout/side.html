@@ -10,10 +10,11 @@
 
 	<div th:fragment="side" th:remove="tag">
 	
-	<div class="col-3" style="background-color:#ffffff">
+	<div class="col-3" style="margin-left:60px;">
 	<div class="sidebar_fixed">
-	<div class="sidebar" style="margin-top:10px;margin-left:10%;">
+	<div class="sidebar" style="margin-top:10px;">
 		<ul class="list-group" style="list-style:none">
+			<li><a th:href="@{/menu}" class="list-group-item list-group-item-action" th:text="TOP"></a></li>
 			<li><a th:href="@{/mypage}" class="list-group-item list-group-item-action" th:text="マイページ"></a></li>
 			<li><a th:href="@{/updateUserInfo/input}" class="list-group-item list-group-item-action" th:text="会員情報修正"></a></li>
 			<li><a th:href="@{/inputfood/input}" class="list-group-item list-group-item-action" th:text="食べたい物リスト追加"></a></li>

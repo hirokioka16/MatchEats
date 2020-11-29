@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.text.ParseException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -25,6 +26,8 @@ public class ReactionController {
 	HttpSession session;
 	@Autowired
 	private PayService payService;
+	@Autowired
+	MailTest02Application mail;
 	
 	@RequestMapping(value= {"/reactionList"}, method=RequestMethod.GET)
 	public String getList(Model model) {
@@ -43,9 +46,12 @@ public class ReactionController {
 	}
 	
 	@RequestMapping(value= {"/reject"}, method=RequestMethod.GET)
-	public String reject(@RequestParam("offerId") int offerId) {
+	public String reject(@RequestParam("offerId") int offerId) throws ParseException {
 		
 		cookOfferService.approvalOffer(offerId);
+		//料理オファーをした人に拒否られましたと通知メールを送る
+		CookingInfoDto dto = cookOfferService.getOfferInfo(offerId);
+		mail.sendMail(dto.getUserMail(),"料理オファー結果の通知","残念ですが" + dto.getUserName()+"様の料理オファーが承認されませんでした");
 		
 		return "redirect:/reactionList";
 	}

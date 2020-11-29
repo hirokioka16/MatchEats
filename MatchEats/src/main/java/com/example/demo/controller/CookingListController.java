@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.text.ParseException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -41,9 +42,9 @@ HttpSession session;
 
 	//詳細画面を表示する
 	  @RequestMapping(value={"/cooking/detail"},method=RequestMethod.GET)
-	  public String displayView(@RequestParam("requestId")String requestId,Model model) {
+	  public String displayView(@RequestParam("offerId") int  offerId,Model model) {
 
-		  CookingInfoDto dto = cookOfferService.getdetail(Integer.parseInt(requestId));
+		  CookingInfoDto dto = cookOfferService.getdetail(offerId);
 
 		  model.addAttribute("detail",dto);
 		return "my_cook_details";
@@ -53,7 +54,7 @@ HttpSession session;
 
 	//データベースに配達依頼登録
 	  @RequestMapping(value= {"/cookinglist/insert"},method=RequestMethod.POST)
-	  public String update(@RequestParam("offerId") String offerId,Model model) {
+	  public String update(@RequestParam("offerId") String offerId,Model model) throws ParseException {
 		  cookOfferService.update(offerId);
 
 		  return "redirect:/cookinglist/complete";

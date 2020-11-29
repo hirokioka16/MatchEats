@@ -12,6 +12,7 @@
 <header>
 	<div th:replace="layout/header :: afterheader" ></div>
 </header>
+<div class="container">
 <div class="row">
 
 <div id="side" th:replace="layout/side :: side"></div>
@@ -20,14 +21,14 @@
 	<form th:action="@{/transferProcedures}" method="post">
 
 		<p class="text-black-50">会員情報</p>
-		<table class="table table-hover">
-		<tbody>
+		<table class="table table-striped">
+			<tbody>
 			<tr>
 				<th scope="row">名前</th>
 				<td th:text="${userInfoDto.userName}"></td>
 			</tr>
 			<tr>
-				<th scope="row">ニックネーム</th>
+				<th scope="col">ニックネーム</th>
 				<td th:text="${userInfoDto.nickName}"></td>
 			</tr>
 			<tr>
@@ -47,15 +48,13 @@
 				<td th:text="${userInfoDto.userBirth}"></td>
 			</tr>
 			<tr>
-		</tbody>		
+			</tbody>		
 		</table>
 		
 	</form>
 	
-	<form th:action="@{/menu}" method="get">
-		<input type="submit" value="戻る">
-	</form>
 	</div>
+</div>
 </div>
 </body>
 </html>

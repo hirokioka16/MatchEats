@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.dto.CookingInfoDto;
 import com.example.demo.form.StripeForm;
+import com.example.demo.service.CookingOfferService;
 import com.example.demo.service.PayService;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
@@ -22,6 +23,10 @@ public class PayControllr {
 	
 	@Autowired
 	private PayService payService;
+	@Autowired
+	MailTest02Application mail;
+	@Autowired
+	CookingOfferService cookOfferService;
 	
 	
 	   @RequestMapping(value = {"/pay"},method=RequestMethod.GET)
@@ -40,6 +45,9 @@ public class PayControllr {
 	    public String charge(StripeForm stripeForm,@RequestParam("amount") int price,@RequestParam("offerId") int offerId,Model model)throws StripeException {
 	    	stripeForm.setDescription("Example charge");
 	        payService.charge(stripeForm,offerId);
+	      //料理オファーをした人に承認されましたと通知メールを送る
+			CookingInfoDto dto = cookOfferService.getOfferInfo(offerId);
+			mail.sendMail(dto.getUserMail(),"料理オファー結果の通知","おめでとうございます" + dto.getUserName()+"様の料理オファーが承認されました!料理完成の時間に合わせて配達依頼をしてください");
 	       
 	        return "pay_complete";
 	    }

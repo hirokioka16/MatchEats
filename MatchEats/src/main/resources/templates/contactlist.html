@@ -7,11 +7,14 @@
 </head>
 <body>
      <div>
-      <button  class=btn1>メニューへ</button>
+     <form th:action="@{/deliveryt/requestlist}" method="post">
+      <input type ="button"  class=btn1 value=メニューへ>
+      </form>
      </div>
     <table>
+
        <tr>
-         <th></th>
+       <th></th>
          <th>メールアドレス</th>
          <th>お問い合わせメッセージ</th>
          <th>返信日</th>
@@ -23,5 +26,6 @@
           <td class="center" th:text="${#dates.format(userTbl.contactDate,'yyy/MM/dd')}"></td>
         </tr>
     </table>
+
 </body>
 </html>

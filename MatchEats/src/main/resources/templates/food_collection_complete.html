@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<link href="/css/complete.css" rel="stylesheet"></link>
 <head>
 <meta charset="UTF-8">
 <title>料理回収完了</title>
 </head>
 <body>
-	<p>料理の回収完了登録をしました</p>
+
+
+        <div>
+		<h1>お問い合わせ 送信完了</h1>
+
 	<form th:action="@{/delivery/approvallist}" method="get">
 		<input type = "submit" value="戻る">
 	</form>
+	</div>
 </body>
 </html>

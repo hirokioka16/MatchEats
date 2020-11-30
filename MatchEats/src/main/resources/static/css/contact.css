@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+body { background-color:#dadada; }
+
+
+.whiteDiv { 
+	background-color:#fff;
+	margin-top:5%;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+	padding:5%; 
+	}
+	
+	
+#next {
+	width:30%;
+	float:left;
+	margin-left:5%;
+	background-color:#ea5532;
+	border-color:#ea5532;
+}
+
+
+#back {
+	width:30%;
+	float: right;
+}

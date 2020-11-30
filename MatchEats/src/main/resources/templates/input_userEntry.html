@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 <title>会員登録　入力</title>
 </head>
 <body>
@@ -13,26 +14,37 @@
 	 </tr>	
  </table>
  
+ <p style="text-align:center; margin-top:4%;">下記の内容をご入力の上、お進みください。</p>
  
  
 <!-- 入力フォーム -->
-
+<div class="border" style="width:60%; margin-right:auto; margin-left:auto; padding:5% 10%;">
  <form th:action="@{/inputUserEntry/confirm}"  method="post" th:object="${UserForm}">
- 	メールアドレス<input type="text" th:field="*{userMail}"><br>
- 	
- 	パスワード<input type="password" th:field="*{userPass}"><br>
- 	
- 	ニックネーム<input type="text" placeholder="" th:field="*{nickName}"><br>
- 	
- 	名前<input type="text" placeholder="" th:field="*{userName}"><br>
- 	
- 	電話番号<input type="text" placeholder="ハイフン抜きの半角数字で入力してください" th:field="*{userTel}"><br>
- 	
- 	郵便番号<input type="text" placeholder="ハイフン抜きの半角数字で入力してください" th:field="*{postalCode}"><br>
- 	
- 	住所<input type="text" placeholder="" th:field="*{userAddres}"><br>
- 	
- 	生年月日<select  name="year">
+ 	<div class="form-group">
+ 		<label for="formGroupExampleInput">メールアドレス</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{userMail}">
+ 	</div>
+ 	<div class="form-group">
+ 		<label for="exampleInputPasswword1">パスワード</label><input type="password" class="form-control" id="exampleInputPassword1" th:field="*{userPass}">
+ 	</div>
+ 	<div class="form-group">
+ 		<label for="formGroupExampleInput">ニックネーム</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{nickName}">
+ 	</div>
+ 	<div class="form-group">
+ 		<label for="formGroupExampleInput">名前</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{userName}">
+ 	</div>
+ 	<div class="form-group">
+ 		<label for="formGroupExampleInput">電話番号</label><input type="text" class="form-control" id="exampleFormControlInput1" placeholder="ハイフン抜きの半角数字で入力してください" th:field="*{userTel}">
+ 	</div>	
+ 	<div class="form-group">
+ 		<label for="formGroupExampleInput">郵便番号</label><input type="text" class="form-control" id="exampleFormControlInput1" placeholder="ハイフン抜きの半角数字で入力してください" th:field="*{postalCode}">
+ 	</div>
+ 	<div class="form-group">
+ 		<label for="formGroupExampleInput">住所</label><input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" th:field="*{userAddres}">
+ 	</div>
+ 	<div class="form-group">
+ 		<label for="xampleFormControlSelect1">生年月日</label>
+ 		<div class="form-inline">
+ 		<select class="form-control" id="exampleFormControlSelect1" name="year" style="width: 20%;">
  				<option value="">-</option>
 				<option value="1950">1950</option>
 				<option value="1951">1951</option>
@@ -106,7 +118,7 @@
 				<option value="2019">2019</option>
 				<option value="2020">2020</option>
  		</select>年
- 	 		<select name="month">
+ 	 		<select class="form-control" id="exampleFormControlSelect1" name="month" style="width: 20%; margin-left:3%;">
  	 			<option value="">-</option>
 				<option value="01">1</option>
 				<option value="02">2</option>
@@ -121,7 +133,7 @@
 				<option value="11">11</option>
 				<option value="12">12</option>
  	 		</select>月
- 	 		<select name="day">
+ 	 		<select class="form-control" id="exampleFormControlSelect1" name="day" style="width: 20%; margin-left:3%;">
  	 			<option value="">-</option>
 				<option value="01">1</option>
 				<option value="02">2</option>
@@ -154,13 +166,19 @@
 				<option value="29">29</option>
 				<option value="30">30</option>
 				<option value="31">31</option>
- 	 		</select>日<br>
- 	 		
- 	カード名義<input type="text" th:field="*{cardName}"><br>
- 	
- 	クレジットカード番号<input type="text" placeholder="半角数字で入力してください" th:field="*{userCard}"><br>
- 	
- 	有効期限<select name="limitYear">
+ 	 		</select>日
+ 	 		</div>
+ 	 </div>
+ 	 <div class="form-group">		
+ 		<label for="exampleFormControlInput1">カード名義</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{cardName}">
+ 	</div>
+ 	<div class="form-gruop">
+ 		<label for="exampleFormControlInput1">クレジットカード番号</label><input type="text" class="form-control" id="exampleFormControlInput1" placeholder="半角数字で入力してください" th:field="*{userCard}">
+ 	</div>
+ 	<div class="form-group">
+ 		<label for="xampleFormControlSelect1">有効期限</label>
+ 		<div class="form-inline">
+ 		<select class="form-control" id="exampleFormControlSelect1" name="limitYear" style="width: 20%;">
  				<option value="2020">2020</option>
 				<option value="2021">2021</option>
 				<option value="2022">2022</option>
@@ -172,9 +190,8 @@
 				<option value="2028">2028</option>
 				<option value="2029">2029</option>
 				<option value="2030">2030</option>
- 				
- 			</select>
- 			<select name="limitMonth">
+ 			</select>年
+ 			<select class="form-control" id="exampleFormControlSelect1" name="limitMonth" style="width: 20%;  margin-left:3%;">
  	 			<option value="">-</option>
 				<option value="01">1</option>
 				<option value="02">2</option>
@@ -188,25 +205,33 @@
 				<option value="10">10</option>
 				<option value="11">11</option>
 				<option value="12">12</option>
- 	 		</select>月<br>
- 	 		
- 	銀行名<input type="text" th:field="*{bankName}"><br>
- 	
- 	口座番号<input type="text" placeholder="半角数字で入力してください" th:field="*{accountNumber}"><br>
- 	
- 	支店名<input type="text" th:field="*{branchName}"><br>
- 	
- 	口座名義<input type="text" th:field="*{accountName}"><br>
- 	
- 	セキュリティーコード<input type="text" th:field="*{secureCode}"><br>
- 	
- 	<input type="submit" value="次へ">
+ 	 		</select>月
+ 	 		</div>
+ 	 	</div>
+ 	<div class="form-group"> 		
+ 		<label for="exampleFormControlInput1">銀行名</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{bankName}">
+ 	</div>
+ 	<div class="form-group">
+ 		<label for="exampleFormControlInput1">口座番号</label><input type="text" class="form-control" id="exampleFormControlInput1" placeholder="半角数字で入力してください" th:field="*{accountNumber}">
+ 	</div>
+ 	<div class="form-group">
+ 		<label for="exampleFormControlInput1">支店名</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{branchName}">
+ 	</div>
+ 	<div class="form-group">
+ 		<label for="exampleFormControlInput1">口座名義</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{accountName}">
+ 	</div>	
+ 	<div class="form-group">
+ 		<label for="exampleFormControlInput1">セキュリティーコード</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{secureCode}">
+ 	</div>
+ 	<input class="btn btn-primary btn-lg" type="submit" value="次へ" style="width:30%; float:left;">
  	
  </form>
  
- <form>
- 	<input type="submit" value="戻る">
+ <form th:action="@{/menu}"  method="get">
+ 	<input class="btn btn-outline-secondary btn-lg" type="submit" value="戻る" style="width:30%; float: right;">
  </form>
+ 
+ </div>
 
 
 </body>

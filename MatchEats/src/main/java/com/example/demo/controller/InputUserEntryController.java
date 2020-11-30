@@ -39,6 +39,28 @@ public class InputUserEntryController {
 	@RequestMapping(value= {"/input"},  method=RequestMethod.GET)
 	public String input(@ModelAttribute("UserForm")UserForm form, Model model) {
 		
+		UserInfoDto dto = new UserInfoDto();
+		//確認画面で戻るボタンを押下した時に前回までの入力内容を入力画面に反映させる処理
+		try {
+			dto = (UserInfoDto)session.getAttribute("userInfoDto");
+		}catch (NullPointerException e){
+		}
+		if(dto != null) {
+			form.setAccountName(dto.getAccountName());
+			form.setAccountNumber(dto.getAccountNumber());
+			form.setUserName(dto.getUserName());
+			form.setNickName(dto.getNickName());
+			form.setUserMail(dto.getUserMail());
+			form.setUserPass(dto.getUserPass());
+			form.setPostalCode(dto.getPostalCode());
+			form.setUserAddres(dto.getUserAddres());
+			form.setUserTel(dto.getUserTel());
+			form.setCardName(dto.getCardName());
+			form.setSecureCode(dto.getSecureCode());
+			form.setUserCard(dto.getUserCard());
+			form.setBankName(dto.getBankName());
+			form.setBranchName(dto.getBranchName());
+		}
 		return "input_userEntry";
 	}
 	
@@ -55,9 +77,9 @@ public class InputUserEntryController {
 			for(ObjectError error : result.getAllErrors()) {
 				errorList.add(error.getDefaultMessage());
 			}
-		
-		}
-			
+			model.addAttribute("validationError", errorList);
+			url = "input_userEntry";
+		}else {	
 			
 			// formの値を入れるdtoに入れるメソッドを呼んでいる
 			UserInfoDto dto = getInsertUserDto(form);
@@ -66,7 +88,7 @@ public class InputUserEntryController {
 			session.setAttribute("userInfoDto", dto);
 			
 			url = "confirm_userEntry";
-		
+		}
 		
 		return url;
 	}

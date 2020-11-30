@@ -2,14 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 <title>オファー取り消し完了</title>
 </head>
-<body>
-<p>取り消し完了</p>
+<body style="text-align:center;">
+	<div style="margin-top:5%; margin-left:auto; margin-right:auto;">
+		<h1>オファー取り消し完了</h1>
+		
+		<p>オファーの取り消しが完了しました。</p>
+		
+		<form th:action="@{/cookingoffer/history}">
+			<input class="btn btn-outline-secondary btn-lg" type="submit" value="戻る" style="background-color:#dcdcdc; width:30%;">
+		</form>
+	</div>
 
-<form th:action="@{/cookingoffer/history}">
-	<input type="submit" value="戻る">
-</form>
 
 </body>
 </html>

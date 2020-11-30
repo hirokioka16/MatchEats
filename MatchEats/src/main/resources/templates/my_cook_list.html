@@ -30,21 +30,21 @@
 					 </thead>
 					 
 					
-						<tbody>						
-							<tr th:each="CookingList:${CookingList}">
-								<td th:text="${CookingList.userName}">
-								<!-- <img class="img-fluid" th:src="${CookingList.pictureName}"> -->
-								<td><img src="http://jousen5.aso-abcc.com/shoppingSystem/img/yokomina.jpg" width="200px"></td>
-								<td th:text="${CookingList.foodName}">
-								<td th:text="${#dates.format(CookingList.registDate,'yyyy/MM/dd')}">
-								<td>
-									<form th:action="@{/cooking/detail}">
-										<input type="hidden" name="offerId" th:value="${CookingList.offerId}">
-										<input type="submit" class="btn btn-link" value="詳細">
-									</form>
-								</td>
-							</tr>
-						</tbody>
+					<tbody>						
+						<tr th:each="CookingList:${CookingList}">
+							<td th:text="${CookingList.userName}">
+							<!-- <img class="img-fluid" th:src="${CookingList.pictureName}"> -->
+							<td><img src="http://jousen5.aso-abcc.com/shoppingSystem/img/yokomina.jpg" width="200px"></td>
+							<td th:text="${CookingList.foodName}">
+							<td th:text="${#dates.format(CookingList.registDate,'yyyy/MM/dd HH:mm:ss')}">
+							<td>
+								<form th:action="@{/cooking/detail}">
+									<input type="hidden" name="offerId" th:value="${CookingList.offerId}">
+									<input type="submit" class="btn btn-link" value="詳細">
+								</form>
+							</td>
+						</tr>
+					</tbody>
 				</table>
 			</div>
 		</div>

@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,10 +15,10 @@ import javax.persistence.Table;
 @Table(name="bankaccount")
 public class BankTblEntity implements Serializable{
 
-	@Id
-	@OneToOne
-    @JoinColumn(name="user_id")
-	private UserTblEntity userTbl;
+
+	
+	@EmbeddedId
+    private BankUserId BankUserId;
 	
 	private String bankName;
 	
@@ -27,12 +28,14 @@ public class BankTblEntity implements Serializable{
 	
 	private String accountName;
 
-	public UserTblEntity getUserTbl() {
-		return userTbl;
+
+
+	public BankUserId getBankUserId() {
+		return BankUserId;
 	}
 
-	public void setUserTbl(UserTblEntity userTbl) {
-		this.userTbl = userTbl;
+	public void setBankUserId(BankUserId bankUserId) {
+		BankUserId = bankUserId;
 	}
 
 	public String getBankName() {

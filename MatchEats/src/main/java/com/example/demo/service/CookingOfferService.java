@@ -2,12 +2,14 @@
 
 package com.example.demo.service;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.controller.DeliveryController;
 import com.example.demo.dto.CookingInfoDto;
 import com.example.demo.dto.FoodInfoDto;
 import com.example.demo.entity.CookOfferTblEntity;
@@ -119,6 +121,8 @@ public class CookingOfferService {
 		dto.setOfferId(entity.getOfferId());
 		dto.setRequestId(String.valueOf(entity.getFoodTbl().getRequestId()));
 		dto.setUserId(String.valueOf(entity.getUserTbl().getUserId()));
+		dto.setUserName(entity.getUserTbl().getUserName());
+		dto.setUserMail(entity.getUserTbl().getUserMail());
 		dto.setPrice(entity.getPrice());
 		dto.setOfferComment(entity.getOfferComment());
 		dto.setOfferDate(entity.getOfferDate());
@@ -127,6 +131,8 @@ public class CookingOfferService {
 		dto.setReactionStatus(entity.getReactionStatus());
 		dto.setReactionComment(entity.getReactionComment());
 		dto.setReactionDate(entity.getReactionDate());
+		dto.setRequestUserName(entity.getFoodTbl().getUserTbl().getUserName());
+		dto.setRequestUserMail(entity.getFoodTbl().getUserTbl().getUserMail());
 
 		return dto;
 
@@ -147,40 +153,30 @@ public class CookingOfferService {
 	//調理リスト
 	public  List<FoodInfoDto> getList(int userId){
 
-		 List<CookingInfoDto> list = new ArrayList<CookingInfoDto>();
 		 List<CookOfferTblEntity> tblList =cookingRepository.getList(userId);
 
-
-		 List<FoodTblEntity> resultList =  new ArrayList<FoodTblEntity>();
 		 List<FoodInfoDto> resultListDto = new ArrayList<FoodInfoDto>();
-
-		 for(int i=0;i<tblList.size();i++) {
-			resultList.add(tblList.get(i).getFoodTbl());
-
+		 for(CookOfferTblEntity entity:tblList) {
+			 FoodInfoDto dto = new FoodInfoDto();
+			 dto.setOfferId(entity.getOfferId());
+			 dto.setRequestId(entity.getFoodTbl().getRequestId());
+			 dto.setFoodName(entity.getFoodTbl().getFoodName());
+			 dto.setRegistDate(entity.getFoodTbl().getRegistDate());
+			 dto.setPictureName(entity.getFoodTbl().getRequestPicture());
+			 dto.setUserId(entity.getUserTbl().getUserId());
+			 
+			 resultListDto.add(dto);
+			 
 		 }
-
-		 for(FoodTblEntity entity:resultList) {
-				FoodInfoDto dto = new FoodInfoDto();
-				dto.setRequestId(entity.getRequestId());
-				dto.setFoodName(entity.getFoodName());
-				dto.setRegistDate(entity.getRegistDate());
-				dto.setPictureName(entity.getRequestPicture());
-				dto.setUserId(entity.getUserTbl().getUserId());
-
-
-				resultListDto.add(dto);
-		 }
-
-
 
 		 return resultListDto;
 
     }
 //リスト詳細
-	public CookingInfoDto getdetail(int requestId){
+	public CookingInfoDto getdetail(int offerId){
 
 
-		CookOfferTblEntity cookOfferTblEntity = cookingRepository.getOne(requestId);
+		CookOfferTblEntity cookOfferTblEntity = cookingRepository.getOne(offerId);
 
 		CookingInfoDto dto = new CookingInfoDto();
 
@@ -199,7 +195,7 @@ public class CookingOfferService {
 		return dto;
 }
 //配達以来をデータベースに登録する
-	public void update(String offerId ) {
+	public void update(String offerId ) throws ParseException {
 
 		CookOfferTblEntity offerEntity = new CookOfferTblEntity();
 		offerEntity = cookingRepository.getOne(Integer.parseInt(offerId));
@@ -207,10 +203,18 @@ public class CookingOfferService {
 
 		boolean delivaryflg = true ;
 		offerEntity.setDeliveryFlg(delivaryflg);
+		DeliveryController del = new DeliveryController();
 
-		cookingRepository.update(offerEntity.getOfferId());
+		cookingRepository.update(offerEntity.getOfferId(),del.getNowDate());
 
 
+	}
+	
+	//リアクション拒否
+	public void approvalOffer(int offerId) throws ParseException {
+		
+		DeliveryController del = new DeliveryController();
+		cookingOfferRepository.rejectOffer(del.getNowDate(),offerId);
 	}
 
 

@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+<link th:href="@{/css/card.css}" rel="stylesheet" type="text/css">
 <title>検索結果</title>
 </head>
 <body>
@@ -19,15 +21,21 @@
 </script>
 
 
-	<form method="post">
-		<table>
-			<tr th:each="list:${list}">
-				<td><input type="radio" name="requestId" th:value="${list.requestId}"></td>
-				<td th:text="${list.pictureName}">
-				<th th:text="${list.foodName}">
-				<td th:text="${list.registDate}">
-			</tr>
-		</table>
+	<div class="album bg-light">
+		<div class="container">
+			<div class="card-columns">
+				<form method="post">
+					<div class="card shadow-sm" th:each="list:${list}">
+						<img src="${list.pictureName}" class="card-img-top" alt="img">
+						<div class="card-body">
+							<input type="radio" name="requestId" th:value="${list.requestId}">
+							<h5 th:text="${list.foodName}">
+							<p th:text="${list.registDate}">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<input type="submit" formaction="/detailfoodlist" value="詳細">
 	</form>

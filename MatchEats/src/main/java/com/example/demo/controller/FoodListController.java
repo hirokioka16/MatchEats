@@ -36,10 +36,10 @@ public class FoodListController {
 	}
 
 	@RequestMapping(value= {"/detailfoodlist"}, method=RequestMethod.POST)
-	public String detail(@RequestParam("requestId") String requestId,Model model) {
+	public String detail(@RequestParam("requestId") int requestId,Model model) {
 
 		//エラーは広池プロのやつとマージすると消えます
-		FoodInfoDto dto = foodService.getUdFoodList(Integer.parseInt(requestId));
+		FoodInfoDto dto = foodService.getUdFoodList(requestId);
 
 		model.addAttribute("dto",dto);
 

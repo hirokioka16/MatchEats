@@ -7,41 +7,43 @@
 <body>
 
 	<div th:fragment="beforeheader" th:remove="tag">
-		<nav class="nav">
-			<h1 style="margin-left: 20%;">MatchEats</h1>
-			<form method="get">
-				<div class="input-group mb-3">
-					<input class="form-control form-control-lg" type="text" placeholder="何かお探しですか" name="keyword" style="height:2em;margin-top: 6px;margin-left: 30px;">
-					<input type="submit" class="btn btn-warning" formaction="/seachfoodlist" value="検索"  style="margin-top: 6px;">
-				</div>
+		<nav class="navbar navbar-dark bg-danger">
+			<a href="menu" class="navbar-brand d-flex align-items-center">
+				<img class="rounded" src="http://jousen5.aso-abcc.com/shoppingSystem/img/matchicon.png" width="50" height="50">
+				<strong style="margin-left:20px">MatchEats</strong>
+			</a>
+			<form method="get" class="form-inline">
+					<input class="form-control mr-sm-2" type="text" placeholder="何かお探しですか" name="keyword" aria-label="Search">
+					<input class="btn btn-warning my-2 my-sm-0" type="submit" formaction="/seachfoodlist" value="検索">
 			</form>
 		</nav>
-
-		<ul class="nav justify-content-end" style="border-bottom: 1px solid #dcdcdc;margin-bottom:15px;">
+	
+		<ul class="nav justify-content-end" style="border-bottom: 1px solid #dcdcdc;margin-bottom:50px;">
   			<li class="nav-item">
-				<a class="nav-link active" th:href="@{/login}" th:text="ログイン"></a>
+				<a class="nav-link" th:href="@{/login}" th:text="ログイン" style="margin-right:10px"></a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" th:href="@{/inputUserEntry/input}" th:text="新規会員登録"></a>
 			</li>
-        </ul>
+        </ul> 
     </div>
 
     <div th:fragment="afterheader" th:remove="tag">
 
-		<nav class="nav">
-			<h1 style="margin-left: 20%;">MatchEats</h1>
-			<form method="get">
-				<div class="input-group mb-3">
-					<input class="form-control form-control-lg" type="text" placeholder="何かお探しですか" name="keyword" style="height:2em;margin-top: 6px;margin-left: 30px;">
-					<input type="submit" class="btn btn-warning" formaction="/seachfoodlist" value="検索"  style="margin-top: 6px;">
-				</div>
+		<nav class="navbar navbar-dark bg-danger">
+			<a href="menu" class="navbar-brand d-flex align-items-center">
+				<img class="rounded" src="http://jousen5.aso-abcc.com/shoppingSystem/img/matchicon.png"  width="50" height="50">
+				<strong style="margin-left:20px">MatchEats</strong>
+			</a>
+			<form method="get" class="form-inline">
+					<input class="form-control mr-sm-2" type="text" placeholder="何かお探しですか" name="keyword" aria-label="Search">
+					<input class="btn btn-warning my-2 my-sm-0" type="submit" formaction="/seachfoodlist" value="検索">
 			</form>
 		</nav>
 
-		<ul class="nav justify-content-end" style="border-bottom: 1px solid #dcdcdc;margin-bottom:15px;">
+		<ul class="nav justify-content-end" style="border-bottom: 1px solid #dcdcdc;margin-bottom:50px;">
 			<li class="nav-item">
-				<a class="nav-link active" th:href="@{/mypage}" th:text="マイページ"></a>
+				<a class="nav-link " th:href="@{/mypage}" th:text="マイページ"></a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link active" th:href="@{/logout}" th:text="ログアウト"></a>

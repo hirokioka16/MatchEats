@@ -50,7 +50,7 @@ public class PayService {
 	}
 	
 	public void charge(StripeForm stripeForm,int offerId){
-		Stripe.apiKey = "sk_test_51HZSIrJjnozX4HQuaJEH2KwtoFV15jNAuHzoMFjAD33VhGCo4bBRHML5c6u29yqwVxkhYEU1SI56nFmoVj5zv7wk00EEGDaZ1p";
+		Stripe.apiKey = "";
 	
 	    Map<String, Object> chargeMap = new HashMap<String, Object>();
 	    chargeMap.put("amount", stripeForm.getAmount());

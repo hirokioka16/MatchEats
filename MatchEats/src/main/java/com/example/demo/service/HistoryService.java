@@ -231,6 +231,18 @@ public class HistoryService {
 		return list;
 
 	}
+	
+	public HistoryInfoDto getHistoryInfo(int historyId) {
+		
+		HistoryTblEntity en = historyRepository.getOne(historyId);
+		HistoryInfoDto dto = new HistoryInfoDto();
+		
+		dto.setCookUserName(en.getCookOfferUser().getUserName());
+		dto.setCookUserMail(en.getCookOfferUser().getUserMail());
+		
+		
+		return dto; 
+	}
 
 
 }

@@ -21,7 +21,7 @@
 				<td th:text="${dto.address}">
 			</tr>
 		</table>
-		<input type="hidden" name="requestId" th:value="${dto.offerId}">
+		<input type="hidden" name="offerId" th:value="${dto.offerId}">
 		<input type="submit" value = "承認">
 	</form>
 	<form th:action="@{/delivery/requestlist}" method="get">

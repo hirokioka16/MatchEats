@@ -12,6 +12,23 @@ public class HistoryInfoDto {
 	private int stateStatus;
 	private int adminProfit;
 	private int cookProfit;
+	private String cookUserName;
+	private String cookUserMail;
+	
+	
+	
+	public String getCookUserName() {
+		return cookUserName;
+	}
+	public void setCookUserName(String cookUserName) {
+		this.cookUserName = cookUserName;
+	}
+	public String getCookUserMail() {
+		return cookUserMail;
+	}
+	public void setCookUserMail(String cookUserMail) {
+		this.cookUserMail = cookUserMail;
+	}
 	public int getHistoryId() {
 		return historyId;
 	}

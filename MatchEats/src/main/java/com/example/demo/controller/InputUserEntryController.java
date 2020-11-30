@@ -60,7 +60,7 @@ public class InputUserEntryController {
 			
 			
 			// formの値を入れるdtoに入れるメソッドを呼んでいる
-			UserInfoDto dto = getUserDto(form);
+			UserInfoDto dto = getInsertUserDto(form);
 			dto.setUserBirth(userBirth);
 			dto.setLimitDate(limitDate);
 			session.setAttribute("userInfoDto", dto);
@@ -96,6 +96,32 @@ public class InputUserEntryController {
 		UserInfoDto userInfo = new UserInfoDto();
 		
 		userInfo.setUserId(Integer.parseInt(userForm.getUserId()));
+		userInfo.setAccountName(userForm.getAccountName());
+		userInfo.setAccountNumber(userForm.getAccountNumber());
+		userInfo.setUserName(userForm.getUserName());
+		userInfo.setNickName(userForm.getNickName());
+		userInfo.setUserMail(userForm.getUserMail());
+		userInfo.setUserPass(userForm.getUserPass());
+		userInfo.setPostalCode(userForm.getPostalCode());
+		userInfo.setUserAddres(userForm.getUserAddres());
+		userInfo.setUserTel(userForm.getUserTel());
+		userInfo.setCardName(userForm.getCardName());
+		userInfo.setSecureCode(userForm.getSecureCode());
+		userInfo.setUserCard(userForm.getUserCard());
+		userInfo.setBankName(userForm.getBankName());
+		userInfo.setBranchName(userForm.getBranchName());
+		
+		
+		return userInfo;
+		
+		
+		
+	}
+	
+public UserInfoDto getInsertUserDto(UserForm userForm) {
+		
+		UserInfoDto userInfo = new UserInfoDto();
+		
 		userInfo.setAccountName(userForm.getAccountName());
 		userInfo.setAccountNumber(userForm.getAccountNumber());
 		userInfo.setUserName(userForm.getUserName());

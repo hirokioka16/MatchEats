@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div th:fragment="footer" th:remove="tag">
+		<footer class="my-5 pt-5 text-muted text-center text-small">
+				<form th:action="@{/inputContact/input}" method="GET">
+	      				<input type="submit" class="btn btn-link" value="お問い合わせはこちらから">
+	      		</form>
+		</footer>
+</div>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -14,7 +15,7 @@ import com.example.demo.entity.CookOfferTblEntity;
 public interface CookingRepository  extends JpaRepository<CookOfferTblEntity,Integer>{
 
 
-		@Query("SELECT c FROM CookOfferTblEntity c left join c.foodTbl f left join c.userTbl u WHERE u.userId = :userId AND c.reactionStatus = 2")
+		@Query("SELECT c FROM CookOfferTblEntity c left join c.foodTbl f left join c.userTbl u WHERE u.userId = :userId AND c.reactionStatus = 2 AND c.deliveryFlg = false")
 	    public List<CookOfferTblEntity> getList(@Param("userId")int userId);
 		//SELECT f FROM FoodTblEntity f left join f.genreTbl g left join f.userTbl u
 
@@ -25,10 +26,12 @@ public interface CookingRepository  extends JpaRepository<CookOfferTblEntity,Int
 		@Transactional
 		@Modifying
 		@Query("UPDATE CookOfferTblEntity x SET "
-				+" x.deliveryFlg = true "
+				+" x.deliveryFlg = true, "
+				+" x.deliveryRequestDate = :date "
 				+" WHERE x.offerId =:offerId")
 		public void update(
-				@Param("offerId") int userId);
+				@Param("offerId") int offerId,
+				@Param("date") Date date);
 
 		/**
 		@Transactional

@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.dto.CookingInfoDto;
 import com.example.demo.dto.DeliveryInfoDto;
 import com.example.demo.dto.FoodInfoDto;
+import com.example.demo.dto.HistoryInfoDto;
+import com.example.demo.service.CookingOfferService;
 import com.example.demo.service.DeliveryService;
 import com.example.demo.service.FoodService;
 import com.example.demo.service.HistoryService;
@@ -27,6 +30,12 @@ public class DeliveryController {
 	
 	@Autowired
 	HistoryService historyService;
+	
+	@Autowired
+	MailTest02Application mail;
+	
+	@Autowired
+	CookingOfferService cookOfferService;
 	
 	//配達リクエストされたやつ
 	@RequestMapping(value= {"/requestlist"}, method=RequestMethod.GET)
@@ -49,9 +58,13 @@ public class DeliveryController {
 	
 	//配達リクエスト承認処理
 	@RequestMapping(value= {"/deliveryinsert"}, method=RequestMethod.POST)
-	public String deliveryRequestDetail(@RequestParam("requestId") int requestId) throws ParseException {
+	public String deliveryRequestDetail(@RequestParam("offerId") int offerId) throws ParseException {
 		
-		deliveryService.deliveryRequesrInsert(requestId,getNowDate());
+		deliveryService.deliveryRequesrInsert(offerId,getNowDate());
+		
+		//配達リクエストを承認したと通知メールを送る
+		CookingInfoDto dto = cookOfferService.getOfferInfo(offerId);
+		mail.sendMail(dto.getUserMail(),"配達通知", dto.getUserName()+"様の配達依頼を確認しましたので料理を回収しに向かいます");
 		
 		return "redirect:/delivery/deliverycomplete";
 	}
@@ -94,6 +107,10 @@ public class DeliveryController {
 		int adminId = 1;
 		historyService.cookCollection(offerId,adminId,getNowDate());
 		
+		//料理を回収したと通知メールを送る
+		CookingInfoDto dto = cookOfferService.getOfferInfo(offerId);
+		mail.sendMail(dto.getRequestUserMail(),"料理回収通知",dto.getRequestUserName()+"様に配達する料理を回収しましたのでもうしばらくお待ちください");
+		
 		return "redirect:/delivery/collectioncomplete";
 	}
 	
@@ -129,6 +146,11 @@ public class DeliveryController {
 	public String insert(@RequestParam("historyId") int historyId) throws ParseException {
 		
 		historyService.deliveryComplete(historyId, getNowDate());
+		
+		//制作者に配達完了したと通知メールを送る
+		HistoryInfoDto dto = historyService.getHistoryInfo(historyId);
+		mail.sendMail(dto.getCookUserMail(),"配達完了通知", dto.getCookUserName()+"様の料理を配達完了しました");
+		
 		return "redirect:/delivery/complete";
 	}
 		

@@ -23,10 +23,31 @@ public class CookingInfoDto {
 	private float point;
 	private String cookContent;
 	private String imgName;
+	private String userMail;
+	private String requestUserName;
+	private String requestUserMail;
 	
 	
 
 	
+	public String getRequestUserMail() {
+		return requestUserMail;
+	}
+	public void setRequestUserMail(String requestUserMail) {
+		this.requestUserMail = requestUserMail;
+	}
+	public String getRequestUserName() {
+		return requestUserName;
+	}
+	public void setRequestUserName(String requestUserName) {
+		this.requestUserName = requestUserName;
+	}
+	public String getUserMail() {
+		return userMail;
+	}
+	public void setUserMail(String userMail) {
+		this.userMail = userMail;
+	}
 	public String getImgName() {
 		return imgName;
 	}

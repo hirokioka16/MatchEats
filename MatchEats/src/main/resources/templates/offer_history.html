@@ -2,14 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 <title>オファー送信履歴</title>
 </head>
 <body>
+<div id="side" th:replace="layout/side :: side"></div>
+
 	<form method="post">
 		<table>
 			<tr th:each="list:${list}">
 				<td><input type="radio" name="offerId" th:value="${list.offerId}"></td>
-				<td th;text="${list.price}"></td>
+				<td th:text="${list.price}"></td>
 				<td th:text="${list.offerComment}"></td>
 			</tr>
 		</table>

@@ -2,22 +2,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 <title>お問い合わせ確認</title>
 </head>
-<body>
-<form th:action="@{/inputContact/insert}" method="post">
-	<p>以下の内容で送信します</p>
-	<table>
-		<tr>
-		<td th:text="${session['contactInfoDto'].content}"></td>
-		</tr>
-	</table>
+<body style="background-color:#dadada;">
 
-	<input type="submit" value="送信">
-</form>
-	<form th:action="@{/inputContact/input}" method="post">
-		<input type="submit" value="戻る">
+<div style="margin:5% 10%; text-align:center; background-color:#fff;">
+
+	<h1>入力内容確認</h1>
+	
+	<form th:action="@{/inputContact/insert}" method="post">
+		<p>以下の内容で送信します</p>
+		<div class="border" th:text="${session['contactInfoDto'].content}" style="padding:10%;"></div>
+			
+	
+		<input class="btn btn-primary btn-lg" type="submit" value="送信" style="width:30%; float:left; margin-left:5%; background-color:#ea5532;">
 	</form>
+	
+	<form th:action="@{/inputContact/input}" method="post">
+		<input class="btn btn-outline-secondary btn-lg" type="submit" value="戻る" style="width:30%; float: right;">
+	</form>
+	
+</div>
 
 </body>
 </html>

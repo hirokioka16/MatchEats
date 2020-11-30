@@ -9,52 +9,52 @@
 </head>
 <body>
 
-<header>
-	<div th:replace="layout/header :: afterheader" ></div>
-</header>
-<div class="container">
-<div class="row">
-
-<div id="side" th:replace="layout/side :: side"></div>
-
-	<div class="col-7" style="margin-left:80px;">
-	<form th:action="@{/transferProcedures}" method="post">
-
-		<p class="text-black-50">会員情報</p>
-		<table class="table table-striped">
-			<tbody>
-			<tr>
-				<th scope="row">名前</th>
-				<td th:text="${userInfoDto.userName}"></td>
-			</tr>
-			<tr>
-				<th scope="col">ニックネーム</th>
-				<td th:text="${userInfoDto.nickName}"></td>
-			</tr>
-			<tr>
-				<th scope="row">メールアドレス</th>
-				<td th:text="${userInfoDto.userMail}"></td>
-			</tr>
-			<tr>
-				<th scope="row">郵便番号</th>
-				<td th:text="${userInfoDto.postalCode}"></td>
-			</tr>
-			<tr>
-				<th scope="row">住所</th>
-				<td th:text="${userInfoDto.userAddres}"></td>
-			</tr>
-			<tr>
-				<th scope="row">生年月日</th>
-				<td th:text="${userInfoDto.userBirth}"></td>
-			</tr>
-			<tr>
-			</tbody>		
-		</table>
-		
-	</form>
+	<header>
+		<div th:replace="layout/header :: afterheader" ></div>
+	</header>
+	<div class="container">
+		<div class="row">
 	
+		<div id="side" th:replace="layout/side :: side"></div>
+		
+			<div class="col-7" style="margin-left:80px;">
+			<form th:action="@{/transferProcedures}" method="post">
+		
+				<p class="text-black-50">会員情報</p>
+				<table class="table table-striped">
+					<tbody>
+					<tr>
+						<th scope="row">名前</th>
+						<td th:text="${userInfoDto.userName}"></td>
+					</tr>
+					<tr>
+						<th scope="col">ニックネーム</th>
+						<td th:text="${userInfoDto.nickName}"></td>
+					</tr>
+					<tr>
+						<th scope="row">メールアドレス</th>
+						<td th:text="${userInfoDto.userMail}"></td>
+					</tr>
+					<tr>
+						<th scope="row">郵便番号</th>
+						<td th:text="${userInfoDto.postalCode}"></td>
+					</tr>
+					<tr>
+						<th scope="row">住所</th>
+						<td th:text="${userInfoDto.userAddres}"></td>
+					</tr>
+					<tr>
+						<th scope="row">生年月日</th>
+						<td th:text="${userInfoDto.userBirth}"></td>
+					</tr>
+					<tr>
+					</tbody>		
+				</table>
+				
+			</form>
+			
+			</div>
+		</div>
 	</div>
-</div>
-</div>
 </body>
 </html>

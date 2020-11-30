@@ -2,24 +2,85 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 <title>調理詳細</title>
 </head>
 <body>
-<table>
-<tr>
-		<th th:text="${detail.foodName}">
-		<td th:text="${detail.userName}">
-		<td th:text="${detail.pictureName}">
-		<td th:text="${detail.point}">
-		<td th:text="${detail.genreName}">
-		<td th:text="${#dates.format(detail.offerDate,'yyyy/MM/dd')}">
-		<td th:text="${detail.requestOutline}">
-		<td th:text="${detail.offerComment}">
-		</tr>
-		</table>
+	<header>
+		<div th:replace="layout/header :: afterheader" ></div>
+	</header>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5">
+		  		<!-- <img th:src="${detail.pictureName}"> -->
+		  		<img src="http://jousen5.aso-abcc.com/shoppingSystem/img/yokomina.jpg" class="img-fluid">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col" th:text="ユーザー名"></th>
+						</tr>
+						
+						<tr>
+							<td th:text="${detail.userName}"></td>
+						</tr>
+						<tr>
+							<th scope="col" th:text="登録日"></th>
+						</tr>
+						
+						<tr>
+							<td th:text="${#dates.format(detail.offerDate,'yyyy/MM/dd')}"></td>
+						</tr>
+						
+					</thead>
+				</table>
+			</div>
+			
+		    <div class="col-7">
+		    	<table class="table">
+					<thead class="thead-light">
+
+						<tr>
+							<th scope="col" th:text="料理名"></th>
+						</tr>
+						
+						<tr>
+							<td th:text="${detail.foodName}"></td>
+						</tr>
+						
+						<tr>
+							<th scope="col" th:text="ジャンル名"></th>
+						</tr>
+						
+						<tr>
+							<td th:text="${detail.genreName}"></td>
+						</tr>
+						
+						<tr>
+							<th scope="col" th:text="料理詳細"></th>
+						</tr>
+						
+						<tr>
+							<td th:text="${detail.requestOutline}"></td>
+						</tr>
+						
+						<tr>
+							<th scope="col" th:text="オファーコメント"></th>
+						</tr>
+						
+						<tr>
+							<td th:text="${detail.offerComment}"></td>
+						</tr>
+					</thead>
+				</table>
+		    </div>
+		</div>
+			  
 		<form method="post">
-		<input type="hidden" th:value="${detail.offerId}" name="offerId">
-		<input type="submit" formaction="/cookinglist/insert" value="配達">
+			<input type="hidden" th:value="${detail.offerId}" name="offerId">
+			<input type="submit" class="btn btn-danger btn-lg btn-block" formaction="/cookinglist/insert" value="配達">
 		</form>
+	</div>	
+
+		
 </body>
 </html>

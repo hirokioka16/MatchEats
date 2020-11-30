@@ -164,6 +164,7 @@ public class CookingOfferService {
 			 dto.setRegistDate(entity.getFoodTbl().getRegistDate());
 			 dto.setPictureName(entity.getFoodTbl().getRequestPicture());
 			 dto.setUserId(entity.getUserTbl().getUserId());
+			 dto.setUserName(entity.getUserTbl().getUserName());
 			 
 			 resultListDto.add(dto);
 			 
@@ -189,6 +190,7 @@ public class CookingOfferService {
 		dto.setPoint(cookOfferTblEntity.getUserTbl().getAssessMent());
 		dto.setGenreName(cookOfferTblEntity.getFoodTbl().getGenreTbl().getGenreName());
 		dto.setRequestOutline(cookOfferTblEntity.getFoodTbl().getRequestOutline());
+	
 
 
 

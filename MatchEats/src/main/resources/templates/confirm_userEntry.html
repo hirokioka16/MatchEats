@@ -10,80 +10,82 @@
 
 <p style="text-align:center; margin-top:4%;">以下の内容で間違いないでしょうか</p>
 
-	<form th:action="@{/inputUserEntry/insert}" method="post">
-		<table class="table table-borderless">
-			<tr>
-				<th>メールアドレス</th>
-				<td th:text="${session['userInfoDto'].userMail}"></td>
-			</tr>
-			<tr>
-				<th>パスワード</th>
-				<td th:text="${session['userInfoDto'].userPass}"></td>
-			</tr>
-			<tr>
-				<th>ニックネーム</th>
-				<td th:text="${session['userInfoDto'].nickName}"></td>
-			</tr>
-			<tr>
-				<th>名前</th>
-				<td th:text="${session['userInfoDto'].userName}"></td>
-			</tr>
-			<tr>
-				<th>電話番号</th>
-				<td th:text="${session['userInfoDto'].userTel}"></td>
-			</tr>
-			<tr>
-				<th>郵便番号</th>
-				<td th:text="${session['userInfoDto'].postalCode}"></td>
-			</tr>
-			<tr>
-				<th>住所</th>
-				<td th:text="${session['userInfoDto'].userAddres}"></td>
-			</tr>
-			<tr>
-				<th>生年月日</th>
-				<td th:text="${session['userInfoDto'].userBirth}"></td>
-			</tr>
-			<tr>
-				<th>カード名義</th>
-				<td th:text="${session['userInfoDto'].cardName}"></td>
-			</tr>
-			<tr>
-				<th>クレジットカード番号</th>
-				<td th:text="${session['userInfoDto'].userCard}"></td>
-			</tr>
-			<tr>
-				<th>有効期限</th>
-				<td th:text="${session['userInfoDto'].limitDate}"></td>
-			</tr>
-			<tr>
-				<th>銀行名</th>
-				<td th:text="${session['userInfoDto'].bankName}"></td>
-			</tr>
-			<tr>
-				<th>口座番号</th>
-				<td th:text="${session['userInfoDto'].accountName}"></td>
-			</tr>
-			<tr>
-				<th>支店名</th>
-				<td th:text="${session['userInfoDto'].branchName}"></td>
-			</tr>
-			<tr>
-				<th>口座名義</th>
-				<td th:text="${session['userInfoDto'].accountName}"></td>
-			</tr>
-			<tr>
-				<th>セキュリティーコード</th>
-				<td th:text="${session['userInfoDto'].secureCode}"></td>
-			</tr>
-		</table>
+<div class="border" style="width:60%; margin-right:auto; margin-left:auto; padding:5% 10%;">
+<form th:action="@{/inputUserEntry/insert}" method="post">
+	<table class="table table-borderless" style="margin-bottom:4%;">
+		<tr>
+			<th>メールアドレス</th>
+			<td th:text="${session['userInfoDto'].userMail}"></td>
+		</tr>
+		<tr>
+			<th>パスワード</th>
+			<td th:text="${session['userInfoDto'].userPass}"></td>
+		</tr>
+		<tr>
+			<th>ニックネーム</th>
+			<td th:text="${session['userInfoDto'].nickName}"></td>
+		</tr>
+		<tr>
+			<th>名前</th>
+			<td th:text="${session['userInfoDto'].userName}"></td>
+		</tr>
+		<tr>
+			<th>電話番号</th>
+			<td th:text="${session['userInfoDto'].userTel}"></td>
+		</tr>
+		<tr>
+			<th>郵便番号</th>
+			<td th:text="${session['userInfoDto'].postalCode}"></td>
+		</tr>
+		<tr>
+			<th>住所</th>
+			<td th:text="${session['userInfoDto'].userAddres}"></td>
+		</tr>
+		<tr>
+			<th>生年月日</th>
+			<td th:text="${session['userInfoDto'].userBirth}"></td>
+		</tr>
+		<tr>
+			<th>カード名義</th>
+			<td th:text="${session['userInfoDto'].cardName}"></td>
+		</tr>
+		<tr>
+			<th>クレジットカード番号</th>
+			<td th:text="${session['userInfoDto'].userCard}"></td>
+		</tr>
+		<tr>
+			<th>有効期限</th>
+			<td th:text="${session['userInfoDto'].limitDate}"></td>
+		</tr>
+		<tr>
+			<th>銀行名</th>
+			<td th:text="${session['userInfoDto'].bankName}"></td>
+		</tr>
+		<tr>
+			<th>口座番号</th>
+			<td th:text="${session['userInfoDto'].accountName}"></td>
+		</tr>
+		<tr>
+			<th>支店名</th>
+			<td th:text="${session['userInfoDto'].branchName}"></td>
+		</tr>
+		<tr>
+			<th>口座名義</th>
+			<td th:text="${session['userInfoDto'].accountName}"></td>
+		</tr>
+		<tr>
+			<th>セキュリティーコード</th>
+			<td th:text="${session['userInfoDto'].secureCode}"></td>
+		</tr>
+	</table>
 		
-		<input class="btn btn-primary btn-lg" type="submit" value="登録する" type="submit" value="次へ" style="width:30%; float:left; margin-left:5%;">
-	</form>
+		<input class="btn btn-primary btn-lg" type="submit" value="登録する" style="width:30%; float:left; margin-left:5%;">
+</form>
 	
 	<form th:action="@{/inputUserEntry/input}" method="post">
 		<input class="btn btn-outline-secondary btn-lg" type="submit" value="戻る" style="width:30%; float: right;">
 	</form>
+</div>
 
 </body>
 </html>

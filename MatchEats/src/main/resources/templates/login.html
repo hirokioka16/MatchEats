@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+
 <meta charset="UTF-8">
-<title>ログイン</title>
-</head>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+<link href="/css/login.css" rel="stylesheet"></link>
+<hgroup class="heading">
+<h1 class="major">Login Form </h1>
+</hgroup>
 <body>
-<h2>ログイン</h2>
+<h1 class="sign-up-title">Sign up in seconds</h1>
+
+<form th:action="@{/auth}" method="post" th:object="${loginform}" class="sign-up">
 <p th:text="${errMessage}"></p>
-<form th:action="@{/auth}" method="post" th:object="${loginform}">
-<input type="email" placeholder="E-mail" th:field="*{email}"><br>
-<input type="password" placeholder="password" th:field="*{pass}">
-<input type="submit" value="ログイン">
+<input type="email" placeholder="E-mail" th:field="*{email}" class="sign-up-input"><br>
+<input type="password" placeholder="password" th:field="*{pass}" class="sign-up-input">
+<input type="submit" value="ログイン"  class="sign-up-button">
 </form>
 
-<form th:action="@{/admin/input}" method="get">
+<form th:action="@{/inputUserEntry/input}" method="get">
 <p><input type="submit" value="新規登録"></p>
 </form>
 </body>

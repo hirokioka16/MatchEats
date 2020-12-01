@@ -2,14 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 <title>配達依頼送信完了</title>
 </head>
-<body>
-<p>配達依頼完了</p>
-
-	<form th:action="@{/cooking/list}">
-	<input type="submit" value="戻る">
+<body style="text-align:center;">
+	<div style="margin-top:5%; margin-left:auto; margin-right:auto;">
+	<h1>配達依頼完了</h1>
+	
+	<p>配達依頼の登録が完了しました。</p>
+	
+	<form th:action="@{/cooking/list}" method="get">
+		<input class="btn btn-outline-secondary btn-lg" type="submit" value="戻る" style="background-color:#dcdcdc; width:30%;">
 	</form>
+	
+	</div>
+
 
 </body>
 </html>

@@ -4,32 +4,52 @@
 
 <head>
 <meta charset="UTF-8">
-
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 <title>調理リスト一覧</title>
 </head>
 <body>
+	<header>
+		<div th:replace="layout/header :: afterheader" ></div>
+	</header>
 
-	<form th:action="@{/mypage}">
-	<input type="submit" value="戻る">
-	</form>
+	<div class="container">
+		<div class="row">
+			<div id="side" th:replace="layout/side :: side"></div>
 
-<form th:action="@{/cooking/detail}">
-<h1>調理リスト一覧</h1>
-	<table>
-	<tr th:each="CookingList:${CookingList}">
-		<td>
+			<div class="col-7" style="margin-left:80px;">
+				<p class="text-black-50">調理リスト一覧</p>
+				<table class="table table-striped">
+					<thead class="thead-light">
+					    <tr>
+					      <th scope="col">ユーザー名</th>
+					      <th scope="col">料理</th>
+					      <th scope="col">料理名</th>
+					      <th scope="col">オファー日</th>
+					      <th scope="col"></th>
+					    </tr>
+					 </thead>
+					 
+					
+					<tbody>						
+						<tr th:each="CookingList:${CookingList}">
+							<td th:text="${CookingList.userName}">
+							<!-- <img class="img-fluid" th:src="${CookingList.pictureName}"> -->
+							<td><img src="http://jousen5.aso-abcc.com/shoppingSystem/img/yokomina.jpg" width="200px"></td>
+							<td th:text="${CookingList.foodName}">
+							<td th:text="${#dates.format(CookingList.registDate,'yyyy/MM/dd HH:mm:ss')}">
+							<td>
+								<form th:action="@{/cooking/detail}">
+									<input type="hidden" name="offerId" th:value="${CookingList.offerId}">
+									<input type="submit" class="btn btn-link" value="詳細">
+								</form>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+			
 
-			<input type="radio" name="offerId" th:value="${CookingList.offerId}">
-		</td>
-		<td th:text="${CookingList.pictureName}">
-		<td th:text="${CookingList.pictureName}">
-		<th th:text="${CookingList.foodName}">
-		<td th:text="${#dates.format(CookingList.registDate,'yyyy/MM/dd')}">
-	</tr>
-	</table>
-
-	<input type="submit" value="詳細">
-
-</form>
 </body>
 </html>

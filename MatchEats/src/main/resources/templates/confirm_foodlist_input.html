@@ -2,46 +2,44 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+<link th:href="@{/css/inputFood.css}" rel="stylesheet" type="text/css">
 <title>食べたい物リスト入力確認</title>
 </head>
 <body>
 
+ <div style="padding:3%;"> 	
+
+	<div style="background-color:#fff; margin:5% 10%;">
 	<form th:action="@{/inputfood/insert}" enctype="multipart/form-data" method="post">
-		<p>以下の内容で間違いはないでしょうか</p>
-		<table>
-			<tr>
-				<td>
-				<img th:src="${image}" alt="サンプル">
-				</td>
-			</tr>
-			<tr>
-				<td>料理名</td>
-			</tr>
-			<tr>
-				<td th:text="${session['foodInfDto'].foodName}"></td>
-			</tr>
-			<tr>
-				<td>料理名の説明</td>
-			</tr>
-			<tr>
-				<td th:text="${session['foodInfDto'].requestOutline}"></td>
-			</tr>
-			<tr>
-				<td>ジャンル</td>
-			</tr>
-			<tr>
-				<td th:text="${genreName}"></td>
-			</tr>
+	<div class="whiteDiv">
+	
+		<div class="div">
+			<label>料理画像</label>
+			<div><img th:src="${image}" alt="サンプル" style="width: 40%; height: auto;"></div>
+		</div>
+		
+		<div class="div">		
+				<label>料理名</label>
+					<p class="border" id="border" th:text="${session['foodInfDto'].foodName}"></p>
 			
-		</table>
-		<p>
-		<input type="submit" value="登録">
-		</p>
+				<label>料理名の説明</label>
+					<p class="border" id="border" th:text="${session['foodInfDto'].requestOutline}"></p>
+				
+				<label>ジャンル</label>
+					<p class="border" id="border" th:text="${genreName}"></p>
+		</div>
+		</div>
+		
+		<input class="btn btn-primary btn-lg" id="next" type="submit" value="登録">
 	</form>
 	
-	<form th:action="@{/inputfood/input}">
-		<input type="submit" value="戻る">
+	<form th:action="@{/inputfood/input}" method="get">
+		<input class="btn btn-outline-secondary btn-lg" id="back" type="submit" value="戻る">
 	</form>
+	</div>
+
+</div>
 
 </body>
 </html>

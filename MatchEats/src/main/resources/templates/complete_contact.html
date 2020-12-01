@@ -3,17 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+<link th:href="@{/css/contact.css}" rel="stylesheet" type="text/css">
 <title>お問い合わせ送信完了</title>
 </head>
-<body style="background-color:#dadada;">
+<body>
 
-<div style="margin:5% 10%; text-align:center; background-color:#fff;">
+<div class="whiteDiv">
 	<h1>送信完了</h1>
 	
-	<p>送信が完了しました</p>
+	<p id="tagP">送信が完了しました</p>
 
 	<form th:action="@{/inputContact/contactlist}">
-	<input class="btn btn-outline-secondary btn-lg" type="submit" value="一覧に戻る" style="width:30%; background-color:#ea5532;">
+	<input class="btn btn-outline-secondary btn-lg" id="first" type="submit" value="一覧に戻る">
 	</form>
 	
 </div>

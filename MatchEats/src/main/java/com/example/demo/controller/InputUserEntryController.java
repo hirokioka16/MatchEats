@@ -39,6 +39,28 @@ public class InputUserEntryController {
 	@RequestMapping(value= {"/input"},  method=RequestMethod.GET)
 	public String input(@ModelAttribute("UserForm")UserForm form, Model model) {
 		
+		UserInfoDto dto = new UserInfoDto();
+		//確認画面で戻るボタンを押下した時に前回までの入力内容を入力画面に反映させる処理
+		try {
+			dto = (UserInfoDto)session.getAttribute("userInfoDto");
+		}catch (NullPointerException e){
+		}
+		if(dto != null) {
+			form.setAccountName(dto.getAccountName());
+			form.setAccountNumber(dto.getAccountNumber());
+			form.setUserName(dto.getUserName());
+			form.setNickName(dto.getNickName());
+			form.setUserMail(dto.getUserMail());
+			form.setUserPass(dto.getUserPass());
+			form.setPostalCode(dto.getPostalCode());
+			form.setUserAddres(dto.getUserAddres());
+			form.setUserTel(dto.getUserTel());
+			form.setCardName(dto.getCardName());
+			form.setSecureCode(dto.getSecureCode());
+			form.setUserCard(dto.getUserCard());
+			form.setBankName(dto.getBankName());
+			form.setBranchName(dto.getBranchName());
+		}
 		return "input_userEntry";
 	}
 	
@@ -55,18 +77,18 @@ public class InputUserEntryController {
 			for(ObjectError error : result.getAllErrors()) {
 				errorList.add(error.getDefaultMessage());
 			}
-		
-		}
-			
+			model.addAttribute("validationError", errorList);
+			url = "input_userEntry";
+		}else {	
 			
 			// formの値を入れるdtoに入れるメソッドを呼んでいる
-			UserInfoDto dto = getUserDto(form);
+			UserInfoDto dto = getInsertUserDto(form);
 			dto.setUserBirth(userBirth);
 			dto.setLimitDate(limitDate);
 			session.setAttribute("userInfoDto", dto);
 			
 			url = "confirm_userEntry";
-		
+		}
 		
 		return url;
 	}
@@ -96,6 +118,32 @@ public class InputUserEntryController {
 		UserInfoDto userInfo = new UserInfoDto();
 		
 		userInfo.setUserId(Integer.parseInt(userForm.getUserId()));
+		userInfo.setAccountName(userForm.getAccountName());
+		userInfo.setAccountNumber(userForm.getAccountNumber());
+		userInfo.setUserName(userForm.getUserName());
+		userInfo.setNickName(userForm.getNickName());
+		userInfo.setUserMail(userForm.getUserMail());
+		userInfo.setUserPass(userForm.getUserPass());
+		userInfo.setPostalCode(userForm.getPostalCode());
+		userInfo.setUserAddres(userForm.getUserAddres());
+		userInfo.setUserTel(userForm.getUserTel());
+		userInfo.setCardName(userForm.getCardName());
+		userInfo.setSecureCode(userForm.getSecureCode());
+		userInfo.setUserCard(userForm.getUserCard());
+		userInfo.setBankName(userForm.getBankName());
+		userInfo.setBranchName(userForm.getBranchName());
+		
+		
+		return userInfo;
+		
+		
+		
+	}
+	
+public UserInfoDto getInsertUserDto(UserForm userForm) {
+		
+		UserInfoDto userInfo = new UserInfoDto();
+		
 		userInfo.setAccountName(userForm.getAccountName());
 		userInfo.setAccountNumber(userForm.getAccountNumber());
 		userInfo.setUserName(userForm.getUserName());

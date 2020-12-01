@@ -3,20 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 
+
 	<div th:fragment="side" th:remove="tag">
-		<ul>
-			<li><a th:href="@{/mypage}" th:text="マイページ"></a></li>
-			<li><a th:href="@{/updateUserInfo/input}" th:text="会員情報修正"></a></li>
-			<li><a th:href="@{/inputfood/input}" th:text="食べたい物リスト追加"></a></li>
-			<li><a th:href="@{/foodlist}" th:text="食べたい物リスト一覧"></a></li>
-			<li><a th:href="@{/history/list}" th:text="履歴"></a></li>
-			<li><a th:href="@{/reactionList}" th:text="リアクション"></a></li>
-			<li><a th:href="@{/cooking/list}" th:text="制作承諾オファー一覧"></a></li>
-    		<li><a th:href="@{/transferProcedures}" th:text="売上申請"></a></li>
+	
+	<div class="col-3" style="margin-left:60px;">
+	<div class="sidebar_fixed">
+	<div class="sidebar" style="margin-top:10px;">
+		<ul class="list-group" style="list-style:none">
+			<li><a th:href="@{/menu}" class="list-group-item list-group-item-action" th:text="TOP"></a></li>
+			<li><a th:href="@{/mypage}" class="list-group-item list-group-item-action" th:text="マイページ"></a></li>
+			<li><a th:href="@{/updateUserInfo/input}" class="list-group-item list-group-item-action" th:text="会員情報修正"></a></li>
+			<li><a th:href="@{/inputfood/input}" class="list-group-item list-group-item-action" th:text="食べたい物リスト追加"></a></li>
+			<li><a th:href="@{/foodlist}"  class="list-group-item list-group-item-action" th:text="食べたい物リスト"></a></li>
+			<li><a th:href="@{/cookingoffer/history}"  class="list-group-item list-group-item-action" th:text="オファー"></a></li>
+			<li><a th:href="@{/history/list}" class="list-group-item list-group-item-action" th:text="履歴"></a></li>
+			<li><a th:href="@{/reactionList}" class="list-group-item list-group-item-action" th:text="リアクション"></a></li>
+			<li><a th:href="@{/cooking/list}" class="list-group-item list-group-item-action" th:text="承認済みオファー"></a></li>
+    		<li><a th:href="@{/transferProcedures}" class="list-group-item list-group-item-action" th:text="売上申請"></a></li>
         </ul>
+        </div>
+        </div>
+	</div>
     </div>
+
 </body>
 </html>

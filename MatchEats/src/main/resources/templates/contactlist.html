@@ -2,26 +2,42 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<link href="/css/list.css" rel="stylesheet"></link>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 <title>お問い合わせ一覧画面</title>
 </head>
-<body>
-     <div>
-      <button  class=btn1>メニューへ</button>
-     </div>
-    <table>
-       <tr>
-         <th></th>
-         <th>メールアドレス</th>
-         <th>お問い合わせメッセージ</th>
-         <th></th>
-       </tr>
-       <tr th:each="userTbl:${contactlist}">
-          <td class="center" th:text="${userTbl.contactId}"></td>
-          <td th:text="${userTbl.userMail}"></td>
-          <td th:text="${userTbl.content}"></td>
-          <td class="center" th:text="${#dates.format(userTbl.contactDate,'yyy/MM/dd')}"></td>
-        </tr>
-    </table>
+<body style="background-color:#dadada;">
+   <div style="margin:5% 10%;">
+   
+	     <div style="background-color:#fff; margin-top:5%; padding:7%">
+	     
+		    <table class="table">
+		    	<thead>
+			       <tr>
+			         <th scope="col"></th>
+			         <th scope="col">メールアドレス</th>
+			         <th scope="col">お問い合わせメッセージ</th>
+			         <th scope="col"></th>
+			       </tr>
+			    </thead>
+			    <tbody>
+			       <tr th:each="userTbl:${contactlist}">
+			          <td class="center" th:text="${userTbl.contactId}"></td>
+			          <td th:text="${userTbl.userMail}"></td>
+			          <td th:text="${userTbl.content}"></td>
+			          <td class="center" th:text="${#dates.format(userTbl.contactDate,'yyy/MM/dd')}"></td>
+			        </tr>
+		        </tbody>
+		    </table>
+		    
+		    <form th:action="@{/inputContact/input}">
+		    	<input class="btn btn-primary btn-lg"  type="submit" value="問い合わせる" style="width:30%; float:left; margin-left:5%; background-color:#ea5532;">
+		    </form>
+		    
+		    <form th:action="@{/menu}" method="get">
+				<input class="btn btn-outline-secondary btn-lg" type="submit" value="戻る" style="width:30%; float: right;">
+			</form>
+	    </div>
+    
+    </div>
 </body>
 </html>

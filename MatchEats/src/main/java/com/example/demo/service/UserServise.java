@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.UserInfoDto;
 import com.example.demo.entity.BankTblEntity;
+import com.example.demo.entity.BankUserId;
 import com.example.demo.entity.TransferId;
 import com.example.demo.entity.TransferTblEntity;
 import com.example.demo.entity.UserTblEntity;
+import com.example.demo.repository.BankRepository;
 import com.example.demo.repository.TransferRepository;
 import com.example.demo.repository.UserRepository;
 
@@ -24,14 +26,17 @@ public class UserServise {
 
 	@Autowired
 	TransferRepository transferRepository;
+	
+	@Autowired
+	BankRepository bankRepository;
 
 
 	public void insert(UserInfoDto dto) {
 
 		UserTblEntity userEntity = change(dto);
-		///BankTblEntity bankEntity = change2(dto);
 		userRepository.saveAndFlush(userEntity);
-		///userRepository.saveAndFlush(entity)
+		BankTblEntity bankEntity = change2(dto);
+		bankRepository.saveAndFlush(bankEntity);
 
 	}
 
@@ -183,6 +188,10 @@ public class UserServise {
 		bankEntity.setAccountNumber(dto.getAccountNumber());
 		bankEntity.setBranchName(dto.getBranchName());
 		bankEntity.setAccountName(dto.getAccountName());
+		UserTblEntity entity = userRepository.getUserInfo(dto.getUserMail(),dto.getUserPass());
+		BankUserId id = new BankUserId();
+		id.setUserTbl(entity);
+		bankEntity.setBankUserId(id);
 
 		return bankEntity;
 

@@ -21,7 +21,7 @@ public class HistoryTblEntity implements Serializable{
 	private Integer historyId;
 
 	@ManyToOne
-    @JoinColumn(name="offer_id",insertable=false,updatable=false)
+    @JoinColumn(name="offer_id")
 	private CookOfferTblEntity CookOfferTbl;
 
 	@ManyToOne

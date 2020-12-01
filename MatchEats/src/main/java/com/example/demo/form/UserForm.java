@@ -65,20 +65,20 @@ public class UserForm {
 	private String limitMonth;
 	
 	
-	//@NotBlank(message = "銀行名を入力してください")
+	@NotBlank(message = "銀行名を入力してください")
 	@Size(max = 30, message = "銀行名は30文字以内で入力してください")
 	private String bankName;
 	
-	//@NotBlank(message = "口座番号を入力してください")
+	@NotBlank(message = "口座番号を入力してください")
 	@Size(max = 7, message = "口座番号は7桁以内で入力してください")
 	@Pattern(regexp = "[\\d]+", message = "口座番号は半角数字で入力してください")
 	private String accountNumber;
 	
-	//@NotBlank(message = "支店名を入力してください")
+	@NotBlank(message = "支店名を入力してください")
 	@Size(max = 30, message = "支店名は30文字以内で入力してください")
 	private String branchName;
 	
-	//@NotBlank(message = "口座名義を入力してください")
+	@NotBlank(message = "口座名義を入力してください")
 	@Size(max = 30, message = "口座名義は30文字以内で入力してください")
 	private String accountName;
 	

@@ -4,46 +4,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
     <title>決済</title>
+ <style type="text/css">
+button.stripe-button-el,
+button.stripe-button-el>span {
+display: none;
+} 
+ </style>
 </head>
 <body>
-	<table>
-		<tr>
-			<td th:text="${dto.userName}">
-		</tr>
-		
-		<tr>
-			<td th:text="${dto.offerComment}">
-		</tr>
-		
-		<tr>
-			<td><img th:src="${dto.imgName}" alt="サンプル"></td>
-			<td th:text="${dto.cookContent}">
-		</tr>
-		
-		
-		
-	</table>
-	<form th:action="@{/charge}" method='POST' id='checkout-form'>
-	    <input type='hidden' th:value='${dto.price}' name='amount'/>
-	    <input type='hidden' name="offerId" th:value='${dto.offerId}'/>
-	    <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
-	    <script
-	    	src='https://checkout.stripe.com/checkout.js'
-	    	class='stripe-button'
-	       	th:attr='data-key=${stripePublicKey},
-	       	data-amount=${dto.price},
-	       	data-currency=${currency},
-	       	data-name=${dto.foodName},
-	       	data-description=${dto.offerComment}'
-	       	data-locale='auto'
-	      	data-zip-code='false'>
-	   </script>
-	</form>
+	<header>
+		<div th:replace="layout/header :: afterheader" ></div>
+	</header>
 	
-	<form th:action="@{/reactionList}" method='get'>
-		<input type="submit" value="戻る">
-	</form>
-	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5">
+		  		<!-- <img src="${dto.imgName}"> -->
+		  		<img src="http://jousen5.aso-abcc.com/shoppingSystem/img/yokomina.jpg" class="img-fluid">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col" th:text="料理名"></th>
+						</tr>
+						
+						<tr>
+							<td th:text="${dto.foodName}"></td>
+						</tr>
+						
+						<tr>
+							<th scope="col" th:text="料理の説明"></th>
+						</tr>
+						
+						<tr>
+							<td th:text="${dto.cookContent}"></td>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			
+		    <div class="col-7">
+		    	<table class="table">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col" th:text="調理者"></th>
+						</tr>
+						
+						<tr>
+							<td th:text="${dto.userName}"></td>
+						</tr>
+						
+						
+						<tr>
+							<th scope="col" th:text="金額"></th>
+						</tr>
+						
+						<tr>
+							<td th:text="'¥' +${dto.price}"></td>
+						</tr>
+						
+						<tr>
+							<th scope="col" th:text="オファー日"></th>
+						</tr>
+						
+						<tr>
+							<td th:text="${dto.offerDate}"></td>
+						</tr>
+						
+						<tr>
+							<th scope="col" th:text="オファーコメント"></th>
+						</tr>
+						
+						<tr>
+							<td th:text="${dto.offerComment}"></td>
+						</tr>
+					</thead>
+				</table>
+		    </div>
+		</div>
+			  
+		<form th:action="@{/charge}" method='POST' id='checkout-form'>
+			<input type="submit" class="btn btn-danger btn-lg btn-block">
+		    <input type='hidden' th:value='${dto.price}' name='amount'/>
+		    <input type='hidden' name="offerId" th:value='${dto.offerId}'/>
+		    <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
+		    <script
+		    	src='https://checkout.stripe.com/checkout.js'
+		    	class='stripe-button'
+		       	th:attr='data-key=${stripePublicKey},
+		       	data-amount=${dto.price},
+		       	data-currency=${currency},
+		       	data-name=${dto.foodName},
+		       	data-description=${dto.offerComment}'
+		       	data-locale='auto'
+		      	data-zip-code='false'>
+		   </script>	
+		</form>
+		
+		<form th:action="@{/reactionList}" method='get'>
+			<input type="submit" value="戻る" class="btn btn-outline-danger btn-lg btn-block" style="margin-top:20px">
+		</form>
+	</div>	
 </body>
 </html>

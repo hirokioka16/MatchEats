@@ -2,23 +2,32 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 <title>会員退会　確認</title>
 </head>
-<body>
-
-<h1>退会申請</h1>
-
-<p>退会申請後は会員向けサービスのご利用ができなくなります</p>
-<p style="color:rgb(235, 58, 51);">一度退会してしまうとアカウントは元に戻せなくなります</p>
-
-<form th:action="@{/deleteUserEntry/delete}" method="post">
-	<input type="submit" value="退会">
-</form>
+<body style="text-align:center;">
 
 
-<form th:action="マイページリンク" method="">
-	<input type="submit" value="戻る">
-</form>
+<div style="width:65%; margin-right:auto; margin-left:auto; padding:5% 10%;">
+
+	<h1>退会申請</h1>
+
+	<div style="margin:10%;">
+		<p>退会申請後は会員向けサービスのご利用ができなくなります。</p>
+		<p style="color:rgb(235, 58, 51);">一度退会してしまうとアカウントは元に戻せません。<p>
+	</div>
+
+	<form th:action="@{/deleteUserEntry/delete}" method="post">
+		<input class="btn btn-outline-secondary btn-lg" type="submit" value="退会" style="background-color:#ea5532; color:#fff; width:30%; float:left; margin-left:5%;">
+	</form>
+
+
+	<form th:action="@{/mypage}" method="get">
+		<input class="btn btn-outline-secondary btn-lg" type="submit" value="戻る" style="width:30%; float: right;">
+	</form>
+
+
+</div>
 
 </body>
 </html>

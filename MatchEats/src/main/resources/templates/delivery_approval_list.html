@@ -2,9 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link href="/css/list.css" rel="stylesheet"></link>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 <title>配達リクエスト承認済み料理一覧</title>
 </head>
 <body>
+
+		<h1>配達リクエスト一覧</h1>
+		<form th:action="@{/admin/menu}" method="get">
+		<input type = "submit" value="戻る"class="btn btn-link">
+	</form>
 	<form th:action="@{/delivery/collectionconfirm}" method="post">
 		<table>
 			<tr>
@@ -19,9 +26,6 @@
 			</tr>
 		</table>
 		<input type="submit" value = "回収">
-	</form>
-	<form th:action="@{/admin/menu}" method="get">
-		<input type = "submit" value="戻る">
 	</form>
 </body>
 </html>

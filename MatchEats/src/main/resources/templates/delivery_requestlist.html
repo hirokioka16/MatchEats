@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>配達リクエスト一覧</title>
+<link href="/css/deliveryrequestlist.css" rel="stylesheet"></link>
 </head>
 <body>
 	<form th:action="@{/delivery/requestDetail}" method="post">
+	<h1>配達リクエスト一覧</h1>
 		<table>
 			<tr>
 				<th>ユーザー名</th>
@@ -17,6 +19,7 @@
 					<input type="radio" name="offerId" th:value="${list.offerId}">
 				</td>
 			</tr>
+
 		</table>
 		<input type="submit" value = "詳細へ">
 	</form>

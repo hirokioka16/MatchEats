@@ -19,12 +19,26 @@ public class FoodInfoDto {
 	private MultipartFile requestPicture;
 	private String pictureName;
 	private String userAddres;
+	private String userMail;
+	private String userName;
 	
 
 
 
 
 
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getUserMail() {
+		return userMail;
+	}
+	public void setUserMail(String userMail) {
+		this.userMail = userMail;
+	}
 	public int getUserId() {
 		return userId;
 	}

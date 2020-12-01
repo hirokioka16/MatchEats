@@ -2,21 +2,84 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 <title>オファー取り消し確認</title>
 </head>
 <body>
-	<p>以下のオファーを取り消しますが、よろしいですか？</p>
-		<table>
-			<tr>
-				<th>オファーコメント</th>
-				<td th:text="${cookdto.offerComment}"></td>
-			</tr>
-		</table>
+	<header>
+		<div th:replace="layout/header :: afterheader" ></div>
+	</header>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5">
+		  		<!-- <img th:src="${detail.pictureName}"> -->
+		  		<img src="http://jousen5.aso-abcc.com/shoppingSystem/img/yokomina.jpg" class="img-fluid">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col" th:text="ユーザー名"></th>
+						</tr>
+						
+						<tr>
+							<td th:text="${cookdto.requestUserName}"></td>
+						</tr>
+						<tr>
+							<th scope="col" th:text="登録日"></th>
+						</tr>
+						
+						<tr>
+							<td th:text="${#dates.format(cookdto.offerDate,'yyyy/MM/dd HH:mm:ss')}"></td>
+						</tr>
+						
+					</thead>
+				</table>
+			</div>
+			
+			<div class="col-7">
+		    	<table class="table">
+					<thead class="thead-light">
+
+						<tr>
+							<th scope="col" th:text="料理名"></th>
+						</tr>
+						
+						<tr>
+							<td th:text="${cookdto.foodName}"></td>
+						</tr>
+						
+						<tr>
+							<th scope="col" th:text="ジャンル名"></th>
+						</tr>
+						
+						<tr>
+							<td th:text="${cookdto.genreName}"></td>
+						</tr>
+						
+						<tr>
+							<th scope="col" th:text="料理詳細"></th>
+						</tr>
+						
+						<tr>
+							<td th:text="${cookdto.requestOutline}"></td>
+						</tr>
+						
+						<tr>
+							<th scope="col" th:text="オファーコメント"></th>
+						</tr>
+						
+						<tr>
+							<td th:text="${cookdto.offerComment}"></td>
+						</tr>
+					</thead>
+				</table>
+		    </div>
+		</div>
 
 		<form method="POST">
 			<input type="hidden" name="offerId" th:value="${cookdto.offerId}">
-			<input type="submit" formaction="/cookingoffer/delete" value="削除">
+			<input type="submit" class="btn btn-danger btn-lg btn-block" formaction="/cookingoffer/delete" value="削除">
 		</form>
+	</div>	
 
 </body>
 </html>

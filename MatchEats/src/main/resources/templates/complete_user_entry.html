@@ -2,14 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 <title>会員登録完了</title>
 </head>
-<body>
+<body style="text-align:center;">
 
-<p>登録完了</p>
 
-<form th:action="@{/menu}">
-	<input type="submit" value="戻る">
+<div style="margin-top:5%; margin-left:auto; margin-right:auto;">
+<h1>会員登録完了</h1>
+
+<p>会員の登録が完了しました。</p>
+
+<form th:action="@{/menu}" method="get">
+	<input class="btn btn-outline-secondary btn-lg" type="submit" value="トップへ" style="background-color:#dcdcdc; width:30%;">
 </form>
+
+</div>
+
 </body>
 </html>

@@ -25,6 +25,7 @@ import com.example.demo.dto.LoginInfoDto;
 import com.example.demo.form.CookingForm;
 import com.example.demo.service.CookingOfferService;
 import com.example.demo.service.FoodService;
+import com.example.demo.service.UserServise;
 
 @Controller
 public class CookingOfferController {
@@ -35,8 +36,13 @@ public class CookingOfferController {
 	CookingOfferService cookingOfferService;
 	@Autowired
 	HttpSession session;
+	@Autowired
+	UserServise userSercvice;
+	@Autowired
+	MailTest02Application mail;
+	
 
-	@RequestMapping(value= {"/inputoffer/input"}, method=RequestMethod.POST)
+	@RequestMapping(value= {"/inputoffer/input"}, method=RequestMethod.GET)
 	public String input(@RequestParam("requestId") String requestId, @ModelAttribute("CookingForm")CookingForm form,Model model) {
 
 
@@ -75,10 +81,10 @@ public class CookingOfferController {
 					//sessionよりLoginInfoを取得
 					LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute("loginInfo");
 					//userIdを取り出しDtoに格納
-					//dto.setUserId(loginInfo.getUserId());
+					dto.setUserId(String.valueOf(loginInfo.getUserId()));
 
-					//テスト用
-					dto.setUserId("1");
+					//本番用に変えた
+					
 
 					session.setAttribute("CookingInfoDto", dto);
 
@@ -99,7 +105,11 @@ public class CookingOfferController {
 		dto.setReactionStatus("0");
 
 		cookingOfferService.insert(dto);
-
+		
+		//料理制作をリクエストした人にオファーが来たとメールを送る
+		FoodInfoDto foodDto = foodService.getUdFoodList(requestId);
+		mail.sendMail(foodDto.getUserMail(),"調理オファーが届きました!",foodDto.getUserName()+"様が登録していた料理リクエストにオファーが届きました");
+		
 
 		session.removeAttribute("CookingInfoDto");
 		return "redirect:/inputoffer/complete";
@@ -109,12 +119,7 @@ public class CookingOfferController {
 	@RequestMapping(value= {"/inputoffer/complete"}, method=RequestMethod.GET)
 	public String complete() {
 
-		//オファーが来たことをメールで通知したい人生だった
-		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute("loginInfo");
 
-
-
-		//String email = loginInfo.getEmail();
 		session.removeAttribute("requestId");
 
 		return "complete_offer_input";
@@ -130,9 +135,9 @@ public class CookingOfferController {
 		LoginInfoDto loginInfo = (LoginInfoDto) session.getAttribute("loginInfo");
 
 		//int userId = loginInfo.getUserId();
-		int userId = 1;
+		//int userId = 1;
 
-		List<CookingInfoDto> list = cookingOfferService.getOfferHistory(userId);
+		List<CookingInfoDto> list = cookingOfferService.getOfferHistory(loginInfo.getUserId());
 
 		model.addAttribute("list",list);
 

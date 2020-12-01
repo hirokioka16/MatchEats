@@ -8,15 +8,13 @@
 <body>
 
 <!-- エラーメッセージ表示 -->
- <table>
-	 <tr th:if="${validationError}" th:each="error : ${validationError}">
-	 	<td style="color:rgb(235, 58, 51);" th:text="${error}"></td>
-	 </tr>	
- </table>
- 
+
  <p style="text-align:center; margin-top:4%;">下記の内容をご入力の上、お進みください。</p>
- 
- 
+ <div th:if="${validationError}">
+ 	<div th:each="error,stat  : ${validationError}" th:if="${stat.index < 1}">
+ 		<p th:text="${error}" style="text-align:center; margin-top:4%;color:rgb(235, 58, 51);">
+ 	</div>
+</div> 
 <!-- 入力フォーム -->
 <div class="border" style="width:60%; margin-right:auto; margin-left:auto; padding:5% 10%;">
  <form th:action="@{/inputUserEntry/confirm}"  method="post" th:object="${UserForm}">

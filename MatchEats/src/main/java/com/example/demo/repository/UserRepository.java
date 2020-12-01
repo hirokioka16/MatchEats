@@ -55,6 +55,6 @@ public interface UserRepository extends JpaRepository<UserTblEntity, Integer> {
 	public void reset(
 			@Param("userId")int userId);
 
-
-
+	@Query("select u from UserTblEntity u where userMail = :mail and  userPass = :password")
+	public UserTblEntity getUserInfo(@Param("mail")String mail,@Param("password")String password);
 }

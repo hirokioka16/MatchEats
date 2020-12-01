@@ -1,31 +1,38 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>マイページ</title>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+<title>売上申請確認</title>
 </head>
 <body>
-		<p>売上振り込み申請確認</p>
-		<table>
-			<tr>
-				<th>売上</th>
-				<td th:text="${userInfoDto.sales}"></td>
-			</tr>
-			<tr>
-				<th>名前</th>
-				<td th:text="${userInfoDto.userName}"></td>
-			</tr>
-			<tr>
-				<th>ニックネーム</th>
-				<td th:text="${userInfoDto.nickName}"></td>
-			</tr>
-		</table>	
+	<header>
+		<div th:replace="layout/header :: afterheader" ></div>
+	</header>
 	
-	<form th:action="@{/transferRegistration}" method="post">
-		<input th:if="${userInfoDto.sales != 0}" type="submit" value="振り込み申請する">
-	</form>
-	<form th:action="@{/mypage}" method="get">
-		<input type="submit" value="戻る">
-	</form>
+	<div class="container">
+		<div class="row">
+			<div id="side" th:replace="layout/side :: side"></div>
+			
+			<div class="col-7" style="margin-left:80px;">
+			<p class="text-black-50">売上振り込み申請確認</p>
+			<table class="table table-striped">
+				<tbody>
+					<tr>
+						<th scope="row">売上</th>
+					</tr>
+					<tr>
+						<td th:text="'¥' + ${userInfoDto.sales}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<form th:action="@{/transferRegistration}" method="post">
+				<input class="btn btn-danger btn-lg btn-block" th:if="${userInfoDto.sales != 0}" type="submit" value="振り込み申請する">
+			</form>
+			</div>
+		</div>
+	</div>	
+	
+
 
 </body>
 </html>

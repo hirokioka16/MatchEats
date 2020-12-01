@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+<title>口座情報登録</title>
+</head>
+<body>
+
+	<!-- エラーメッセージ表示 -->
+	 <table>
+		 <tr th:if="${validationError}" th:each="error : ${validationError}">
+		 	<td style="color:rgb(235, 58, 51);" th:text="${error}"></td>
+		 </tr>	
+	 </table>
+	 
+	 <p style="text-align:center; margin-top:4%;">下記の内容をご入力の上、お進みください。</p>
+	 
+	 <!-- 入力フォーム -->
+	<div class="border" style="width:60%; margin-right:auto; margin-left:auto; padding:5% 10%;">
+		<form th:action="@{/inputUserEntry/confirm}"  method="post" th:object="${UserForm}">
+		 	<div class="form-group">
+		 		<label for="formGroupExampleInput">メールアドレス</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{userMail}">
+		 	</div>
+		 	<div class="form-group">
+		 		<label for="exampleInputPasswword1">パスワード</label><input type="password" class="form-control" id="exampleInputPassword1" th:field="*{userPass}">
+		 	</div>
+		 	<div class="form-group">
+		 		<label for="formGroupExampleInput">ニックネーム</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{nickName}">
+		 	</div>
+		 	
+		 	
+
+</body>
+</html>

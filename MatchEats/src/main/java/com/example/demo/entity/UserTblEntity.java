@@ -54,6 +54,8 @@ public class UserTblEntity {
 	@OneToMany(mappedBy="userTbl")
 	private List<FoodTblEntity> foodUser;
 	
+	
+	
 //	@OneToOne(mappedBy="userTbl")
 //	private List<TransferId> transferUser;
 //	

@@ -5,18 +5,30 @@ body { background-color:#dadada; }
 
 .whiteDiv { 
 	background-color:#fff;
-	margin-top:5%;
-	margin-left:auto;
-	margin-right:auto;
+	margin:5% 10%;
 	text-align:center;
-	padding:5%; 
+	padding:8%; 
 	}
+	
+	
+h1 {margin:2%;}
+
+
+label {margin:2%}
+
+
+textarea {margin-bottom:2%;}
+
+
+.border {margin-bottom:2%;}
+
+
+#tagP {margin-bottom:2%;}
 	
 	
 #next {
 	width:30%;
 	float:left;
-	margin-left:5%;
 	background-color:#ea5532;
 	border-color:#ea5532;
 }
@@ -25,4 +37,12 @@ body { background-color:#dadada; }
 #back {
 	width:30%;
 	float: right;
+}
+
+
+#first {
+	width:30%;
+	background-color:#ea5532;
+	color:#fff;
+	border-color:#ea5532;
 }

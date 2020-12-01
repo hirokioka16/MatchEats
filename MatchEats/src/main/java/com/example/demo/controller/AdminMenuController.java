@@ -5,14 +5,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping(value= {"/adminMenu"})
+@RequestMapping(value= {"/adminmenu"})
 public class AdminMenuController {
-	
-	@RequestMapping(value= {"/menu"}, method=RequestMethod.GET)
+
+	@RequestMapping(value= {"/menu"}, method=RequestMethod.POST)
 	public String adminMenu() {
 		return "adminMenu";
-		
+
 	}
-	
+
 
 }

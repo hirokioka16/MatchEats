@@ -5,6 +5,30 @@
 <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 <title>お問い合わせ一覧画面</title>
 </head>
+<<<<<<< HEAD
+<body>
+     <div>
+     <form th:action="@{/deliveryt/requestlist}" method="post">
+      <input type ="button"  class=btn1 value=メニューへ>
+      </form>
+     </div>
+    <table>
+
+       <tr>
+       <th></th>
+         <th>メールアドレス</th>
+         <th>お問い合わせメッセージ</th>
+         <th>返信日</th>
+       </tr>
+       <tr th:each="userTbl:${contactlist}">
+          <td class="center" th:text="${userTbl.contactId}"></td>
+          <td th:text="${userTbl.userMail}"></td>
+          <td th:text="${userTbl.content}"></td>
+          <td class="center" th:text="${#dates.format(userTbl.contactDate,'yyy/MM/dd')}"></td>
+        </tr>
+    </table>
+
+=======
 <body style="background-color:#dadada;">
    <div style="margin:5% 10%;">
    
@@ -39,5 +63,6 @@
 	    </div>
     
     </div>
+>>>>>>> main
 </body>
 </html>

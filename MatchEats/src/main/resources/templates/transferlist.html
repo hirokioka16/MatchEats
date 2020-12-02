@@ -3,14 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <title>振り込み申請一覧</title>
+<link th:href="@{/css/history.css}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 </head>
 <body>
 
-	<table>
+	<div class="container">
+				<div class="row">
+					<div class="col-12" >
+  						<form method="post">
+							<table class="table table-striped">
+								<thead class="thead-light">
+								<tr>
+									<th scope="col">料理名</th>
+									<th scope="col">依頼日</th>
+									<th scope="col">金額</th>
+									<th scope="col">製作状況</th>
+									<th scope="col"></th>
+								</tr>
+							</thead>
 
+							<tbody>
+								<tr th:each="list:${list}">
 
+									<td th:text="${list.price}"></td>
+									<td th:text="${list.transferDate}"></td>
 
-	</table>
+									<td>
+										<input type="hidden" name="historyId" th:value="${list.transferId}">
+										<input type="submit" class="btn btn-link" formaction="" value="詳細">
+									</td>
+								</tr>
+						</tbody>
+					</table>
+				</form>
+  			</div>
+  		</div>
+  		</div>
 
 </body>
 </html>

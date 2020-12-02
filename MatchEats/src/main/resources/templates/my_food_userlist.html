@@ -24,31 +24,32 @@
 					      <th scope="col"></th>
 					      <th scope="col">料理名</th>
 					      <th scope="col">投稿日</th>
-					      
+
 					    </tr>
 					 </thead>
-					 
+
 					 <tbody>
-					 	<form method="post">	
+					 	<form method="post">
 							<tr th:each="list:${list}">
 								<td>
 									<input type="radio" name="requestId" th:value="${list.requestId}">
 								</td>
-								<!-- 
+								<!--
 								本番用
+								<img src="http://jousen5.aso-abcc.com/shoppingSystem/img/yokomina.jpg" width="200px">
 								<img th:src="'/usr/share/tomcat/webapps/foodpic/' + ${list.pictureName}" class="img-fluid">
 								-->
-								<td><img src="http://jousen5.aso-abcc.com/shoppingSystem/img/yokomina.jpg" width="200px"></td>
+								<td><img th:src="'/usr/share/tomcat/webapps/foodpic/' + ${list.pictureName}" class="img-fluid"></td>
 								<td th:text="${list.foodName}">
 								<td th:text="${#dates.format(list.registDate,'yyyy/MM/dd')}">
 							</tr>
-							
-											 
+
+
 					 </tbody>
 				</table>
 						<input type="submit" class="btn btn-danger btn-lg btn-block" formaction="/updatefoodlist/input" value="修正">
 						<input type="submit" class="btn btn-outline-danger btn-lg btn-block" formaction="/deletefood/confirm" value="削除">
-					</form>	
+					</form>
 			</div>
 		</div>
 	</div>

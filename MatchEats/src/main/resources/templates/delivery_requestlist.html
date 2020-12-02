@@ -4,26 +4,50 @@
 <meta charset="UTF-8">
 <title>配達リクエスト一覧</title>
 <link href="/css/deliveryrequestlist.css" rel="stylesheet"></link>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 </head>
 <body>
-	<form th:action="@{/delivery/requestDetail}" method="post">
-	<h1>配達リクエスト一覧</h1>
-		<table>
-			<tr>
-				<th>ユーザー名</th>
-				<th>リクエスト日</th>
-			<tr th:each="list:${list}">
-				<td th:text="${list.userName}">
-				<td th:text="${#dates.format(list.requestDay,'yyyy/MM/dd HH:mm:ss')}">
-				<td>
-					<input type="radio" name="offerId" th:value="${list.offerId}">
-				</td>
-			</tr>
 
-		</table>
-		<input type="submit" value = "詳細へ">
-	</form>
-	<form th:action="@{/admin/menu}" method="get">
+<div tr th:each="list:${list}">
+
+
+		<div class="container">
+			  <div class="row">
+
+			    <div class="col-7">
+
+			    </div>
+			    <div class="col-1">
+			    	<form method='POST'>
+						<input type="hidden" name='offerId' th:value="${list.offerId}">
+						<input type="submit" formaction="/delivery/requestDetail" value="詳細" class="btn btn-danger btn-lg">
+					</form>
+			    </div>
+			    </div>
+			  </div>
+
+			  <div class="row">
+
+				<div class="col-md-6">
+			    <table class="table">
+					<thead class="thead-light">
+					<tr>
+						<th scope="col">ユーザー名</th>
+						<td th:text="${list.userName}">
+					</tr>
+					<tr>
+						<th scope="col">リクエスト日</th>
+						<td th:text=" ${#dates.format(list.requestDay,'yyyy/MM/dd HH:mm:ss')}">
+					</tr>
+					</thead>
+				</table>
+			  </div>
+			</div>
+		</div>
+	 </div>
+
+
+	<form th:action="@{/adminmenu/menu}" method="POST">
 		<input type = "submit" value="戻る">
 	</form>
 </body>

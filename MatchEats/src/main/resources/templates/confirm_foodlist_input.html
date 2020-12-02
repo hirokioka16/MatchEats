@@ -23,13 +23,13 @@
 				<label>料理名</label>
 					<p class="border" id="border" th:text="${session['foodInfDto'].foodName}"></p>
 			
-				<label>料理名の説明</label>
+				<label>料理の説明</label>
 					<p class="border" id="border" th:text="${session['foodInfDto'].requestOutline}"></p>
 				
 				<label>ジャンル</label>
 					<p class="border" id="border" th:text="${genreName}"></p>
 		</div>
-		</div>
+	</div>
 		
 		<input class="btn btn-primary btn-lg" id="next" type="submit" value="登録">
 	</form>

@@ -2,14 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+<link th:href="@{/css/contact.css}" rel="stylesheet" type="text/css">
 <title>オファー送信完了</title>
 </head>
 <body>
-<p>送信完了</p>
 
-<form th:action="@{/menu}">
-	<input type="submit" value="戻る">
-</form>
+<div class="whiteDiv">
+	<h1>送信完了</h1>
+	
+	<p id="tagP">オファーの送信を完了しました。</p>
+	
 
+	<form th:action="@{/menu}">
+		<input class="btn btn-outline-secondary btn-lg" id="first" type="submit" value="戻る">
+	</form>
+</div>
 </body>
 </html>

@@ -49,10 +49,13 @@ public class CookingOfferController {
 		//オファーを送る食べたいものの情報を再取得
 		int r_Id = Integer.parseInt(requestId);
 		FoodInfoDto dto = foodService.getUdFoodList(Integer.parseInt(requestId));
+		
+		String genre = foodService.getGenreName(dto.getGenreId());
+		
 
 		session.setAttribute("requestId", r_Id);
 
-
+		model.addAttribute("genre",genre);
 		model.addAttribute("dto",dto);
 
 		return "input_offer";

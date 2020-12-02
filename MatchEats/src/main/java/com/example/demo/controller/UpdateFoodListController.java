@@ -35,7 +35,7 @@ public class UpdateFoodListController {
 	@Autowired
 	InputFoodListController inputFoodList;
 	
-	@RequestMapping(value= {"/input"}, method=RequestMethod.POST)
+	@RequestMapping(value= {"/input"}, method=RequestMethod.GET)
 	public String inputUpdate(@RequestParam("requestId") String requestId,@ModelAttribute("FoodForm")FoodForm form,Model model) {
 		
 		List<GenreInfoDto> list = foodService.getGenre();

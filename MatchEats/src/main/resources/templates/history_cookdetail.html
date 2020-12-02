@@ -2,54 +2,59 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 <title>調理履歴詳細</title>
 </head>
 <body>
+	<header>
+		<div th:replace="layout/header :: afterheader" ></div>
+	</header>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<table class="table table-striped">
+					<tbody>
+						<tr>
+							<th scope="row">作ったもの</th>
+							<td th:text="${cookDto.foodName}"></td>
+						</tr>
+						<tr>
+							<th scope="row">リクエスト概要</th>
+							<td th:text="${cookDto.requestOutline}"></td>
+						</tr>
+						<tr>
+							<th scope="row">オファーコメント</th>
+							<td th:text="${cookDto.offerComment}"></td>
+						</tr>
+						<tr>
+							<th scope="row">提示金額</th>
+							<td th:text="${cookDto.price}"></td>
+						</tr>
+						<tr>
+							<th scope="row">利益</th>
+							<td th:text="${cookDto.profit}"></td>
+						</tr>
+						<tr>
+							<th scope="row">状態</th>
+							<td th:text="${cookDto.stateStatus}"></td>
+						</tr>
+						<tr>
+							<th scope="row">回収日</th>
+							<td th:text="${cookDto.recoveryDate}"></td>
+						</tr>
+						<tr>
+							<th scope="row">配達完了日</th>
+							<td th:text="${cookDto.deliveryCompleteDate}"></td>
+						</tr>				
+					</tbody>
+				</table>	
+			</div>
+		</div>
+		<form th:action="@{/history/cooklist}" method="get">
+			<input type="submit" class="btn btn-danger btn-lg btn-block" value="一覧に戻る" style="margin-top:20px;">
+		</form>
+	</div>
 
-<table>
-		<tr>
-			<th>作ったもの</th>
-			<td th:text="${cookDto.foodName}"></td>
-		</tr>
-		<tr>
-			<th>リクエスト概要</th>
-			<td th:text="${cookDto.requestOutline}"></td>
-		</tr>
-		<tr>
-			<th>オファーコメント</th>
-			<td th:text="${cookDto.offerComment}"></td>
-		</tr>
-		<tr>
-			<th>提示金額</th>
-			<td th:text="${cookDto.price}"></td>
-		</tr>
-		<tr>
-			<th>利益</th>
-			<td th:text="${cookDto.profit}"></td>
-		</tr>
-		<tr>
-			<th>状態</th>
-			<td th:text="${cookDto.stateStatus}"></td>
-		</tr>
-		<tr>
-			<th>回収日</th>
-			<td th:text="${cookDto.recoveryDate}"></td>
-		</tr>
-		<tr>
-			<th>配達完了日</th>
-			<td th:text="${cookDto.deliveryCompleteDate}"></td>
-		</tr>
-	</table>
-
-
-
-
-
-
-
-
-<form th:action="@{/history/list}" method="get">
-		<input type="submit" value="一覧に戻る">
-	</form>
 </body>
 </html>

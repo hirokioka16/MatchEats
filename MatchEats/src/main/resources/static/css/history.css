@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 
-.area {
+/* .area {
   width: 500px;
   margin: auto;
   flex-wrap: wrap;
@@ -19,19 +19,19 @@
   float: left;
   order: -1;
 }
-
+ */
 input[name="tab_name"] {
   display: none;
 }
 
 input:checked + .tab_class {
-  background-color: cadetblue;
+ background-color: cadetblue;
   color: aliceblue;
 }
-
+ 
 .content_class {
   display: none;
-  width: 100%;
+
 }
 
 input:checked + .tab_class + .content_class {

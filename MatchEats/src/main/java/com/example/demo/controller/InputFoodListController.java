@@ -63,7 +63,7 @@ public class InputFoodListController {
 			form.setGenreId(String.valueOf(dto.getGenreId()));
 			form.setGenreName(getGenreName(dto.getGenreId()));
 			//戻った場合画像を確認画面で保存した画像を消す処理
-			File file = new File("/Users/hiroikeshouta/Desktop/img" + "/" + dto.getPictureName());
+			File file = new File("/usr/share/tomcat/webapps/foodpic" + "/" + dto.getPictureName());
 		    if (file.exists()){
 		        if (file.delete()){
 		          System.out.println("ファイルを削除しました");
@@ -233,7 +233,7 @@ public class InputFoodListController {
         	}
         }
       //画像の保存先
-		File destination = new File("/Users/hiroikeshouta/Desktop/img" + "/" + resultName);
+		File destination = new File("/usr/share/tomcat/webapps/foodpic" + "/" + resultName);
 		makeDir(String.valueOf(destination));
 		//画像保存処理
 		try {

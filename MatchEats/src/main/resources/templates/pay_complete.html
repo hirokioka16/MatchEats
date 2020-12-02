@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
     <head>
         <title>決済完了</title>
     </head>
-    <body>
-        <h3 th:if='${error}' th:text='${error}' style='color: red;'></h3>
-        <div th:unless='${error}'>
-            <h3 style='color: green;'>Success!</h3>
-        </div>
-        <form th:action="@{/}">
-			<input type="submit" value="戻る">
-		</form>
+    <body style="text-align:center;">
+
+	<div style="margin-top:5%; margin-left:auto; margin-right:auto;">
+		<h1 th:if='${error}' th:text='${error}' style='color: red;'></h1>
+		    <div th:unless='${error}'>
+				<h1>決済完了</h1>
+				<p>決済処理が完了しました</p>
+	</div>
+	</div>
+	
+	<form th:action="@{/mypage}" method="get">
+		<input class="btn btn-outline-secondary btn-lg" type="submit" value="戻る" style="background-color:#dcdcdc; width:30%;">
+	</form>
+	
     </body>
 </html>

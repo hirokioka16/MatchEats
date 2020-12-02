@@ -2,29 +2,57 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 <title>食べたい物リスト一覧</title>
 </head>
 <body>
 
-	<form th:action="@{/mypage}">
-	<input type="submit" value="戻る">
-	</form>
+	<header>
+		<div th:replace="layout/header :: afterheader" ></div>
+	</header>
 
-	<form method="post">
-	<table>
-	<tr th:each="list:${list}">
-		<td>
-			<input type="radio" name="requestId" th:value="${list.requestId}">
-		</td>
-		<td th:text="${list.pictureName}">
-		<th th:text="${list.foodName}">
-		<td th:text="${#dates.format(list.registDate,'yyyy/MM/dd')}">
-	</tr>
-	</table>
+	<div class="container">
+		<div class="row">
+			<div id="side" th:replace="layout/side :: side"></div>
 
-	<input type="submit" formaction="/updatefoodlist/input" value="修正">
-	<input type="submit" formaction="/deletefood/confirm" value="削除">
-	</form>
+			<div class="col-7" style="margin-left:80px;">
+				<p class="text-black-50">投稿リスト</p>
+				<table class="table table-striped">
+					<thead class="thead-light">
+					    <tr>
+					      <th scope="col"></th>
+					      <th scope="col"></th>
+					      <th scope="col">料理名</th>
+					      <th scope="col">投稿日</th>
+					      
+					    </tr>
+					 </thead>
+					 
+					 <tbody>
+					 	<form method="post">	
+							<tr th:each="list:${list}">
+								<td>
+									<input type="radio" name="requestId" th:value="${list.requestId}">
+								</td>
+								<!-- 
+								本番用
+								<img th:src="'/usr/share/tomcat/webapps/foodpic/' + ${list.pictureName}" class="img-fluid">
+								-->
+								<td><img src="http://jousen5.aso-abcc.com/shoppingSystem/img/yokomina.jpg" width="200px"></td>
+								<td th:text="${list.foodName}">
+								<td th:text="${#dates.format(list.registDate,'yyyy/MM/dd')}">
+							</tr>
+							
+											 
+					 </tbody>
+				</table>
+						<input type="submit" class="btn btn-danger btn-lg btn-block" formaction="/updatefoodlist/input" value="修正">
+						<input type="submit" class="btn btn-outline-danger btn-lg btn-block" formaction="/deletefood/confirm" value="削除">
+					</form>	
+			</div>
+		</div>
+	</div>
+
 
 </body>
 </html>

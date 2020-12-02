@@ -4,72 +4,62 @@
 <meta charset="UTF-8">
 <title>食事履歴一覧</title>
 <link th:href="@{/css/history.css}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 </head>
 <body>
-	<form th:action="@{/mypage}">
-	<input type="submit" value="戻る">
-	</form>
-	<div class="area">
-		<!-- 以下2行＋CSSでタブ切り替えを実装 -->
-		<input type="radio" name="tab_name" id="tab1" checked>
-		<label class="tab_class" for="tab1">食べた</label>
-		<div class="content_class">
+	<header>
+		<div th:replace="layout/header :: afterheader" ></div>
+	</header>
+	
+			
 
-			<form method="post">
-				<table>
-					<tr>
-						<th></th>
-						<th>料理名</th>
-						<th>依頼日</th>
-						<th>金額</th>
-						<th>製作状況</th>
-						<th>時間</th>
+	<div class="container">
+		<ul class="nav nav-tabs" id="myTab" role="tablist">
+		  <li class="nav-item">
+		  	<form th:action="@{/history/list}">
+		    	<input type="submit" value="食べた" class="nav-link active" id="home-tab" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">
+		  	</form>
+		  </li>
+		  <li class="nav-item">
+		    <form th:action="@{/history/cooklist}">
+		    	<input type="submit" value="作った" class="nav-link" id="profile-tab" data-toggle="tab" role="tab" aria-controls="profile" aria-selected="false">
+		  	</form>
+		  </li>
+		</ul>
 
-					</tr>
-					<tr th:each="eatList:${eatList}">
-						<td><input type="hidden" name="historyId" th:value="${eatList.historyId}"></td>
-						<td th:text="${eatList.foodName}"></td>
-						<td th:text="${eatList.requestDate}"></td>
-						<td th:text="${eatList.price}"></td>
-						<td th:text="${eatList.stateStatus}"></td>
-						<td th:text="${eatList.recoveryDate}"></td>
-						<td><input type="submit"  formaction="/history/eatdetail" value="詳細"></td>
-					</tr>
-				</table>
-
-			</form>
-		</div>
-		<input type="radio" name="tab_name" id="tab2">
-		<label class="tab_class" for="tab2">作った</label>
-		<div class="content_class">
-
-			<form method="post">
-				<table>
-					<tr>
-						<th>料理名</th>
-						<th>オファー日</th>
-						<th>利益</th>
-						<th>製作状況</th>
-						<th>時間</th>
-
-					</tr>
-					<tr th:each="cookList:${cookList}">
-						<td><input type="hidden" name="historyId" th:value="${cookList.historyId}"></td>
-						<td th:text="${cookList.foodName}"></td>
-						<td th:text="${cookList.offerDate}"></td>
-						<td th:text="${cookList.profit}"></td>
-						<td th:text="${cookList.stateStatus}"></td>
-						<td th:text="${cookList.recoveryDate}"></td>
-						<td><input type="submit"  formaction="/history/cookdetail" value="詳細"></td>
-					</tr>
-				</table>
-
-			</form>
-		</div>
-	</div>
-
-
-
-
+		<div class="row">
+			<div class="col-12" >
+  				<form method="post">
+					<table class="table table-striped">
+						<thead class="thead-light">
+							<tr>
+								
+								<th scope="col">料理名</th>
+								<th scope="col">依頼日</th>
+								<th scope="col">金額</th>
+								<th scope="col">製作状況</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+							
+						<tbody>
+							<tr th:each="eatList:${eatList}">
+								
+								<td th:text="${eatList.foodName}"></td>
+								<td th:text="${eatList.requestDate}"></td>
+								<td th:text="${eatList.price}"></td>
+								<td th:text="${eatList.stateStatus}"></td>
+								<td>
+									<input type="hidden" name="historyId" th:value="${eatList.historyId}">
+									<input type="submit" class="btn btn-link" formaction="/history/eatdetail" value="詳細">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+  			</div>
+  		</div>
+  	</div>
+ 
 </body>
 </html>

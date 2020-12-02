@@ -52,14 +52,11 @@ public class HistoryController {
 
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute("loginInfo");
 
-		//int userId = loginInfo.getUserId();
 
-		//テスト用
-		int userId = 1;
 
 		//食事履歴
 
-		List<HistoryInfoDto> list = historyService.getFoodlist(userId);
+		List<HistoryInfoDto> list = historyService.getFoodlist(loginInfo.getUserId());
 		List<EatHistoryDetailDto> eatList = new ArrayList();
 
 		for(HistoryInfoDto dto : list) {
@@ -100,7 +97,7 @@ public class HistoryController {
 
 
 		//調理履歴
-		List<HistoryInfoDto> cList = historyService.getCookList(userId);
+		List<HistoryInfoDto> cList = historyService.getCookList(loginInfo.getUserId());
 		List<EatHistoryDetailDto> cookList = new ArrayList();
 
 		for(HistoryInfoDto cDto : list) {
@@ -144,10 +141,105 @@ public class HistoryController {
 		return "eat_history";
 
 	}
+////////////////////////////////////////////////////////	
+	//Bootstrapの限界
+	@RequestMapping(value= {"history/cooklist"},method=RequestMethod.GET)
+	public String getCookFoodList(Model model) {
+
+		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute("loginInfo");
 
 
 
-	//食事履歴詳細
+		//食事履歴
+
+		List<HistoryInfoDto> list = historyService.getFoodlist(loginInfo.getUserId());
+		List<EatHistoryDetailDto> eatList = new ArrayList();
+
+		for(HistoryInfoDto dto : list) {
+			EatHistoryDetailDto eatDto = new EatHistoryDetailDto();
+
+			eatDto.setHistoryId(dto.getHistoryId());
+
+			//オファーIDをキーにしてオファーテーブルからリクエストIDを取得
+			//リクエストIDをキーに食べたいものテーブルから情報取得、各値をセット
+			CookingInfoDto offerDto = cookService.getOfferInfo(dto.getOfferId());
+			FoodInfoDto foodInfoDto = foodService.getUdFoodList(Integer.parseInt(offerDto.getRequestId()));
+
+
+			eatDto.setFoodName(foodInfoDto.getFoodName());
+			eatDto.setRequestDate(foodInfoDto.getRegistDate());
+			eatDto.setPrice(dto.getCookProfit()+dto.getAdminProfit());
+
+			int state = dto.getStateStatus();
+			switch(state) {
+				case 0:
+					eatDto.setStateStatus("未回収（調理中）");
+					break;
+				case 1:
+					eatDto.setStateStatus("配達中");
+					eatDto.setRecoveryDate(dto.getRecoveryDate());
+					break;
+				case 2:
+					eatDto.setStateStatus("配達完了");
+					eatDto.setDeliveryCompleteDate(dto.getDeliveryCompleteDate());
+					break;
+			}
+
+
+			eatList.add(eatDto);
+		}
+
+		model.addAttribute("eatList",eatList);
+
+		//調理履歴
+		List<HistoryInfoDto> cList = historyService.getCookList(loginInfo.getUserId());
+		List<EatHistoryDetailDto> cookList = new ArrayList();
+
+		for(HistoryInfoDto cDto : list) {
+
+			EatHistoryDetailDto cookDto = new EatHistoryDetailDto();
+			cookDto.setHistoryId(cDto.getHistoryId());
+
+
+			CookingInfoDto offerDto = cookService.getOfferInfo(cDto.getOfferId());
+			FoodInfoDto foodInfoDto = foodService.getUdFoodList(Integer.parseInt(offerDto.getRequestId()));
+
+			cookDto.setFoodName(foodInfoDto.getFoodName());
+			cookDto.setOfferDate(offerDto.getOfferDate());
+
+			cookDto.setProfit(cDto.getCookProfit());
+
+			int state = cDto.getStateStatus();
+			switch(state) {
+			case 0:
+				cookDto.setStateStatus("未回収（調理中）");
+				break;
+			case 1:
+				cookDto.setStateStatus("配達中");
+				cookDto.setRecoveryDate(cDto.getRecoveryDate());
+				break;
+			case 2:
+				cookDto.setStateStatus("配達完了");
+				cookDto.setDeliveryCompleteDate(cDto.getDeliveryCompleteDate());
+				break;
+		}
+
+		cookList.add(cookDto);
+
+		}
+
+		model.addAttribute("cookList",cookList);
+
+
+
+
+		return "cook_history";
+
+	}
+////////////////////////////////////////////////////////
+
+
+	//履歴詳細
 	@RequestMapping(value={"history/eatdetail"},method=RequestMethod.POST)
 	public String detailEat (@RequestParam("historyId") int historyId, @ModelAttribute("AssessmentForm")AssessmentForm form,Model model) {
 

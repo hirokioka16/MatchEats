@@ -2,12 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 <title>売上申請完成</title>
 </head>
-<body>
+<body style="text-align:center;">
+
+	<div style="margin-top:5%; margin-left:auto; margin-right:auto;">
+	<h1>売上振り込み完了</h1>
 	<p>売上振り込み申請完了しました</p>
+	
+	
 	<form th:action="@{/mypage}" method="get">
-		<input type="submit" value="戻る">
+		<input class="btn btn-outline-secondary btn-lg" type="submit" value="戻る" style="background-color:#dcdcdc; width:30%;">
 	</form>
+	
+	</div>
+	
 </body>
 </html>

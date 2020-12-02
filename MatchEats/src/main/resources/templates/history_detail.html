@@ -2,72 +2,85 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 <title>食事履歴詳細</title>
 </head>
 <body>
+	<header>
+		<div th:replace="layout/header :: afterheader" ></div>
+	</header>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<table class="table table-striped">
+					<tbody>
+						<tr>
+							<th>食べたいもの</th>
+							<td th:text="${eatDto.foodName}"></td>
+						</tr>
+						<tr>
+							<th>ニックネーム</th>
+							<td th:text="${eatDto.nickName}"></td>
+						</tr>
+						<tr>
+							<th>リクエスト概要</th>
+							<td th:text="${eatDto.requestOutline}"></td>
+						</tr>
+						<tr>
+							<th>オファーコメント</th>
+							<td th:text="${eatDto.offerComment}"></td>
+						</tr>
+						<tr>
+							<th>リクエスト日</th>
+							<td th:text="${eatDto.requestDate}"></td>
+						</tr>
+						<tr>
+							<th>価格</th>
+							<td th:text="${eatDto.price}"></td>
+						</tr>
+						<tr>
+							<th>状態</th>
+							<td th:text="${eatDto.stateStatus}"></td>
+						</tr>
+						<tr>
+							<th>回収日</th>
+							<td th:text="${eatDto.recoveryDate}"></td>
+						</tr>
+						<tr>
+							<th>配達完了日</th>
+							<td th:text="${eatDto.deliveryCompleteDate}"></td>
+						</tr>			
+					</tbody>
+				</table>
+			</div>
+		</div>
 
-	<table>
-		<tr>
-			<th>食べたいもの</th>
-			<td th:text="${eatDto.foodName}"></td>
-		</tr>
-		<tr>
-			<th>ニックネーム</th>
-			<td th:text="${eatDto.nickName}"></td>
-		</tr>
-		<tr>
-			<th>リクエスト概要</th>
-			<td th:text="${eatDto.requestOutline}"></td>
-		</tr>
-		<tr>
-			<th>オファーコメント</th>
-			<td th:text="${eatDto.offerComment}"></td>
-		</tr>
-		<tr>
-			<th>リクエスト日</th>
-			<td th:text="${eatDto.requestDate}"></td>
-		</tr>
-		<tr>
-			<th>価格</th>
-			<td th:text="${eatDto.price}"></td>
-		</tr>
-		<tr>
-			<th>状態</th>
-			<td th:text="${eatDto.stateStatus}"></td>
-		</tr>
-		<tr>
-			<th>回収日</th>
-			<td th:text="${eatDto.recoveryDate}"></td>
-		</tr>
-		<tr>
-			<th>配達完了日</th>
-			<td th:text="${eatDto.deliveryCompleteDate}"></td>
-		</tr>
-	</table>
+		<form th:action="@{/history/assessmentconfirm}" method="post" th:object="${AssessmentForm}">
+			<div class="form-row">
+				<div class="form-group col-2">	
+					<label for="point">ポイント</label>
+					<select name="point" class="form-control" th:field="*{point}">
+						<option value=1>1</option>
+						<option value=2>2</option>
+						<option value=3>3</option>
+						<option value=4>4</option>
+						<option value=5>5</option>
+					</select>
+				</div>
+				<div class="col-10">	
+					<label for="comment">評価コメント</label>
+					<input type="text" th:field="*{a_comment}" class="form-control">
+				</div>
+			</div>	
+					<input type="submit" class="btn btn-danger btn-lg btn-block" value="確認" style="margin-top:40px;">
+		</form>
+			
+		<form th:action="@{/history/list}" method="get">
+			<input type="submit" value="一覧に戻る" class="btn btn-outline-danger btn-lg btn-block" style="margin-top:20px;">
+		</form>
 
-
-	<form th:action="@{/history/assessmentconfirm}" method="post" th:object="${AssessmentForm}">
-
-		ポイント<select name="point" th:field="*{point}">
-					<option value=1>1</option>
-					<option value=2>2</option>
-					<option value=3>3</option>
-					<option value=4>4</option>
-					<option value=5>5</option>
-				</select>
-
-		<br>
-		<input type="text" th:field="*{a_comment}">
-
-		<input type="submit" value="確認">
-
-	</form>
-
-	<form th:action="@{/history/list}" method="get">
-		<input type="submit" value="一覧に戻る">
-	</form>
-
-
+	</div>
 
 
 </body>

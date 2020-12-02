@@ -138,6 +138,7 @@ public class CookingOfferService {
 		dto.setGenreName(entity.getFoodTbl().getGenreTbl().getGenreName());
 		dto.setRequestOutline(entity.getFoodTbl().getRequestOutline());
 		dto.setFoodName(entity.getFoodTbl().getFoodName());
+		dto.setPictureName(entity.getFoodTbl().getRequestPicture());
 
 
 		return dto;

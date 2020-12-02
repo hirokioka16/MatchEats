@@ -23,11 +23,20 @@ public class UserInfoDto {
 	private String secureCode;
 	private int sales;
 	private Date recoveryDate;
+	private float assessment;
 	
 	
 	
 
-	
+
+	public float getAssessment() {
+		return assessment;
+	}
+
+	public void setAssessment(float assessment) {
+		this.assessment = assessment;
+	}
+
 	public Date getRecoveryDate() {
 		return recoveryDate;
 	}

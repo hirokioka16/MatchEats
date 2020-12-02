@@ -37,6 +37,9 @@ textarea {margin-bottom:2%;}
 #back {
 	width:30%;
 	float: right;
+	border-color:#ea5532;
+	background-color:#fff;
+	color:#ea5532;
 }
 
 

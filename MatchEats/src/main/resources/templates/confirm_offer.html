@@ -2,28 +2,37 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+<link th:href="@{/css/contact.css}" rel="stylesheet" type="text/css">
 <title>入力内容確認</title>
 </head>
-<body>
-	<form th:action="@{/inputoffer/insert}" method="POST">
-	<p>以下の内容で間違いないでしょうか？</p>
-	<table>
-		<tr>
-			<th>金額</th>
-			<td th:text="${session['CookingInfoDto'].price}"></td>
-		</tr>
-		<tr>
-			<th>オファーコメント</th>
-			<td th:text="${session['CookingInfoDto'].offerComment}"></td>
-		</tr>
-	</table>
+<body style="background-color:#dadada;">
 
-	<input type="submit" value="オファーする">
-	</form>
 
-	<form th:action="@{/inputoffer/input}" method="POST">
-		<input type="submit" value="戻る">
-	</form>
+	
+<h1>入力内容確認</h1>
+
+<div style="background-color:#fff; margin:5% 10%;">
+<form th:action="@{/inputoffer/insert}" method="POST">
+
+	<div class="whiteDiv">
+	<h1>入力内容確認</h1>
+	<p>以下の内容で間違いないでしょうか。</p>
+		<label>金額</label>
+			<p class="border" th:text="${session['CookingInfoDto'].price}"></p>
+		<label>オファーコメント</label>
+			<div class="border" th:text="${session['CookingInfoDto'].offerComment}"></div>
+		
+	</div>
+		<input class="btn btn-primary btn-lg" id="next" type="submit" value="オファーする">
+</form>
+
+<form th:action="@{/inputoffer/input}" method="POST">
+	<input class="btn btn-outline-secondary btn-lg" id="back" type="submit" value="戻る">
+</form>
+</div>
+	
+
 
 </body>
 </html>

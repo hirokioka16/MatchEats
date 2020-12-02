@@ -211,6 +211,7 @@ public class UserServise {
 			userDto.setUserAddres(userEntity.getUserAdress());
 			userDto.setUserTel(userEntity.getUserTel());
 			userDto.setSales(userEntity.getSales());
+			userDto.setAssessment(userEntity.getAssessMent());
 
 			//変換
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

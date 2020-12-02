@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+<link th:href="@{/css/inputFood.css}" rel="stylesheet" type="text/css">
 <title>食べたい物リスト登録</title>
 </head>
 <body>
@@ -13,49 +15,44 @@
       		<td style="color:red;" th:text="${error}"></td>
    	 	</tr>
   	</table>
+  	
+  	
+ <div style="padding:3%;"> 	
+ 
+  	<div style="background-color:#fff; margin:5% 10%;">
 	<form th:action="@{/inputfood/confirm}" enctype="multipart/form-data" method="post" th:object="${FoodForm}">
-
-		<table>
-		<tr>
-			<td>料理画像</td>
-		</tr>
-		<tr>
-			<td><input type="file" th:field="*{requestPicture}"></td>
-		<tr>
-			<td>料理名</td>
-		</tr>
-		<tr>
-			<td><input type="text" placeholder="料理名" th:field="*{foodName}"></td>
-		<tr>
-		<tr>
-			<td>料理の説明</td>
-		</tr>
-		<tr>
-			<td><input type="text" placeholder="料理の説明" th:field="*{requestOutline}"></td>
-		</tr>
-		<tr>
-			<td>料理のジャンル</td>
-		</tr>
-
-		<tr>
-			<td>
-				<select name="genreId">
+	<div class="whiteDiv">
+	
+		<div class="div">
+			<label>料理画像</label><span>必須</span>
+			<div class="pic">
+				<input class="selectPic" type="file" th:field="*{requestPicture}">
+			</div>
+		</div>
+		
+		<div class="form-group" style="padding:40px; border-bottom:solid 0.5px #dadada;">
+			<label>料理名</label><span>必須</span>
+				<input class="form-control" type="text" placeholder="料理名" th:field="*{foodName}">
+			<label>料理の説明</label><span>必須</span>
+				<textarea class="form-control" placeholder="料理の説明" th:field="*{requestOutline}" rows="4"></textarea>
+			<label>料理のジャンル</label><span>必須</span>
+				<select name="genreId" class="form-control">
 					<option th:value="*{genreId}" th:text="*{genreName}"></option>
 					<option th:each="genre : ${list}" th:value="${genre.genreId}" th:text="${genre.genreName}"></option>
 				</select>
-			</td>
-		</tr>
-
-		</table>
-
-
-
-		<input type="submit" value="登録">
+		</div>
+		
+	</div>
+		
+		<input class="btn btn-primary btn-lg" id="next" type="submit" value="登録">
 	</form>
 
-	<form th:action="@{/mypage}">
-	<input type="submit" value="戻る">
+	<form th:action="@{/menu}" method="get">
+		<input class="btn btn-outline-secondary btn-lg" id="back"  type="submit" value="戻る">
 	</form>
+	</div>
+
+</div>
 
 </body>
 </html>

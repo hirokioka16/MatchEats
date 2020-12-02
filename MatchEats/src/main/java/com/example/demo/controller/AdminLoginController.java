@@ -52,6 +52,6 @@ public class AdminLoginController {
 	@RequestMapping(value= {"/adminlogout"},method=RequestMethod.GET)
 	public String logout(Model model) {
 		session.removeAttribute("adminInfo");
-		return "redirect:menu";
+		return "redirect:adminlogin";
 	}
 }

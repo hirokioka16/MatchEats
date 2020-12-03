@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.demo.dto.FoodInfoDto;
 import com.example.demo.dto.UserInfoDto;
+import com.example.demo.form.UpdateUserForm;
 import com.example.demo.form.UserForm;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserServise;
@@ -165,6 +166,30 @@ public UserInfoDto getInsertUserDto(UserForm userForm) {
 		
 		
 	}
+
+	public UserInfoDto getUpdateuserDto(UpdateUserForm userForm) {
+		
+		UserInfoDto userInfo = new UserInfoDto();
+		
+		userInfo.setUserId(Integer.parseInt(userForm.getUserId()));
+		userInfo.setUserName(userForm.getUserName());
+		userInfo.setNickName(userForm.getNickName());
+		userInfo.setUserMail(userForm.getUserMail());
+		userInfo.setUserPass(userForm.getUserPass());
+		userInfo.setPostalCode(userForm.getPostalCode());
+		userInfo.setUserAddres(userForm.getUserAddres());
+		userInfo.setUserTel(userForm.getUserTel());
+		userInfo.setCardName(userForm.getCardName());
+		userInfo.setSecureCode(userForm.getSecureCode());
+		userInfo.setUserCard(userForm.getUserCard());
+
+		
+		
+		return userInfo;
+	
+	
+	
+}
 	
 	
 	

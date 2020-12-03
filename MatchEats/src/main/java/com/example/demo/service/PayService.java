@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.controller.DeliveryController;
 import com.example.demo.dto.CookingInfoDto;
-import com.example.demo.dto.LoginInfoDto;
 import com.example.demo.entity.CookOfferTblEntity;
 import com.example.demo.entity.HistoryTblEntity;
 import com.example.demo.entity.UserTblEntity;
@@ -21,20 +20,20 @@ import com.stripe.model.Charge;
 
 @Service
 public class PayService {
-	
+
 	@Autowired
 	CookingOfferRepository cookingOfferRepository;
-	
+
 	@Autowired
 	HistoryRepository historyRepository;
-	
-	
-	
+
+
+
 	public CookingInfoDto getFoodInfo(int offerId) {
-		
+
 		CookingInfoDto dto = new CookingInfoDto();
 		CookOfferTblEntity entity = cookingOfferRepository.getOne(offerId);
-		
+
 		dto.setFoodName(entity.getFoodTbl().getFoodName());
 		dto.setPrice(entity.getPrice());
 		dto.setOfferComment(entity.getOfferComment());
@@ -45,60 +44,60 @@ public class PayService {
 		dto.setFoodName(entity.getFoodTbl().getFoodName());
 		dto.setUserName(entity.getUserTbl().getUserName());
 		dto.setUserMail(entity.getUserTbl().getUserMail());
-		
+
 		return dto;
 	}
-	
+
 	public void charge(StripeForm stripeForm,int offerId){
 		Stripe.apiKey = "";
-	
+
 	    Map<String, Object> chargeMap = new HashMap<String, Object>();
 	    chargeMap.put("amount", stripeForm.getAmount());
 	    chargeMap.put("description", stripeForm.getDescription());
 	    chargeMap.put("currency", "jpy");
 	    chargeMap.put("source", stripeForm.getStripeToken());
-	    
+
 	    CookingInfoDto dto = getFoodInfo(offerId);
 	    HistoryTblEntity en = change(dto);
 	    CookOfferTblEntity cook = new CookOfferTblEntity();
 	    cook.setOfferId(offerId);
 	    en.setCookOfferTbl(cook);
-    
+
     try {
 		Charge.create(chargeMap);
-		
+
 	    //reaction_statusを"2"(決済済み)に設定するRepositoryを書く
 		DeliveryController del = new DeliveryController();
 	   cookingOfferRepository.approvalOffer(del.getNowDate(),offerId);
 	   historyRepository.saveAndFlush(en);
-	    
+
 	} catch (StripeException e) {
 		e.printStackTrace();
 	}catch (Exception e) {
 		e.printStackTrace();
 	}
 	}
-	
-	
+
+
 	public HistoryTblEntity change(CookingInfoDto dto) {
-		
+
 		HistoryTblEntity en = new HistoryTblEntity();
 		UserTblEntity cookUser = new UserTblEntity();
 		UserTblEntity requestUser = new UserTblEntity();
-	
+
 		int adminProfit = dto.getPrice() / 10;
 		int cookProfit = dto.getPrice() - adminProfit;
 		cookUser.setUserId(Integer.parseInt(dto.getUserId()));
 		//LoginInfoDto loginInfo  = (LoginInfoDto)session.getAttribute("loginInfo");
 		requestUser.setUserId(1);
-		
+
 		en.setAdminProfit(adminProfit);
 		en.setCookProfit(cookProfit);
 		en.setCookOfferUser(cookUser);
 		en.setRequestUser(requestUser);
 		en.setStateStatus(0);
-		
-		
+
+
 		return en;
 	}
 }

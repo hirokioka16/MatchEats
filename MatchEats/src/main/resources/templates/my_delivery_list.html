@@ -11,6 +11,18 @@
 		<form th:action="@{/adminmenu/menu}" method="get">
 		<input type = "submit" value="戻る"class="btn btn-link">
 	</form>
+
+	<script  type="text/javascript">
+
+	String nullMsg = null;
+	nullMsg = "${nullMsg}";
+
+	if(nullMsg != null){
+</script>
+	 <p th:text="${nullMsg}"></p>
+<script type="text/javascript">
+	}else{
+</script>
 	<form th:action="@{/delivery/confirm}" method="post">
 		<table>
 			<tr>
@@ -26,6 +38,8 @@
 		</table>
 		<input type="submit" value = "詳細">
 	</form>
-
+<script type="text/javascript">
+	}
+</script>
 </body>
 </html>

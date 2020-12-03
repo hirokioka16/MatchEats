@@ -86,6 +86,11 @@ public class DeliveryController {
 		//回収するやつ
 		List<DeliveryInfoDto> list = deliveryService.getRequestAPProvalList("1");
 
+		if(list.size()==0) {
+			String nullMsg = "現在、回収する料理はありません。";
+			model.addAttribute("nullMsg",nullMsg);
+		}
+
 		model.addAttribute("list", list);
 
 		return "delivery_approval_list";
@@ -129,6 +134,12 @@ public class DeliveryController {
 		int adminId = 1;
 		//配達するやつ
 		List<DeliveryInfoDto> list = historyService.mydeliverylist(adminId);
+
+		if(list.size()==0) {
+			String nullMsg = "現在、配達する料理はありません。";
+			model.addAttribute("nullMsg",nullMsg);
+		}
+
 		model.addAttribute("list", list);
 
 		return "my_delivery_list";

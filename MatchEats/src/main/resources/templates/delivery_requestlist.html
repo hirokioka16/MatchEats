@@ -8,6 +8,10 @@
 </head>
 <body>
 
+	<form th:action="@{/adminmenu/menu}" method="GET">
+		<input type = "submit" value="戻る">
+	</form>
+
 <script  type="text/javascript">
 
 	String nullMsg = null;
@@ -63,8 +67,6 @@
 	}
 </script>
 
-<form th:action="@{/adminmenu/menu}" method="GET">
-		<input type = "submit" value="戻る">
-	</form>
+
 </body>
 </html>

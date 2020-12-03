@@ -3,41 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+<link th:href="@{/css/inputFood.css}" rel="stylesheet" type="text/css">
 <title>詳細</title>
 </head>
 <body>
 
 
-
-<h1 th:text="${dto.foodName}" style="text-align:center;margin-top: 80px;"></h1>
-<div class="container" style="margin-top: 20px;">
-	<div class="row">
-		<div class="col-md-6">
-			<!-- <img src="${pictureName}"> -->
-			<img src="http://jousen5.aso-abcc.com/shoppingSystem/img/yokomina.jpg" class="img-fluid">
-		</div>
+<div style="padding:3%;">
+	<div style="background-color:#fff; margin:5% 10%;">
+		<div class="whiteDiv">
+			<h1 th:text="${dto.foodName}" style="text-align:center;margin-top: 80px;"></h1>
+			
+			<div class="container" style="margin-top: 20px;">
+				<div class="row">
+					<div class="col-md-6">
+					<!-- <img src="${pictureName}"> -->
+					<img src="http://jousen5.aso-abcc.com/shoppingSystem/img/yokomina.jpg" class="img-fluid">
+					</div>
 		
-		<div class="col-md-6">
-			<table class="table">
-				<thead class="thead-light">
-					<tr>
-						<th scope="col">説明</th>
-						<td th:text="${dto.requestOutline}">
-					</tr>
-					<tr>
-						<th scope="col">登録日</th>
-						<td th:text="${dto.registDate}">
-					</tr>
-				</thead>	
-			</table>
+					<div class="col-md-6">
+						<table class="table">
+							<thead class="thead-light">
+							<tr>
+								<th scope="col">説明</th>
+								<td th:text="${dto.requestOutline}">
+							</tr>
+							<tr>
+								<th scope="col">登録日</th>
+								<td th:text="${dto.registDate}">
+							</tr>
+							</thead>	
+						</table>
+					</div>	
+				</div>
+			</div>
 		</div>
-		<div class="col-md-12">
-			<form method="GET">
-				<input type="hidden" name="requestId" th:value="${dto.requestId}">
-				<input type="submit" formaction="/inputoffer/input" value="オファー" class="btn btn-danger btn-lg btn-block" style="margin-top:100px;">
-				<input type="submit" formaction="/menu" value="戻る" class="btn btn-outline-danger btn-lg btn-block" style="margin-top:20px;">
-			</form>
-		</div>
+					
+		
+		<form method="GET">
+			<input type="hidden" name="requestId" th:value="${dto.requestId}">
+			<input type="submit" formaction="/inputoffer/input" value="オファーする" class="btn btn-danger btn-lg" id="next">
+			<input type="submit" formaction="/menu" value="前の画面に戻る" class="btn btn-outline-danger btn-lg" id="back">
+		</form>
 	</div>
 </div>
 	

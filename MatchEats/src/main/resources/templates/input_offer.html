@@ -16,48 +16,56 @@
 
  <div style="padding:3%;">
  	<div style="background-color:#fff; margin:5% 10%;">
-		<div class="whiteDiv">
-			<p>内容を確認して下の入力欄にオファー内容を入力してください。</p>
-			<div class="div">
-				<label>料理画像</label>
-				<div><img th:src="${image}" alt="サンプル" style="width: 40%; height: auto;"></div>
-			</div>
+		<div class="whiteDiv" style="margin-bottom:0px;">
 			
-			<div class="div">		
-					<label>料理名</label>
-					<p class="border" id="border" th:text="${dto.foodName}" style="display:block;"></p>
-			</div>
+			<h1 th:text="${dto.foodName}" style="text-align:center;margin-top: 80px;"></h1>
 			
-			<div class="div">
-				<label>料理の説明</label>
-					<p class="border" id="border" th:text="${dto.requestOutline}"></p>
-				
-				<label>ジャンル</label>
-					<p class="border" id="border" th:text="${genre}"></p>
+			<div class="container" style="margin-top: 20px;">
+				<div class="row">
+					<div class="col-md-6">
+					<!-- <img src="${pictureName}"> -->
+					<img src="http://jousen5.aso-abcc.com/shoppingSystem/img/yokomina.jpg" class="img-fluid">
+					</div>
 					
-				<label>登録日</label>
-					<p class="border" id="border" th:text="${dto.registDate}"></p>
-				
+					<div class="col-md-6">
+						<table class="table">
+							<thead class="thead-light">
+							<tr>
+								<th scope="col">説明</th>
+								<td th:text="${dto.requestOutline}">
+							</tr>
+							<tr>
+								<th scope="col">ジャンル</th>
+								<td th:text="${genre}">
+							</tr>
+							<tr>
+								<th scope="col">登録日</th>
+								<td th:text="${dto.registDate}">
+							</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
 			</div>
-	</div>
-
-
-
-	<form th:action="@{/inputoffer/confirm}" enctype="multipart/form-data" method="post" th:object="${CookingForm}">
-		<div class="whiteDiv">
-			<label>金額</label><span>必須</span>
-				<input class="form-control" type="text" placeholder="金額を入力してください" th:field="*{price}"><br>
-			<label>内容</label><span>必須</span>
-			<textarea class="form-control" placeholder="オファーコメントを入力してください" th:field="*{offerComment}" rows="4"></textarea>
 		</div>
-		
-			<input class="btn btn-primary btn-lg" id="next" type="submit" value="オファーする">
-	</form>
 
-	<form th:action="@{/detailfoodlist}" method="POST">
-		<input class="btn btn-outline-secondary btn-lg" id="back" type="submit" value="戻る">
-	</form>
+
+		<form th:action="@{/inputoffer/confirm}" enctype="multipart/form-data" method="post" th:object="${CookingForm}">
+			<div class="whiteDiv">
+				<label>金額</label><span>必須</span>
+					<input class="form-control" type="text" placeholder="金額を入力してください" th:field="*{price}"><br>
+				<label>内容</label><span>必須</span>
+				<textarea class="form-control" placeholder="オファーコメントを入力してください" th:field="*{offerComment}" rows="4"></textarea>
+			</div>
+			
+		<input class="btn btn-primary btn-lg" id="next" type="submit" value="オファーする">
+		</form>
+
+		<form th:action="@{/detailfoodlist}" method="POST">
+			<input class="btn btn-outline-secondary btn-lg" id="back" type="submit" value="戻る">
+		</form>
 	</div>
 </div>
+
 </body>
 </html>

@@ -21,7 +21,7 @@ public class DeleteFoodListController {
 	@Autowired
 	HttpSession session;
 
-	@RequestMapping(value= {"/confirm"},method=RequestMethod.POST)
+	@RequestMapping(value= {"/confirm"},method=RequestMethod.GET)
 	public String confirmDelete(@RequestParam("requestId") String requestId, Model model) {
 
 		FoodInfoDto dto = foodService.getUdFoodList(Integer.parseInt(requestId));

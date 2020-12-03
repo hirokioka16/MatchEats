@@ -2,44 +2,54 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+<link th:href="@{/css/inputFood.css}" rel="stylesheet" type="text/css">
 <title>食べたい物リスト修正確認</title>
 </head>
 <body>
+
+ <div style="padding:3%;"> 	
+	
+	<div style="background-color:#fff; margin:5% 10%;">
 	<form th:action="@{/updatefoodlist/update}" method="post">
-		<p>以下の内容で間違いはないでしょうか</p>
-		<table>
-			<tr>
-				<td>料理名</td>
-			</tr>
-			<tr>
-				<td th:text="${session['foodInfDto'].foodName}"></td>
-			</tr>
-			<tr>
-				<td>料理名の説明</td>
-			</tr>
-			<tr>
-				<td th:text="${session['foodInfDto'].requestOutline}"></td>
-			</tr>
-			<tr>
-				<td>ジャンル</td>
-			</tr>
-			<tr>
-				<td th:text="${genreName}"></td>
-			</tr>		
-		</table>
-		<div th:switch="${session['foodInfDto'].eatFlag}">
-    		<p th:case="0">オファー受付可</p>
-    		<p th:case="1">オファー受付不可</p>
-    		<p th:case="*">エラー</p>
+	<div class="whiteDiv">
+		
+		<div class="div">
+			<label>料理画像</label>
+			<div><img th:src="${image}" alt="サンプル" style="width: 40%; height: auto;"></div>
 		</div>
-		<p>
-			<input type="submit" value="修正">
-		</p>
+		
+		<div class="div">
+			<label>料理名</label>
+				<p class="border" id="border" th:text="${session['foodInfDto'].foodName}"></p>
+			
+			<label>料理名の説明</label>
+				<p class="border" id="border" th:text="${session['foodInfDto'].requestOutline}"></p>
+			
+			<label>ジャンル</label>
+				<p class="border" id="border" th:text="${genreName}"></p>
+		</div>
+		
+				
+		<div class="form-group" style="padding:40px; border-bottom:solid 0.5px #dadada;">
+			<div th:switch="${session['foodInfDto'].eatFlag}">
+	    		<p th:case="0">オファー受付可</p>
+	    		<p th:case="1">オファー受付不可</p>
+	    		<p th:case="*">エラー</p>
+			</div>
+		</div>
+		</div>
+		
+		<input class="btn btn-primary btn-lg" id="next" type="submit" value="修正">
 	</form>
 	
 	<form th:action="@{/updatefoodlist/input}" method="post">
 		<input type="hidden" name="requestId" th:value="${session['foodInfDto'].requestId}">
-		<input type="submit" value="戻る">
+		<input class="btn btn-outline-secondary btn-lg" id="back" type="submit" value="戻る">
 	</form>
+	</div>
+	
+</div>
+
 </body>
 </html>

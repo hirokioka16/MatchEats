@@ -13,6 +13,8 @@ public class AdminService {
 	@Autowired
 	private AdminRepository adminRepository;
 
+
+	//ログイン
 	public AdminInfoDto login(String mail,String pass)throws Exception{
 		AdminInfoDto adminInfo = null;
 
@@ -26,6 +28,7 @@ public class AdminService {
 
 		return adminInfo;
 	}
+
 
 }
 

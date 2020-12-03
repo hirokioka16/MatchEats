@@ -2,27 +2,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<link href="/css/menu.css" rel="stylesheet"></link>
+<link th:href="@{/css/menu.css}" rel="stylesheet" type="text/css">
 <title>管理者メニュー</title>
 
 </head>
 <body>
+<h1>管理者メニュー</h1>
+
+<form th:action="@{/adminlogout}" method="get">
 <input type="submit" value="ログアウト">
-<h1>管理者メニュー画面</h1>
-
-<form th:action="@{/}" method="get">
-
-
-<ul id="nav2_lr">
-<li id="current"><a th:href="@{/delivery/requestlist}">配達リクエスト一覧</a></li>
-
-<li><a th:href="@{/inputContact/contactlist}" id="current">お問合せ一覧</a></li>
-
-<li><a th:href="@{/delivery/approvallist}">配達リスト一覧</a></li>
-
-<li><a th:href="@{/mypage}">振り込み申請一覧</a></li>
-</ul>
 </form>
+
+
+<table>
+	<tr>
+		<td><a th:href="@{/delivery/requestlist}" class="menu" >配達リクエスト一覧</a></td>
+		<td><a th:href="@{/inputContact/contactlist}" class="menu" >お問合せ一覧</a></td>
+	</tr>
+	<tr>
+		<td><a th:href="@{/delivery/approvallist}" class="menu" >配達リスト一覧</a></td>
+		<td><a th:href="@{/adminmenu/transfer}" class="menu" >振り込み申請一覧</a></td>
+	</tr>
+</table>
 
 </body>
 </html>

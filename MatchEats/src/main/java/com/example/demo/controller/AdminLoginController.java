@@ -39,7 +39,7 @@ public class AdminLoginController {
 
 		if(adminInfo != null) {
 			session.setAttribute("adminInfo",adminInfo);
-			url="redirect:adminmenu";
+			url="redirect:adminmenu/menu";
 		}else {
 			err="メールアドレスまたはパスワードが間違っています";
 			url = "redirect:adminlogin";
@@ -52,6 +52,6 @@ public class AdminLoginController {
 	@RequestMapping(value= {"/adminlogout"},method=RequestMethod.GET)
 	public String logout(Model model) {
 		session.removeAttribute("adminInfo");
-		return "redirect:menu";
+		return "redirect:adminlogin";
 	}
 }

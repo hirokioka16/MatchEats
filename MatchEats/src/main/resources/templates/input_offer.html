@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+<link th:href="@{/css/inputFood.css}" rel="stylesheet" type="text/css">
 <title>オファー入力</title>
 </head>
 <body>
@@ -10,17 +12,52 @@
       		<td style="color:red;" th:text="${error}"></td>
    	 	</tr>
   	</table>
+  	
 
-  	<form th:action="@{/inputoffer/confirm}" enctype="multipart/form-data" method="post" th:object="${CookingForm}">
-		<input type="text" placeholder="金額を入力してください" th:field="*{price}"><br>
-		<input type="text" placeholder="オファーコメントを入力してください" th:field="*{offerComment}">
+ <div style="padding:3%;">
+ 	<div style="background-color:#fff; margin:5% 10%;">
+		<div class="whiteDiv">
+			<p>内容を確認して下の入力欄にオファー内容を入力してください。</p>
+			<div class="div">
+				<label>料理画像</label>
+				<div><img th:src="${image}" alt="サンプル" style="width: 40%; height: auto;"></div>
+			</div>
+			
+			<div class="div">		
+					<label>料理名</label>
+					<p class="border" id="border" th:text="${dto.foodName}" style="display:block;"></p>
+			</div>
+			
+			<div class="div">
+				<label>料理の説明</label>
+					<p class="border" id="border" th:text="${dto.requestOutline}"></p>
+				
+				<label>ジャンル</label>
+					<p class="border" id="border" th:text="${genre}"></p>
+					
+				<label>登録日</label>
+					<p class="border" id="border" th:text="${dto.registDate}"></p>
+				
+			</div>
+	</div>
 
-		<input type="submit" value="オファーする">
+
+
+	<form th:action="@{/inputoffer/confirm}" enctype="multipart/form-data" method="post" th:object="${CookingForm}">
+		<div class="whiteDiv">
+			<label>金額</label><span>必須</span>
+				<input class="form-control" type="text" placeholder="金額を入力してください" th:field="*{price}"><br>
+			<label>内容</label><span>必須</span>
+			<textarea class="form-control" placeholder="オファーコメントを入力してください" th:field="*{offerComment}" rows="4"></textarea>
+		</div>
+		
+			<input class="btn btn-primary btn-lg" id="next" type="submit" value="オファーする">
 	</form>
 
 	<form th:action="@{/detailfoodlist}" method="POST">
-		<input type="submit" value="戻る">
+		<input class="btn btn-outline-secondary btn-lg" id="back" type="submit" value="戻る">
 	</form>
-
+	</div>
+</div>
 </body>
 </html>

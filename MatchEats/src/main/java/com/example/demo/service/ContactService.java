@@ -34,7 +34,7 @@ public class ContactService {
 	 */
 	public List<ContactInfoDto> searchAll(){
 
-		List<ContactsTblEntity> list = contactRepository.findAll();
+		List<ContactsTblEntity> list = contactRepository.getAll();
 
 		List<ContactInfoDto> dtoList = new ArrayList<ContactInfoDto>();
 

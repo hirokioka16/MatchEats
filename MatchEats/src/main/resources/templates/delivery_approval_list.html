@@ -9,10 +9,10 @@
 <body>
 
 		<h1>配達リクエスト一覧</h1>
-		<form th:action="@{/adminmenu/menu}" method="post">
-		<input type = "submit" value="戻る"class="btn btn-link">
-	</form>
-	<form th:action="@{/delivery/collectionconfirm}" method="post">
+		<form th:action="@{/adminmenu/menu}" method="get">
+			<input type = "submit" value="戻る"class="btn btn-link">
+		</form>
+		<form th:action="@{/delivery/collectionconfirm}" method="post">
 		<table>
 			<tr>
 				<th>ユーザー名</th>

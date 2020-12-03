@@ -8,20 +8,26 @@
 </head>
 <body>
 
+<script  type="text/javascript">
+
+	String nullMsg = null;
+	nullMsg = "${nullMsg}";
+
+	if(nullMsg != null){
+</script>
+	 <p th:text="${nullMsg}"></p>
+<script type="text/javascript">
+	}else{
+</script>
+
 <div tr th:each="list:${list}">
 
 
 		<div class="container">
 			  <div class="row">
 
-			    <div class="col-7">
-
-			    </div>
 			    <div class="col-1">
-			    	<form method='POST'>
-						<input type="hidden" name='offerId' th:value="${list.offerId}">
-						<input type="submit" formaction="/delivery/requestDetail" value="詳細" class="btn btn-danger btn-lg">
-					</form>
+
 			    </div>
 			    </div>
 			  </div>
@@ -38,6 +44,12 @@
 					<tr>
 						<th scope="col">リクエスト日</th>
 						<td th:text=" ${#dates.format(list.requestDay,'yyyy/MM/dd HH:mm:ss')}">
+						<td>
+							<form method='POST'>
+								<input type="hidden" name='offerId' th:value="${list.offerId}">
+								<input type="submit" formaction="/delivery/requestDetail" value="詳細" class="btn btn-danger btn-lg">
+							</form>
+						</td>
 					</tr>
 					</thead>
 				</table>
@@ -47,7 +59,11 @@
 	 </div>
 
 
-	<form th:action="@{/adminmenu/menu}" method="POST">
+<script type="text/javascript">
+	}
+</script>
+
+<form th:action="@{/adminmenu/menu}" method="GET">
 		<input type = "submit" value="戻る">
 	</form>
 </body>

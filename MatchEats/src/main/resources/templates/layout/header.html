@@ -8,7 +8,7 @@
 
 	<div th:fragment="beforeheader" th:remove="tag">
 		<nav class="navbar navbar-dark bg-danger">
-			<a href="" class="navbar-brand d-flex align-items-center">
+			<a th:href="@{/menu}" class="navbar-brand d-flex align-items-center">
 				<img class="rounded" src="http://jousen5.aso-abcc.com/shoppingSystem/img/matchicon.png" width="50" height="50">
 				<strong style="margin-left:20px">MatchEats</strong>
 			</a>
@@ -31,7 +31,7 @@
     <div th:fragment="afterheader" th:remove="tag">
 
 		<nav class="navbar navbar-dark bg-danger">
-			<a href="" class="navbar-brand d-flex align-items-center">
+			<a th:href="@{/menu}" class="navbar-brand d-flex align-items-center">
 				<img class="rounded" src="http://jousen5.aso-abcc.com/shoppingSystem/img/matchicon.png"  width="50" height="50">
 				<strong style="margin-left:20px">MatchEats</strong>
 			</a>

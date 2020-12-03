@@ -47,7 +47,8 @@
 		本番用
 		<img src="/usr/share/tomcat/webapps/foodpic/広告の画像名" class="card-img-top" alt="img">
 		-->
-		<img src="http://jousen5.aso-abcc.com/shoppingSystem/img/yokomina.jpg" class="img-fluid" alt="Responsive image" style="max-width:100%;height: auto;">
+		<!-- <img src="http://jousen5.aso-abcc.com/shoppingSystem/img/yokomina.jpg" class="img-fluid" alt="Responsive image" style="max-width:100%;height: auto;"> -->
+		<img th:src="'/getImage/' + ${imgFile}"   class="img-fluid" alt="Responsive image" style="max-width:100%;height: auto;">
 	</div> 
 
 

@@ -48,7 +48,6 @@ public class UserTopController {
 			loginFlg = true;
 		}
 		model.addAttribute("loginFlg",loginFlg);
-		
 		return "top";
 	}
 }

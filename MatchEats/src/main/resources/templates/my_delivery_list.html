@@ -33,11 +33,11 @@
 				<td th:text="${list.userName}">
 				<td th:text="${#dates.format(list.requestDay,'yyyy/MM/dd HH:mm:ss')}">
 				<td>
-					<input type="radio" name="historyId" th:value="${list.historyId}">
+					<input type="hidden" name="historyId" th:value="${list.historyId}">
+					<input type="submit" value = "詳細">
 				</td>
 			</tr>
 		</table>
-		<input type="submit" value = "詳細">
 	</form>
 <script type="text/javascript">
 	}

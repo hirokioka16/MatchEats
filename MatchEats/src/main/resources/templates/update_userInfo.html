@@ -9,19 +9,19 @@
 
 
 
-<!-- エラーメッセージ -->
-<table>
- 	 <tr th:if="${validationError}" th:each="error : ${validationError}">
-      	<td style="color:red;" th:text="${error}"></td>
-   	 </tr>
-</table>
+
 
  <p style="text-align:center; margin-top:4%;">修正したい項目をご入力の上、お進みください。</p>
 
 
 <!-- 入力フォーム -->
 <div class="border" style="width:60%; margin-right:auto; margin-left:auto; padding:5% 10%;">
-<form th:action="@{/updateUserInfo/confirm}"  method="post" th:object="${UserForm}">
+<div th:if="${validationError}">
+ 	<div th:each="error,stat  : ${validationError}" th:if="${stat.index < 1}">
+ 		<p th:text="${error}" style="text-align:center; margin-top:4%;color:rgb(235, 58, 51);">
+ 	</div>
+</div> 
+<form th:action="@{/updateUserInfo/confirm}"  method="post" th:object="${updateUserForm}">
  	<input type="hidden" th:field="*{userId}">
  	<div class="form-group"> 
  		<label for="formGroupExampleInput">メールアドレス</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{userMail}">

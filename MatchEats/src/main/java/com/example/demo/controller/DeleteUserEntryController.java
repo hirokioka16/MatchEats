@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+import com.example.demo.dto.LoginInfoDto;
 import com.example.demo.service.UserServise;
 
 @Controller
@@ -34,13 +34,9 @@ public class DeleteUserEntryController {
 	public String delete() throws java.text.ParseException {
 		
 		//本番
-//		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute("loginInfo");
-//		Integer userId = loginInfo.getUserId();
-		Integer userId = 5;
-		
-		
-		//UserInfoDto dto = (UserInfoDto)session.getAttribute("userInfoDto");
-		userService.delete(userId);
+		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute("loginInfo");
+
+		userService.delete(loginInfo.getUserId());
 		
 		return "redirect:/deleteUserEntry/complete";
 		

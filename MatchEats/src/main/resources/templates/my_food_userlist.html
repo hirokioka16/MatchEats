@@ -30,17 +30,16 @@
 					 </thead>
 
 					 <tbody>
-					 	<form method="post">
+					 	<form method="get">
 							<tr th:each="list:${list}">
 								<td>
 									<input type="radio" name="requestId" th:value="${list.requestId}">
 								</td>
 								<!--
 								本番用
-								<img src="http://jousen5.aso-abcc.com/shoppingSystem/img/yokomina.jpg" width="200px">
-								<img th:src="'/usr/share/tomcat/webapps/foodpic/' + ${list.pictureName}" class="img-fluid">
+								<img th:src="'/getImage/' + ${list.pictureName}" class="img-fluid">
 								-->
-								<td><img th:src="'/usr/share/tomcat/webapps/foodpic/' + ${list.pictureName}" class="img-fluid"></td>
+								<td><img th:src="'/getImage/' + ${list.pictureName}" class="img-fluid" width="200px"></td>
 								<td th:text="${list.foodName}">
 								<td th:text="${#dates.format(list.registDate,'yyyy/MM/dd')}">
 							</tr>

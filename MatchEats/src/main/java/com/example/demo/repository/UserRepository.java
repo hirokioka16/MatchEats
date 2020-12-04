@@ -13,7 +13,7 @@ import com.example.demo.entity.UserTblEntity;
 @Repository
 public interface UserRepository extends JpaRepository<UserTblEntity, Integer> {
 
-	@Query("select u from UserTblEntity u where userMail = :mail and  userPass = :password")
+	@Query("select u from UserTblEntity u where userMail = :mail and  userPass = :password and accountType != 1")
 	public UserTblEntity login(@Param("mail")String mail,@Param("password")String password);
 
 	//会員情報修正
@@ -57,4 +57,11 @@ public interface UserRepository extends JpaRepository<UserTblEntity, Integer> {
 
 	@Query("select u from UserTblEntity u where userMail = :mail and  userPass = :password")
 	public UserTblEntity getUserInfo(@Param("mail")String mail,@Param("password")String password);
+	
+	@Modifying
+	@Query("UPDATE UserTblEntity u SET"
+			+ " u.accountType = 1 "
+			+ " WHERE u.userId = :userId ")
+	public void deleteUser(
+			@Param("userId")int userId);
 }

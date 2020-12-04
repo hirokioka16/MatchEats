@@ -7,12 +7,13 @@
 <style>
 </style>
 </head>
-<body>
+<body style="background-color:#f8f9fa;">
 
-	<header>
+	<header style="background-color:#fff;">
 		<div th:replace="layout/header :: afterheader" ></div>
 	</header>
-	<div class="container">
+	
+	<div class="container" style="margin:5% 1%;">
 		<div class="row">
 	
 		<div id="side" th:replace="layout/side :: side"></div>
@@ -20,8 +21,8 @@
 			<div class="col-7" style="margin-left:80px;">
 			<form th:action="@{/transferProcedures}" method="post">
 		
-				<p class="text-black-50">会員情報</p>
-				<table class="table table-striped">
+				<p style="margin-bottom:0px; padding-left:10px; padding-top:10px; padding-bottom:10px; background-color:#fff; color:#ea5532; border-bottom:2px solid #ea5532;">会員情報</p>
+				<table class="table" style="background-color:#fff">
 					<tbody>
 					<tr>
 						<th scope="row">名前</th>

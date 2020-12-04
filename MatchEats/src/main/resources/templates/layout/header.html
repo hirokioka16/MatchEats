@@ -10,20 +10,26 @@
 		<nav class="navbar navbar-dark bg-danger">
 			<a th:href="@{/menu}" class="navbar-brand d-flex align-items-center">
 				<img class="rounded" src="http://jousen5.aso-abcc.com/shoppingSystem/img/matchicon.png" width="50" height="50">
-				<strong style="margin-left:20px">MatchEats</strong>
+				<strong style="margin-left:20px; color:#ea5532;">MatchEats</strong>
 			</a>
 			<form method="get" class="form-inline">
-					<input class="form-control mr-sm-2" type="text" placeholder="何かお探しですか" name="keyword" aria-label="Search">
-					<input class="btn btn-warning my-2 my-sm-0" type="submit" formaction="/seachfoodlist" value="検索">
+					 <!-- 入力欄 -->
+					<input class="form-control mr-sm-2" type="text" placeholder="何かお探しですか" name="keyword" aria-label="Search" 
+						style="background-color: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204);
+								border-radius: 4px; font-size: 16px; height: 40px; float:left;">
+					<!-- 検索ボタン -->
+					<input class="btn btn-outline-secondary my-2 my-sm-0" type="submit" formaction="/seachfoodlist" value="検索" style="float:right;">
 			</form>
 		</nav>
 	
-		<ul class="nav justify-content-end" style="border-bottom: 1px solid #dcdcdc;margin-bottom:50px;">
+		<ul class="nav justify-content-end" style="border-bottom: 1px solid #dcdcdc;margin-bottom:30px; padding-bottom:1%;">
   			<li class="nav-item">
-				<a class="nav-link" th:href="@{/login}" th:text="ログイン" style="margin-right:10px"></a>
+				<a class="btn btn-outline-primary" th:href="@{/login}" th:text="ログイン"
+					style="margin-right:10px; border-color:#ea5532; color:#ea5532;"></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" th:href="@{/inputUserEntry/input}" th:text="新規会員登録"></a>
+				<a class="btn btn-outline-primary" th:href="@{/inputUserEntry/input}" th:text="新規会員登録"
+					style="background-color:#ea5532; border-color:#ea5532; color:#fff; margin-right:16px;"></a>
 			</li>
         </ul> 
     </div>
@@ -33,20 +39,24 @@
 		<nav class="navbar navbar-dark bg-danger">
 			<a th:href="@{/menu}" class="navbar-brand d-flex align-items-center">
 				<img class="rounded" src="http://jousen5.aso-abcc.com/shoppingSystem/img/matchicon.png"  width="50" height="50">
-				<strong style="margin-left:20px">MatchEats</strong>
+				<strong style="margin-left:20px; color:#ea5532;">MatchEats</strong>
 			</a>
 			<form method="get" class="form-inline">
-					<input class="form-control mr-sm-2" type="text" placeholder="何かお探しですか" name="keyword" aria-label="Search">
-					<input class="btn btn-warning my-2 my-sm-0" type="submit" formaction="/seachfoodlist" value="検索">
+				<!-- 入力欄 -->
+					<input class="form-control mr-sm-2" type="text" placeholder="何かお探しですか" name="keyword" aria-label="Search"
+						style="background-color: rgb(245, 245, 245); border: 1px solid rgb(204, 204, 204);
+								border-radius: 4px; font-size: 16px; height: 40px; float:left;">
+				<!-- 検索ボタン -->
+					<input class="btn btn-primary my-2 my-sm-0" type="submit" formaction="/seachfoodlist" value="検索" style="float:right; border-color:#ea5532; background-color:#ea5532; color:#fff;">
 			</form>
 		</nav>
 
-		<ul class="nav justify-content-end" style="border-bottom: 1px solid #dcdcdc;margin-bottom:50px;">
+		<ul class="nav justify-content-end" style="border-bottom: 1px solid #dcdcdc; padding-bottom:1%;">
 			<li class="nav-item">
-				<a class="nav-link " th:href="@{/mypage}" th:text="マイページ"></a>
+				<a class="nav-link " th:href="@{/mypage}" th:text="マイページ" style="color:#6a6a6a;"></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link active" th:href="@{/logout}" th:text="ログアウト"></a>
+				<a class="nav-link active" th:href="@{/logout}" th:text="ログアウト" style="color:#6a6a6a;"></a>
         	</li>
         </ul>
     </div>

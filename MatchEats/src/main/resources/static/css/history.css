@@ -37,3 +37,24 @@ input:checked + .tab_class {
 input:checked + .tab_class + .content_class {
   display: block;
 }
+
+
+/***************
+
+食事履歴一覧 
+
+***************/
+
+
+
+.nav-link:hover {
+    background-color: #fff;
+    cursor: pointer;
+    border-color:#ea5532;
+    color:#ea5532;
+}
+.nav-tabs .nav-link.active {
+    background-color: #ea5532;
+    border:#ea5532;
+    color:#fff;
+}

@@ -15,7 +15,7 @@
 	<div class="container">
 				<div class="row">
 					<div class="col-12" >
-  						<form th:action="@{/adminmenu/transfer/confirmapproval}" method="POST">
+  						<form th:action="@{/adminmenu/transfer/confirmapproval}" method="post">
 							<table class="table table-striped">
 								<thead class="thead-light">
 								<tr>
@@ -33,7 +33,7 @@
 									<td th:text="${list.transferDate}"></td>
 
 									<td>
-										<input type="hidden" name="historyId" th:value="${list.transferId}">
+										<input type="hidden" name="transferId" th:value="${list.transferId}">
 										<input type="submit" class="btn btn-link" formaction="" value="承認">
 									</td>
 								</tr>

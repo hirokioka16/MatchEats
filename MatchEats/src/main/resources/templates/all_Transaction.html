@@ -20,21 +20,28 @@
 							<tr>
 
 								<th scope="col">料理名</th>
-								<th scope="col">依頼日</th>
+								<th scope="col">依頼者</th>
+								<th scope="col">調理者</th>
+								<th scope="col">回収日</th>
+								<th scope="col">配達日</th>
 								<th scope="col">金額</th>
+								<th scope="col">製作者利益</th>
+								<th scope="col">調理者履歴</th>
 								<th scope="col">製作状況</th>
-								<th scope="col"></th>
 							</tr>
 						</thead>
 
 						<tbody>
-							<tr th:each="list:${list}">
-
+							<tr th:each="list:${AllList}">
+								<td th:text="${list.foodName}"></td>
+								<td th:text="${list.cookUserName}"></td>
+								<td th:text="${list.requestUserName}"></td>
+								<td th:text="${list.RecoveryDate}"></td>
+								<td th:text="${list.DeliveryCompleteDate}"></td>
+								<td th:text="${list.price}"></td>
 								<td th:text="${list.adminProfit}"></td>
-
-								<td>
-
-								</td>
+								<td th:text="${list.cookerProfit}"></td>
+								<td th:text="${list.stateStatus}"></td>
 							</tr>
 						</tbody>
 					</table>

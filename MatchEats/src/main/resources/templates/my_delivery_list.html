@@ -7,22 +7,23 @@
 <title>配達一覧</title>
 </head>
 <body>
-	<p>配達一覧</p>
+
+		<h1>配達中料理一覧</h1>
 		<form th:action="@{/adminmenu/menu}" method="get">
-		<input type = "submit" value="戻る"class="btn btn-link">
-	</form>
+			<input type = "submit" value="戻る"class="btn btn-link">
+		</form>
 
-	<script  type="text/javascript">
+		<script  type="text/javascript">
 
-	String nullMsg = null;
-	nullMsg = "${nullMsg}";
+			String nullMsg = null;
+			nullMsg = "${nullMsg}";
 
-	if(nullMsg != null){
-</script>
-	 <p th:text="${nullMsg}"></p>
-<script type="text/javascript">
-	}else{
-</script>
+			if(nullMsg != null){
+		</script>
+	 		<p th:text="${nullMsg}"></p>
+		<script type="text/javascript">
+			}else{
+		</script>
 	<form th:action="@{/delivery/confirm}" method="post">
 		<table>
 			<tr>

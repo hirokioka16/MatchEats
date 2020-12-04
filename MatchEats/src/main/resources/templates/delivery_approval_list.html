@@ -9,10 +9,22 @@
 <body>
 
 		<h1>配達リクエスト一覧</h1>
-		<form th:action="@{/adminmenu/menu}" method="post">
-		<input type = "submit" value="戻る"class="btn btn-link">
-	</form>
-	<form th:action="@{/delivery/collectionconfirm}" method="post">
+		<form th:action="@{/adminmenu/menu}" method="get">
+			<input type = "submit" value="戻る"class="btn btn-link">
+		</form>
+
+		<script  type="text/javascript">
+
+			String nullMsg = null;
+			nullMsg = "${nullMsg}";
+
+			if(nullMsg != null){
+		</script>
+	 		<p th:text="${nullMsg}"></p>
+		<script type="text/javascript">
+			}else{
+		</script>
+		<form th:action="@{/delivery/collectionconfirm}" method="post">
 		<table>
 			<tr>
 				<th>ユーザー名</th>
@@ -27,5 +39,8 @@
 		</table>
 		<input type="submit" value = "回収">
 	</form>
+<script type="text/javascript">
+	}
+</script>
 </body>
 </html>

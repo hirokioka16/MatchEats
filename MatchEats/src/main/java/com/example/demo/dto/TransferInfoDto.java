@@ -7,6 +7,7 @@ import com.example.demo.entity.TransferId;
 public class TransferInfoDto {
 
 	private TransferId transferId;
+	private Integer userId;
 	private Integer price;
 	private Date transferDate;
 	private boolean acceptFlag;
@@ -17,6 +18,12 @@ public class TransferInfoDto {
 	}
 	public void setTransferId(TransferId transferId) {
 		this.transferId = transferId;
+	}
+	public Integer getUserId() {
+		return userId;
+	}
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 	public Integer getPrice() {
 		return price;

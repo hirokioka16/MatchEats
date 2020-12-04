@@ -8,11 +8,23 @@
 </head>
 <body>
 
-		<h1>配達リクエスト一覧</h1>
-		<form th:action="@{/adminmenu/menu}" method="post">
-		<input type = "submit" value="戻る"class="btn btn-link">
-	</form>
-	<form th:action="@{/delivery/collectionconfirm}" method="post">
+		<h1>配達リクエスト承認済み料理一覧</h1>
+		<form th:action="@{/adminmenu/menu}" method="get">
+			<input type = "submit" value="戻る"class="btn btn-link">
+		</form>
+
+		<script  type="text/javascript">
+
+			String nullMsg = null;
+			nullMsg = "${nullMsg}";
+
+			if(nullMsg != null){
+		</script>
+	 		<p th:text="${nullMsg}"></p>
+		<script type="text/javascript">
+			}else{
+		</script>
+		<form th:action="@{/delivery/collectionconfirm}" method="post">
 		<table>
 			<tr>
 				<th>ユーザー名</th>
@@ -21,11 +33,14 @@
 				<td th:text="${list.userName}">
 				<td th:text="${#dates.format(list.requestApprovalDay,'yyyy/MM/dd HH:mm:ss')}">
 				<td>
-					<input type="radio" name="offerId" th:value="${list.offerId}">
+					<input type="hidden" name="offerId" th:value="${list.offerId}">
+					<input type="submit" value = "回収">
 				</td>
 			</tr>
 		</table>
-		<input type="submit" value = "回収">
 	</form>
+<script type="text/javascript">
+	}
+</script>
 </body>
 </html>

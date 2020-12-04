@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 
@@ -7,18 +7,19 @@
 <link href="/css/complete.css" rel="stylesheet"></link>
 </head>
 <body>
-<div><h1>MeatEate</h1></div>
+<div><h1>MeatEats</h1></div>
 <div><h2></h2> </div>
 <div>
         <div>
-      
+
         <p>
-        回収完了しました。<br>
-       
+        配達完了<br>
+        お疲れさまでした。
+
         </p>
-        <a href="input.php">
-            <button type="button">戻る</button>
-        </a>
+        <form th:action="@{/adminmenu/menu}" method="GET">
+		<input type = "submit" value="戻る">
+	</form>
     </div>
 </div>
 </body>

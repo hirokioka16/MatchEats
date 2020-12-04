@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.dto.AdminHistoryDto;
 import com.example.demo.dto.AssessmentInfoDto;
 import com.example.demo.dto.CookingInfoDto;
 import com.example.demo.dto.EatHistoryDetailDto;
@@ -415,16 +416,44 @@ public class HistoryController {
 	public String getAllTransaction(Model model) {
 
 		List<HistoryInfoDto> list = historyService.getAll();
+		List<AdminHistoryDto> AllList = new ArrayList();
 
+		for(HistoryInfoDto dto : list) {
+			AdminHistoryDto adDto = new AdminHistoryDto();
 
+			adDto.setPrice(dto.getCookProfit() + dto.getAdminProfit() );
+			adDto.setAdminProfit(dto.getAdminProfit());
+			adDto.setCookerProfit(dto.getCookProfit());
 
+			int state = dto.getStateStatus();
+			switch(state) {
+				case 0:
+					adDto.setStateStatus("未回収（調理中）");
+					break;
+				case 1:
+					adDto.setStateStatus("配達中");
+					adDto.setRecoveryDate(dto.getRecoveryDate());
+					break;
+				case 2:
+					adDto.setStateStatus("配達完了");
+					adDto.setDeliveryCompleteDate(dto.getDeliveryCompleteDate());
+					break;
+			}
 
+			CookingInfoDto offerDto = cookService.getOfferInfo(dto.getOfferId());
+			String nickName = userService.getTrueName(Integer.parseInt(offerDto.getUserId()));
+			adDto.setCookUserName(nickName);
 
+			FoodInfoDto foodDto = foodService.getUdFoodList(Integer.parseInt(offerDto.getRequestId()));
+			adDto.setFoodName(foodDto.getFoodName());
 
+			String rName =  userService.getTrueName(foodDto.getUserId());
+			adDto.setRequestUserName(rName);
 
+			AllList.add(adDto);
+		}
 
-
-		session.setAttribute("list", list);
+		model.addAttribute("AllList", AllList);
 
 		return "all_Transaction";
 	}

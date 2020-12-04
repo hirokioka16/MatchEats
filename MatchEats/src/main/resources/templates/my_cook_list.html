@@ -7,18 +7,19 @@
 <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 <title>調理リスト一覧</title>
 </head>
-<body>
-	<header>
+<body style="background-color:#f8f9fa;">
+	<header style="background-color:#fff;">
 		<div th:replace="layout/header :: afterheader" ></div>
 	</header>
 
-	<div class="container">
+	<div class="container" style="margin:5% 1%;">
 		<div class="row">
 			<div id="side" th:replace="layout/side :: side"></div>
 
 			<div class="col-7" style="margin-left:80px;">
-				<p class="text-black-50">調理リスト一覧</p>
-				<table class="table table-striped">
+				<p style="margin-bottom:0px; padding-left:10px; padding-top:10px; padding-bottom:10px; background-color:#fff; 
+						color:#ea5532; border-bottom:2px solid #ea5532;">調理リスト一覧</p>
+				<table class="table" style="background-color:#fff;">
 					<thead class="thead-light">
 					    <tr>
 					      <th scope="col">ユーザー名</th>

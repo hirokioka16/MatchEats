@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>取引履歴</title>
+<link th:href="@{/css/history.css}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-12" >
+  				<form method="post">
+					<table class="table table-striped">
+						<thead class="thead-light">
+							<tr>
+
+								<th scope="col">料理名</th>
+								<th scope="col">依頼日</th>
+								<th scope="col">金額</th>
+								<th scope="col">製作状況</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr th:each="list:${list}">
+
+								<td th:text="${list.adminProfit}"></td>
+
+								<td>
+
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+  			</div>
+  		</div>
+
+
+
+
+</body>
+</html>

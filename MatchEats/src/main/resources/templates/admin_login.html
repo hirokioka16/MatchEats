@@ -4,11 +4,10 @@
 <meta charset="UTF-8">
 <link href="/css/login.css" rel="stylesheet"></link>
 <hgroup class="heading">
-<h1 class="major">Login Form </h1>
+<h1 class="major">Admin Login</h1>
 </hgroup>
 
 <body>
-<h1 class="sign-up-title">Sign up in seconds</h1>
 
 <form th:action="@{/adminauth}" method="post" th:object="${loginform}" class="sign-up">
 <p th:text="${errMessage}"></p>

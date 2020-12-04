@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<link href="/css/list.css" rel="stylesheet"></link>
+<link th:href="@{/css/history.css}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 <title>配達一覧</title>
 </head>
@@ -14,7 +14,6 @@
 		</form>
 
 		<script  type="text/javascript">
-
 			String nullMsg = null;
 			nullMsg = "${nullMsg}";
 
@@ -24,23 +23,33 @@
 		<script type="text/javascript">
 			}else{
 		</script>
-	<form th:action="@{/delivery/confirm}" method="post">
-		<table>
-			<tr>
-				<th>ユーザー名</th>
-				<th>回収時間</th>
-			<tr th:each="list:${list}">
-				<td th:text="${list.userName}">
-				<td th:text="${#dates.format(list.requestDay,'yyyy/MM/dd HH:mm:ss')}">
-				<td>
-					<input type="hidden" name="historyId" th:value="${list.historyId}">
-					<input type="submit" value = "詳細">
-				</td>
-			</tr>
-		</table>
-	</form>
-<script type="text/javascript">
-	}
-</script>
+
+		<div class="container">
+				<div class="row">
+					<div class="col-12" >
+						<form th:action="@{/delivery/confirm}" method="post">
+							<table class="table table-striped">
+								<thead class="thead-light">
+									<tr>
+										<th scope="col">ユーザー名</th>
+										<th scope="col">回収時間</th>
+									</tr>
+								</thead>
+
+								<tbody>
+											<tr th:each="list:${list}">
+												<td th:text="${list.userName}">
+												<td th:text="${#dates.format(list.requestDay,'yyyy/MM/dd HH:mm:ss')}">
+												<td>
+													<input type="hidden" name="historyId" th:value="${list.historyId}">
+													<input type="submit" value = "詳細">
+												</td>
+											</tr>
+								</tbody>
+							</table>
+						</form>
+		<script type="text/javascript">
+			}
+		</script>
 </body>
 </html>

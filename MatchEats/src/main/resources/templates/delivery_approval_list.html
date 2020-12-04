@@ -24,23 +24,33 @@
 		<script type="text/javascript">
 			}else{
 		</script>
-		<form th:action="@{/delivery/collectionconfirm}" method="post">
-		<table>
-			<tr>
-				<th>ユーザー名</th>
-				<th>リクエスト日</th>
-			<tr th:each="list:${list}">
-				<td th:text="${list.userName}">
-				<td th:text="${#dates.format(list.requestApprovalDay,'yyyy/MM/dd HH:mm:ss')}">
-				<td>
-					<input type="hidden" name="offerId" th:value="${list.offerId}">
-					<input type="submit" value = "回収">
-				</td>
-			</tr>
-		</table>
-	</form>
-<script type="text/javascript">
-	}
-</script>
+
+		<div class="container">
+				<div class="row">
+					<div class="col-12" >
+						<form th:action="@{/delivery/collectionconfirm}" method="post">
+							<table class="table table-striped">
+								<thead class="thead-light">
+									<tr>
+										<th>ユーザー名</th>
+										<th>リクエスト日</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr th:each="list:${list}">
+										<td th:text="${list.userName}">
+										<td th:text="${#dates.format(list.requestApprovalDay,'yyyy/MM/dd HH:mm:ss')}">
+										<td>
+											<input type="hidden" name="offerId" th:value="${list.offerId}">
+											<input type="submit" value = "回収">
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+		<script type="text/javascript">
+				}
+		</script>
 </body>
 </html>

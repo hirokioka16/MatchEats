@@ -38,7 +38,7 @@ public class AdminMenuController {
 	}
 
 
-	//振込申請確認
+	//振込申請一覧
 	@RequestMapping(value= {"/transfer"},method=RequestMethod.GET)
 	public String  getTransferlist(Model model) {
 
@@ -48,10 +48,13 @@ public class AdminMenuController {
 		return "transferlist";
 	}
 
+	//申請確認
 	@RequestMapping(value= {"/transfer/confirmapproval"},method=RequestMethod.POST)
-	public String confirmApproval(@RequestParam("transferId") TransferId transferId,Model model) {
+	public String confirmApproval(@RequestParam("transferId") int  transferId,Model model) {
 
-			TransferInfoDto dto = transferService.getInfo(transferId);
+			TransferId id = new TransferId();
+			id.setTransferId(transferId);
+			TransferInfoDto dto = transferService.getInfo(id);
 
 			String userName = userService.getTrueName(dto.getUserId());
 
@@ -64,6 +67,7 @@ public class AdminMenuController {
 
 	}
 
+	//承認登録
 	@RequestMapping(value= {"/transfer/insertapproval"},method=RequestMethod.POST)
 	public String insertApproval() throws java.text.ParseException {
 		TransferId transferId = (TransferId)session.getAttribute("transferId");

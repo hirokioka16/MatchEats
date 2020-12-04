@@ -7,30 +7,33 @@
 <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 </head>
 <body>
+	<h1>振込申請一覧</h1>
+	<form th:action="@{/adminmenu/menu}" method="get">
+			<input type = "submit" value="戻る"class="btn btn-link">
+	</form>
 
 	<div class="container">
 				<div class="row">
 					<div class="col-12" >
-  						<form th:action="@{/adminmenu/transfer/confirmapproval}" method="POST">
+  						<form th:action="@{/adminmenu/transfer/confirmapproval}" method="post">
 							<table class="table table-striped">
 								<thead class="thead-light">
 								<tr>
-									<th scope="col">料理名</th>
-									<th scope="col">依頼日</th>
+									<th scope="col">ユーザー名</th>
 									<th scope="col">金額</th>
-									<th scope="col">製作状況</th>
+									<th scope="col">依頼日</th>
 									<th scope="col"></th>
 								</tr>
 							</thead>
 
 							<tbody>
 								<tr th:each="list:${list}">
-
+									<td></td>
 									<td th:text="${list.price}"></td>
 									<td th:text="${list.transferDate}"></td>
 
 									<td>
-										<input type="hidden" name="historyId" th:value="${list.transferId}">
+										<input type="hidden" name="transferId" th:value="${list.transferId}">
 										<input type="submit" class="btn btn-link" formaction="" value="承認">
 									</td>
 								</tr>

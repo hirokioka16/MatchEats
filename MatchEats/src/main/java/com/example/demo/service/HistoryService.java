@@ -231,19 +231,48 @@ public class HistoryService {
 		return list;
 
 	}
-	
+
 	public HistoryInfoDto getHistoryInfo(int historyId) {
-		
+
 		HistoryTblEntity en = historyRepository.getOne(historyId);
 		HistoryInfoDto dto = new HistoryInfoDto();
-		
+
 		dto.setCookUserName(en.getCookOfferUser().getUserName());
 		dto.setCookUserMail(en.getCookOfferUser().getUserMail());
-		
-		
-		return dto; 
+
+
+		return dto;
 	}
 
+	public List<HistoryInfoDto> getAll(){
+
+		List<HistoryInfoDto> allList = new ArrayList<HistoryInfoDto>();
+		List<HistoryTblEntity> entityList = historyRepository.findAll();
+
+		for(HistoryTblEntity entity:entityList) {
+
+			HistoryInfoDto dto = new HistoryInfoDto();
+			dto.setHistoryId(entity.getHistoryId());
+			dto.setOfferId(entity.getCookOfferTbl().getOfferId());
+
+			if(entity.getAdminTbl() != null) {
+				dto.setAdminId(entity.getAdminTbl().getAdminId());
+			}
+			dto.setRecoveryDate(entity.getRecoveryDate());
+			dto.setDeliveryCompleteDate(entity.getDeliveryCompleteDate());
+			dto.setStateStatus(entity.getStateStatus());
+			dto.setAdminProfit(entity.getAdminProfit());
+			dto.setCookProfit(entity.getCookProfit());
+			dto.setCookUserId(entity.getCookOfferUser().getUserId());
+			dto.setRequestUserId(entity.getRequestUser().getUserId());
+
+			allList.add(dto);
+		}
+
+		return allList;
+
+
+	}
 
 }
 

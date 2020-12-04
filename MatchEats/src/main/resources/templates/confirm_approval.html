@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+<link th:href="@{/css/contact.css}" rel="stylesheet" type="text/css">
+<title>振込承認確認</title>
+</head>
+<body>
+<body style="background-color:#dadada;">
+
+<div style="background-color:#fff; margin:5% 10%;">
+<form th:action="@{/adminmenu/transfer/insertapproval}" method="POST">
+
+	<div class="whiteDiv">
+	<h1>振込承認確認</h1>
+	<p>以下の内容で間違いないでしょうか。</p>
+		<label>金額</label>
+			<p class="border" th:text="${dto.price}"></p>
+	</div>
+		<input class="btn btn-primary btn-lg" id="next" type="submit" value="オファーする">
+</form>
+
+<form th:action="@{/adminmenu/transfer}" method="GET">
+	<input class="btn btn-outline-secondary btn-lg" id="back" type="submit" value="戻る">
+</form>
+</div>
+
+
+
+</body>
+</html>

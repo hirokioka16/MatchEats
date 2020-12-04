@@ -141,7 +141,7 @@ public class HistoryController {
 		return "eat_history";
 
 	}
-////////////////////////////////////////////////////////	
+////////////////////////////////////////////////////////
 	//Bootstrapの限界
 	@RequestMapping(value= {"history/cooklist"},method=RequestMethod.GET)
 	public String getCookFoodList(Model model) {
@@ -410,6 +410,25 @@ public class HistoryController {
 
 	}
 
+	//管理者側[取引履歴]機能用
+	@RequestMapping(value= {"/adminmenu/alltransaction"},method=RequestMethod.GET)
+	public String getAllTransaction(Model model) {
+
+		List<HistoryInfoDto> list = historyService.getAll();
+
+
+
+
+
+
+
+
+
+		session.setAttribute("list", list);
+
+		return "all_Transaction";
+	}
+
 
 
 
@@ -437,6 +456,8 @@ public class HistoryController {
 
 			return now;
 		}
+
+
 
 
 }

@@ -16,7 +16,7 @@
 			<div id="side" th:replace="layout/side :: side"></div>
 
 			<div class="col-7" style="margin-left:80px;">
-				<p style="margin-bottom:0px; padding-left:10px; padding-top:10px; padding-bottom:10px; background-color:#fff; 
+				<p style="margin-bottom:0px; padding-left:10px; padding-top:10px; padding-bottom:10px; background-color:#fff;
 						color:#ea5532; border-bottom:2px solid #ea5532;">投稿リスト</p>
 				<table class="table" style="background-color:#fff">
 					<thead style="background-color: #fafafa;">
@@ -47,8 +47,8 @@
 
 					 </tbody>
 				</table>
-						<input type="submit" class="btn btn-danger btn-lg btn-block" formaction="/updatefoodlist/input" value="修正">
-						<input type="submit" class="btn btn-outline-danger btn-lg btn-block" formaction="/deletefood/confirm" value="削除">
+						<input type="submit" class="btn btn-danger btn-lg btn-block" th:action="@{/updatefoodlist/input}" value="修正">
+						<input type="submit" class="btn btn-outline-danger btn-lg btn-block" th:action="@{/deletefood/confirm}" value="削除">
 					</form>
 			</div>
 		</div>

@@ -2,10 +2,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link href="/css/list.css" rel="stylesheet"></link>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 <title>配達一覧</title>
 </head>
 <body>
-	<p>配達一覧</p>
+
+		<h1>配達中料理一覧</h1>
+		<form th:action="@{/adminmenu/menu}" method="get">
+			<input type = "submit" value="戻る"class="btn btn-link">
+		</form>
+
+		<script  type="text/javascript">
+
+			String nullMsg = null;
+			nullMsg = "${nullMsg}";
+
+			if(nullMsg != null){
+		</script>
+	 		<p th:text="${nullMsg}"></p>
+		<script type="text/javascript">
+			}else{
+		</script>
 	<form th:action="@{/delivery/confirm}" method="post">
 		<table>
 			<tr>
@@ -15,14 +33,14 @@
 				<td th:text="${list.userName}">
 				<td th:text="${#dates.format(list.requestDay,'yyyy/MM/dd HH:mm:ss')}">
 				<td>
-					<input type="radio" name="historyId" th:value="${list.historyId}">
+					<input type="hidden" name="historyId" th:value="${list.historyId}">
+					<input type="submit" value = "詳細">
 				</td>
 			</tr>
 		</table>
-		<input type="submit" value = "詳細">
 	</form>
-	<form th:action="@{/admin/menu}" method="get">
-		<input type = "submit" value="戻る">
-	</form>
+<script type="text/javascript">
+	}
+</script>
 </body>
 </html>

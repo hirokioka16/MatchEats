@@ -17,11 +17,13 @@
 <table>
 	<tr>
 		<td><a th:href="@{/delivery/requestlist}" class="menu" >配達リクエスト一覧</a></td>
-		<td><a th:href="@{/inputContact/contactlist}" class="menu" >お問合せ一覧</a></td>
+		<td><a th:href="@{/delivery/approvallist}" class="menu" >未回収一覧</a></td>
+		<td><a th:href="@{/delivery/mydeliverylist}" class="menu" >未配達一覧</a></td>
 	</tr>
 	<tr>
-		<td><a th:href="@{/delivery/approvallist}" class="menu" >配達リスト一覧</a></td>
 		<td><a th:href="@{/adminmenu/transfer}" class="menu" >振り込み申請一覧</a></td>
+		<td><a th:href="@{/adminmenu/alltransaction}" class="menu">取引履歴</a></td>
+		<td><a th:href="@{/inputContact/contactlist}" class="menu" >お問合せ一覧</a></td>
 	</tr>
 </table>
 

@@ -94,7 +94,7 @@ public class UserServise {
 	
 	//削除
 	public void delete(Integer userId) {
-		userRepository.deleteById(userId);
+		userRepository.deleteUser(userId);
 	}
 	
 	

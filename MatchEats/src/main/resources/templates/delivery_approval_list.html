@@ -13,19 +13,17 @@
 			<input type = "submit" value="戻る"class="btn btn-link">
 		</form>
 
+		<script  type="text/javascript">
 
+			String nullMsg = null;
+			nullMsg = "${nullMsg}";
 
-	<script  type="text/javascript">
-
-	String nullMsg = null;
-	nullMsg = "${nullMsg}";
-
-	if(nullMsg != null){
-</script>
-	 <p th:text="${nullMsg}"></p>
-<script type="text/javascript">
-	}else{
-</script>
+			if(nullMsg != null){
+		</script>
+	 		<p th:text="${nullMsg}"></p>
+		<script type="text/javascript">
+			}else{
+		</script>
 		<form th:action="@{/delivery/collectionconfirm}" method="post">
 		<table>
 			<tr>

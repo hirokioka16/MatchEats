@@ -16,8 +16,9 @@
 	<h1>振込承認確認</h1>
 	<p>以下の内容で間違いないでしょうか。</p>
 		<label>金額</label>
-			<p class="border" th:text="${dto.price}"></p>
+			<p class="border" th:text="${transferDto.price}"></p>
 	</div>
+		<input type="hidden" name="transferId" th:value="${transferId}">
 		<input class="btn btn-primary btn-lg" id="next" type="submit" value="オファーする">
 </form>
 

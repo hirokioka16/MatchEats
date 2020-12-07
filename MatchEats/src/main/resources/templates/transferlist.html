@@ -15,7 +15,7 @@
 	<div class="container">
 				<div class="row">
 					<div class="col-12" >
-  						<form th:action="@{/adminmenu/transfer/confirmapproval}" method="post">
+  						
 							<table class="table table-striped">
 								<thead class="thead-light">
 								<tr>
@@ -28,18 +28,20 @@
 
 							<tbody>
 								<tr th:each="list:${list}">
-									<td></td>
+									<td th:text="${list.userName}"</td>
 									<td th:text="${list.price}"></td>
 									<td th:text="${list.transferDate}"></td>
 
 									<td>
-										<input type="hidden" name="transferId" th:value="${list.transferId}">
-										<input type="submit" class="btn btn-link" formaction="" value="承認">
+										<form th:action="@{/adminmenu/transfer/confirmapproval}" method="POST">
+											<input type="hidden" th:value="${list.id}" name="id">
+											<input type="submit" class="btn btn-link"  value="承認">
+										</form>
 									</td>
 								</tr>
 						</tbody>
 					</table>
-				</form>
+				
   			</div>
   		</div>
   		</div>

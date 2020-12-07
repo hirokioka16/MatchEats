@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.example.demo.util.FileUtils;
 
-@WebFilter("/*")
+@WebFilter
 public class EncodingFilter implements Filter {
 
 	/** エンコード */

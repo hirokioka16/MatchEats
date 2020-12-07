@@ -22,10 +22,11 @@
 		</div>
 	</div>
 	</form>
-	
-	
+
+
 	<form th:action="@{/auth}" method="post" th:object="${loginform}" class="sign-up">
-	<div class="form-group" style="margin-top:0px; padding-bottom:50px;">	
+	<p th:text="${errMessage}"></p>
+	<div class="form-group" style="margin-top:0px; padding-bottom:50px;">
 			<input class="form-control" type="email" placeholder="メールアドレス" th:field="*{email}">
 			<input class="form-control" type="password" placeholder="パスワード" th:field="*{pass}">
 			<div style="text-align:center; margin-top:5px;">
@@ -34,7 +35,7 @@
 	</div>
 	</form>
 </div>
-	
+
 
 
 

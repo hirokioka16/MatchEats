@@ -28,9 +28,10 @@ public class TransferService {
 		for(TransferTblEntity entity:entityList) {
 
 			TransferInfoDto dto = new TransferInfoDto();
-			dto.setTransferId(entity.getTransferId());
+			dto.setId(entity.getTransferId().getTransferId());
 			dto.setPrice(entity.getPrice());
 			dto.setTransferDate(entity.getTransferDate());
+			dto.setUserName(entity.getTransferId().getUserTbl().getUserName());
 			list.add(dto);
 		}
 
@@ -39,9 +40,9 @@ public class TransferService {
 	}
 
 	//承認確認用情報再取得
-	public TransferInfoDto getInfo(TransferId transferId) {
+	public TransferInfoDto getInfo(int transferId) {
 
-		TransferTblEntity entity = transferRepository.getOne(transferId);
+		TransferTblEntity entity = transferRepository.getTransfer(transferId);
 		TransferInfoDto dto = new TransferInfoDto();
 
 		dto.setUserId(entity.getTransferId().getUserTbl().getUserId());
@@ -52,7 +53,7 @@ public class TransferService {
 
 	}
 
-	public void insertApproval(Date now,TransferId transferId) {
+	public void insertApproval(Date now,int transferId) {
 
 		transferRepository.insertApproval(now,transferId);
 

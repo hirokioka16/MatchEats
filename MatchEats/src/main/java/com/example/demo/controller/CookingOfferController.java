@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.dto.CookingInfoDto;
 import com.example.demo.dto.FoodInfoDto;
+import com.example.demo.dto.GenreInfoDto;
 import com.example.demo.dto.LoginInfoDto;
 import com.example.demo.form.CookingForm;
 import com.example.demo.service.CookingOfferService;
@@ -74,6 +75,13 @@ public class CookingOfferController {
 						errorList.add(error.getDefaultMessage());
 					}
 					model.addAttribute("validationError", errorList);
+					
+					int requestId = (int)session.getAttribute("requestId");
+					FoodInfoDto dto = foodService.getUdFoodList(requestId);
+					String genre = foodService.getGenreName(dto.getGenreId());
+					
+					model.addAttribute("genre",genre);
+					model.addAttribute("dto",dto);
 					//エラーあり入力画面に戻す
 					url = "input_offer";
 				}else {

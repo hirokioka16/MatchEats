@@ -12,8 +12,12 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
-import com.example.demo.util.FileUtils;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
+import com.example.demo.util.FileUtils;
+@Component
+@Order(2)
 @WebFilter
 public class EncodingFilter implements Filter {
 

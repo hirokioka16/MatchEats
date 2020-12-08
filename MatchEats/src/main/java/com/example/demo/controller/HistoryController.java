@@ -436,6 +436,7 @@ public class HistoryController {
 					break;
 				case 2:
 					adDto.setStateStatus("配達完了");
+					adDto.setRecoveryDate(dto.getRecoveryDate());
 					adDto.setDeliveryCompleteDate(dto.getDeliveryCompleteDate());
 					break;
 			}

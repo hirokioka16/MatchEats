@@ -54,6 +54,7 @@ public class CookingOfferService {
 			dto.setFoodName(entity.getFoodTbl().getFoodName());
 			dto.setImgName(entity.getFoodTbl().getRequestPicture());
 			dto.setCookContent(entity.getFoodTbl().getRequestOutline());
+			dto.setPictureName(entity.getFoodTbl().getRequestPicture());
 			
 			reactionList.add(dto);
 		}

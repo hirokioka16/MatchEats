@@ -35,7 +35,7 @@
 								<td>
 									<input type="radio" name="requestId" th:value="${list.requestId}">
 								</td>
-								<td><img th:src="'/MatchEats/getImage/' + ${list.pictureName}" class="img-fluid" width="200px" height="100px"></td>
+								<td><img th:src="'/MatchEats/getImage/' + ${list.pictureName}"  width="200px" height="100px"></td>
 								<td th:text="${list.foodName}">
 								<td th:text="${#dates.format(list.registDate,'yyyy/MM/dd')}">
 							</tr>

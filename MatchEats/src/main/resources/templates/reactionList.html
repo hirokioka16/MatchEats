@@ -29,15 +29,15 @@ margin-bottom: 10px;
 			  
 			    </div>
 			    <div class="col-1">
-			    	<form method='get'>
+			    	<form th:action="@{/pay}" method='get'>
 						<input type="hidden" name='offerId' th:value="${reactionList.offerId}">
-						<input type="submit" formaction="/pay" value="詳細" class="btn btn-danger btn-lg">
+						<input type="submit"  value="詳細" class="btn btn-danger btn-lg">
 					</form>
 			    </div>
 			     <div class="col-1">
-			      	<form method='get'>
+			      	<form th:action="@{/reject}" method='get'>
 						<input type="hidden" name='offerId' th:value="${reactionList.offerId}">
-						<input type="submit" formaction="/reject" value="拒否" class="btn btn-primary btn-lg">
+						<input type="submit" value="拒否" class="btn btn-primary btn-lg">
 					</form>
 			    </div>
 			  </div>

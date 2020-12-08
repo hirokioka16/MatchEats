@@ -47,6 +47,7 @@ public class CookingOfferController {
 	public String input(@RequestParam("requestId") String requestId, @ModelAttribute("CookingForm")CookingForm form,Model model) {
 
 
+		
 		//オファーを送る食べたいものの情報を再取得
 		int r_Id = Integer.parseInt(requestId);
 		FoodInfoDto dto = foodService.getUdFoodList(Integer.parseInt(requestId));

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.dto.CookingInfoDto;
 import com.example.demo.dto.FoodInfoDto;
@@ -41,19 +42,30 @@ public class CookingOfferController {
 	UserServise userSercvice;
 	@Autowired
 	MailTest02Application mail;
-	
+
 
 	@RequestMapping(value= {"/inputoffer/input"}, method=RequestMethod.GET)
-	public String input(@RequestParam("requestId") String requestId, @ModelAttribute("CookingForm")CookingForm form,Model model) {
+	public String input(RedirectAttributes redirectAttributes,@RequestParam("requestId") String requestId, @ModelAttribute("CookingForm")CookingForm form,Model model) {
 
 
 		
 		//オファーを送る食べたいものの情報を再取得
 		int r_Id = Integer.parseInt(requestId);
 		FoodInfoDto dto = foodService.getUdFoodList(Integer.parseInt(requestId));
-		
+
+
+		//自分が登録した食べものの場合エラー表示
+		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute("loginInfo");
+
+		if(dto.getUserId() == loginInfo.getUserId()) {
+			redirectAttributes.addAttribute("errMsg","これは自分が登録したたべたいものです。");
+
+			return "redirect:/detailfoodlist?requestId="+dto.getRequestId();
+
+		}
+
 		String genre = foodService.getGenreName(dto.getGenreId());
-		
+
 
 		session.setAttribute("requestId", r_Id);
 
@@ -96,7 +108,7 @@ public class CookingOfferController {
 					dto.setUserId(String.valueOf(loginInfo.getUserId()));
 
 					//本番用に変えた
-					
+
 
 					session.setAttribute("CookingInfoDto", dto);
 
@@ -117,11 +129,11 @@ public class CookingOfferController {
 		dto.setReactionStatus("0");
 
 		cookingOfferService.insert(dto);
-		
+
 		//料理制作をリクエストした人にオファーが来たとメールを送る
 		FoodInfoDto foodDto = foodService.getUdFoodList(requestId);
 		mail.sendMail(foodDto.getUserMail(),"調理オファーが届きました!",foodDto.getUserName()+"様が登録していた料理リクエストにオファーが届きました");
-		
+
 
 		session.removeAttribute("CookingInfoDto");
 		return "redirect:/inputoffer/complete";

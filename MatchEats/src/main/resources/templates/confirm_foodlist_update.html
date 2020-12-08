@@ -43,7 +43,7 @@
 		<input class="btn btn-primary btn-lg" id="next" type="submit" value="修正">
 	</form>
 	
-	<form th:action="@{/updatefoodlist/input}" method="post">
+	<form th:action="@{/updatefoodlist/input}" method="get">
 		<input type="hidden" name="requestId" th:value="${session['foodInfDto'].requestId}">
 		<input class="btn btn-outline-secondary btn-lg" id="back" type="submit" value="戻る">
 	</form>

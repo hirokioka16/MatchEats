@@ -25,7 +25,7 @@ public interface FoodRepository extends JpaRepository<FoodTblEntity,Integer>{
     public List<FoodRepository> testFind();
 
 	//自分の投稿した食べたい物リストを取得する
-	@Query("SELECT f FROM FoodTblEntity f left join f.userTbl u WHERE u.userId = :userId")
+	@Query("SELECT f FROM FoodTblEntity f left join f.userTbl u WHERE u.userId = :userId AND f.eatFlag = 0")
 	public List<FoodTblEntity> getMyFoodList(@Param("userId") int userId);
 
 	//+ " f.genreTbl = :genreId, "	@Param("genreId") int genreId,

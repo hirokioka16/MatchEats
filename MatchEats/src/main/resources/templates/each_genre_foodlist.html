@@ -24,7 +24,7 @@
 		<div class="container">
 			<div class="card-columns">
 				<div class="card shadow-sm" th:each="list: ${firstList}" th:object="${list}">
-	    			<img src="http://jousen5.aso-abcc.com/shoppingSystem/img/minami.jpg" class="card-img-top" alt="img">
+	    			<img th:src="'/MatchEats/getImage/' + ${list.pictureName}" class="card-img-top" alt="img">
 	    			<div class="card-body">
 	      				<h5 class="card-title" th:text="*{foodName}"></h5>
 	      				<form th:action="@{/detailfoodlist}" method="GET">

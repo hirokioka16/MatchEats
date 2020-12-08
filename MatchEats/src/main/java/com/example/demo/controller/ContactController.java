@@ -67,13 +67,9 @@ import com.example.demo.service.ContactService;
 
 			  	ContactInfoDto dto = getCreateDto(form);
 
-			  //sessionよりLoginInfoを取得
-			  //LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute("loginInfo");
-			  //userIdを取り出しDtoに格納
-			   //dto.setUserId(loginInfo.getUserId());
+			  	LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute("loginInfo");
 
-			  	 //テスト用
-			  	dto.setUserId(1);
+			  	dto.setUserId(loginInfo.getUserId());
 
 
 			  	session.setAttribute("contactInfoDto",dto);

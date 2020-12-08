@@ -62,6 +62,7 @@
 		</form>
 
 		<form th:action="@{/detailfoodlist}" method="POST">
+			<input type="hidden" name="requestId" th:value="${session['requestId']}">
 			<input class="btn btn-outline-secondary btn-lg" id="back" type="submit" value="戻る">
 		</form>
 	</div>

@@ -9,23 +9,23 @@
 <body>
 
 <div class="whiteDiv">
-	
+
 	<h1>お問合せ</h1>
 
 	<form th:action="@{/inputContact/confirm}" enctype="multipart/form-data" method="post" th:object="${ContactForm}">
 		<div class="form-group">
 		<label for="exampleFormControlTextarea1">お問合せしたい内容を入力してください。</label>
-		<textarea class="form-control" id="exampleFormControlTextarea1" 
+		<textarea class="form-control" id="exampleFormControlTextarea1"
 					rows="4" th:field="*{content}"></textarea>
 		</div>
 		<input class="btn btn-primary btn-lg" id="next" type="submit" value="次へ">
 	</form>
-	
-	
-	<form th:action="@{/inputContact/contactlist}">
+
+
+	<form th:action="@{/menu}">
 		<input class="btn btn-outline-secondary btn-lg" id="back" type="submit" value="戻る">
 	</form>
-	
+
 </div>
 </body>
 </html>

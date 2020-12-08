@@ -40,10 +40,12 @@
 		</div>
 					
 		
-		<form method="GET">
+		<form th:action ="@{/inputoffer/input}" method="GET">
 			<input type="hidden" name="requestId" th:value="${dto.requestId}">
-			<input type="submit" formaction="/inputoffer/input" value="オファーする" class="btn btn-danger btn-lg" id="next">
-			<input type="submit" formaction="/menu" value="前の画面に戻る" class="btn btn-outline-danger btn-lg" id="back">
+			<input type="submit" value="オファーする" class="btn btn-danger btn-lg" id="next">
+		</form>
+		<form th:action ="@{/menu}" method="GET">
+			<input type="submit" value="前の画面に戻る" class="btn btn-outline-danger btn-lg" id="back">
 		</form>
 	</div>
 </div>

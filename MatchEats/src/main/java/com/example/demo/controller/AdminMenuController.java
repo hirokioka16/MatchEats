@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.dto.AdminInfoDto;
 import com.example.demo.dto.TransferInfoDto;
+import com.example.demo.entity.AdminTblEntity;
 import com.example.demo.entity.TransferId;
+import com.example.demo.entity.UserTblEntity;
 import com.example.demo.service.TransferService;
 import com.example.demo.service.UserServise;
 
@@ -50,17 +53,12 @@ public class AdminMenuController {
 
 	//申請確認
 	@RequestMapping(value= {"/transfer/confirmapproval"},method=RequestMethod.POST)
-	public String confirmApproval(@RequestParam("transferId") int  transferId,Model model) {
+	public String confirmApproval(@RequestParam("id") int  transferId,Model model) {
+			
+			TransferInfoDto dto = transferService.getInfo(transferId);
 
-			TransferId id = new TransferId();
-			id.setTransferId(transferId);
-			TransferInfoDto dto = transferService.getInfo(id);
-
-			String userName = userService.getTrueName(dto.getUserId());
-
-			session.setAttribute("transferId",transferId);
+			model.addAttribute("transferId",transferId);
 			model.addAttribute("transferDto",dto);
-			model.addAttribute("userName",userName);
 
 
 		return "confirm_approval";
@@ -69,8 +67,8 @@ public class AdminMenuController {
 
 	//承認登録
 	@RequestMapping(value= {"/transfer/insertapproval"},method=RequestMethod.POST)
-	public String insertApproval() throws java.text.ParseException {
-		TransferId transferId = (TransferId)session.getAttribute("transferId");
+	public String insertApproval(@RequestParam("transferId") int  transferId) throws java.text.ParseException {
+		
 		Date now = getNowDate();
 
 		transferService.insertApproval(now,transferId);

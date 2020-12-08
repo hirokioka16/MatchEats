@@ -16,31 +16,31 @@
  <form th:action="@{/inputUserEntry/confirm}"  method="post" th:object="${UserForm}">
  	<div class="form-group">
  		<label for="formGroupExampleInput">メールアドレス</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{userMail}" th:classappend="${#fields.hasErrors('userMail')} ? 'is-invalid'">
- 		<span class="text-danger" th:if="${#fields.hasErrors('userMail')}" th:errors="*{userMail}"></span>
+ 		<div class="text-danger" th:if="${#fields.hasErrors('userMail')}" th:errors="*{userMail}"></div>
  	</div>
  	<div class="form-group">
  		<label for="exampleInputPasswword1">パスワード</label><input type="password" class="form-control" id="exampleInputPassword1" th:field="*{userPass}" th:classappend="${#fields.hasErrors('userPass')} ? 'is-invalid'">
- 		<span class="text-danger" th:if="${#fields.hasErrors('userPass')}" th:errors="*{userPass}"></span>
+ 		<div class="text-danger" th:if="${#fields.hasErrors('userPass')}" th:errors="*{userPass}"></div>
  	</div>
  	<div class="form-group">
  		<label for="formGroupExampleInput">ニックネーム</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{nickName}" th:classappend="${#fields.hasErrors('nickName')} ? 'is-invalid'">
-		<span class="text-danger" th:if="${#fields.hasErrors('nickName')}" th:errors="*{nickName}"></span> 	
+		<div class="text-danger" th:if="${#fields.hasErrors('nickName')}" th:errors="*{nickName}"></div> 	
  	</div>
  	<div class="form-group">
  		<label for="formGroupExampleInput">名前</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{userName}" th:classappend="${#fields.hasErrors('userName')} ? 'is-invalid'">
- 		<span class="text-danger" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></span>
+ 		<div class="text-danger" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></div>
  	</div>
  	<div class="form-group">
  		<label for="formGroupExampleInput">電話番号</label><input type="text" class="form-control" id="exampleFormControlInput1" placeholder="ハイフン抜きの半角数字で入力してください" th:field="*{userTel}" th:classappend="${#fields.hasErrors('userTel')} ? 'is-invalid'">
- 		<span class="text-danger" th:if="${#fields.hasErrors('userTel')}" th:errors="*{userTel}"></span>
+ 		<div class="text-danger" th:if="${#fields.hasErrors('userTel')}" th:errors="*{userTel}"></div>
  	</div>	
  	<div class="form-group">
  		<label for="formGroupExampleInput">郵便番号</label><input type="text" class="form-control" id="exampleFormControlInput1" placeholder="ハイフン抜きの半角数字で入力してください" th:field="*{postalCode}" th:classappend="${#fields.hasErrors('postalCode')} ? 'is-invalid'">
- 		<span class="text-danger" th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></span>
+ 		<div class="text-danger" th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></div>
  	</div>
  	<div class="form-group">
  		<label for="formGroupExampleInput">住所</label><input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" th:field="*{userAddres}" th:classappend="${#fields.hasErrors('userAddres')} ? 'is-invalid'">
- 		<span class="text-danger" th:if="${#fields.hasErrors('userAddres')}" th:errors="*{userAddres}"></span>
+ 		<div class="text-danger" th:if="${#fields.hasErrors('userAddres')}" th:errors="*{userAddres}"></div>
  	</div>
  	<div class="form-group">
  		<label for="xampleFormControlSelect1">生年月日</label>
@@ -172,11 +172,11 @@
  	 </div>
  	 <div class="form-group">		
  		<label for="exampleFormControlInput1">カード名義</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{cardName}" th:classappend="${#fields.hasErrors('cardName')} ? 'is-invalid'">
- 		<span class="text-danger" th:if="${#fields.hasErrors('cardName')}" th:errors="*{cardName}"></span>
+ 		<div class="text-danger" th:if="${#fields.hasErrors('cardName')}" th:errors="*{cardName}"></div>
  	</div>
  	<div class="form-gruop">
  		<label for="exampleFormControlInput1">クレジットカード番号</label><input type="text" class="form-control" id="exampleFormControlInput1" placeholder="半角数字で入力してください" th:field="*{userCard}" th:classappend="${#fields.hasErrors('userCard')} ? 'is-invalid'">
- 		<span class="text-danger" th:if="${#fields.hasErrors('userCard')}" th:errors="*{userCard}"></span>	
+ 		<div class="text-danger" th:if="${#fields.hasErrors('userCard')}" th:errors="*{userCard}"></div>	
  	</div>
  	<div class="form-group">
  		<label for="xampleFormControlSelect1">有効期限</label>
@@ -214,23 +214,23 @@
  	 	</div>
  	<div class="form-group"> 		
  		<label for="exampleFormControlInput1">銀行名</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{bankName}" th:classappend="${#fields.hasErrors('bankName')} ? 'is-invalid'">
-		<span class="text-danger" th:if="${#fields.hasErrors('bankName')}" th:errors="*{bankName}"></span> 	
+		<div class="text-danger" th:if="${#fields.hasErrors('bankName')}" th:errors="*{bankName}"></div> 	
  	</div>
  	<div class="form-group">
  		<label for="exampleFormControlInput1">口座番号</label><input type="text" class="form-control" id="exampleFormControlInput1" placeholder="半角数字で入力してください" th:field="*{accountNumber}" th:classappend="${#fields.hasErrors('accountNumber')} ? 'is-invalid'">
- 		<span class="text-danger" th:if="${#fields.hasErrors('accountNumber')}" th:errors="*{accountNumber}"></span>
+ 		<div class="text-danger" th:if="${#fields.hasErrors('accountNumber')}" th:errors="*{accountNumber}"></div>
  	</div>
  	<div class="form-group">
  		<label for="exampleFormControlInput1">支店名</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{branchName}" th:classappend="${#fields.hasErrors('branchName')} ? 'is-invalid'">
- 		<span class="text-danger" th:if="${#fields.hasErrors('branchName')}" th:errors="*{branchName}"></span>
+ 		<div class="text-danger" th:if="${#fields.hasErrors('branchName')}" th:errors="*{branchName}"></div>
  	</div>
  	<div class="form-group">
  		<label for="exampleFormControlInput1">口座名義</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{accountName}" th:classappend="${#fields.hasErrors('accountName')} ? 'is-invalid'"> 
- 		<span class="text-danger" th:if="${#fields.hasErrors('accountName')}" th:errors="*{accountName}"></span>	
+ 		<div class="text-danger" th:if="${#fields.hasErrors('accountName')}" th:errors="*{accountName}"></div>	
  	</div>	
  	<div class="form-group">
  		<label for="exampleFormControlInput1">セキュリティーコード</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{secureCode}" th:classappend="${#fields.hasErrors('secureCode')} ? 'is-invalid'">
-		<span class="text-danger" th:if="${#fields.hasErrors('secureCode')}" th:errors="*{secureCode}"></span> 	
+		<div class="text-danger" th:if="${#fields.hasErrors('secureCode')}" th:errors="*{secureCode}"></div> 	
  	</div>
  	<input class="btn btn-primary btn-lg" type="submit" value="次へ" style="width:30%; float:left;">
  	

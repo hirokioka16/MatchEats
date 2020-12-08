@@ -5,7 +5,7 @@
 <title>食べたい物リスト一覧</title>
 </head>
 <body>
-	<form method="post">
+	<form method="get">
 		<table>
 			<tr th:each="list:${list}">
 				<td><input type="radio" name="requestId" th:value="${list.requestId}"></td>

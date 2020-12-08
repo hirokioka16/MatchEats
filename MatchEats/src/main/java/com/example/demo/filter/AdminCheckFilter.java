@@ -20,18 +20,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import com.example.demo.dto.LoginInfoDto;
+import com.example.demo.dto.AdminInfoDto;
 import com.example.demo.util.FileUtils;
 
 @Component
-@Order(1)
+@Order(2)
 @WebFilter(filterName="LoginCheckFilter", urlPatterns="/*")
-public class LoginCheckFilter implements Filter{
+public class AdminCheckFilter implements Filter{
 	Logger logger = LoggerFactory.getLogger(LoginCheckFilter.class);
 	//チェック除外画面
 	private String excludeDispList[] =
 		{
-			"/login","/auth","/logout","/menu","/adminlogin","/adminauth","/adminlogout"
+			"/adminlogin","/adminauth","/adminlogout"
 		};
 	private String excludeExtList[] =
 		{
@@ -70,13 +70,16 @@ public class LoginCheckFilter implements Filter{
 			((HttpServletResponse)response).sendRedirect("login");
 			return;
 		}
-		LoginInfoDto loginInfo =
-				(LoginInfoDto)session.getAttribute("loginInfo");
+		AdminInfoDto adminInfo =
+				(AdminInfoDto)session.getAttribute("adminInfo");
 
-		if( loginInfo == null ){
+
+
+
+		if( adminInfo == null ){
 			//ログイン画面へ転送
 			logger.debug("Filter!!! servletPath="+servletPath);
-			((HttpServletResponse)response).sendRedirect("login");
+			((HttpServletResponse)response).sendRedirect("adminlogin");
 		}else{
 			chain.doFilter(request, response);
 		}

@@ -34,11 +34,7 @@
 					<tbody>						
 						<tr th:each="CookingList:${CookingList}">
 							<td th:text="${CookingList.userName}">
-							<!-- 
-							本番用
-							<img th:src="'/usr/share/tomcat/webapps/foodpic/' + ${CookingList.pictureName}" class="img-fluid">
-							-->
-							<td><img src="http://jousen5.aso-abcc.com/shoppingSystem/img/yokomina.jpg" width="200px" height="100px"></td>
+							<td><img th:src="'/MatchEats/getImage/' + ${CookingList.pictureName}" width="200px" height="100px"></td>
 							<td th:text="${CookingList.foodName}">
 							<td th:text="${#dates.format(CookingList.registDate,'yyyy/MM/dd HH:mm:ss')}">
 							<td>

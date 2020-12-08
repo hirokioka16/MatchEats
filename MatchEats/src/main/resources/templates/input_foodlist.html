@@ -7,14 +7,6 @@
 <title>食べたい物リスト登録</title>
 </head>
 <body>
-	<table>
-		<tr th:if="${errImg}">
-      		<td style="color:red;" th:text="${errImg}"></td>
-   	 	</tr>
- 	  	<tr th:if="${validationError}" th:each="error : ${validationError}">
-      		<td style="color:red;" th:text="${error}"></td>
-   	 	</tr>
-  	</table>
   	
   	
  <div style="padding:3%;"> 	
@@ -24,6 +16,7 @@
 	<div class="whiteDiv">
 	
 		<div class="div">
+			<h5 class="text-danger" th:if="${errImg}" th:text="${errImg}"></h5>
 			<label>料理画像</label><span>必須</span>
 			<div class="pic">
 				<input class="selectPic" type="file" th:field="*{requestPicture}">
@@ -32,9 +25,11 @@
 		
 		<div class="form-group" style="padding:40px; border-bottom:solid 0.5px #dadada;">
 			<label>料理名</label><span>必須</span>
-				<input class="form-control" type="text" placeholder="料理名" th:field="*{foodName}">
+				<input class="form-control" type="text" placeholder="料理名" th:field="*{foodName}" th:classappend="${#fields.hasErrors('foodName')} ? 'is-invalid'">
+				<div class="text-danger" th:if="${#fields.hasErrors('foodName')}" th:errors="*{foodName}"></div>
 			<label>料理の説明</label><span>必須</span>
-				<textarea class="form-control" placeholder="料理の説明" th:field="*{requestOutline}" rows="4"></textarea>
+				<textarea class="form-control" placeholder="料理の説明" th:field="*{requestOutline}" rows="4" th:classappend="${#fields.hasErrors('requestOutline')} ? 'is-invalid'"></textarea>
+				<div class="text-danger" th:if="${#fields.hasErrors('requestOutline')}" th:errors="*{requestOutline}"></div>			
 			<label>料理のジャンル</label><span>必須</span>
 				<select name="genreId" class="form-control">
 					<option th:value="*{genreId}" th:text="*{genreName}"></option>
@@ -47,7 +42,7 @@
 		<input class="btn btn-primary btn-lg" id="next" type="submit" value="登録">
 	</form>
 
-	<form th:action="@{/menu}" method="get">
+	<form th:action="@{/mypage}" method="get">
 		<input class="btn btn-outline-secondary btn-lg" id="back"  type="submit" value="戻る">
 	</form>
 	</div>

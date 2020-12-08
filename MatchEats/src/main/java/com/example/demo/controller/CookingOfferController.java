@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.dto.CookingInfoDto;
 import com.example.demo.dto.FoodInfoDto;
+import com.example.demo.dto.GenreInfoDto;
 import com.example.demo.dto.LoginInfoDto;
 import com.example.demo.form.CookingForm;
 import com.example.demo.service.CookingOfferService;
@@ -47,6 +48,7 @@ public class CookingOfferController {
 	public String input(RedirectAttributes redirectAttributes,@RequestParam("requestId") String requestId, @ModelAttribute("CookingForm")CookingForm form,Model model) {
 
 
+		
 		//オファーを送る食べたいものの情報を再取得
 		int r_Id = Integer.parseInt(requestId);
 		FoodInfoDto dto = foodService.getUdFoodList(Integer.parseInt(requestId));
@@ -86,6 +88,13 @@ public class CookingOfferController {
 						errorList.add(error.getDefaultMessage());
 					}
 					model.addAttribute("validationError", errorList);
+					
+					int requestId = (int)session.getAttribute("requestId");
+					FoodInfoDto dto = foodService.getUdFoodList(requestId);
+					String genre = foodService.getGenreName(dto.getGenreId());
+					
+					model.addAttribute("genre",genre);
+					model.addAttribute("dto",dto);
 					//エラーあり入力画面に戻す
 					url = "input_offer";
 				}else {
@@ -149,12 +158,15 @@ public class CookingOfferController {
 
 		LoginInfoDto loginInfo = (LoginInfoDto) session.getAttribute("loginInfo");
 
-		//int userId = loginInfo.getUserId();
-		//int userId = 1;
+		
+		try {
+			List<CookingInfoDto> list = cookingOfferService.getOfferHistory(loginInfo.getUserId());
+			model.addAttribute("list",list);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 
-		List<CookingInfoDto> list = cookingOfferService.getOfferHistory(loginInfo.getUserId());
-
-		model.addAttribute("list",list);
+		
 
 		return "offer_history";
 

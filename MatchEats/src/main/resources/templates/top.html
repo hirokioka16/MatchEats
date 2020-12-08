@@ -62,7 +62,7 @@
 			<div class="card-columns">
 				<div class="card shadow-sm" th:each="list, stat : ${firstList}" th:object="${list}" th:if="${stat.index < 5}">
 
-					<img th:src="'/usr/share/tomcat/webapps/foodpic/' + *{pictureName}" class="card-img-top" alt="img">
+					<img th:src="'/MatchEats/getImage/' + ${list.pictureName}" class="card-img-top" alt="img">
 	    			<div class="card-body">
 	      				<h5 class="card-title" th:text="*{foodName}"></h5>
 	      				<form th:action="@{/detailfoodlist}" method="GET">
@@ -84,11 +84,7 @@
 			</form>
 			<div class="card-columns">
 				<div class="card shadow-sm" th:each="list, stat : ${secondList}" th:object="${list}" th:if="${stat.index < 5}">
-	    			<!--
-					本番用
-					<img th:src="'/usr/share/tomcat/webapps/foodpic/' + *{pictureName}" class="card-img-top" alt="img">
-					 -->
-	    			<svg class="bd-placeholder-img card-img-top" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+	    			<img th:src="'/MatchEats/getImage/' + ${list.pictureName}" class="card-img-top" alt="img">
 	    			<div class="card-body">
 	      				<h5 class="card-title" th:text="*{foodName}"></h5>
 	      				<form th:action="@{/detailfoodlist}" method="GET">
@@ -110,11 +106,7 @@
 			</form>
 			<div class="card-columns">
 				<div class="card shadow-sm" th:each="list, stat : ${thirdList}" th:object="${list}" th:if="${stat.index < 5}">
-	    			<!--
-					本番用
-					<img th:src="'/usr/share/tomcat/webapps/foodpic/' + *{pictureName}" class="card-img-top" alt="img">
-					 -->
-	    			<svg class="bd-placeholder-img card-img-top" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+	    			<img th:src="'/MatchEats/getImage/' + ${list.pictureName}" class="card-img-top" alt="img">
 	    			<div class="card-body">
 	      				<h5 class="card-title" th:text="*{foodName}"></h5>
 	      				<form th:action="@{/detailfoodlist}" method="GET">
@@ -137,11 +129,7 @@
 			</form>
 			<div class="card-columns">
 				<div class="card shadow-sm" th:each="list, stat : ${fourthList}" th:object="${list}" th:if="${stat.index < 5}">
-	    			<!--
-					本番用
-					<img th:src="'/usr/share/tomcat/webapps/foodpic/' + *{pictureName}" class="card-img-top" alt="img">
-					 -->
-	    			<svg class="bd-placeholder-img card-img-top" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image cap"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
+	    			<img th:src="'/MatchEats/getImage/' + ${list.pictureName}" class="card-img-top" alt="img">
 	    			<div class="card-body">
 	      				<h5 class="card-title" th:text="*{foodName}"></h5>
 	      				<form th:action="@{/detailfoodlist}" method="GET">

@@ -30,7 +30,7 @@
 
 		<div class="row">
 			<div class="col-12">
-  				<form method="post">
+  				<form th:action="@{/history/cookdetail}" method="post">
 					<table class="table table-striped">
 						<thead style="background-color:#ea5532; color:#fff">
 							<tr>
@@ -51,7 +51,7 @@
 								<td th:text="${cookList.stateStatus}"></td>
 								<td>
 									<input type="hidden" name="historyId" th:value="${cookList.historyId}">
-									<input type="submit" class="btn btn-link"  formaction="/history/cookdetail" value="詳細">
+									<input type="submit" class="btn btn-link"  value="詳細">
 								</td>
 							</tr>
 						</tbody>

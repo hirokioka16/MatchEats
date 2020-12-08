@@ -86,6 +86,7 @@ public class HistoryController {
 					break;
 				case 2:
 					eatDto.setStateStatus("配達完了");
+					eatDto.setRecoveryDate(dto.getRecoveryDate());
 					eatDto.setDeliveryCompleteDate(dto.getDeliveryCompleteDate());
 					break;
 			}
@@ -126,6 +127,7 @@ public class HistoryController {
 				break;
 			case 2:
 				cookDto.setStateStatus("配達完了");
+				cookDto.setRecoveryDate(cDto.getRecoveryDate());
 				cookDto.setDeliveryCompleteDate(cDto.getDeliveryCompleteDate());
 				break;
 		}
@@ -182,6 +184,7 @@ public class HistoryController {
 					break;
 				case 2:
 					eatDto.setStateStatus("配達完了");
+					eatDto.setRecoveryDate(dto.getRecoveryDate());
 					eatDto.setDeliveryCompleteDate(dto.getDeliveryCompleteDate());
 					break;
 			}
@@ -221,6 +224,7 @@ public class HistoryController {
 				break;
 			case 2:
 				cookDto.setStateStatus("配達完了");
+				cookDto.setRecoveryDate(cDto.getRecoveryDate());
 				cookDto.setDeliveryCompleteDate(cDto.getDeliveryCompleteDate());
 				break;
 		}
@@ -283,6 +287,7 @@ public class HistoryController {
 				break;
 			case 2:
 				eatDto.setStateStatus("配達完了");
+				eatDto.setRecoveryDate(dto.getRecoveryDate());
 				eatDto.setDeliveryCompleteDate(dto.getDeliveryCompleteDate());
 				break;
 		}
@@ -341,6 +346,7 @@ public class HistoryController {
 				break;
 			case 2:
 				cookDto.setStateStatus("配達完了");
+				cookDto.setRecoveryDate(dto.getRecoveryDate());
 				cookDto.setDeliveryCompleteDate(dto.getDeliveryCompleteDate());
 				break;
 		}

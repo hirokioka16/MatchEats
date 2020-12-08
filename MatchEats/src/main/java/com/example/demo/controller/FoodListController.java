@@ -35,7 +35,7 @@ public class FoodListController {
 		return "allfoodlist";
 	}
 
-	@RequestMapping(value= {"/detailfoodlist"}, method=RequestMethod.POST)
+	@RequestMapping(value= {"/detailfoodlist"}, method=RequestMethod.GET)
 	public String detail(@RequestParam("requestId") int requestId,Model model) {
 
 		//エラーは広池プロのやつとマージすると消えます

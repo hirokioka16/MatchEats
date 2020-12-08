@@ -146,12 +146,15 @@ public class CookingOfferController {
 
 		LoginInfoDto loginInfo = (LoginInfoDto) session.getAttribute("loginInfo");
 
-		//int userId = loginInfo.getUserId();
-		//int userId = 1;
+		
+		try {
+			List<CookingInfoDto> list = cookingOfferService.getOfferHistory(loginInfo.getUserId());
+			model.addAttribute("list",list);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 
-		List<CookingInfoDto> list = cookingOfferService.getOfferHistory(loginInfo.getUserId());
-
-		model.addAttribute("list",list);
+		
 
 		return "offer_history";
 

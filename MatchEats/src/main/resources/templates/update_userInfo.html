@@ -16,38 +16,41 @@
 
 <!-- 入力フォーム -->
 <div class="border" style="width:60%; margin-right:auto; margin-left:auto; padding:5% 10%;">
-<div th:if="${validationError}">
- 	<div th:each="error,stat  : ${validationError}" th:if="${stat.index < 1}">
- 		<p th:text="${error}" style="text-align:center; margin-top:4%;color:rgb(235, 58, 51);">
- 	</div>
-</div> 
+
 <form th:action="@{/updateUserInfo/confirm}"  method="post" th:object="${updateUserForm}">
  	<input type="hidden" th:field="*{userId}">
  	<div class="form-group"> 
- 		<label for="formGroupExampleInput">メールアドレス</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{userMail}">
+ 		<label for="formGroupExampleInput">メールアドレス</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{userMail}"  th:classappend="${#fields.hasErrors('userMail')} ? 'is-invalid'">
+ 		<div class="text-danger" th:if="${#fields.hasErrors('userMail')}" th:errors="*{userMail}"></div>
  	</div>
  	<div class="form-group">
- 		<label for="exampleInputPasswword1">パスワード</label><input type="password" class="form-control" id="exampleInputPassword1"  th:field="*{userPass}">
+ 		<label for="exampleInputPasswword1">パスワード</label><input type="password" class="form-control" id="exampleInputPassword1"  th:field="*{userPass}" th:classappend="${#fields.hasErrors('userPass')} ? 'is-invalid'">
+ 		<div class="text-danger" th:if="${#fields.hasErrors('userPass')}" th:errors="*{userPass}"></div>
  	</div>
  	<div class="form-group">
- 		<label for="formGroupExampleInput">ニックネーム</label><input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" th:field="*{nickName}">
+ 		<label for="formGroupExampleInput">ニックネーム</label><input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" th:field="*{nickName}" th:classappend="${#fields.hasErrors('nickName')} ? 'is-invalid'">
+ 		<div class="text-danger" th:if="${#fields.hasErrors('nickName')}" th:errors="*{nickName}"></div>
  	</div>
  	<div class="form-group">
- 		<label for="formGroupExampleInput">名前</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{userName}">
+ 		<label for="formGroupExampleInput">名前</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{userName}" th:classappend="${#fields.hasErrors('userName')} ? 'is-invalid'">
+ 		<div class="text-danger" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></div>
  	</div>
  	<div class="form-group">
- 		<label for="formGroupExampleInput">電話番号</label><input type="text" placeholder="ハイフン抜きの半角数字で入力してください" class="form-control" id="exampleFormControlInput1" th:field="*{userTel}">
+ 		<label for="formGroupExampleInput">電話番号</label><input type="text" placeholder="ハイフン抜きの半角数字で入力してください" class="form-control" id="exampleFormControlInput1" th:field="*{userTel}" th:classappend="${#fields.hasErrors('userTel')} ? 'is-invalid'">
+		<div class="text-danger" th:if="${#fields.hasErrors('userTel')}" th:errors="*{userTel}"></div> 	
  	</div>
  	<div class="form-group">
- 		<label for="formGroupExampleInput">郵便番号</label><input type="text" class="form-control" id="exampleFormControlInput1" placeholder="ハイフン抜きの半角数字で入力してください" th:field="*{postalCode}">
+ 		<label for="formGroupExampleInput">郵便番号</label><input type="text" class="form-control" id="exampleFormControlInput1" placeholder="ハイフン抜きの半角数字で入力してください" th:field="*{postalCode}" th:classappend="${#fields.hasErrors('postalCode')} ? 'is-invalid'">
+ 		<div class="text-danger" th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></div>
  	</div>
  	<div class="form-group">
- 		<label for="formGroupExampleInput">住所</label><input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" th:field="*{userAddres}">
+ 		<label for="formGroupExampleInput">住所</label><input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" th:field="*{userAddres}" th:classappend="${#fields.hasErrors('userAddres')} ? 'is-invalid'">
+ 		<div class="text-danger" th:if="${#fields.hasErrors('userAddres')}" th:errors="*{userAddres}"></div>
  	</div>
  	<div class="form-group">
  		<label for="xampleFormControlSelect1">生年月日</label>
  		<div class="form-inline">
- 		<select class="form-control" id="exampleFormControlSelect1"  name="year" style="width: 20%;">
+ 		<select class="form-control" id="exampleFormControlSelect1"  name="year" style="width: 20%;" th:classappend="${#fields.hasErrors('year')} ? 'is-invalid'">
  				<option th:value="*{year}" th:text="*{year}"></option>
 				<option value="1950">1950</option>
 				<option value="1951">1951</option>
@@ -121,7 +124,7 @@
 				<option value="2019">2019</option>
 				<option value="2020">2020</option>
  		</select>年
- 	 		<select class="form-control" id="exampleFormControlSelect1" name="month" style="width: 20%; margin-left:3%;">
+ 	 		<select class="form-control" id="exampleFormControlSelect1" name="month" style="width: 20%; margin-left:3%;" th:classappend="${#fields.hasErrors('month')} ? 'is-invalid'">
  	 			<option th:value="*{month}" th:text="*{month}"></option>
 				<option value="01">1</option>
 				<option value="02">2</option>
@@ -136,7 +139,7 @@
 				<option value="11">11</option>
 				<option value="12">12</option>
  	 		</select>月
- 	 		<select class="form-control" id="exampleFormControlSelect1" name="day" style="width: 20%; margin-left:3%;">
+ 	 		<select class="form-control" id="exampleFormControlSelect1" name="day" style="width: 20%; margin-left:3%;" th:classappend="${#fields.hasErrors('day')} ? 'is-invalid'">
  	 			<option th:value="*{day}" th:text="*{day}"></option>
 				<option value="01">1</option>
 				<option value="02">2</option>
@@ -173,15 +176,17 @@
  	 		</div>
  	 </div>
  	<div class="form-group">		
- 		<label for="exampleFormControlInput1">カード名義</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{cardName}">
+ 		<label for="exampleFormControlInput1">カード名義</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{cardName}" th:classappend="${#fields.hasErrors('cardName')} ? 'is-invalid'">
+ 		<div class="text-danger" th:if="${#fields.hasErrors('cardName')}" th:errors="*{cardName}"></div>
  	</div>
  	<div class="form-gruop">
- 		<label for="exampleFormControlInput1">クレジットカード番号</label><input type="text" class="form-control" id="exampleFormControlInput1" placeholder="半角数字で入力してください" th:field="*{userCard}">
+ 		<label for="exampleFormControlInput1">クレジットカード番号</label><input type="text" class="form-control" id="exampleFormControlInput1" placeholder="半角数字で入力してください" th:field="*{userCard}" th:classappend="${#fields.hasErrors('userCard')} ? 'is-invalid'">
+ 		<div class="text-danger" th:if="${#fields.hasErrors('userCard')}" th:errors="*{userCard}"></div>
  	</div>
  	<div class="form-group">
  		<label for="xampleFormControlSelect1">有効期限</label>
  		<div class="form-inline">
- 		<select class="form-control" id="exampleFormControlSelect1" name="limitYear" style="width: 20%;">
+ 		<select class="form-control" id="exampleFormControlSelect1" name="limitYear" style="width: 20%;" th:classappend="${#fields.hasErrors('limitYear')} ? 'is-invalid'">
  				<option th:value="*{limitYear}" th:text="*{limitYear}"></option>
  				<option value="2020">2020</option>
 				<option value="2021">2021</option>
@@ -195,7 +200,7 @@
 				<option value="2029">2029</option>
 				<option value="2030">2030</option>
  			</select>年
- 			<select class="form-control" id="exampleFormControlSelect1" name="limitMonth" style="width: 20%;  margin-left:3%;">
+ 			<select class="form-control" id="exampleFormControlSelect1" name="limitMonth" style="width: 20%;  margin-left:3%;" th:classappend="${#fields.hasErrors('limitMonth')} ? 'is-invalid'">
  	 			<option th:value="*{limitMonth}" th:text="*{limitMonth}"></option>
 				<option value="01">1</option>
 				<option value="02">2</option>
@@ -213,7 +218,8 @@
  	 		</div>
  	 </div>
  	<div class="form-group">
- 		<label for="exampleFormControlInput1">セキュリティーコード</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{secureCode}"><br>
+ 		<label for="exampleFormControlInput1">セキュリティーコード</label><input type="text" class="form-control" id="exampleFormControlInput1" th:field="*{secureCode}" th:classappend="${#fields.hasErrors('secureCode')} ? 'is-invalid'"><br>
+ 		<div class="text-danger" th:if="${#fields.hasErrors('secureCode')}" th:errors="*{secureCode}"></div> 	
  	</div>
  	<input class="btn btn-primary btn-lg" type="submit" value="次へ" style="width:30%; float:left;">
  	

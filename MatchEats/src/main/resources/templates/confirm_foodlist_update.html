@@ -16,7 +16,7 @@
 		
 		<div class="div">
 			<label>料理画像</label>
-			<div><img th:src="${image}" alt="サンプル" style="width: 40%; height: auto;"></div>
+			<div><img th:src="'/MatchEats/getImage/' + ${session['foodInfDto'].pictureName}" alt="サンプル" style="width: 40%; height: auto;"></div>
 		</div>
 		
 		<div class="div">
@@ -43,7 +43,7 @@
 		<input class="btn btn-primary btn-lg" id="next" type="submit" value="修正">
 	</form>
 	
-	<form th:action="@{/updatefoodlist/input}" method="post">
+	<form th:action="@{/updatefoodlist/input}" method="get">
 		<input type="hidden" name="requestId" th:value="${session['foodInfDto'].requestId}">
 		<input class="btn btn-outline-secondary btn-lg" id="back" type="submit" value="戻る">
 	</form>

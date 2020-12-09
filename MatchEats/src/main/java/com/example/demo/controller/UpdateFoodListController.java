@@ -81,6 +81,9 @@ public class UpdateFoodListController {
 	@RequestMapping(value= {"/confirm"}, method=RequestMethod.POST)
 	public String confirm(@Validated @ModelAttribute("FoodForm")FoodForm form,BindingResult result,Model model){
 		String url = null;	
+		
+		FoodInfoDto errorDto = new FoodInfoDto();
+		errorDto = foodService.getUdFoodList(form.getRequestId());
 		//入力エラーをチェック
 				if(result.hasErrors()) {
 					List<String> errorList = new ArrayList<String>();
@@ -90,12 +93,14 @@ public class UpdateFoodListController {
 					List<GenreInfoDto> list = foodService.getGenre();
 					model.addAttribute("validationError", errorList);
 					model.addAttribute("list",list);
+					form.setFileName(errorDto.getPictureName());
 					form.setGenreName(inputFoodList.getGenreName(Integer.parseInt(form.getGenreId())));
 					url = "update_foodlist";
 				}else{				       					
 			        model.addAttribute("genreName",inputFoodList.getGenreName(Integer.parseInt(form.getGenreId())) );
 					//formの値をdtoにいれるメソッドを呼んでいる
 					FoodInfoDto dto = inputFoodList.getCreateDto(form);
+					dto.setPictureName(errorDto.getPictureName());
 					session.setAttribute("foodInfDto", dto);
 					url = "confirm_foodlist_update";	
 				}

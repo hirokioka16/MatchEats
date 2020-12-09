@@ -61,6 +61,19 @@ public class InputUserEntryController {
 			form.setUserCard(dto.getUserCard());
 			form.setBankName(dto.getBankName());
 			form.setBranchName(dto.getBranchName());
+			
+			//生年月日分解
+			String birth = dto.getUserBirth();
+			String[] birthList = birth.split("-");
+			form.setYear(birthList[0]);
+			form.setMonth(birthList[1]);
+			form.setDay(birthList[2]);
+			
+			//有効期限分解
+			String limit = dto.getLimitDate();
+			String[] limitList = limit.split("");
+			form.setLimitYear(limitList[0] + limitList[1] + limitList[2] + limitList[3]);
+			form.setLimitMonth(limitList[4] + limitList[5]);
 		}
 		return "input_userEntry";
 	}

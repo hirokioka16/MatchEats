@@ -2,19 +2,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <meta charset="UTF-8">
-<link href="/css/login.css" rel="stylesheet"></link>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+<link href="css/login_user.css" rel="stylesheet"></link>
 <hgroup class="heading">
 <h1 class="major">Admin Login</h1>
 </hgroup>
 
 <body>
+<div class="title">
+	<img class="rounded" src="http://jousen5.aso-abcc.com/shoppingSystem/img/matchicon.png" width="50" height="50">
+	<strong style="margin-left:20px; color:#ea5532;">MatchEats</strong>
+</div>
 
-<form th:action="@{/adminauth}" method="post" th:object="${loginform}" class="sign-up">
-<p th:text="${errMessage}"></p>
-<input type="email" placeholder="E-mail" th:field="*{email}" class="sign-up-input"><br>
-<input type="password" placeholder="password" th:field="*{pass}" class="sign-up-input">
-<input type="submit" value="ログイン" class="sign-up-button">
-</form>
+	<form th:action="@{/adminauth}" method="post" th:object="${loginform}" class="sign-up">
+	<p th:text="${errMessage}"></p>
+	<div class="form-group" style="margin-top:0px; padding-bottom:50px;">
+			<input class="form-control" type="email" placeholder="メールアドレス" th:field="*{email}">
+			<input class="form-control" type="password" placeholder="パスワード" th:field="*{pass}">
+			<div style="text-align:center; margin-top:5px;">
+				<input class="btn btn-primary btn-lg" id="login" type="submit" value="ログイン">
+			</div>
+	</div>
+	</form>
 
 
 </body>

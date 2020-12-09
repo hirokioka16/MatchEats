@@ -25,7 +25,7 @@ display: none;
 					本番用
 					<img th:src="'/usr/share/tomcat/webapps/foodpic/' + ${dto.imgName}" class="img-fluid">
 				-->
-		  		<img src="http://jousen5.aso-abcc.com/shoppingSystem/img/yokomina.jpg" class="img-fluid">
+		  		<img th:src="'/MatchEats/getImage/' + ${dto.imgName}" class="img-fluid">
 				<table class="table">
 					<thead>
 						<tr>

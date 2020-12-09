@@ -33,10 +33,10 @@
 		<div class="container">
 			<div class="card-columns">
 				<div class="card shadow-sm" th:each="list:${list}">
-					<img src="'/MatchEats/getImage/' + ${list.pictureName}" class="card-img-top" alt="img">
+					<img th:src="'/MatchEats/getImage/' + ${list.pictureName}" class="card-img-top" alt="img">
 					<div class="card-body">
 						<h5 th:text="${list.foodName}"></h5>
-						<form th:action="@{/detailfoodlist}" method="POST">
+						<form th:action="@{/detailfoodlist}" method="get">
 							<input type="hidden" name="requestId" th:value="${list.requestId}">
 							<input type="submit" class="btn btn-link" value="詳細" style="display: block;margin: 0 0 0 auto;">
 						</form>	

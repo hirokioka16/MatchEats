@@ -10,14 +10,22 @@
 button.stripe-button-el,
 button.stripe-button-el>span {
 display: none;
-} 
+}
  </style>
 </head>
 <body>
 	<header>
 		<div th:replace="layout/header :: afterheader" ></div>
 	</header>
-	
+	<script  type="text/javascript">
+	$(function() {
+		$('button').on('click', function() {
+			$(this).prop('disabled', true);
+			$('form').submit();
+		});
+	});
+	</script>
+
 	<div class="container">
 		<div class="row">
 			<div class="col-md-5">
@@ -27,54 +35,54 @@ display: none;
 						<tr>
 							<th scope="col" th:text="料理名"></th>
 						</tr>
-						
+
 						<tr>
 							<td th:text="${dto.foodName}"></td>
 						</tr>
-						
+
 						<tr>
 							<th scope="col" th:text="料理の説明"></th>
 						</tr>
-						
+
 						<tr>
 							<td th:text="${dto.cookContent}"></td>
 						</tr>
 					</thead>
 				</table>
 			</div>
-			
+
 		    <div class="col-7">
 		    	<table class="table">
 					<thead class="thead-light">
 						<tr>
 							<th scope="col" th:text="調理者"></th>
 						</tr>
-						
+
 						<tr>
 							<td th:text="${dto.userName}"></td>
 						</tr>
-						
-						
+
+
 						<tr>
 							<th scope="col" th:text="金額"></th>
 						</tr>
-						
+
 						<tr>
 							<td th:text="'¥' +${dto.price}"></td>
 						</tr>
-						
+
 						<tr>
 							<th scope="col" th:text="オファー日"></th>
 						</tr>
-						
+
 						<tr>
 							<td th:text="${dto.offerDate}"></td>
 						</tr>
-						
+
 						<tr>
 							<th scope="col" th:text="オファーコメント"></th>
 						</tr>
-						
+
 						<tr>
 							<td th:text="${dto.offerComment}"></td>
 						</tr>
@@ -82,9 +90,9 @@ display: none;
 				</table>
 		    </div>
 		</div>
-			  
+
 		<form th:action="@{/charge}" method='POST' id='checkout-form'>
-			<input type="submit" class="btn btn-danger btn-lg btn-block">
+			<input type="submit" class="btn btn-danger btn-lg btn-block" value="依頼する" id="button">
 		    <input type='hidden' th:value='${dto.price}' name='amount'/>
 		    <input type='hidden' name="offerId" th:value='${dto.offerId}'/>
 		    <!-- NOTE: data-key/data-amount/data-currency will be rendered by Thymeleaf -->
@@ -98,12 +106,12 @@ display: none;
 		       	data-description=${dto.offerComment}'
 		       	data-locale='auto'
 		      	data-zip-code='false'>
-		   </script>	
+		   </script>
 		</form>
-		
+
 		<form th:action="@{/reactionList}" method='get'>
 			<input type="submit" value="戻る" class="btn btn-outline-danger btn-lg btn-block" style="margin-top:20px">
 		</form>
-	</div>	
+	</div>
 </body>
 </html>

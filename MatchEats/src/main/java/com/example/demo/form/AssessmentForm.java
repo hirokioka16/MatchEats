@@ -1,11 +1,12 @@
 package com.example.demo.form;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class AssessmentForm {
 
-
+	@NotNull(message = "評価ポイントを選択してください")
 	private int point;
 
 	@NotBlank(message = "コメントを入力してください")

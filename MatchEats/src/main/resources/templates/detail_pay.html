@@ -21,11 +21,7 @@ display: none;
 	<div class="container">
 		<div class="row">
 			<div class="col-md-5">
-		  		<!-- 
-					本番用
-					<img th:src="'/usr/share/tomcat/webapps/foodpic/' + ${dto.imgName}" class="img-fluid">
-				-->
-		  		<img th:src="'/MatchEats/getImage/' + ${dto.imgName}" class="img-fluid">
+		  		<img th:src="'/MatchEats/getImage/' + ${dto.imgName}" width="100%" height="200px">
 				<table class="table">
 					<thead>
 						<tr>

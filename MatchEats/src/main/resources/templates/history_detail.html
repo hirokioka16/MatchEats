@@ -60,7 +60,7 @@
 			<div class="form-row">
 				<div class="form-group col-2">	
 					<label for="point">ポイント</label>
-					<select name="point" class="form-control" th:field="*{point}">
+					<select name="point" class="form-control" th:field="*{point}" th:classappend="${#fields.hasErrors('point')} ? 'is-invalid'">
 						<option value=1>1</option>
 						<option value=2>2</option>
 						<option value=3>3</option>
@@ -70,7 +70,7 @@
 				</div>
 				<div class="col-10">	
 					<label for="comment">評価コメント</label>
-					<input type="text" th:field="*{a_comment}" class="form-control">
+					<input type="text" th:field="*{a_comment}" class="form-control" th:classappend="${#fields.hasErrors('a_comment')} ? 'is-invalid'">
 				</div>
 			</div>	
 					<input type="submit" class="btn btn-danger btn-lg btn-block" value="確認" style="margin-top:40px;">

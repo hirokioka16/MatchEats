@@ -47,7 +47,16 @@ public class CookingOfferController {
 	@RequestMapping(value= {"/inputoffer/input"}, method=RequestMethod.GET)
 	public String input(RedirectAttributes redirectAttributes,@RequestParam("requestId") String requestId, @ModelAttribute("CookingForm")CookingForm form,Model model) {
 
-
+		CookingInfoDto cookDto = new CookingInfoDto();
+		try {
+			cookDto = (CookingInfoDto)session.getAttribute("CookingInfoDto");
+		}catch (NullPointerException e){
+			e.printStackTrace();
+		}
+		if(cookDto != null) {
+			form.setPrice(cookDto.getPrice());
+			form.setOfferComment(cookDto.getOfferComment());
+		}
 		
 		//オファーを送る食べたいものの情報を再取得
 		int r_Id = Integer.parseInt(requestId);

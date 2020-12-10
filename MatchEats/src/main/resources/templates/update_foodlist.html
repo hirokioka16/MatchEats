@@ -7,11 +7,6 @@
 <title>食べたい物リスト修正内容入力</title>
 </head>
 <body>
-	<table>
- 	  	<tr th:if="${validationError}" th:each="error : ${validationError}">
-      		<td style="color:red;" th:text="${error}"></td>
-   	 	</tr>
-  	</table>
   	
 <div style="padding:3%;"> 	  	
   	
@@ -23,15 +18,17 @@
 		<div class="div">
 			<label>料理画像</label><span>必須</span>
 			<div class="pic">
-			<img th:src="'/MatchEats/getImage/' + *{fileName}"  alt="サンプル">
+			<img th:src="'/MatchEats/getImage/' + *{fileName}"  alt="サンプル" width="70%" height= "180px">
 			</div>
 		</div>
 		
 		<div class="form-group" style="padding:40px; border-bottom:solid 0.5px #dadada;">
 			<label>料理名</label><span>必須</span>
-				<input class="form-control" type="text" placeholder="料理名" th:field="*{foodName}">
+				<input class="form-control" type="text" placeholder="料理名" th:field="*{foodName}"  th:classappend="${#fields.hasErrors('foodName')} ? 'is-invalid'">
+				<div class="text-danger" th:if="${#fields.hasErrors('foodName')}" th:errors="*{foodName}"></div>
 			<label>料理の説明</label><span>必須</span>
-				<textarea class="form-control" placeholder="料理の説明" th:field="*{requestOutline}"></textarea>
+				<textarea class="form-control" placeholder="料理の説明" th:field="*{requestOutline}" th:classappend="${#fields.hasErrors('requestOutline')} ? 'is-invalid'"></textarea>
+				<div class="text-danger" th:if="${#fields.hasErrors('requestOutline')}" th:errors="*{requestOutline}"></div>
 			<label>料理のジャンル</label><span>必須</span>
 				<select name="genreId" class="form-control">
 					<option th:value="*{genreId}" th:text="*{genreName}"></option>
@@ -47,11 +44,13 @@
 					<input type="radio" name="eatFlag" value="0" checked/>オファー受付可
 		   			<input type="radio" name="eatFlag" value="1" />オファー受付不可
 		   		</div>
-		   		<div th:case="1">
+		   		<div th:case="*">
 					<input type="radio" name="eatFlag" value="0" />オファー受付可
 		   			<input type="radio" name="eatFlag" value="1" checked/>オファー受付不可
+		   			<div class="text-danger" th:if="${#fields.hasErrors('eatFlag')}" th:errors="*{eatFlag}"></div>
 		   		</div>
 		   	</div>
+		   
 		 </div>
 	</div>
 		 

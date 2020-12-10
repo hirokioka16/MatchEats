@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 
 import com.example.demo.util.FileUtils;
 @Component
-@Order(2)
+@Order(3)
 @WebFilter
 public class EncodingFilter implements Filter {
 

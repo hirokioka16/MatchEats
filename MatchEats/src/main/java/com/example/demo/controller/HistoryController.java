@@ -150,7 +150,7 @@ public class HistoryController {
 	public String getCookFoodList(Model model) {
 
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute("loginInfo");
-
+		session.removeAttribute("historyId");
 
 
 		//食事履歴
@@ -351,7 +351,16 @@ public class HistoryController {
 				break;
 		}
 
+		//評価内容を取得
+		AssessmentInfoDto assessmentDto = null;
+		assessmentDto = historyService.getAssessment(historyId);
 
+		if(assessmentDto == null) {
+			assessmentDto.setPoint(0);
+			assessmentDto.setAssessmentComment("まだ評価は入力されていません");
+		}
+
+		model.addAttribute("asDto",assessmentDto);
 		model.addAttribute("cookDto",cookDto);
 
 

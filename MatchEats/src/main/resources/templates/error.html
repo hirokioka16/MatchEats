@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+<link th:href="@{/css/contact.css}" rel="stylesheet" type="text/css">
+<title>エラー</title>
+</head>
+<body>
+	<div class="whiteDiv">
+		<h1 th:text="${status} + ''+ ${error}"></h1>
+		<p id="tagP" th:text="${message}"></p>
+		<p id="tagP">エラーが起こりました。一度トップ画面に戻ってください</p> 
+		<form th:action ="@{/menu}" method="GET">
+			<input class="btn btn-outline-secondary btn-lg" id="first" type="submit" value="トップへ">
+		</form>
+	</div>	
+</body>
+</html>

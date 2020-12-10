@@ -57,7 +57,7 @@
 		<input class="btn btn-primary btn-lg" id="next" type="submit" value="オファーする">
 		</form>
 
-		<form th:action="@{/detailfoodlist}" method="POST">
+		<form th:action="@{/detailfoodlist}" method="get">
 			<input type="hidden" name="requestId" th:value="${session['requestId']}">
 			<input class="btn btn-outline-secondary btn-lg" id="back" type="submit" value="戻る">
 		</form>

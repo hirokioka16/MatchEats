@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.dto.AdminHistoryDto;
+import com.example.demo.dto.AdminInfoDto;
 import com.example.demo.dto.AssessmentInfoDto;
 import com.example.demo.dto.CookingInfoDto;
 import com.example.demo.dto.EatHistoryDetailDto;
@@ -477,6 +478,11 @@ public class HistoryController {
 	//管理者側[取引履歴]機能用
 	@RequestMapping(value= {"/adminmenu/alltransaction"},method=RequestMethod.GET)
 	public String getAllTransaction(Model model) {
+
+		AdminInfoDto adminInfo = (AdminInfoDto)session.getAttribute("adminInfo");
+		if(adminInfo == null) {
+			return "redirect:/adminlogin";
+		}
 
 		List<HistoryInfoDto> list = historyService.getAll();
 		List<AdminHistoryDto> AllList = new ArrayList();

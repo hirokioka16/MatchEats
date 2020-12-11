@@ -73,7 +73,7 @@ public class LoginCheckFilter implements Filter{
 
 		if( session == null ){
 			//セッションがない場合はログイン画面へ
-			((HttpServletResponse)response).sendRedirect("/login");
+			((HttpServletResponse)response).sendRedirect("/MatchEats/login");
 			return;
 		}
 		LoginInfoDto loginInfo =
@@ -84,7 +84,7 @@ public class LoginCheckFilter implements Filter{
 		if( loginInfo == null ){
 			//ログイン画面へ転送
 			logger.debug("Filter!!! servletPath="+servletPath);
-			((HttpServletResponse)response).sendRedirect("/login");
+			((HttpServletResponse)response).sendRedirect("/MatchEats/login");
 		}else{
 			chain.doFilter(request, response);
 		}

@@ -55,7 +55,7 @@
 	<div class="album bg-light" style="margin-bottom:60px;">
 		<div class="container" style="padding-top:80px;">
 			<h3 style="border-left:20px solid #ea5532; padding:4px; float:left;">和食</h3>
-			<form th:action="@{/eachgenre}" method="get">
+			<form th:action="@{/eachgenre}" method="POST">
 				<input type="hidden" name="genreId" value="0">
 				<input type="submit" class="btn btn-link" value="もっと見る" style="display: block;margin: 0 0 0 auto;">
 			</form>
@@ -65,7 +65,7 @@
 					<img th:src="'/MatchEats/getImage/' + ${list.pictureName}" class="card-img-top" alt="img">
 	    			<div class="card-body">
 	      				<h5 class="card-title" th:text="*{foodName}"></h5>
-	      				<form th:action="@{/detailfoodlist}" method="GET">
+	      				<form th:action="@{/detailfoodlist}" method="POST">
 	      					<input type="hidden" th:value="*{requestId}" name="requestId">
 	      					<input type="submit" class="btn btn-link" value="詳細" style="display: block;margin: 0 0 0 auto;">
 	      				</form>
@@ -78,7 +78,7 @@
 	<div class="album bg-light" style="margin-bottom:60px;">
 		<div class="container">
 			<h3 style="border-left:20px solid #ea5532; padding:4px; float:left;">洋食</h3>
-			<form th:action="@{/eachgenre}" method="get">
+			<form th:action="@{/eachgenre}" method="POST">
 				<input type="hidden" name="genreId" value="1">
 				<input type="submit" class="btn btn-link" value="もっと見る" style="display: block;margin: 0 0 0 auto;">
 			</form>
@@ -87,7 +87,7 @@
 	    			<img th:src="'/MatchEats/getImage/' + ${list.pictureName}" class="card-img-top" alt="img">
 	    			<div class="card-body">
 	      				<h5 class="card-title" th:text="*{foodName}"></h5>
-	      				<form th:action="@{/detailfoodlist}" method="GET">
+	      				<form th:action="@{/detailfoodlist}" method="POST">
 	      					<input type="hidden" th:value="*{requestId}" name="requestId">
 	      					<input type="submit" class="btn btn-link" value="詳細" style="display: block;margin: 0 0 0 auto;">
 	      				</form>
@@ -100,7 +100,7 @@
 	<div class="album bg-light" style="margin-bottom:60px;">
 		<div class="container">
 			<h3 style="border-left:20px solid #ea5532; padding:4px; float:left;">中華</h3>
-			<form th:action="@{/eachgenre}" method="get">
+			<form th:action="@{/eachgenre}" method="POST">
 				<input type="hidden" name="genreId" value="2">
 				<input type="submit" class="btn btn-link" value="もっと見る" style="display: block;margin: 0 0 0 auto;">
 			</form>
@@ -109,7 +109,7 @@
 	    			<img th:src="'/MatchEats/getImage/' + ${list.pictureName}" class="card-img-top" alt="img">
 	    			<div class="card-body">
 	      				<h5 class="card-title" th:text="*{foodName}"></h5>
-	      				<form th:action="@{/detailfoodlist}" method="GET">
+	      				<form th:action="@{/detailfoodlist}" method="POST">
 	      					<input type="hidden" th:value="*{requestId}" name="requestId">
 	      					<input type="submit" class="btn btn-link" value="詳細" style="display: block;margin: 0 0 0 auto;">
 	      				</form>
@@ -123,7 +123,7 @@
 	<div class="album bg-light" style="margin-bottom:60px;">
 		<div class="container">
 		<h3 style="border-left:20px solid #ea5532; padding:4px; float:left;">スイーツ</h3>
-			<form th:action="@{/eachgenre}" method="get">
+			<form th:action="@{/eachgenre}" method="POST">
 				<input type="hidden" name="genreId" value="3">
 				<input type="submit" class="btn btn-link" value="もっと見る" style="display: block;margin: 0 0 0 auto;">
 			</form>
@@ -132,7 +132,7 @@
 	    			<img th:src="'/MatchEats/getImage/' + ${list.pictureName}" class="card-img-top" alt="img">
 	    			<div class="card-body">
 	      				<h5 class="card-title" th:text="*{foodName}"></h5>
-	      				<form th:action="@{/detailfoodlist}" method="GET">
+	      				<form th:action="@{/detailfoodlist}" method="POST">
 	      					<input type="hidden" th:value="*{requestId}" name="requestId">
 	      					<input type="submit" class="btn btn-link" value="詳細" style="display: block;margin: 0 0 0 auto;">
 	      				</form>

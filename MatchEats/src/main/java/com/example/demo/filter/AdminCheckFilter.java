@@ -1,4 +1,4 @@
-
+/**
 package com.example.demo.filter;
 
 import java.io.IOException;
@@ -39,7 +39,7 @@ public class AdminCheckFilter implements Filter{
 	//チェック除外画面
 	private String excludeDispList[] =
 		{
-			"/adminlogin","/adminauth","/adminlogout"
+			"/adminlogin","/adminauth","/adminlogout","/menu"
 		};
 	private String excludeExtList[] =
 		{
@@ -101,3 +101,4 @@ public class AdminCheckFilter implements Filter{
 
 }
 
+**/

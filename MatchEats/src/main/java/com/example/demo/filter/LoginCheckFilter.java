@@ -1,4 +1,3 @@
-/**
 package com.example.demo.filter;
 
 import java.io.IOException;
@@ -24,14 +23,21 @@ import com.example.demo.dto.LoginInfoDto;
 import com.example.demo.util.FileUtils;
 
 @Component
-@Order(1)
+@Order(2)
 @WebFilter(filterName="LoginCheckFilter", urlPatterns="/*")
 public class LoginCheckFilter implements Filter{
 	Logger logger = LoggerFactory.getLogger(LoginCheckFilter.class);
 	//チェック除外画面
 	private String excludeDispList[] =
 		{
-			"/login","/auth","/logout","/menu","/adminlogin","/adminauth","/adminlogout"
+			"/login","/auth","/logout","/menu","/inputUserEntry/input","/inputUserEntry/confirm",
+			"/inputUserEntry/insert","/inputUserEntry/complete","/detailfoodlist","/seachfoodlist",
+			"/adminlogin","/adminauth","/adminlogout","/adminmenu/menu","/adminmenu/transfer",
+			"/adminmenu/transfer/confirmapproval","/adminmenu/transfer/insertapproval",
+			"/adminmenu/alltransaction","/inputContact/contactlist",
+			"/delivery/requestlist","/delivery/requestDetail","/delivery/deliveryinsert","/delivery/deliverycomplete",
+			"/delivery/approvallist","/delivery/collectionconfirm","/delivery/collectioninsert","/delivery/collectioncomplete",
+			"/delivery/mydeliverylist","/delivery/confirm","/delivery/insert","/delivery/complete","/eachgenre"
 		};
 	private String excludeExtList[] =
 		{
@@ -67,16 +73,18 @@ public class LoginCheckFilter implements Filter{
 
 		if( session == null ){
 			//セッションがない場合はログイン画面へ
-			((HttpServletResponse)response).sendRedirect("login");
+			((HttpServletResponse)response).sendRedirect("/MatchEats/login");
 			return;
 		}
 		LoginInfoDto loginInfo =
 				(LoginInfoDto)session.getAttribute("loginInfo");
 
+
+
 		if( loginInfo == null ){
 			//ログイン画面へ転送
 			logger.debug("Filter!!! servletPath="+servletPath);
-			((HttpServletResponse)response).sendRedirect("login");
+			((HttpServletResponse)response).sendRedirect("/MatchEats/login");
 		}else{
 			chain.doFilter(request, response);
 		}
@@ -89,4 +97,3 @@ public class LoginCheckFilter implements Filter{
 	}
 
 }
-**/

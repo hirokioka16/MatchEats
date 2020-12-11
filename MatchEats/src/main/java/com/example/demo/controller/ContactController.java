@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.example.demo.dto.AdminInfoDto;
 import com.example.demo.dto.ContactInfoDto;
 import com.example.demo.dto.FoodInfoDto;
 import com.example.demo.dto.GenreInfoDto;
@@ -43,6 +44,12 @@ import com.example.demo.service.ContactService;
 
 		@RequestMapping(value= {"/contactlist"}, method=RequestMethod.GET)
 		public String ContactList(Model model) {
+
+			AdminInfoDto adminInfo = (AdminInfoDto)session.getAttribute("adminInfo");
+			if(adminInfo == null) {
+				return "redirect:/adminlogin";
+			}
+
 			List<ContactInfoDto> contactlist =contactService .searchAll();
 			model.addAttribute("contactlist",contactlist);
 			return "contactlist";

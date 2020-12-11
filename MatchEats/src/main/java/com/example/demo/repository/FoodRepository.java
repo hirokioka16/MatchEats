@@ -49,7 +49,7 @@ public interface FoodRepository extends JpaRepository<FoodTblEntity,Integer>{
 	public List<FoodTblEntity> getAllList();
 
 	//食べたいもの検索用
-	@Query("SELECT f FROM FoodTblEntity f WHERE f.foodName LIKE %:keyword%")
+	@Query("SELECT f FROM FoodTblEntity f WHERE f.foodName LIKE %:keyword% AND f.eatFlag=0")
 	public List<FoodTblEntity> search(@Param("keyword") String keyword);
 
 	//ジャンルごとの料理を取得する

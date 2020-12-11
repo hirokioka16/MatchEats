@@ -9,7 +9,7 @@
 	<header>
 		<div th:replace="layout/header :: afterheader" ></div>
 	</header>
-	
+
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
@@ -46,9 +46,17 @@
 						<tr>
 							<th scope="row">配達完了日</th>
 							<td th:text="${cookDto.deliveryCompleteDate}"></td>
-						</tr>				
+						</tr>
+						<tr>
+							<th scope="row">ポイント</th>
+							<td th:text="${asDto.point}"></td>
+						</tr>
+						<tr>
+							<th scope="row">評価コメント</th>
+							<td th:text="${asDto.assessmentComment}"></td>
+						</tr>
 					</tbody>
-				</table>	
+				</table>
 			</div>
 		</div>
 		<form th:action="@{/history/cooklist}" method="get">

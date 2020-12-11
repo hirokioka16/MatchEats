@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.dto.AdminInfoDto;
 import com.example.demo.dto.TransferInfoDto;
-import com.example.demo.entity.AdminTblEntity;
-import com.example.demo.entity.TransferId;
-import com.example.demo.entity.UserTblEntity;
 import com.example.demo.service.TransferService;
 import com.example.demo.service.UserServise;
 
@@ -36,6 +33,7 @@ public class AdminMenuController {
 
 	@RequestMapping(value= {"/menu"}, method=RequestMethod.GET)
 	public String adminMenu() {
+
 		return "adminMenu";
 
 	}
@@ -54,7 +52,7 @@ public class AdminMenuController {
 	//申請確認
 	@RequestMapping(value= {"/transfer/confirmapproval"},method=RequestMethod.POST)
 	public String confirmApproval(@RequestParam("id") int  transferId,Model model) {
-			
+
 			TransferInfoDto dto = transferService.getInfo(transferId);
 
 			model.addAttribute("transferId",transferId);
@@ -68,7 +66,7 @@ public class AdminMenuController {
 	//承認登録
 	@RequestMapping(value= {"/transfer/insertapproval"},method=RequestMethod.POST)
 	public String insertApproval(@RequestParam("transferId") int  transferId) throws java.text.ParseException {
-		
+
 		Date now = getNowDate();
 
 		transferService.insertApproval(now,transferId);

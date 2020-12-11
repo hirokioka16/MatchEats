@@ -18,6 +18,7 @@
 		<div class="div">
 			<h5 class="text-danger" th:if="${errImg}" th:text="${errImg}"></h5>
 			<label>料理画像</label><span>必須</span>
+			<p class="text-danger" th:text="︎画像のファイルサイズは50MB未満のものを選択してください︎">
 			<div class="pic">
 				<input class="selectPic" type="file" th:field="*{requestPicture}">
 			</div>

@@ -2,29 +2,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+<link th:href="@{/css/contact.css}" rel="stylesheet" type="text/css">
 <title>評価入力確認</title>
 </head>
-<body>
+<body style="background-color:#dadada;">
+
+	<div style="background-color:#fff; margin:5% 10%;">
 	<form th:action="@{/history/insertassessment}" method="post">
-		<p>以下の内容でよろしいでしょうか？</p>
-		<table>
-			<tr>
-				<th>ポイント</th>
-				<td th:text="${session['AssessmentInfoDto'].point}"></td>
-			</tr>
-			<tr>
-				<th>コメント</th>
-				<td th:text="${session['AssessmentInfoDto'].assessmentComment}"></td>
-			</tr>
-		</table>
 
+		<div class="whiteDiv">
+		<h1>評価内容確認</h1>
+		<p>以下の内容で間違いないでしょうか。</p>
+		<label>金額</label>
+			<p class="border"th:text="${session['AssessmentInfoDto'].point}"></p></br>
+		<label>コメント</label>
+			<p class="border"th:text="${session['AssessmentInfoDto'].assessmentComment}"></p>
+		</div>
+		<input  class="btn btn-primary btn-lg" id="next" type="submit" value="送信">
+	</form>
 
-		<input type="submit" value="送信">
-
-
-
-
-
+	<form th:action="@{/history/eatdetail}" method="post">
+		<input class="btn btn-outline-secondary btn-lg" id="back" type="submit" value="戻る">
 	</form>
 
 </body>

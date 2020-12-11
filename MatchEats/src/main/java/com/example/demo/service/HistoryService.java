@@ -125,6 +125,23 @@ public class HistoryService {
 		return dto;
 	}
 
+	//評価情報取得メソッド
+	public AssessmentInfoDto getAssessment(int historyId) {
+
+		AssessmentTblEntity entity = assessmentRepository.getOne(historyId);
+		AssessmentInfoDto dto = new AssessmentInfoDto();
+
+		dto.setAssessmentId(entity.getAssessmentId());
+		dto.setHistoryId(entity.getHistoryTbl().getHistoryId());
+		dto.setAssessmentDate(entity.getAssessmentDate());
+		dto.setPoint(Integer.parseInt(entity.getPoint()));
+		dto.setAssessmentComment(entity.getaComment());
+
+		return dto;
+
+
+	}
+
 	//評価登録メソッド
 	public void insert(AssessmentInfoDto dto) {
 

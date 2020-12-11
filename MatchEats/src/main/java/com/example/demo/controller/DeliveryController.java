@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.dto.AdminInfoDto;
 import com.example.demo.dto.CookingInfoDto;
 import com.example.demo.dto.DeliveryInfoDto;
 import com.example.demo.dto.HistoryInfoDto;
@@ -35,9 +38,17 @@ public class DeliveryController {
 	@Autowired
 	CookingOfferService cookOfferService;
 
+	@Autowired
+	HttpSession session;
+
 	//配達リクエストされたやつ
 	@RequestMapping(value= {"/requestlist"}, method=RequestMethod.GET)
 	public String deliveryRequestList(Model model) {
+
+		AdminInfoDto adminInfo = (AdminInfoDto)session.getAttribute("adminInfo");
+		if(adminInfo == null) {
+			return "redirect:/adminlogin";
+		}
 
 		List<DeliveryInfoDto> list = deliveryService.getRequestList(true);
 		if(list.size() == 0) {
@@ -53,6 +64,11 @@ public class DeliveryController {
 	@RequestMapping(value= {"/requestDetail"}, method=RequestMethod.POST)
 	public String deliveryRequestDetail(@RequestParam("offerId") int offerId,Model model) {
 
+		AdminInfoDto adminInfo = (AdminInfoDto)session.getAttribute("adminInfo");
+		if(adminInfo == null) {
+			return "redirect:/adminlogin";
+		}
+
 		DeliveryInfoDto dto = deliveryService.getDetailDeliveryRequest(offerId);
 		model.addAttribute("dto", dto);
 		return "detail_deliverylist";
@@ -61,6 +77,12 @@ public class DeliveryController {
 	//配達リクエスト承認処理
 	@RequestMapping(value= {"/deliveryinsert"}, method=RequestMethod.POST)
 	public String deliveryRequestDetail(@RequestParam("offerId") int offerId) throws ParseException {
+
+
+		AdminInfoDto adminInfo = (AdminInfoDto)session.getAttribute("adminInfo");
+		if(adminInfo == null) {
+			return "redirect:/adminlogin";
+		}
 
 		deliveryService.deliveryRequesrInsert(offerId,getNowDate());
 
@@ -74,6 +96,11 @@ public class DeliveryController {
 	@RequestMapping(value= {"/deliverycomplete"}, method=RequestMethod.GET)
 	public String deliveryComplete() {
 
+		AdminInfoDto adminInfo = (AdminInfoDto)session.getAttribute("adminInfo");
+		if(adminInfo == null) {
+			return "redirect:/adminlogin";
+		}
+
 		return "delivery_request_complete";
 	}
 
@@ -82,6 +109,11 @@ public class DeliveryController {
 	//配達リクエストが承認されたやつ回収編
 	@RequestMapping(value= {"/approvallist"}, method=RequestMethod.GET)
 	public String deliveryList(Model model) {
+
+		AdminInfoDto adminInfo = (AdminInfoDto)session.getAttribute("adminInfo");
+		if(adminInfo == null) {
+			return "redirect:/adminlogin";
+		}
 
 		//回収するやつ
 		List<DeliveryInfoDto> list = deliveryService.getRequestAPProvalList("1");
@@ -100,6 +132,11 @@ public class DeliveryController {
 	@RequestMapping(value= {"/collectionconfirm"}, method=RequestMethod.POST)
 	public String correction(@RequestParam("offerId") int offerId,Model model) {
 
+		AdminInfoDto adminInfo = (AdminInfoDto)session.getAttribute("adminInfo");
+		if(adminInfo == null) {
+			return "redirect:/adminlogin";
+		}
+
 		DeliveryInfoDto dto = deliveryService.getDetailDeliveryRequest(offerId);
 		model.addAttribute("dto", dto);
 
@@ -109,6 +146,11 @@ public class DeliveryController {
 	//回収完了登録
 	@RequestMapping(value= {"/collectioninsert"}, method=RequestMethod.POST)
 	public String correctionInsert(@RequestParam("offerId") int offerId) throws ParseException {
+
+		AdminInfoDto adminInfo = (AdminInfoDto)session.getAttribute("adminInfo");
+		if(adminInfo == null) {
+			return "redirect:/adminlogin";
+		}
 
 		//sessionからadminIdをとってくるそして入れる
 		int adminId = 1;
@@ -123,6 +165,10 @@ public class DeliveryController {
 
 	@RequestMapping(value= {"/collectioncomplete"}, method=RequestMethod.GET)
 	public String correctionComplete() {
+		AdminInfoDto adminInfo = (AdminInfoDto)session.getAttribute("adminInfo");
+		if(adminInfo == null) {
+			return "redirect:/adminlogin";
+		}
 
 		return "food_collection_complete";
 	}
@@ -130,6 +176,11 @@ public class DeliveryController {
 	//配達リクエストが承認されたやつ配達編
 	@RequestMapping(value= {"/mydeliverylist"}, method=RequestMethod.GET)
 	public String mydeliverylist(Model model) {
+
+		AdminInfoDto adminInfo = (AdminInfoDto)session.getAttribute("adminInfo");
+		if(adminInfo == null) {
+			return "redirect:/adminlogin";
+		}
 
 		int adminId = 1;
 		//配達するやつ
@@ -148,6 +199,11 @@ public class DeliveryController {
 	@RequestMapping(value= {"/confirm"}, method=RequestMethod.POST)
 	public String confirm(@RequestParam("historyId") int historyId,Model model) {
 
+		AdminInfoDto adminInfo = (AdminInfoDto)session.getAttribute("adminInfo");
+		if(adminInfo == null) {
+			return "redirect:/adminlogin";
+		}
+
 		DeliveryInfoDto dto = historyService.getDeliveryInfo(historyId);
 
 		model.addAttribute("dto", dto);
@@ -157,6 +213,11 @@ public class DeliveryController {
 
 	@RequestMapping(value= {"/insert"}, method=RequestMethod.POST)
 	public String insert(@RequestParam("historyId") int historyId) throws ParseException {
+
+		AdminInfoDto adminInfo = (AdminInfoDto)session.getAttribute("adminInfo");
+		if(adminInfo == null) {
+			return "redirect:/adminlogin";
+		}
 
 		historyService.deliveryComplete(historyId, getNowDate());
 
@@ -169,6 +230,11 @@ public class DeliveryController {
 
 	@RequestMapping(value= {"/complete"}, method=RequestMethod.GET)
 	public String complete(Model model) {
+
+		AdminInfoDto adminInfo = (AdminInfoDto)session.getAttribute("adminInfo");
+		if(adminInfo == null) {
+			return "redirect:/adminlogin";
+		}
 
 		return "delivery_complete";
 	}

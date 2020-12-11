@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.dto.AdminInfoDto;
 import com.example.demo.dto.TransferInfoDto;
 import com.example.demo.service.TransferService;
 import com.example.demo.service.UserServise;
@@ -33,7 +34,10 @@ public class AdminMenuController {
 	@RequestMapping(value= {"/menu"}, method=RequestMethod.GET)
 	public String adminMenu() {
 
-		
+		AdminInfoDto adminInfo = (AdminInfoDto)session.getAttribute("adminInfo");
+		if(adminInfo == null) {
+			return "redirect:/adminlogin";
+		}
 
 		return "adminMenu";
 
@@ -44,6 +48,11 @@ public class AdminMenuController {
 	@RequestMapping(value= {"/transfer"},method=RequestMethod.GET)
 	public String  getTransferlist(Model model) {
 
+		AdminInfoDto adminInfo = (AdminInfoDto)session.getAttribute("adminInfo");
+		if(adminInfo == null) {
+			return "redirect:/adminlogin";
+		}
+
 		List<TransferInfoDto> list = transferService.getTransferList();
 		model.addAttribute("list",list);
 
@@ -53,6 +62,11 @@ public class AdminMenuController {
 	//申請確認
 	@RequestMapping(value= {"/transfer/confirmapproval"},method=RequestMethod.POST)
 	public String confirmApproval(@RequestParam("id") int  transferId,Model model) {
+
+			AdminInfoDto adminInfo = (AdminInfoDto)session.getAttribute("adminInfo");
+			if(adminInfo == null) {
+				return "redirect:/adminlogin";
+			}
 
 			TransferInfoDto dto = transferService.getInfo(transferId);
 
@@ -67,6 +81,11 @@ public class AdminMenuController {
 	//承認登録
 	@RequestMapping(value= {"/transfer/insertapproval"},method=RequestMethod.POST)
 	public String insertApproval(@RequestParam("transferId") int  transferId) throws java.text.ParseException {
+
+		AdminInfoDto adminInfo = (AdminInfoDto)session.getAttribute("adminInfo");
+		if(adminInfo == null) {
+			return "redirect:/adminlogin";
+		}
 
 		Date now = getNowDate();
 

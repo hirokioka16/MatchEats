@@ -1,4 +1,4 @@
-/**
+
 package com.example.demo.filter;
 
 import java.io.IOException;
@@ -24,10 +24,18 @@ import com.example.demo.dto.AdminInfoDto;
 import com.example.demo.util.FileUtils;
 
 @Component
-@Order(2)
-@WebFilter(filterName="LoginCheckFilter", urlPatterns="/*")
+@Order(1)
+@WebFilter(filterName="LoginCheckFilter",
+					urlPatterns={"/adminmenu/menu","/adminmenu/transfer",
+					"/adminmenu/transfer/confirmapproval","/adminmenu/transfer/insertapproval",
+					"/adminmenu/alltransaction","/inputContact/contactlist",
+					"/delivery/requestlist","/delivery/requestDetail","/delivery/deliveryinsert","/delivery/deliverycomplete",
+					"/delivery/approvallist","/delivery/collectionconfirm","/delivery/collectioninsert","/delivery/collectioncomplete",
+					"/delivery/mydeliverylist","/delivery/confirm","/delivery/insert","/delivery/complete"
+					}
+)
 public class AdminCheckFilter implements Filter{
-	Logger logger = LoggerFactory.getLogger(LoginCheckFilter.class);
+	Logger logger = LoggerFactory.getLogger(AdminCheckFilter.class);
 	//チェック除外画面
 	private String excludeDispList[] =
 		{
@@ -67,7 +75,7 @@ public class AdminCheckFilter implements Filter{
 
 		if( session == null ){
 			//セッションがない場合はログイン画面へ
-			((HttpServletResponse)response).sendRedirect("login");
+			((HttpServletResponse)response).sendRedirect("/adminlogin");
 			return;
 		}
 		AdminInfoDto adminInfo =
@@ -79,7 +87,7 @@ public class AdminCheckFilter implements Filter{
 		if( adminInfo == null ){
 			//ログイン画面へ転送
 			logger.debug("Filter!!! servletPath="+servletPath);
-			((HttpServletResponse)response).sendRedirect("adminlogin");
+			((HttpServletResponse)response).sendRedirect("/adminlogin");
 		}else{
 			chain.doFilter(request, response);
 		}
@@ -92,4 +100,4 @@ public class AdminCheckFilter implements Filter{
 	}
 
 }
-**/
+

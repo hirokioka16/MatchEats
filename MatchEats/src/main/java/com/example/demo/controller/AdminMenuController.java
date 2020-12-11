@@ -34,6 +34,11 @@ public class AdminMenuController {
 	@RequestMapping(value= {"/menu"}, method=RequestMethod.GET)
 	public String adminMenu() {
 
+		AdminInfoDto adminInfo = (AdminInfoDto)session.getAttribute("adminInfo");
+		if(adminInfo == null) {
+			return "redirect:/adminlogin";
+		}
+
 		return "adminMenu";
 
 	}
@@ -42,6 +47,11 @@ public class AdminMenuController {
 	//振込申請一覧
 	@RequestMapping(value= {"/transfer"},method=RequestMethod.GET)
 	public String  getTransferlist(Model model) {
+
+		AdminInfoDto adminInfo = (AdminInfoDto)session.getAttribute("adminInfo");
+		if(adminInfo == null) {
+			return "redirect:/adminlogin";
+		}
 
 		List<TransferInfoDto> list = transferService.getTransferList();
 		model.addAttribute("list",list);
@@ -52,6 +62,11 @@ public class AdminMenuController {
 	//申請確認
 	@RequestMapping(value= {"/transfer/confirmapproval"},method=RequestMethod.POST)
 	public String confirmApproval(@RequestParam("id") int  transferId,Model model) {
+
+			AdminInfoDto adminInfo = (AdminInfoDto)session.getAttribute("adminInfo");
+			if(adminInfo == null) {
+				return "redirect:/adminlogin";
+			}
 
 			TransferInfoDto dto = transferService.getInfo(transferId);
 
@@ -66,6 +81,11 @@ public class AdminMenuController {
 	//承認登録
 	@RequestMapping(value= {"/transfer/insertapproval"},method=RequestMethod.POST)
 	public String insertApproval(@RequestParam("transferId") int  transferId) throws java.text.ParseException {
+
+		AdminInfoDto adminInfo = (AdminInfoDto)session.getAttribute("adminInfo");
+		if(adminInfo == null) {
+			return "redirect:/adminlogin";
+		}
 
 		Date now = getNowDate();
 

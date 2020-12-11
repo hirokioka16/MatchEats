@@ -21,18 +21,18 @@ public class EachGenreFoodList {
 
 	@Autowired
 	FoodService foodService;
-	
+
 	@Autowired
 	HttpSession session;
-	
-	@RequestMapping(value= {"/eachgenre"}, method=RequestMethod.GET)
+
+	@RequestMapping(value= {"/eachgenre"}, method=RequestMethod.POST)
 	public String top(@RequestParam("genreId") int genreId,Model model) {
-		
+
 		//料理のジャンルをDBから取得
 				List<GenreInfoDto> list = foodService.getGenre();
-				
+
 				List<FoodInfoDto> firstList = foodService.topDetailFoodList(list.get(genreId).getGenreId());
-				
+
 				boolean loginFlg = false;
 				LoginInfoDto loginInfo  = (LoginInfoDto)session.getAttribute("loginInfo");
 				if(loginInfo !=null) {
@@ -40,7 +40,7 @@ public class EachGenreFoodList {
 				}
 				model.addAttribute("loginFlg",loginFlg);
 				model.addAttribute("firstList",firstList);
-				
+
 		return "each_genre_foodlist";
 	}
 }

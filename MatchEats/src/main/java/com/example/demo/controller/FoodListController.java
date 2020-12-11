@@ -25,17 +25,8 @@ public class FoodListController {
 
 
 
-	@RequestMapping(value= {"/allfoodlist"}, method=RequestMethod.GET)
-	public String getAllList(Model model) {
 
-		List<FoodInfoDto> list = foodService.getAllList();
-
-		model.addAttribute("list",list);
-
-		return "allfoodlist";
-	}
-
-	@RequestMapping(value= {"/detailfoodlist"}, method=RequestMethod.GET)
+	@RequestMapping(value= {"/detailfoodlist"}, method=RequestMethod.POST)
 	public String detail(@RequestParam("requestId") int requestId,Model model) {
 
 		//エラーは広池プロのやつとマージすると消えます

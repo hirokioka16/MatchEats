@@ -33,6 +33,8 @@ public class AdminMenuController {
 	@RequestMapping(value= {"/menu"}, method=RequestMethod.GET)
 	public String adminMenu() {
 
+		
+
 		return "adminMenu";
 
 	}

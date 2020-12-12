@@ -38,6 +38,8 @@
 						<h5 th:text="${list.foodName}"></h5>
 						<form th:action="@{/detailfoodlist}" method="get">
 							<input type="hidden" name="requestId" th:value="${list.requestId}">
+							<input type="hidden" name="status" th:value="0">
+							<input type="hidden" name="keyword" th:value="${keyword}">
 							<input type="submit" class="btn btn-link" value="詳細" style="display: block;margin: 0 0 0 auto;">
 						</form>
 					</div>

@@ -30,6 +30,9 @@
 
 <form th:action="@{/inputoffer/input}" method="get">
 	<input type="hidden" name="requestId" th:value="${session['requestId']}">
+	<input type="hidden" th:field="${BackForm.status}">
+	<input type="hidden" th:field="${BackForm.keyword}">
+	<input type="hidden" th:field="${BackForm.genre}">
 	<input class="btn btn-outline-secondary btn-lg" id="back" type="submit" value="戻る">
 </form>
 </div>

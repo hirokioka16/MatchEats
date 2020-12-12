@@ -21,8 +21,9 @@
 		<label>金額</label>
 			<p class="border" th:text="${session['CookingInfoDto'].price}"></p>
 		<label>オファーコメント</label>
+		<div class="text-break">
 			<div class="border" th:text="${session['CookingInfoDto'].offerComment}"></div>
-		
+		</div>
 	</div>
 		<input class="btn btn-primary btn-lg" id="next" type="submit" value="オファーする">
 </form>

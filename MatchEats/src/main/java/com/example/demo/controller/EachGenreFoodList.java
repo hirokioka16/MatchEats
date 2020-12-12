@@ -25,7 +25,7 @@ public class EachGenreFoodList {
 	@Autowired
 	HttpSession session;
 
-	@RequestMapping(value= {"/eachgenre"}, method=RequestMethod.POST)
+	@RequestMapping(value= {"/eachgenre"}, method=RequestMethod.GET)
 	public String top(@RequestParam("genreId") int genreId,Model model) {
 
 		//料理のジャンルをDBから取得

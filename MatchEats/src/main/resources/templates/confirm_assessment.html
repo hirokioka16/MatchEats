@@ -17,12 +17,15 @@
 		<label>金額</label>
 			<p class="border"th:text="${session['AssessmentInfoDto'].point}"></p></br>
 		<label>コメント</label>
-			<p class="border"th:text="${session['AssessmentInfoDto'].assessmentComment}"></p>
+			<div class="text-break">
+				<p class="border"th:text="${session['AssessmentInfoDto'].assessmentComment}"></p>
+			</div>
 		</div>
 		<input  class="btn btn-primary btn-lg" id="next" type="submit" value="送信">
 	</form>
 
 	<form th:action="@{/history/eatdetail}" method="post">
+		<input type="hidden" name="historyId" th:value="${session['AssessmentInfoDto'].historyId}">
 		<input class="btn btn-outline-secondary btn-lg" id="back" type="submit" value="戻る">
 	</form>
 

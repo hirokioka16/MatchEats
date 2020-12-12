@@ -40,35 +40,69 @@ public class UpdateUserEntry {
 	public String inputUpdate(@ModelAttribute("updateUserForm")UpdateUserForm form,Model model){
 		
 		LoginInfoDto loginInfo  = (LoginInfoDto)session.getAttribute("loginInfo");
-		UserInfoDto dto = userService.getUser(loginInfo.getUserId());
 		
-		form.setUserId(String.valueOf(dto.getUserId()));
-		form.setUserName(dto.getUserName());
-		form.setNickName(dto.getNickName());
-		form.setUserMail(dto.getUserMail());
-		form.setUserPass(dto.getUserPass());
-		form.setPostalCode(dto.getPostalCode());
-		form.setUserAddres(dto.getUserAddres());
-		form.setUserTel(dto.getUserTel());
-		
-		//分解
-		String birth = dto.getUserBirth();
-		String[] birthList = birth.split("-");
-		form.setYear(birthList[0]);
-		form.setMonth(birthList[1]);
-		form.setDay(birthList[2]);
-		
-		form.setUserCard(dto.getUserCard());
-		form.setCardName(dto.getCardName());
-		
-		//分解
-		String limit = dto.getLimitDate();
-		String[] limitList = limit.split("");
-		form.setLimitYear(limitList[0] + limitList[1] + limitList[2] + limitList[3]);
-		form.setLimitMonth(limitList[4] + limitList[5]);
-		
-		form.setSecureCode(dto.getSecureCode());
-		
+		UserInfoDto userInfo = new UserInfoDto();
+		try {
+			userInfo  = (UserInfoDto)session.getAttribute("userInfoDto");
+		}catch(NullPointerException e){
+			
+		}
+		if(userInfo != null) {
+			form.setUserId(String.valueOf(userInfo.getUserId()));
+			form.setUserName(userInfo.getUserName());
+			form.setNickName(userInfo.getNickName());
+			form.setUserMail(userInfo.getUserMail());
+			form.setUserPass(userInfo.getUserPass());
+			form.setPostalCode(userInfo.getPostalCode());
+			form.setUserAddres(userInfo.getUserAddres());
+			form.setUserTel(userInfo.getUserTel());
+			form.setCardName(userInfo.getCardName());
+			form.setSecureCode(userInfo.getSecureCode());
+			form.setUserCard(userInfo.getUserCard());
+			
+			//生年月日分解
+			String birth = userInfo.getUserBirth();
+			String[] birthList = birth.split("-");
+			form.setYear(birthList[0]);
+			form.setMonth(birthList[1]);
+			form.setDay(birthList[2]);
+			
+			//有効期限分解
+			String limit = userInfo.getLimitDate();
+			String[] limitList = limit.split("");
+			form.setLimitYear(limitList[0] + limitList[1] + limitList[2] + limitList[3]);
+			form.setLimitMonth(limitList[4] + limitList[5]);
+		}else {
+			
+			UserInfoDto dto = userService.getUser(loginInfo.getUserId());
+			
+			form.setUserId(String.valueOf(dto.getUserId()));
+			form.setUserName(dto.getUserName());
+			form.setNickName(dto.getNickName());
+			form.setUserMail(dto.getUserMail());
+			form.setUserPass(dto.getUserPass());
+			form.setPostalCode(dto.getPostalCode());
+			form.setUserAddres(dto.getUserAddres());
+			form.setUserTel(dto.getUserTel());
+			
+			//分解
+			String birth = dto.getUserBirth();
+			String[] birthList = birth.split("-");
+			form.setYear(birthList[0]);
+			form.setMonth(birthList[1]);
+			form.setDay(birthList[2]);
+			
+			form.setUserCard(dto.getUserCard());
+			form.setCardName(dto.getCardName());
+			
+			//分解
+			String limit = dto.getLimitDate();
+			String[] limitList = limit.split("");
+			form.setLimitYear(limitList[0] + limitList[1] + limitList[2] + limitList[3]);
+			form.setLimitMonth(limitList[4] + limitList[5]);
+			
+			form.setSecureCode(dto.getSecureCode());
+		}
 		return "update_userInfo";
 		
 	

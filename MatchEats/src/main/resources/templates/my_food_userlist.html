@@ -7,6 +7,20 @@
 </head>
 <body style="background-color:#f8f9fa;">
 
+<script>
+	function check() {
+  		var radioList = document.getElementById("requestId");
+  		for(var i=0; i<radioList.length; i++){
+  			if (radioList[i].checked) {
+  				alert("いや");
+  				return true;
+			}else{
+				alert("修正または削除したい食べたい物リストを選択してください");
+  	  			return false;
+  		}
+					
+ </script> 		
+  		
 	<header style="background-color:#fff;">
 		<div th:replace="layout/header :: afterheader" ></div>
 	</header>
@@ -22,32 +36,34 @@
 					<thead style="background-color: #fafafa;">
 					    <tr>
 					      <th scope="col"></th>
-					      <th scope="col"></th>
 					      <th scope="col">料理名</th>
 					      <th scope="col">投稿日</th>
-
+						  <th scope="col"></th>
+					      <th scope="col"></th>
 					    </tr>
 					 </thead>
 
 					 <tbody>
-					 	<form method="get">
 							<tr th:each="list:${list}">
-								<td>
-									<input type="radio" name="requestId" th:value="${list.requestId}">
-								</td>
 								<td><img th:src="'/MatchEats/getImage/' + ${list.pictureName}"  width="200px" height="100px"></td>
 								<td th:text="${list.foodName}">
 								<td th:text="${#dates.format(list.registDate,'yyyy/MM/dd')}">
+								<td>
+									<form th:action="@{/updatefoodlist/input}" method="GET">
+		      							<input type="hidden" name="requestId" th:value="${list.requestId}">
+		      							<input type="submit" class="btn btn-link" value="修正">
+		      						</form>
+								</td>
+								<td>
+									<form th:action="@{/deletefood/confirm}" method="GET">
+		      							<input type="hidden" name="requestId" th:value="${list.requestId}">
+		      							<input type="submit" class="btn btn-link" value="削除">
+		      						</form>
+								</td>
 							</tr>
 
-
 					 </tbody>
-				</table>
-						<input type="submit" class="btn btn-danger btn-lg btn-block" formaction="/updatefoodlist/input" value="修正">
-						<input type="submit" class="btn btn-outline-danger btn-lg btn-block" formaction="/deletefood/confirm" value="削除">
-						<input type="submit" class="btn btn-danger btn-lg btn-block" formaction="/MatchEats/updatefoodlist/input" value="修正(AWS用)">
-						<input type="submit" class="btn btn-outline-danger btn-lg btn-block" formaction="/MatchEats/deletefood/confirm" value="削除(AWS用)">
-					</form>
+				</table>				
 			</div>
 		</div>
 	</div>

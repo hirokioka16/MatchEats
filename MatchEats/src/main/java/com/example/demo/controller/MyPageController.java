@@ -25,6 +25,7 @@ public class MyPageController {
 	@RequestMapping(value= {"/mypage"}, method=RequestMethod.GET)
 	public String inputUpdate(Model model){
 
+		session.removeAttribute("userInfoDto");
 		LoginInfoDto loginInfo  = (LoginInfoDto)session.getAttribute("loginInfo");
 
 		if(loginInfo ==null) {

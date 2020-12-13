@@ -182,9 +182,9 @@ public class DeliveryController {
 			return "redirect:/adminlogin";
 		}
 
-		int adminId = 1;
+
 		//配達するやつ
-		List<DeliveryInfoDto> list = historyService.mydeliverylist(adminId);
+		List<DeliveryInfoDto> list = historyService.mydeliverylist(adminInfo.getAdminId());
 
 		if(list.size()==0) {
 			String nullMsg = "現在、配達する料理はありません。";

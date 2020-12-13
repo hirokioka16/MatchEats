@@ -13,9 +13,11 @@ import com.example.demo.dto.HistoryInfoDto;
 import com.example.demo.entity.AdminTblEntity;
 import com.example.demo.entity.AssessmentTblEntity;
 import com.example.demo.entity.HistoryTblEntity;
+import com.example.demo.entity.UserTblEntity;
 import com.example.demo.repository.AssessmentRepository;
 import com.example.demo.repository.CookingOfferRepository;
 import com.example.demo.repository.HistoryRepository;
+import com.example.demo.repository.UserRepository;
 
 @Service
 public class HistoryService {
@@ -26,6 +28,8 @@ public class HistoryService {
 	AssessmentRepository assessmentRepository;
 	@Autowired
 	CookingOfferRepository cookRepository;
+	@Autowired
+	UserRepository userRepository;
 
 	//食事履歴取得
 	public List<HistoryInfoDto> getFoodlist(int userId){
@@ -202,6 +206,13 @@ public class HistoryService {
 	public void deliveryComplete(int historyId,Date date) {
 
 		historyRepository.cookDeliveryUpdate(historyId,date);
+		
+		HistoryTblEntity entity = historyRepository.getOne(historyId);
+		UserTblEntity userEntity = userRepository.getOne(entity.getCookOfferUser().getUserId());
+		int sales = userEntity.getSales() + entity.getCookProfit();
+		userRepository.updateSales(sales,userEntity.getUserId());
+		
+		
 	}
 
 	private AssessmentTblEntity change(AssessmentInfoDto dto) {

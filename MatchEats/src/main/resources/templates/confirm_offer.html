@@ -9,8 +9,7 @@
 <body style="background-color:#dadada;">
 
 
-	
-<h1>入力内容確認</h1>
+
 
 <div style="background-color:#fff; margin:5% 10%;">
 <form th:action="@{/inputoffer/insert}" method="POST">
@@ -22,7 +21,7 @@
 			<p class="border" th:text="${session['CookingInfoDto'].price}"></p>
 		<label>オファーコメント</label>
 			<div class="border" th:text="${session['CookingInfoDto'].offerComment}"></div>
-		
+
 	</div>
 		<input class="btn btn-primary btn-lg" id="next" type="submit" value="オファーする">
 </form>
@@ -32,7 +31,7 @@
 	<input class="btn btn-outline-secondary btn-lg" id="back" type="submit" value="戻る">
 </form>
 </div>
-	
+
 
 
 </body>

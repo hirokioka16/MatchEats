@@ -125,10 +125,11 @@ public class HistoryService {
 		return dto;
 	}
 
+
 	//評価情報取得メソッド
 	public AssessmentInfoDto getAssessment(int historyId) {
 
-		AssessmentTblEntity entity = assessmentRepository.getOne(historyId);
+		AssessmentTblEntity entity = assessmentRepository.getAssessment(historyId);
 		AssessmentInfoDto dto = new AssessmentInfoDto();
 
 		dto.setAssessmentId(entity.getAssessmentId());

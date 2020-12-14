@@ -3,7 +3,7 @@ package com.example.demo.dto;
 import java.util.Date;
 
 public class UserInfoDto {
-	
+
 	private Integer userId;
 	private String userMail;
 	private String userPass;
@@ -24,10 +24,21 @@ public class UserInfoDto {
 	private int sales;
 	private Date recoveryDate;
 	private float assessment;
-	
-	
-	
+	private int totalprice;
 
+
+
+
+
+
+
+	public int getTotalprice() {
+		return totalprice;
+	}
+
+	public void setTotalprice(int totalprice) {
+		this.totalprice = totalprice;
+	}
 
 	public float getAssessment() {
 		return assessment;
@@ -158,9 +169,9 @@ public class UserInfoDto {
 	public void setSecureCode(String secureCode) {
 		this.secureCode = secureCode;
 	}
-	
-	
-	
-	
+
+
+
+
 
 }

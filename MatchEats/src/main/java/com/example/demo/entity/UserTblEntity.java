@@ -8,57 +8,58 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@Entity 
+@Entity
 @Table(name="users")
 public class UserTblEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer userId;
-	
+
 	private String userName;
-	
+
 	private String nickname;
-	
+
 	private String userMail;
-	
+
 	private String userPass;
-	
+
 	private String postalCode;
-	
+
 	private String userAddres;
-	
+
 	private String userTel;
-	
+
 	private Date userBirth;
-	
+
 	private String userCard;
-	
+
 	private String cardName;
-	
+
 	private String secureCode;
-	
+
 	private String limitDate;
-	
+
 	private String accountType;
-	
+
 	private Integer sales;
-	
+
 	private float assessment;
-	
+
 	private String iconPass;
-	
+
+	private Integer totalprice;
+
 	@OneToMany(mappedBy="userTbl")
 	private List<FoodTblEntity> foodUser;
-	
-	
-	
+
+
+
 //	@OneToOne(mappedBy="userTbl")
 //	private List<TransferId> transferUser;
-//	
+//
 //
 //	public List<TransferId> getTransferUser() {
 //		return transferUser;
@@ -68,8 +69,18 @@ public class UserTblEntity {
 //		this.transferUser = transferUser;
 //	}
 
+
+
 	public List<FoodTblEntity> getFoodUser() {
 		return foodUser;
+	}
+
+	public Integer getTotalprice() {
+		return totalprice;
+	}
+
+	public void setTotalprice(Integer totalprice) {
+		this.totalprice = totalprice;
 	}
 
 	public void setFoodUser(List<FoodTblEntity> foodUser) {
@@ -211,9 +222,9 @@ public class UserTblEntity {
 	public void setIconPass(String iconPass) {
 		this.iconPass = iconPass;
 	}
-	
-	
-	
+
+
+
 //	@OneToMany(mappedBy="userTbl")
 //	private List<CookOfferTblEntity> cookUser;
 //
@@ -226,13 +237,13 @@ public class UserTblEntity {
 //	public void setCookUser(List<CookOfferTblEntity> cookUser) {
 //		this.cookUser = cookUser;
 //	}
-//	
-//	
+//
+//
 
-	
-	
-	
-	
-	
+
+
+
+
+
 
 }

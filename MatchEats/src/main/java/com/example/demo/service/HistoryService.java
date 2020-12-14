@@ -216,6 +216,7 @@ public class HistoryService {
 		UserTblEntity userEntity = userRepository.getOne(entity.getCookOfferUser().getUserId());
 		int sales = userEntity.getSales() + entity.getCookProfit();
 		userRepository.updateSales(sales,userEntity.getUserId());
+		userRepository.updateTotalPrice(sales,userEntity.getUserId());
 
 
 	}

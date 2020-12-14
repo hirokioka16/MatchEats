@@ -135,12 +135,16 @@ public class HistoryService {
 
 		AssessmentTblEntity entity = assessmentRepository.getAssessment(historyId);
 		AssessmentInfoDto dto = new AssessmentInfoDto();
-
+		if(entity != null) {
 		dto.setAssessmentId(entity.getAssessmentId());
 		dto.setHistoryId(entity.getHistoryTbl().getHistoryId());
 		dto.setAssessmentDate(entity.getAssessmentDate());
 		dto.setPoint(Integer.parseInt(entity.getPoint()));
 		dto.setAssessmentComment(entity.getaComment());
+		}else {
+			dto.setAssessmentComment("まだ評価は入力されていません");
+			dto.setPoint(0);
+		}
 
 		return dto;
 
@@ -207,13 +211,13 @@ public class HistoryService {
 	public void deliveryComplete(int historyId,Date date) {
 
 		historyRepository.cookDeliveryUpdate(historyId,date);
-		
+
 		HistoryTblEntity entity = historyRepository.getOne(historyId);
 		UserTblEntity userEntity = userRepository.getOne(entity.getCookOfferUser().getUserId());
 		int sales = userEntity.getSales() + entity.getCookProfit();
 		userRepository.updateSales(sales,userEntity.getUserId());
-		
-		
+
+
 	}
 
 	private AssessmentTblEntity change(AssessmentInfoDto dto) {

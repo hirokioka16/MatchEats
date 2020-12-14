@@ -74,9 +74,9 @@
 		    </div>
 		</div>
 
-		<form method="post">
+		<form th:action="@{/cookinglist/insert}" method="post">
 			<input type="hidden" th:value="${detail.offerId}" name="offerId">
-			<input type="submit" class="btn btn-danger btn-lg btn-block" formaction="/cookinglist/insert" value="配達">
+			<input type="submit" class="btn btn-danger btn-lg btn-block" value="配達">
 		</form>
 		<form th:action="@{/cooking/list}" method="GET">
 			<input type="submit" class="btn btn-outline-danger btn-lg btn-block" value="戻る">

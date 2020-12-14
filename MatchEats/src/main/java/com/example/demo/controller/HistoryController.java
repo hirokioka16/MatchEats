@@ -335,7 +335,11 @@ public class HistoryController {
 								aDto = historyService.getAssessment(historyId);
 								if(aDto.getPoint() != 0) {
 									//登録済みなら詳細画面（評価入力）に遷移
+									model.addAttribute("errorHistory","既に評価済みです");
 									url = "history_detail";
+								}else if(state == 0 || state ==1) {
+									url = "history_detail";
+									model.addAttribute("errorHistory","料理の配達完了後に評価をしてください");
 								}else if(result.hasErrors()) {
 									//入力エラーをチェック
 									List<String> errorList = new ArrayList<String>();

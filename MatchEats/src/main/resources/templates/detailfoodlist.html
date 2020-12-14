@@ -7,21 +7,14 @@
 <title>詳細</title>
 </head>
 <body>
-<script  type="text/javascript">
 
-	String errMsg = null;
-	errMsg = "${errMsg}";
-
-	if(errMsg != null){
-</script>
-	 <p th:text="${errMsg}" style="text-align:center"></p>
-<script type="text/javascript">
-	}
-</script>
 
 <div style="padding:3%;">
 	<div style="background-color:#fff; margin:5% 10%;">
 		<div class="whiteDiv">
+			<div style="text-align:center;margin-top:20px">
+				<h5 class="text-danger" th:text="${errMsg}"></h5>
+			</div>
 			<h1 th:text="${dto.foodName}" style="text-align:center;margin-top: 80px;"></h1>
 
 			<div class="container" style="margin-top: 20px;">
@@ -33,6 +26,10 @@
 					<div class="col-md-6">
 						<table class="table">
 							<thead class="thead-light">
+							<tr>
+								<th scope="col">ユーザー名</th>
+								<td th:text="${dto.nickName}">
+							</tr>
 							<tr>
 								<th scope="col">説明</th>
 								<td th:text="${dto.requestOutline}">

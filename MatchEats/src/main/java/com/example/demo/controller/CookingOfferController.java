@@ -68,7 +68,7 @@ public class CookingOfferController {
 		LoginInfoDto loginInfo = (LoginInfoDto)session.getAttribute("loginInfo");
 
 		if(dto.getUserId() == loginInfo.getUserId()) {
-			redirectAttributes.addAttribute("errMsg","これは自分が登録したたべたいものです。");
+			redirectAttributes.addAttribute("errMsg","これは自分が登録した食べたい物です。");
 
 			return "redirect:/detailfoodlist?requestId="+dto.getRequestId();
 

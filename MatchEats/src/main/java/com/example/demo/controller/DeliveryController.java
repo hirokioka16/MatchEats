@@ -62,7 +62,7 @@ public class DeliveryController {
 			model.addAttribute("nullMsg",nullMsg);
 		}
 
-		List<DeliveryInfoDto> list = new ArrayList();
+		List<DeliveryInfoDto> list = new ArrayList<DeliveryInfoDto>();
 
 		for(DeliveryInfoDto dto : devlist) {
 
@@ -134,11 +134,22 @@ public class DeliveryController {
 		}
 
 		//回収するやつ
-		List<DeliveryInfoDto> list = deliveryService.getRequestAPProvalList("1");
+		List<DeliveryInfoDto> devlist = deliveryService.getRequestAPProvalList("1");
 
-		if(list.size()==0) {
+		if(devlist.size()==0) {
 			String nullMsg = "現在、回収する料理はありません。";
 			model.addAttribute("nullMsg",nullMsg);
+		}
+
+		List<DeliveryInfoDto> list = new ArrayList<DeliveryInfoDto>();
+
+		for(DeliveryInfoDto dto : devlist) {
+
+			CookingInfoDto offerDto = cookOfferService.getOfferInfo(dto.getOfferId());
+			FoodInfoDto foodDto = foodService.getUdFoodList(Integer.parseInt(offerDto.getRequestId()));
+			dto.setFoodName(foodDto.getFoodName());
+
+			list.add(dto);
 		}
 
 		model.addAttribute("list", list);
@@ -202,11 +213,22 @@ public class DeliveryController {
 
 
 		//配達するやつ
-		List<DeliveryInfoDto> list = historyService.mydeliverylist(adminInfo.getAdminId());
+		List<DeliveryInfoDto> devlist = historyService.mydeliverylist(adminInfo.getAdminId());
 
-		if(list.size()==0) {
+		if(devlist.size()==0) {
 			String nullMsg = "現在、配達する料理はありません。";
 			model.addAttribute("nullMsg",nullMsg);
+		}
+
+		List<DeliveryInfoDto> list = new ArrayList<DeliveryInfoDto>();
+
+		for(DeliveryInfoDto dto : devlist) {
+
+			CookingInfoDto offerDto = cookOfferService.getOfferInfo(dto.getOfferId());
+			FoodInfoDto foodDto = foodService.getUdFoodList(Integer.parseInt(offerDto.getRequestId()));
+			dto.setFoodName(foodDto.getFoodName());
+
+			list.add(dto);
 		}
 
 		model.addAttribute("list", list);

@@ -114,6 +114,7 @@ public class FoodService {
 		dto.setUserId(entity.getUserTbl().getUserId());
 		dto.setUserMail(entity.getUserTbl().getUserMail());
 		dto.setUserName(entity.getUserTbl().getUserName());
+		dto.setNickName(entity.getUserTbl().getNickName());
 		return dto;
 	}
 	//ジャンルごとの料理を取得する

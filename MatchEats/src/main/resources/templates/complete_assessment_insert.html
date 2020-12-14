@@ -2,13 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
+<link th:href="@{/css/contact.css}" rel="stylesheet" type="text/css">
 <title>評価登録完了</title>
 </head>
 <body>
-<p>登録完了</p>
+<div class="whiteDiv">
+	<h1>送信完了</h1>
+
+	<p id="tagP">送信が完了しました</p>
 
 <form th:action="@{/history/list}">
-	<input type="submit" value="戻る">
+	<input class="btn btn-outline-secondary btn-lg" id="first" type="submit" value="戻る">
 </form>
 
 </body>

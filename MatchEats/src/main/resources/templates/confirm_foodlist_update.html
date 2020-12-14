@@ -24,8 +24,9 @@
 				<p class="border" id="border" th:text="${session['foodInfDto'].foodName}"></p>
 			
 			<label>料理名の説明</label>
-				<p class="border" id="border" th:text="${session['foodInfDto'].requestOutline}"></p>
-			
+				<div class="text-break">
+					<p class="border" id="border" th:text="${session['foodInfDto'].requestOutline}"></p>
+				</div>
 			<label>ジャンル</label>
 				<p class="border" id="border" th:text="${genreName}"></p>
 		</div>

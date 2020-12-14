@@ -3,6 +3,7 @@
 package com.example.demo.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.demo.dto.AdminInfoDto;
 import com.example.demo.dto.ContactInfoDto;
+import com.example.demo.dto.FoodInfoDto;
+import com.example.demo.dto.GenreInfoDto;
 import com.example.demo.dto.LoginInfoDto;
 import com.example.demo.form.ContactForm;
 import com.example.demo.repository.ContactRepository;
@@ -64,6 +68,15 @@ import com.example.demo.service.ContactService;
 
 				return "redirect:/login";
 			}
+			
+			ContactInfoDto dto = new ContactInfoDto();
+			try {
+				dto =(ContactInfoDto)session.getAttribute("contactInfoDto");
+			}catch (NullPointerException e){
+			}
+			if(dto != null) {
+				form.setContent(dto.getContent());
+			}
 		return "input_contact";
 		}
 	//確認
@@ -71,6 +84,15 @@ import com.example.demo.service.ContactService;
 		public String confirm(@Validated @ModelAttribute("ContactForm")ContactForm form, BindingResult result,Model model) {
 			  	String url = null;
 
+			  //入力エラーをチェック
+				if(result.hasErrors()) {
+					List<String> errorList = new ArrayList<String>();
+					for(ObjectError error : result.getAllErrors()) {
+						errorList.add(error.getDefaultMessage());
+					}
+					
+					url = "input_contact";
+				}else {
 
 			  	ContactInfoDto dto = getCreateDto(form);
 
@@ -78,9 +100,11 @@ import com.example.demo.service.ContactService;
 
 			  	dto.setUserId(loginInfo.getUserId());
 
-
 			  	session.setAttribute("contactInfoDto",dto);
+			  	
 			  	url = "confirm_contact";
+				}
+			  	
 
 		return url;
 		}

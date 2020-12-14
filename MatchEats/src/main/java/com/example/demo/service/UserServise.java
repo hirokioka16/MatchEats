@@ -26,7 +26,7 @@ public class UserServise {
 
 	@Autowired
 	TransferRepository transferRepository;
-	
+
 	@Autowired
 	BankRepository bankRepository;
 
@@ -87,20 +87,20 @@ public class UserServise {
 
 				);
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 	//削除
 	public void delete(Integer userId) {
 		userRepository.deleteUser(userId);
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 	public UserInfoDto getUser(int id) {
 
 		UserTblEntity userEntity = new UserTblEntity();
@@ -212,7 +212,7 @@ public class UserServise {
 			userDto.setUserTel(userEntity.getUserTel());
 			userDto.setSales(userEntity.getSales());
 			userDto.setAssessment(userEntity.getAssessMent());
-
+			userDto.setTotalprice(userEntity.getTotalprice());
 			//変換
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			String strDate = dateFormat.format(userEntity.getUserBirth());

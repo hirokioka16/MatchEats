@@ -26,7 +26,9 @@ public class UserTopController {
 
 	@RequestMapping(value= {"/menu"}, method=RequestMethod.GET)
 	public String top(Model model) {
-
+		
+		session.removeAttribute("contactInfoDto");
+		session.removeAttribute("CookingInfoDto");
 		//料理のジャンルをDBから取得
 		List<GenreInfoDto> list = foodService.getGenre();
 

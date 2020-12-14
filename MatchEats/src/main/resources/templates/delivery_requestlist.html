@@ -35,6 +35,7 @@
 								<thead class="thead-light">
 									<tr>
 										<th>ユーザー名</th>
+										<th>食べたいもの</th>
 										<th>リクエスト日</th>
 									</tr>
 								</thead>
@@ -42,6 +43,7 @@
 								<tbody>
 									<tr th:each="list:${list}">
 										<td th:text="${list.userName}">
+										<td th:text="${list.foodName}">
 										<td th:text=" ${#dates.format(list.requestDay,'yyyy/MM/dd HH:mm:ss')}">
 										<td>
 											<form th:action="@{/delivery/requestDetail}" method="post">
@@ -52,7 +54,7 @@
 									</tr>
 								</tbody>
 							</table>
-						
+
 <script type="text/javascript">
 	}
 </script>

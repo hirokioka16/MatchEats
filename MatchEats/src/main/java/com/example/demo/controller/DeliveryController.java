@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.dto.AdminInfoDto;
 import com.example.demo.dto.CookingInfoDto;
 import com.example.demo.dto.DeliveryInfoDto;
+import com.example.demo.dto.FoodInfoDto;
 import com.example.demo.dto.HistoryInfoDto;
 import com.example.demo.service.CookingOfferService;
 import com.example.demo.service.DeliveryService;
+import com.example.demo.service.FoodService;
 import com.example.demo.service.HistoryService;
 
 @Controller
@@ -39,6 +42,9 @@ public class DeliveryController {
 	CookingOfferService cookOfferService;
 
 	@Autowired
+	FoodService foodService;
+
+	@Autowired
 	HttpSession session;
 
 	//配達リクエストされたやつ
@@ -50,11 +56,23 @@ public class DeliveryController {
 			return "redirect:/adminlogin";
 		}
 
-		List<DeliveryInfoDto> list = deliveryService.getRequestList(true);
-		if(list.size() == 0) {
+		List<DeliveryInfoDto> devlist = deliveryService.getRequestList(true);
+		if(devlist.size() == 0) {
 			String nullMsg = "未承認の配達リクエストはありません。";
 			model.addAttribute("nullMsg",nullMsg);
 		}
+
+		List<DeliveryInfoDto> list = new ArrayList();
+
+		for(DeliveryInfoDto dto : devlist) {
+
+			CookingInfoDto offerDto = cookOfferService.getOfferInfo(dto.getOfferId());
+			FoodInfoDto foodDto = foodService.getUdFoodList(Integer.parseInt(offerDto.getRequestId()));
+			dto.setFoodName(foodDto.getFoodName());
+
+			list.add(dto);
+		}
+
 
 		model.addAttribute("list", list);
 		return "delivery_requestlist";

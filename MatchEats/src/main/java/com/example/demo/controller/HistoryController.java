@@ -356,8 +356,8 @@ public class HistoryController {
 								}else {
 
 							AssessmentInfoDto assessmentDto = getCreateDto(form);
-
-							dto.setHistoryId((int) session.getAttribute("historyId"));
+////変更点
+							assessmentDto.setHistoryId((int) session.getAttribute("historyId"));
 
 							session.setAttribute("AssessmentInfoDto", assessmentDto );
 

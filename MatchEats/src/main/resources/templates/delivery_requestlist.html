@@ -31,7 +31,6 @@
 	<div class="container">
 				<div class="row">
 					<div class="col-12" >
-						<form th:action="@{/delivery/requestDetail}" method="post">
 							<table class="table table-striped">
 								<thead class="thead-light">
 									<tr>
@@ -45,13 +44,15 @@
 										<td th:text="${list.userName}">
 										<td th:text=" ${#dates.format(list.requestDay,'yyyy/MM/dd HH:mm:ss')}">
 										<td>
-											<input type="hidden" name='offerId' th:value="${list.offerId}">
-											<input type="submit" value="詳細" >
+											<form th:action="@{/delivery/requestDetail}" method="post">
+												<input type="hidden" name='offerId' th:value="${list.offerId}">
+												<input type="submit" value="詳細" >
+											</form>
 										</td>
 									</tr>
 								</tbody>
 							</table>
-						</form>
+						
 <script type="text/javascript">
 	}
 </script>

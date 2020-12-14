@@ -20,14 +20,18 @@
 		<label>金額</label>
 			<p class="border" th:text="${session['CookingInfoDto'].price}"></p>
 		<label>オファーコメント</label>
+		<div class="text-break">
 			<div class="border" th:text="${session['CookingInfoDto'].offerComment}"></div>
-
+		</div>
 	</div>
 		<input class="btn btn-primary btn-lg" id="next" type="submit" value="オファーする">
 </form>
 
 <form th:action="@{/inputoffer/input}" method="get">
 	<input type="hidden" name="requestId" th:value="${session['requestId']}">
+	<input type="hidden" th:field="${BackForm.status}">
+	<input type="hidden" th:field="${BackForm.keyword}">
+	<input type="hidden" th:field="${BackForm.genre}">
 	<input class="btn btn-outline-secondary btn-lg" id="back" type="submit" value="戻る">
 </form>
 </div>

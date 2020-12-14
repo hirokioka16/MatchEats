@@ -31,13 +31,12 @@ public class FoodListController {
 
 
 	@RequestMapping(value= {"/detailfoodlist"}, method=RequestMethod.GET)
-	public String detail(@RequestParam("requestId") int requestId,@ModelAttribute("BackForm")BackForm backForm,Model model) {
+	public String detail(@RequestParam("requestId") int requestId,@ModelAttribute("BackForm")BackForm backForm,@ModelAttribute("errMsg") String errMsg,Model model) {
 
 		//エラーは広池プロのやつとマージすると消えます
 		FoodInfoDto dto = foodService.getUdFoodList(requestId);
 
 		model.addAttribute("dto",dto);
-
 
 
 		return "detailfoodlist";

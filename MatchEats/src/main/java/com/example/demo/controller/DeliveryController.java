@@ -213,13 +213,13 @@ public class DeliveryController {
 
 
 		//配達するやつ
-		List<DeliveryInfoDto> devlist = historyService.mydeliverylist(adminInfo.getAdminId());
+		List<DeliveryInfoDto> list = historyService.mydeliverylist(adminInfo.getAdminId());
 
-		if(devlist.size()==0) {
+		if(list.size()==0) {
 			String nullMsg = "現在、配達する料理はありません。";
 			model.addAttribute("nullMsg",nullMsg);
 		}
-
+/**
 		List<DeliveryInfoDto> list = new ArrayList<DeliveryInfoDto>();
 
 		for(DeliveryInfoDto dto : devlist) {
@@ -230,7 +230,7 @@ public class DeliveryController {
 
 			list.add(dto);
 		}
-
+**/
 		model.addAttribute("list", list);
 
 		return "my_delivery_list";

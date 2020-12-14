@@ -329,17 +329,14 @@ public class HistoryController {
 								}
 								model.addAttribute("eatDto",eatDto);
 
-/**
+
 								//既に評価を登録済みでないかを確認
 								AssessmentInfoDto aDto = null;
 								aDto = historyService.getAssessment(historyId);
-								if(aDto == null) {
+								if(aDto.getPoint() != 0) {
 									//登録済みなら詳細画面（評価入力）に遷移
-
 									url = "history_detail";
-								}else
-	**/
-									if(result.hasErrors()) {
+								}else if(result.hasErrors()) {
 									//入力エラーをチェック
 									List<String> errorList = new ArrayList<String>();
 									for(ObjectError error : result.getAllErrors()) {

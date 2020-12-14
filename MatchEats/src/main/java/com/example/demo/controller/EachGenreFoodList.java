@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.dto.FoodInfoDto;
 import com.example.demo.dto.GenreInfoDto;
 import com.example.demo.dto.LoginInfoDto;
+import com.example.demo.form.BackForm;
 import com.example.demo.service.FoodService;
 
 @Controller
@@ -25,9 +27,10 @@ public class EachGenreFoodList {
 	@Autowired
 	HttpSession session;
 
-	@RequestMapping(value= {"/eachgenre"}, method=RequestMethod.POST)
-	public String top(@RequestParam("genreId") int genreId,Model model) {
+	@RequestMapping(value= {"/eachgenre"}, method=RequestMethod.GET)
+	public String top(@RequestParam("genreId") int genreId,@ModelAttribute("BackForm")BackForm backForm,Model model) {
 
+		session.removeAttribute("CookingInfoDto");
 		//料理のジャンルをDBから取得
 				List<GenreInfoDto> list = foodService.getGenre();
 
@@ -40,6 +43,7 @@ public class EachGenreFoodList {
 				}
 				model.addAttribute("loginFlg",loginFlg);
 				model.addAttribute("firstList",firstList);
+				model.addAttribute("genreId", genreId);
 
 		return "each_genre_foodlist";
 	}

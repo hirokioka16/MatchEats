@@ -27,8 +27,10 @@
 	    			<img th:src="'/MatchEats/getImage/' + ${list.pictureName}" class="card-img-top" alt="img">
 	    			<div class="card-body">
 	      				<h5 class="card-title" th:text="*{foodName}"></h5>
-	      				<form th:action="@{/detailfoodlist}" method="POST">
+	      				<form th:action="@{/detailfoodlist}" method="GET">
 	      					<input type="hidden" th:value="*{requestId}" name="requestId">
+	      					<input type="hidden" name="status" th:value="1">
+							<input type="hidden" name="genre" th:value="${genreId}">
 	      					<input type="submit" class="btn btn-link" value="詳細" style="display: block;margin: 0 0 0 auto;">
 	      				</form>
 	    			</div>

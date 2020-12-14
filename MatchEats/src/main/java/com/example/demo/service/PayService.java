@@ -3,17 +3,21 @@ package com.example.demo.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.controller.DeliveryController;
 import com.example.demo.dto.CookingInfoDto;
+import com.example.demo.dto.LoginInfoDto;
 import com.example.demo.entity.CookOfferTblEntity;
 import com.example.demo.entity.HistoryTblEntity;
 import com.example.demo.entity.UserTblEntity;
 import com.example.demo.form.StripeForm;
 import com.example.demo.repository.CookingOfferRepository;
 import com.example.demo.repository.HistoryRepository;
+import com.example.demo.repository.UserRepository;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
@@ -26,6 +30,11 @@ public class PayService {
 
 	@Autowired
 	HistoryRepository historyRepository;
+	
+	@Autowired
+	HttpSession session;
+	
+	
 
 
 
@@ -49,7 +58,7 @@ public class PayService {
 	}
 
 	public void charge(StripeForm stripeForm,int offerId){
-		Stripe.apiKey = "";
+		Stripe.apiKey = "sk_test_51HZSIrJjnozX4HQuaJEH2KwtoFV15jNAuHzoMFjAD33VhGCo4bBRHML5c6u29yqwVxkhYEU1SI56nFmoVj5zv7wk00EEGDaZ1p";
 
 	    Map<String, Object> chargeMap = new HashMap<String, Object>();
 	    chargeMap.put("amount", stripeForm.getAmount());
@@ -68,8 +77,9 @@ public class PayService {
 
 	    //reaction_statusを"2"(決済済み)に設定するRepositoryを書く
 		DeliveryController del = new DeliveryController();
-	   cookingOfferRepository.approvalOffer(del.getNowDate(),offerId);
-	   historyRepository.saveAndFlush(en);
+	    cookingOfferRepository.approvalOffer(del.getNowDate(),offerId);
+	    historyRepository.saveAndFlush(en);
+	   
 
 	} catch (StripeException e) {
 		e.printStackTrace();
@@ -88,8 +98,8 @@ public class PayService {
 		int adminProfit = dto.getPrice() / 10;
 		int cookProfit = dto.getPrice() - adminProfit;
 		cookUser.setUserId(Integer.parseInt(dto.getUserId()));
-		//LoginInfoDto loginInfo  = (LoginInfoDto)session.getAttribute("loginInfo");
-		requestUser.setUserId(1);
+		LoginInfoDto loginInfo  = (LoginInfoDto)session.getAttribute("loginInfo");
+		requestUser.setUserId(loginInfo.getUserId());
 
 		en.setAdminProfit(adminProfit);
 		en.setCookProfit(cookProfit);

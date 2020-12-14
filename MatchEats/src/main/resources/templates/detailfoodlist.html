@@ -51,11 +51,30 @@
 
 		<form th:action ="@{/inputoffer/input}" method="GET">
 			<input type="hidden" name="requestId" th:value="${dto.requestId}">
+			<input type="hidden" th:field="${BackForm.status}">
+			<input type="hidden" th:field="${BackForm.keyword}">
+			<input type="hidden" th:field="${BackForm.genre}">
 			<input type="submit" value="オファーする" class="btn btn-danger btn-lg" id="next">
 		</form>
-		<form th:action ="@{/menu}" method="GET">
-			<input type="submit" value="前の画面に戻る" class="btn btn-outline-danger btn-lg" id="back">
-		</form>
+		
+		
+		<div th:switch="${BackForm.status}">
+		   	<form  th:case="0" th:action ="@{/seachfoodlist}" method="GET">
+		   		<input type="hidden" name="keyword"  th:value="${BackForm.keyword}">
+				<input type="submit" value="前の画面に戻る" class="btn btn-outline-danger btn-lg" id="back">
+			</form>
+		    <form  th:case="1" th:action ="@{/eachgenre}" method="GET">
+		   		<input type="hidden" name="genreId"  th:value="${BackForm.genre}">
+				<input type="submit" value="前の画面に戻る" class="btn btn-outline-danger btn-lg" id="back">
+			</form>
+		    <form  th:case="*" th:action ="@{/menu}" method="GET">
+				<input type="submit" value="前の画面に戻る" class="btn btn-outline-danger btn-lg" id="back">
+			</form>
+		</div>
+		
+		 
+		
+		
 	</div>
 </div>
 

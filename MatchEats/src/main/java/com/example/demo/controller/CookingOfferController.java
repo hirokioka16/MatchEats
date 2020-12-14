@@ -24,6 +24,7 @@ import com.example.demo.dto.CookingInfoDto;
 import com.example.demo.dto.FoodInfoDto;
 import com.example.demo.dto.GenreInfoDto;
 import com.example.demo.dto.LoginInfoDto;
+import com.example.demo.form.BackForm;
 import com.example.demo.form.CookingForm;
 import com.example.demo.service.CookingOfferService;
 import com.example.demo.service.FoodService;
@@ -45,7 +46,7 @@ public class CookingOfferController {
 
 
 	@RequestMapping(value= {"/inputoffer/input"}, method=RequestMethod.GET)
-	public String input(RedirectAttributes redirectAttributes,@RequestParam("requestId") String requestId, @ModelAttribute("CookingForm")CookingForm form,Model model) {
+	public String input(RedirectAttributes redirectAttributes,@RequestParam("requestId") String requestId, @ModelAttribute("CookingForm")CookingForm form,@ModelAttribute("BackForm")BackForm backForm,Model model) {
 
 		CookingInfoDto cookDto = new CookingInfoDto();
 		try {
@@ -85,7 +86,7 @@ public class CookingOfferController {
 	}
 
 	@RequestMapping(value= {"/inputoffer/confirm"}, method=RequestMethod.POST)
-	public String confirm (@Validated @ModelAttribute("CookingForm")CookingForm form,BindingResult result,Model model) throws IllegalStateException, IOException {
+	public String confirm (@Validated @ModelAttribute("CookingForm")CookingForm form,BindingResult result,Model model,@ModelAttribute("BackForm")BackForm backForm) throws IllegalStateException, IOException {
 
 		//画面の遷移先を保持する文字型変数
 		String url = null;

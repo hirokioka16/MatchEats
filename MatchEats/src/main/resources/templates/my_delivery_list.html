@@ -40,7 +40,6 @@
 								<tbody>
 											<tr th:each="list:${list}">
 												<td th:text="${list.userName}">
-												<td th:text="${list.foodName}">
 												<td th:text="${#dates.format(list.requestDay,'yyyy/MM/dd HH:mm:ss')}">
 												<td>
 													<form th:action="@{/delivery/confirm}" method="post">

@@ -18,22 +18,22 @@
 						<tr>
 							<th scope="col" th:text="ユーザー名"></th>
 						</tr>
-						
+
 						<tr>
 							<td th:text="${detail.userName}"></td>
 						</tr>
 						<tr>
 							<th scope="col" th:text="登録日"></th>
 						</tr>
-						
+
 						<tr>
 							<td th:text="${#dates.format(detail.offerDate,'yyyy/MM/dd HH:mm:ss')}"></td>
 						</tr>
-						
+
 					</thead>
 				</table>
 			</div>
-			
+
 		    <div class="col-7">
 		    	<table class="table">
 					<thead class="thead-light">
@@ -41,31 +41,31 @@
 						<tr>
 							<th scope="col" th:text="料理名"></th>
 						</tr>
-						
+
 						<tr>
 							<td th:text="${detail.foodName}"></td>
 						</tr>
-						
+
 						<tr>
 							<th scope="col" th:text="ジャンル名"></th>
 						</tr>
-						
+
 						<tr>
 							<td th:text="${detail.genreName}"></td>
 						</tr>
-						
+
 						<tr>
 							<th scope="col" th:text="料理詳細"></th>
 						</tr>
-						
+
 						<tr>
 							<td th:text="${detail.requestOutline}"></td>
 						</tr>
-						
+
 						<tr>
 							<th scope="col" th:text="オファーコメント"></th>
 						</tr>
-						
+
 						<tr>
 							<td th:text="${detail.offerComment}"></td>
 						</tr>
@@ -73,13 +73,17 @@
 				</table>
 		    </div>
 		</div>
-			  
+
 		<form method="post">
 			<input type="hidden" th:value="${detail.offerId}" name="offerId">
 			<input type="submit" class="btn btn-danger btn-lg btn-block" formaction="/cookinglist/insert" value="配達">
 		</form>
-	</div>	
+		<form th:action="@{/cooking/list}" method="GET">
+			<input type="submit" class="btn btn-outline-danger btn-lg btn-block" value="戻る">
+		</form>
 
-		
+	</div>
+
+
 </body>
 </html>

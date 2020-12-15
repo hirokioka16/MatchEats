@@ -8,13 +8,13 @@
 	<header style="background-color:#fff;">
 		<div th:replace="layout/header :: afterheader" ></div>
 	</header>
-	
+
 	<div class="container" style="margin:5% 1%;">
 		<div class="row">
 			<div id="side" th:replace="layout/side :: side"></div>
-			
+
 			<div class="col-7" style="margin-left:80px;">
-			<p style="margin-bottom:0px; padding-left:10px; padding-top:10px; padding-bottom:10px; background-color:#fff; 
+			<p style="margin-bottom:0px; padding-left:10px; padding-top:10px; padding-bottom:10px; background-color:#fff;
 						color:#ea5532; border-bottom:2px solid #ea5532;">売上振り込み申請確認</p>
 			<table class="table" style="background-color:#fff">
 				<tbody>
@@ -24,6 +24,13 @@
 					<tr>
 						<td th:text="'¥' + ${userInfoDto.sales}"></td>
 					</tr>
+
+						<tr>
+						<th scope="row">累計売上</th>
+					</tr>
+					<tr>
+						<td th:text="'¥' + ${userInfoDto.totalprice}"></td>
+					</tr>
 				</tbody>
 			</table>
 			<form th:action="@{/transferRegistration}" method="post">
@@ -31,8 +38,8 @@
 			</form>
 			</div>
 		</div>
-	</div>	
-	
+	</div>
+
 
 
 </body>

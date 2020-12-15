@@ -185,6 +185,7 @@ public class HistoryService {
 			dto.setUserName(entity.getRequestUser().getUserName());
 			dto.setRequestDay(entity.getRecoveryDate());
 			dto.setAddress(entity.getRequestUser().getUserAdress());
+			dto.setOfferId(entity.getCookOfferTbl().getOfferId());
 
 			resultList.add(dto);
 		}
@@ -203,6 +204,7 @@ public class HistoryService {
 		dto.setUserName(entity.getRequestUser().getUserName());
 		dto.setRequestDay(entity.getRecoveryDate());
 		dto.setAddress(entity.getRequestUser().getUserAdress());
+		dto.setOfferId(entity.getCookOfferTbl().getOfferId());
 
 		return dto;
 	}
@@ -216,6 +218,7 @@ public class HistoryService {
 		UserTblEntity userEntity = userRepository.getOne(entity.getCookOfferUser().getUserId());
 		int sales = userEntity.getSales() + entity.getCookProfit();
 		userRepository.updateSales(sales,userEntity.getUserId());
+		userRepository.updateTotalPrice(sales,userEntity.getUserId());
 
 
 	}

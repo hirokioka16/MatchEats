@@ -57,18 +57,26 @@ public interface UserRepository extends JpaRepository<UserTblEntity, Integer> {
 
 	@Query("select u from UserTblEntity u where userMail = :mail and  userPass = :password")
 	public UserTblEntity getUserInfo(@Param("mail")String mail,@Param("password")String password);
-	
+
 	@Modifying
 	@Query("UPDATE UserTblEntity u SET"
 			+ " u.accountType = 1 "
 			+ " WHERE u.userId = :userId ")
 	public void deleteUser(
 			@Param("userId")int userId);
-	
+
 	@Modifying
 	@Query("UPDATE UserTblEntity u SET"
 			+ " u.sales = :sales "
 			+ " WHERE u.userId = :userId ")
 	public void updateSales(
 			@Param("sales")int sales,@Param("userId")int userId);
+
+	@Modifying
+	@Query("UPDATE UserTblEntity u SET"
+			+ " u.totalprice = :sales "
+			+ " WHERE u.userId = :userId ")
+	public void updateTotalPrice(
+			@Param("sales")int sales,@Param("userId")int userId);
+
 }

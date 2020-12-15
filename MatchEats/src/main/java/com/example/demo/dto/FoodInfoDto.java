@@ -21,12 +21,19 @@ public class FoodInfoDto {
 	private String userAddres;
 	private String userMail;
 	private String userName;
+	private String nickName;
 	
 
 
 
 
 
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
 	public String getUserName() {
 		return userName;
 	}

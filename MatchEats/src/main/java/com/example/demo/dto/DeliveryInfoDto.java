@@ -3,22 +3,32 @@ package com.example.demo.dto;
 import java.util.Date;
 
 public class DeliveryInfoDto {
-	
+
 	private int offerId;
-	
+
 	private String userName;
-	
+
 	private Date requestDay;
-	
+
 	private Date requestApprovalDay;
-	
+
 	private String address;
-	
+
 	private String content;
-	
+
 	private int historyId;
 
-	
+	private String foodName;
+
+
+
+	public String getFoodName() {
+		return foodName;
+	}
+
+	public void setFoodName(String foodName) {
+		this.foodName = foodName;
+	}
 
 	public int getHistoryId() {
 		return historyId;
@@ -75,7 +85,7 @@ public class DeliveryInfoDto {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
-	
+
+
 
 }

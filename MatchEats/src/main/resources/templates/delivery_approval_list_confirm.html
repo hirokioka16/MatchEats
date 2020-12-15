@@ -7,23 +7,23 @@
 </head>
 <body>
 	<form th:action="@{/delivery/collectioninsert}" method="post">
-	<h1>料理回収確認画面</h1>
+	<h1>料理回収確認</h1>
 
 		<table>
 			<tr>
-				<th>調理者</th>
+				<th>配達依頼者</th>
 				<td th:text="${cooker.userName}">
 			</tr>
 			<tr>
-				<th>調理者住所</th>
+				<th>配達依頼者住所</th>
 				<td th:text="${cooker.userAddres}">
 			</tr>
 			<tr>
-				<th>依頼者</th>
+				<th>お届け先氏名</th>
 				<td th:text="${eater.userName}">
 			</tr>
 			<tr>
-				<th>依頼者住所</th>
+				<th>お届け先住所</th>
 				<td th:text="${eater.userAddres}">
 			</tr>
 			<tr>
@@ -31,7 +31,7 @@
 				<td th:if="${dto.requestApprovalDay != null}" th:text="${#dates.format(dto.requestApprovalDay,'yyyy/MM/dd HH:mm:ss')}">
 				<td th:if="${dto.requestApprovalDay == null}" th:text="配達リクエストが承認されていません">
 			</tr>
-			
+
 		</table>
 		<input type="hidden" name="offerId" th:value="${dto.offerId}">
 		<input type="submit" value = "回収">

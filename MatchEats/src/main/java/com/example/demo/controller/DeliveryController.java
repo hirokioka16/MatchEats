@@ -229,7 +229,7 @@ public class DeliveryController {
 		return "food_collection_complete";
 	}
 
-	//配達リクエストが承認されたやつ配達編
+	//回収した料理配達編
 	@RequestMapping(value= {"/mydeliverylist"}, method=RequestMethod.GET)
 	public String mydeliverylist(Model model) {
 
@@ -272,8 +272,15 @@ public class DeliveryController {
 		}
 
 		DeliveryInfoDto dto = historyService.getDeliveryInfo(historyId);
-
 		model.addAttribute("dto", dto);
+
+		List<UserInfoDto> list = getUserInfo(dto.getOfferId());
+
+		UserInfoDto cooker = list.get(0);
+		UserInfoDto eater = list.get(1);
+
+		model.addAttribute("cooker",cooker);
+		model.addAttribute("eater",eater);
 
 
 

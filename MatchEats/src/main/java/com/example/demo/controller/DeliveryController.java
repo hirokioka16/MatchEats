@@ -20,10 +20,12 @@ import com.example.demo.dto.CookingInfoDto;
 import com.example.demo.dto.DeliveryInfoDto;
 import com.example.demo.dto.FoodInfoDto;
 import com.example.demo.dto.HistoryInfoDto;
+import com.example.demo.dto.UserInfoDto;
 import com.example.demo.service.CookingOfferService;
 import com.example.demo.service.DeliveryService;
 import com.example.demo.service.FoodService;
 import com.example.demo.service.HistoryService;
+import com.example.demo.service.UserServise;
 
 @Controller
 @RequestMapping(value= {"/delivery"})
@@ -45,7 +47,12 @@ public class DeliveryController {
 	FoodService foodService;
 
 	@Autowired
+	UserServise userService;
+
+	@Autowired
 	HttpSession session;
+
+
 
 	//配達リクエストされたやつ
 	@RequestMapping(value= {"/requestlist"}, method=RequestMethod.GET)
@@ -89,6 +96,17 @@ public class DeliveryController {
 
 		DeliveryInfoDto dto = deliveryService.getDetailDeliveryRequest(offerId);
 		model.addAttribute("dto", dto);
+
+		List<UserInfoDto> list = getUserInfo(offerId);
+
+		UserInfoDto cooker = list.get(0);
+		UserInfoDto eater = list.get(1);
+
+		model.addAttribute("cooker",cooker);
+		model.addAttribute("eater",eater);
+
+
+
 		return "detail_deliverylist";
 	}
 
@@ -169,6 +187,15 @@ public class DeliveryController {
 		DeliveryInfoDto dto = deliveryService.getDetailDeliveryRequest(offerId);
 		model.addAttribute("dto", dto);
 
+		List<UserInfoDto> list = getUserInfo(offerId);
+
+		UserInfoDto cooker = list.get(0);
+		UserInfoDto eater = list.get(1);
+
+		model.addAttribute("cooker",cooker);
+		model.addAttribute("eater",eater);
+
+
 		return "delivery_approval_list_confirm";
 	}
 
@@ -202,7 +229,7 @@ public class DeliveryController {
 		return "food_collection_complete";
 	}
 
-	//配達リクエストが承認されたやつ配達編
+	//回収した料理配達編
 	@RequestMapping(value= {"/mydeliverylist"}, method=RequestMethod.GET)
 	public String mydeliverylist(Model model) {
 
@@ -213,13 +240,13 @@ public class DeliveryController {
 
 
 		//配達するやつ
-		List<DeliveryInfoDto> list = historyService.mydeliverylist(adminInfo.getAdminId());
+		List<DeliveryInfoDto> devlist = historyService.mydeliverylist(adminInfo.getAdminId());
 
-		if(list.size()==0) {
+		if(devlist.size()==0) {
 			String nullMsg = "現在、配達する料理はありません。";
 			model.addAttribute("nullMsg",nullMsg);
 		}
-/**
+
 		List<DeliveryInfoDto> list = new ArrayList<DeliveryInfoDto>();
 
 		for(DeliveryInfoDto dto : devlist) {
@@ -230,7 +257,7 @@ public class DeliveryController {
 
 			list.add(dto);
 		}
-**/
+
 		model.addAttribute("list", list);
 
 		return "my_delivery_list";
@@ -245,8 +272,17 @@ public class DeliveryController {
 		}
 
 		DeliveryInfoDto dto = historyService.getDeliveryInfo(historyId);
-
 		model.addAttribute("dto", dto);
+
+		List<UserInfoDto> list = getUserInfo(dto.getOfferId());
+
+		UserInfoDto cooker = list.get(0);
+		UserInfoDto eater = list.get(1);
+
+		model.addAttribute("cooker",cooker);
+		model.addAttribute("eater",eater);
+
+
 
 		return "confirm_delivery";
 	}
@@ -291,6 +327,22 @@ public class DeliveryController {
 		Date now = d1.parse(strDate);
 
 		return now;
+	}
+
+	public List<UserInfoDto> getUserInfo(int offerId) {
+
+		List<UserInfoDto> list = new ArrayList<UserInfoDto>();
+		CookingInfoDto offerDto = cookOfferService.getOfferInfo(offerId);
+		FoodInfoDto foodDto = foodService.getUdFoodList(Integer.parseInt(offerDto.getRequestId()));
+
+		UserInfoDto cookerInfo = userService.getUser(Integer.parseInt(offerDto.getUserId()));
+		UserInfoDto eaterInfo = userService.getUser(foodDto.getUserId());
+
+		list.add(cookerInfo);
+		list.add(eaterInfo);
+
+		return list;
+
 	}
 
 }

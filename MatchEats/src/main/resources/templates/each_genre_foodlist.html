@@ -16,11 +16,14 @@
 		</div>
 	</header>
 
-	<form th:action="@{/menu}">
-		<input type="submit" value="戻る">
-	</form>
+	
 
 	<div class="album bg-light">
+	
+		<form th:action="@{/menu}">
+			<input type="submit" value="戻る">
+		</form>
+	
 		<div class="container">
 			<div class="card-columns">
 				<div class="card shadow-sm" th:each="list: ${firstList}" th:object="${list}">

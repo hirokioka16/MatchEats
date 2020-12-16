@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<link href="/css/list.css" rel="stylesheet"></link>
+<link th:href="@{/css/history.css}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.2/css/bootstrap.min.css}">
 <title>配達リクエスト承認済み料理一覧</title>
 </head>
@@ -32,6 +32,7 @@
 								<thead class="thead-light">
 									<tr>
 										<th>回収待ちユーザー名</th>
+										<th>料理名</th>
 										<th>リクエスト日</th>
 									</tr>
 								</thead>
@@ -39,6 +40,7 @@
 								<tbody>
 									<tr th:each="list:${list}">
 										<td th:text="${list.userName}">
+										<td th:text="${list.foodName}">
 										<td th:text="${#dates.format(list.requestApprovalDay,'yyyy/MM/dd HH:mm:ss')}">
 										<td>
 											<form th:action="@{/delivery/collectionconfirm}" method="post">
@@ -49,7 +51,7 @@
 									</tr>
 								</tbody>
 							</table>
-					
+
 		<script type="text/javascript">
 				}
 		</script>

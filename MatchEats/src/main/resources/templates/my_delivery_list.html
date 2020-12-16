@@ -27,11 +27,12 @@
 		<div class="container">
 				<div class="row">
 					<div class="col-12" >
-						
+
 							<table class="table table-striped">
 								<thead class="thead-light">
 									<tr>
 										<th scope="col">配達待ちユーザー名</th>
+										<th>料理名</th>
 										<th scope="col">回収時間</th>
 									</tr>
 								</thead>
@@ -39,6 +40,7 @@
 								<tbody>
 											<tr th:each="list:${list}">
 												<td th:text="${list.userName}">
+
 												<td th:text="${#dates.format(list.requestDay,'yyyy/MM/dd HH:mm:ss')}">
 												<td>
 													<form th:action="@{/delivery/confirm}" method="post">
@@ -49,7 +51,7 @@
 											</tr>
 								</tbody>
 							</table>
-						
+
 		<script type="text/javascript">
 			}
 		</script>

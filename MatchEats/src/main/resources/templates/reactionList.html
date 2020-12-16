@@ -20,17 +20,21 @@ margin-bottom: 10px;
 	<header style="background-color:#fff;">
 		<div th:replace="layout/header :: afterheader" ></div>
 	</header>
+	
+	
+	
+<!-- 戻るボタン -->
+	<div style="margin:5% 9%;">
+		<a th:href="@{/mypage}" th:text="前の画面に戻る" style="color:#6a6a6a;"></a>
+	</div>
 
 
 <!-- 中身 -->
 	<div th:each="reactionList:${reactionList}">
+			
 
-		<div class="container" style="background-color:#fff;">
+		<div class="container" style="background-color:#fff; padding:2%; margin-bottom:1.5%;">
 		
-		<!-- 戻るボタン -->
-			<div style="margin:5% 1%;">
-				<a th:href="@{/mypage}" th:text="前の画面に戻る" style="color:#6a6a6a;"></a>
-			</div>
 			
 			
 			  <div class="row">
